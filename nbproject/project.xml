@@ -8,17 +8,17 @@
         <general-data xmlns="http://www.netbeans.org/ns/freeform-project/2">
             <!-- Do not use Project Properties customizer when editing this file manually. -->
             <name>pUI</name>
-            <properties/>
+
             <folders>
+                <source-folder>
+                    <label>pUI</label>
+                    <location>.</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
                 <source-folder>
                     <label>src</label>
                     <type>java</type>
                     <location>src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
-                    <label>pUI</label>
-                    <location>.</location>
                     <encoding>UTF-8</encoding>
                 </source-folder>
             </folders>
@@ -54,11 +54,13 @@
                     <ide-action name="javadoc"/>
                 </context-menu>
             </view>
+            <subprojects/>
+            <project-license>gpl20</project-license>
         </general-data>
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/3">
             <compilation-unit>
                 <package-root>src</package-root>
-                <classpath mode="compile">/Users/mlg/Documents/NetBeansProjects/p5-git/processing/core/library/core.jar:/Users/mlg/Documents/NetBeansProjects/p5-git/processing/core/src</classpath>
+                <classpath mode="compile">/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/library/core.jar:/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/src</classpath>
                 <source-level>1.6</source-level>
             </compilation-unit>
         </java-data>
