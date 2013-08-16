@@ -20,7 +20,7 @@ package com.martinleopold.pui.events;
 import java.util.*;
 
 /**
- *
+ * Event System based on http://stackoverflow.com/questions/937302/simple-java-message-dispatching-system
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Events {
