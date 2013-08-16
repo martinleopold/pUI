@@ -24,7 +24,7 @@
     <property name="line" value="------------------------------------------------------------------------------------------------" />
 	
     <condition property="is.normal">
-        <equals arg1="${project.compile}" arg2="normal" />
+		<equals arg1="${project.compile}" arg2="normal" />
     </condition>
 	
 	
@@ -89,15 +89,15 @@
     <!-- build the library -->
     <target name="build">
         <echo level="info">
-            ${line}
-            Building ${project.name} v${library.fullVersion}
-            ${line}
-            src path        ${project.src}
-            bin path        ${project.bin}
-            classpath.local	${classpath.local.location}
-            sketchbook      ${sketchbook.location}
-            java version    ${java.target.version}
-            ${line}
+${line}
+Building ${project.name} v${library.fullVersion}
+${line}
+src path        ${project.src}
+bin path        ${project.bin}
+classpath.local	${classpath.local.location}
+sketchbook      ${sketchbook.location}
+java version    ${java.target.version}
+${line}
         </echo>
         <mkdir dir="${project.bin}"/>
         
@@ -122,16 +122,21 @@
         <delete dir="${project.tmp}" />
         <antcall target="util.incrementBuildNo" />
         <echo level="info">
-            ${line}
-            Name        ${project.name} 
-            Version     ${library.fullVersion}
-            Compiled    ${project.compile}
-            Sketchbook  ${sketchbook.location}
-            ${line}
-            DONE.
-            ${line}
+${line}
+Name        ${project.name} 
+Version     ${library.fullVersion}
+Compiled    ${project.compile}
+Sketchbook  ${sketchbook.location}
+${line}
+DONE.
+${line}
         </echo>
     </target>
+	
+	<target name="build-fast">
+		<property name="is.normal" value="false" />
+		<antcall target="build" />
+	</target>
     
     <target name="compile">
         <javac srcdir="${project.tmp}/${project.name}/src" destdir="${project.bin}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">

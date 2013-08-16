@@ -29,9 +29,9 @@ public class NewMain implements GenericEventHandler {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+		System.out.println("Running NewMain");
 		// TODO code application logic here
 		Events events = new Events();
-
 	}
 
 	@Override
