@@ -1,0 +1,38 @@
+/*
+ * Copyright (C) 2013 Martin Leopold <m@martinleopold.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+package com.martinleopold.pui.events2;
+
+/**
+ * Event system based on ofEvent/poco 
+ * http://www.openframeworks.cc/documentation/events/ofEvent.html
+ * http://pocoproject.org/docs/package-Foundation.Events-index.html
+ * @author Martin Leopold <m@martinleopold.com>
+ */
+public class Events {
+	static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
+		e.addListener(new Delegate<T>(listener, callbackMethodName));
+	}
+	
+	static void removeListener() {
+		// TODO
+	}
+	
+	static <T> void fireEvent(Event<T> e, T args) {
+		e.fire(args);
+	}
+}
