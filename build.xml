@@ -11,7 +11,7 @@
     -->
     
 	
-
+	<property file="./resources/build.number" />
     <property file="./resources/build.properties" />
 	
     <description>
@@ -301,10 +301,10 @@
         UTILS
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->
     
-    <!-- increment build.number in build.properties file -->
+    <!-- increment build.number in build.number file -->
     <target name="util.incrementBuildNo">
-        <propertyfile file="./resources/build.properties">
-            <entry key="library.version" type="int" default="1" operation="+" value="1" />
+        <propertyfile file="./resources/build.number">
+            <entry key="build.number" type="int" default="1" operation="+" value="1" />
         </propertyfile>
     </target>
     
