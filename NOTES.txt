@@ -1,0 +1,64 @@
+DESIGN PRINCIPLES
+-----------------
+* Accessibility. The library should be easy to set up and use. It should be easy and painless to quickly throw together a UI to control some parameters of a sketch. This is in spirit of the 'sketching metaphor' of processing.
+* Minimalism. Graphic elements should be clean in design, easily readable and understandable. A basic but usable set of user interface elements should be provided.
+* Extensibility. Allow for customizing the display of UI Elements and support creating completely new ones regardless of the type of data they represent.
+
+
+IDEAS
+-----
+* Separate Event System Library (see ofxEvent)
+* Basic Elements (Slider, Button, Toggle, Label, Divider)
+* Sensible Defaults (Position, Size, Proportion)
+* Grid Based Layout
+* Graphical Layout Adjustment ("Edit Mode", Drag & Drop)
+* Minimal Theme
+* Auto connect to variables and functions (by name)
+* Write your own elements (Functionality & Look)
+* Accessible Documentation (see Interfascia)
+* Documentation through examples
+* GUI Overlay
+* Save and load parameters
+* Method Chaining (controlP5)
+* Feedback when an Element auto-connects (console)
+* Main GUI Object has a graphic representation (the overlay). When empty contains a notice that elements need to be added.
+* Automatic Labels for elements
+* Simplest way to create a GUI Element?
+* Performance: Draw GUI in offscreen buffer. Only redraw when changed.
+* Possible to avoid class syntax? (beginners!)
+
+
+REFERENCES
+----------
+processing library basics https://github.com/processing/processing/wiki/Library-Basics
+processing library guidelines https://github.com/processing/processing/wiki/Library-Guidelines
+ofxUI https://github.com/rezaali/ofxUI
+ofEvent http://www.openframeworks.cc/documentation/events/ofEvent.html
+java reflection http://docs.oracle.com/javase/tutorial/reflect/
+controlP5 http://code.google.com/p/controlp5/
+GUIDO https://github.com/fjenett/Guido
+tweaker http://bezier.de/processing/tweaker/
+poco events: http://pocoproject.org/docs/package-Foundation.Events-index.html
+
+TODO
+----
+x Base Setup
+	x Repository
+	x Library Template
+	x Build File
+* Core System
+	* Event System
+	* Active Regions
+* Basic UI Components
+	* Button
+	* Toggle
+	* Slider
+	* Divider
+	* Label
+* API Refinement
+* Advanced Features
+	* Automatic Layout
+	* Saving State
+	* Theme
+	* Layout Adjustment
+* More UI Elements
