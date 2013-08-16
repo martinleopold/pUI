@@ -61,6 +61,9 @@
                         </arity>
                     </context>
                 </action>
+                <action name="run">
+                    <target>run</target>
+                </action>
             </ide-actions>
             <view>
                 <items>
@@ -77,6 +80,7 @@
                     <ide-action name="rebuild"/>
                     <ide-action name="clean"/>
                     <ide-action name="javadoc"/>
+                    <ide-action name="run"/>
                 </context-menu>
             </view>
             <subprojects/>

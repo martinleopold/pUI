@@ -132,11 +132,6 @@ DONE.
 ${line}
         </echo>
     </target>
-	
-	<target name="build-fast">
-		<property name="is.normal" value="false" />
-		<antcall target="build" />
-	</target>
     
     <target name="compile">
         <javac srcdir="${project.tmp}/${project.name}/src" destdir="${project.bin}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">
@@ -150,7 +145,10 @@ ${line}
         </copy>
     </target>
     
-    
+    <target name="run" depends="build">
+		<echo level="info">Running Processing...</echo>
+        <exec executable="${processing.executable}" spawn="false" />
+    </target>
     
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         GENERATORS
