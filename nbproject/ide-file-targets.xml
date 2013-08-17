@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir=".." name="pUI-IDE">
-	
     <!-- TODO: edit the following target according to your needs -->
     <!-- (more info: http://www.netbeans.org/kb/articles/freeform-config.html#runsingle) -->
     <target name="run-selected-file-in-src">
         <fail unless="run.class">Must set property 'run.class'</fail>
-        
-		<echo level="info">Building...</echo>
-        <ant target="build"> <!-- run build target in main build.xml -->
-			<property name="project.compile" value="fast" /> <!-- properties are immutable. can't be overridden in build.xml -->
-		</ant>
-		
-		<echo level="info">Running...</echo>
+        <echo level="info">Building...</echo>
+        <ant target="build">
+            <!-- run build target in main build.xml -->
+            <property name="project.compile" value="fast"/>
+            <!-- properties are immutable. can't be overridden in build.xml -->
+        </ant>
+        <echo level="info">Running...</echo>
         <java classname="${run.class}" failonerror="true" fork="true">
             <classpath>
                 <pathelement path="./bin:/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/library/core.jar:/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/src"/>
             </classpath>
         </java>
     </target>
-	
     <!-- TODO: edit the following target according to your needs -->
     <!-- (more info: http://www.netbeans.org/kb/articles/freeform-config.html#compilesingle) -->
-<!--    <target name="compile-selected-files-in-src">
+    <!--    <target name="compile-selected-files-in-src">
         <fail unless="files">Must set property 'files'</fail>
          TODO decide on and define some value for ${build.classes.dir} 
         <mkdir dir="${build.classes.dir}"/>
@@ -29,5 +27,15 @@
             <classpath path="/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/library/core.jar:/Users/martinleopold/Documents/NetBeansProjects/p5-git/processing/core/src"/>
         </javac>
     </target>-->
-	
+    <!-- TODO: edit the following target according to your needs -->
+    <!-- (more info: http://www.netbeans.org/kb/articles/freeform-config.html#runsingle) -->
+    <target name="run-selected-file-in-test">
+        <fail unless="run.class">Must set property 'run.class'</fail>
+        <ant antfile="build.xml" inheritall="false" target="build"/>
+        <java classname="${run.class}" failonerror="true" fork="true">
+            <classpath>
+                <pathelement path="resources/code/junit-4.11.jar"/>
+            </classpath>
+        </java>
+    </target>
 </project>
