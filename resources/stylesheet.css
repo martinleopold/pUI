@@ -183,9 +183,9 @@ font.FrameHeadingFont {
 }
 
 .toggleList dt {
- 	font-weight:bold;
- 	font-size:12px;
- 	font-family:arial,sans-serif;
+	font-weight:bold;
+	font-size:12px;
+	font-family:arial,sans-serif;
 	padding:0px;
 	margin:10px 0px 10px 0px;
 }
@@ -196,14 +196,14 @@ font.FrameHeadingFont {
 	margin:0;
 }
 
- 
+
 .toggleList dd {
 	margin:0;
 	padding:0; 
 }
 
 html.isjs .toggleList dd { 
-  display: none; 
+	display: none; 
 }
 
 .toggleList pre {

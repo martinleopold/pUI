@@ -23,11 +23,6 @@
     
     <property name="line" value="------------------------------------------------------------------------------------------------" />
 	
-    <condition property="is.normal">
-		<equals arg1="${project.compile}" arg2="normal" />
-    </condition>
-	
-	
     <!-- set the OS properties -->
     <condition property="is.mac">
         <os family="mac" />
@@ -48,6 +43,7 @@
     <property name="project.data" location="data"/>
     <property name="project.lib" location="lib"/>
     <property name="project.bin" location="bin"/>
+	<property name="project.test" location="test"/>
     <property name="project.bin.data" location="${project.bin}/data"/>
     <property name="project.examples" location="examples"/>
     <property name="project.reference" location="reference"/>
@@ -68,7 +64,12 @@
         <fileset dir="${classpath.local.location}" includes="${classpath.local.include}" />
         <fileset dir="${classpath.libraries.location}" includes="**/*.jar" />
         <fileset dir="${project.lib}" includes="**/*.jar" />
-    </path>	
+    </path>
+	
+	<path id="junit">
+		<pathelement path="resources/code/junit/junit-4.11.jar" />
+		<pathelement path="resources/code/junit/hamcrest-core-1.3.jar" />
+	</path>
 
     <!-- Create the time stamp -->
     <tstamp> 
@@ -88,6 +89,13 @@
 	
     <!-- build the library -->
     <target name="build">
+		<condition property="is.normal">
+			<and>
+				<equals arg1="${project.compile}" arg2="normal" /> <!-- project.compile is set to normal -->
+				<isfalse value="${fast}" /> <!-- fast parameter either not given or not "yes", "true" or "on" -->
+			</and>
+		</condition>
+	
         <echo level="info">
 ${line}
 Building ${project.name} v${library.fullVersion}
@@ -121,18 +129,41 @@ ${line}
         <antcall target="generate.zip" />
         <delete dir="${project.tmp}" />
         <antcall target="util.incrementBuildNo" />
+		
+		<condition property="compile.type" value="normal" else="fast">
+			<istrue value="${is.normal}" />
+		</condition>
         <echo level="info">
 ${line}
 Name        ${project.name} 
 Version     ${library.fullVersion}
-Compiled    ${project.compile}
+Compiled    ${compile.type}
 Sketchbook  ${sketchbook.location}
 ${line}
 DONE.
 ${line}
         </echo>
     </target>
+	
+	<!-- build project in fast mode (excludes javadocs and web files) -->
+	<target name="build-fast">
+		<antcall target="build">
+			<param name="fast" value="true" />
+		</antcall>
+	</target>
     
+	<!-- build unit tests -->
+	<target name="build-tests" depends="build-fast">
+		<mkdir dir="${project.bin}/${project.test}"/>
+		<javac srcdir="${project.test}" destdir="${project.bin}/${project.test}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">
+            <classpath>
+                <path refid="classpath"/>
+				<path refid="junit"/>
+            </classpath>
+            <compilerarg value="-Xlint"/>
+        </javac>
+	</target>
+	
     <target name="compile">
         <javac srcdir="${project.tmp}/${project.name}/src" destdir="${project.bin}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">
             <classpath>
@@ -145,11 +176,27 @@ ${line}
         </copy>
     </target>
     
+	<!-- build and run processing -->
     <target name="run" depends="build">
 		<echo level="info">Running Processing...</echo>
         <exec executable="${processing.executable}" spawn="false" />
     </target>
     
+	<!-- run all unit tests -->
+	<target name="test" depends="build-tests">
+		<junit printsummary="on">
+			<batchtest >
+				<fileset dir="${project.test}" />
+			</batchtest>
+			<formatter type="plain" usefile="false" /> <!-- it seems a formatter is needed to properly run tests -->
+			<classpath>
+				<path refid="classpath"/>
+				<path refid="junit"/>
+				<pathelement path="${project.bin}:${project.bin}/${project.test}" />
+			</classpath>
+		</junit>
+	</target>
+	
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         GENERATORS
     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -->

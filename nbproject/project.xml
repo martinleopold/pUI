@@ -83,6 +83,9 @@
                         </arity>
                     </context>
                 </action>
+                <action name="test">
+                    <target>test</target>
+                </action>
             </ide-actions>
             <view>
                 <items>
@@ -104,6 +107,7 @@
                     <ide-action name="clean"/>
                     <ide-action name="javadoc"/>
                     <ide-action name="run"/>
+                    <ide-action name="test"/>
                 </context-menu>
             </view>
             <subprojects/>
@@ -118,7 +122,7 @@
             <compilation-unit>
                 <package-root>test</package-root>
                 <unit-tests/>
-                <classpath mode="compile">resources/code/junit-4.11.jar</classpath>
+                <classpath mode="compile">resources/code/junit/junit-4.11.jar</classpath>
                 <source-level>1.6</source-level>
             </compilation-unit>
         </java-data>

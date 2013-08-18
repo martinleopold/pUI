@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Event {
+public class EventTest {
 	
-	public Event() {
+	public EventTest() {
 	}
 	
 	@BeforeClass
@@ -52,6 +52,8 @@ public class Event {
 	// TODO add test methods here.
 	// The methods must be annotated with annotation @Test. For example:
 	//
-	 @Test
-	 public void hello() {}
+	@Test
+	public void hello() {
+		System.out.println("hello");
+	}
 }
