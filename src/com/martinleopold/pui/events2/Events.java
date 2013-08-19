@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui.events2;
 
+import java.util.Iterator;
+
 /**
  * Event system based on ofEvent/poco 
  * http://www.openframeworks.cc/documentation/events/ofEvent.html
@@ -24,12 +26,17 @@ package com.martinleopold.pui.events2;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Events {
+	// TODO check this
+	static <T> Event<T> createEvent(T type) {
+		return new Event<T>();
+	}
+	
 	static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
 		e.addListener(new Delegate<T>(listener, callbackMethodName));
 	}
 	
-	static void removeListener() {
-		// TODO
+	static <T> void removeListener(Event<T> e, Object listener, String callbackMethodName) {
+		e.removeListener(new Delegate<T>(listener, callbackMethodName));
 	}
 	
 	static <T> void fireEvent(Event<T> e, T args) {

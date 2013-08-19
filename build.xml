@@ -43,6 +43,7 @@
     <property name="project.data" location="data"/>
     <property name="project.lib" location="lib"/>
     <property name="project.bin" location="bin"/>
+	<property name="project.bin.test" location="${project.bin}/test"/>
 	<property name="project.test" location="test"/>
     <property name="project.bin.data" location="${project.bin}/data"/>
     <property name="project.examples" location="examples"/>
@@ -154,8 +155,8 @@ ${line}
     
 	<!-- build unit tests -->
 	<target name="build-tests" depends="build-fast">
-		<mkdir dir="${project.bin}/${project.test}"/>
-		<javac srcdir="${project.test}" destdir="${project.bin}/${project.test}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">
+		<mkdir dir="${project.bin.test}"/>
+		<javac srcdir="${project.test}" destdir="${project.bin.test}" source="${java.target.version}" target="${java.target.version}" includeantruntime="false">
             <classpath>
                 <path refid="classpath"/>
 				<path refid="junit"/>

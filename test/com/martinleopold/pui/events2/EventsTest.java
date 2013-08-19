@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class EventsTest {
+public class EventsTest implements Listener<String> {
 	
 	public EventsTest() {
 	}
@@ -43,6 +43,7 @@ public class EventsTest {
 	
 	@Before
 	public void setUp() {
+		messageReceived = "";
 	}
 	
 	@After
@@ -53,7 +54,48 @@ public class EventsTest {
 	// The methods must be annotated with annotation @Test. For example:
 	//
 	@Test
-	public void hello2() {
-		System.out.println("hello2");
+	public void messageViaListener() {
+		// create event
+		Event<String> message = new Event<String>();
+		
+		// add listeners
+		message.addListener(this);
+		
+		// fire event
+		message.fire("hello");
+		
+		assertEquals("hello", messageReceived);
+		
+		setUp();
+		message.removeListener(this);
+		message.fire("hello");
+		assertEquals("", messageReceived);
 	}
+	
+	public String messageReceived;
+
+	@Override
+	public void notify(String args) {
+		messageReceived = args;
+	}
+
+	@Test
+	public void messageViaEventsObject() {
+		// create an event
+		Event<String> message = new Event<String>();
+		
+		// add listener
+		Events.addListener(message, this, "notify");
+		
+		// fire event
+		message.fire("hello2");
+		
+		assertEquals("hello2", messageReceived);
+		
+		setUp();
+		Events.removeListener(message, this, "notify");
+		message.fire("hello2");
+		assertEquals("", messageReceived);
+	}
+
 }

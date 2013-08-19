@@ -122,7 +122,7 @@
             <compilation-unit>
                 <package-root>test</package-root>
                 <unit-tests/>
-                <classpath mode="compile">resources/code/junit/junit-4.11.jar</classpath>
+                <classpath mode="compile">resources/code/junit/junit-4.11.jar:src</classpath>
                 <source-level>1.6</source-level>
             </compilation-unit>
         </java-data>
