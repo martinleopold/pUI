@@ -54,7 +54,7 @@ public class EventsTest implements Listener<String> {
 	// The methods must be annotated with annotation @Test. For example:
 	//
 	@Test
-	public void messageViaListener() {
+	public void viaListener() {
 		// create event
 		Event<String> message = new Event<String>();
 		
@@ -80,15 +80,15 @@ public class EventsTest implements Listener<String> {
 	}
 
 	@Test
-	public void messageViaEventsObject() {
+	public void viaEventsObject() {
 		// create an event
-		Event<String> message = new Event<String>();
+		Event message = Events.createEvent(new String());
 		
 		// add listener
 		Events.addListener(message, this, "notify");
 		
 		// fire event
-		message.fire("hello2");
+		Events.fireEvent(message, "hello2");
 		
 		assertEquals("hello2", messageReceived);
 		
