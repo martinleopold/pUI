@@ -25,7 +25,8 @@
  */
 package com.martinleopold.pui;
 
-import processing.core.*;
+import java.util.ArrayList;
+import processing.core.PApplet;
 import processing.event.MouseEvent;
 
 /**
@@ -42,10 +43,12 @@ public class PUI {
 
 	public final static String VERSION = "##library.prettyVersion##";
 	// myParent is a reference to the parent sketch
-	PApplet p;
+	protected PApplet p;
+
+	protected ArrayList<AbstractElement> elements = new ArrayList<AbstractElement>();
 
 	/**
-	 * a Constructor, usually called in the setup() method in your sketch to initialize and start the library.
+	 * A constructor, usually called in the setup() method in your sketch to initialize and start the library.
 	 *
 	 * @example Hello
 	 * @param p
@@ -64,7 +67,7 @@ public class PUI {
 	}
 
 	/**
-	 * return the version of the library.
+	 * Return the version of the library.
 	 *
 	 * @return String
 	 */
@@ -72,47 +75,153 @@ public class PUI {
 		return VERSION;
 	}
 
+	/**
+	 * Callback/handler for processing mouse events. Don't call manually.
+	 *
+	 * @param e
+	 */
 	public void mouseEvent(MouseEvent e) {
 		switch (e.getAction()) {
 			case processing.event.MouseEvent.ENTER:
-//				mouseEntered( e );
+				mouseEntered(e);
 				System.out.println("ENTER");
 				break;
 			case processing.event.MouseEvent.MOVE:
 				System.out.println("MOVE");
-//				mouseMoved( e );
+				mouseMoved(e);
 				break;
 			case processing.event.MouseEvent.PRESS:
 				System.out.println("PRESS");
-//				mousePressed( e );
+				mousePressed(e);
 				break;
 			case processing.event.MouseEvent.DRAG:
 				System.out.println("DRAG");
-//				mouseDragged( e );
+				mouseDragged(e);
 				break;
 			case processing.event.MouseEvent.RELEASE:
 				System.out.println("RELEASE");
-//				mouseReleased( e );
+				mouseReleased(e);
 				break;
 			case processing.event.MouseEvent.CLICK:
 				System.out.println("CLICK");
-				//mousePressed( evt );
+				mousePressed(e);
 				break;
 			case processing.event.MouseEvent.EXIT:
 				System.out.println("EXIT");
-//				mouseExited( e );
+				mouseExited(e);
 				break;
 			case processing.event.MouseEvent.WHEEL:
 				System.out.println("WHEEL");
-//				mouseWheelMovedImpl( e.getAmount() );
+				mouseWheelMoved(e);
 				break;
 		}
-		
+
 		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
 		System.out.println("");
 	}
 
+	/**
+	 * Callback/handler for processing draw events. Don't call manually.
+	 *
+	 */
 	public void draw() {
 		//System.out.println("draw " + p.frameCount);
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+			element.draw();
+		}
+	}
+
+	/**
+	 * Add an element to the GUI.
+	 * @param e 
+	 */
+	public void add(AbstractElement e) {
+		if (!elements.contains(e)) {
+			elements.add(e);
+		}
+	}
+
+	protected void mouseEntered(processing.event.MouseEvent e) {
+	}
+	
+	protected void mouseExited(MouseEvent e) {
+	}
+
+	protected void mouseMoved(processing.event.MouseEvent e) {
+		int mx = e.getX();
+		int my = e.getY();
+
+		for (AbstractElement element : elements) {
+			// skip inactive elements
+			if (!element.isActive()) {
+				continue; 
+			}
+			
+			// distribute mouseEntered, mouseExited and mouseMoved
+			boolean wasHover = element.hover;
+			element.hover = element.isInside(mx, my);
+			if (element.hover && !wasHover) {
+				element.mouseEntered();
+				element.mouseEntered(mx, my);
+			} else if (!element.hover && wasHover) {
+				element.mouseExited();
+				element.mouseExited(mx, my);
+			} else {
+				element.mouseMoved();
+				element.mouseMoved(mx, my);
+			}
+		}
+	}
+
+	private void mousePressed(processing.event.MouseEvent e) {
+		int mx = e.getX();
+		int my = e.getY();
+
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+
+			if (element.hover) {
+				element.mousePressedPre(mx, my);
+			}
+		}
+	}
+
+	private void mouseDragged(processing.event.MouseEvent evt) {
+		int mx = evt.getX();
+		int my = evt.getY();
+
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+
+			if (element.hover) {
+				element.mouseDraggedPre(mx, my);
+			}
+		}
+	}
+
+	private void mouseReleased(processing.event.MouseEvent evt) {
+		int mx = evt.getX();
+		int my = evt.getY();
+
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+
+			if (element.hover) {
+				element.mouseReleasedPre(mx, my);
+				element.mouseReleasedPost(mx, my);
+			}
+		}
+	}
+
+	private void mouseWheelMoved(MouseEvent e) {
 	}
 }
