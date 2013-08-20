@@ -26,6 +26,7 @@
 package com.martinleopold.pui;
 
 import processing.core.*;
+import processing.event.MouseEvent;
 
 /**
  * This is a template class and can be used to start a new processing library or tool. Make sure you rename this class
@@ -38,31 +39,28 @@ import processing.core.*;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class PUI {
-	// myParent is a reference to the parent sketch
-
-	PApplet myParent;
-
-	int myVariable = 0;
 
 	public final static String VERSION = "##library.prettyVersion##";
+	// myParent is a reference to the parent sketch
+	PApplet p;
 
 	/**
 	 * a Constructor, usually called in the setup() method in your sketch to initialize and start the library.
 	 *
 	 * @example Hello
-	 * @param theParent
+	 * @param p
 	 */
-	public PUI(PApplet theParent) {
-		myParent = theParent;
-		welcome();
+	public PUI(PApplet p) {
+		welcomeMessage();
+
+		this.p = p;
+		p.registerMethod("mouseEvent", this);
+		p.registerMethod("draw", this);
+
 	}
 
-	private void welcome() {
+	private void welcomeMessage() {
 		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
-	}
-
-	public String sayHello() {
-		return "hello library.";
 	}
 
 	/**
@@ -74,20 +72,12 @@ public class PUI {
 		return VERSION;
 	}
 
-	/**
-	 *
-	 * @param theA the width of test
-	 * @param theB the height of test
-	 */
-	public void setVariable(int theA, int theB) {
-		myVariable = theA + theB;
+	public void mouseEvent(MouseEvent e) {
+		System.out.println(e);
 	}
 
-	/**
-	 *
-	 * @return int
-	 */
-	public int getVariable() {
-		return myVariable;
+	public void draw() {
+		System.out.println("draw " + p.frameCount);
 	}
+
 }
