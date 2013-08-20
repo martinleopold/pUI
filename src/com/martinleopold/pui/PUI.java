@@ -73,11 +73,46 @@ public class PUI {
 	}
 
 	public void mouseEvent(MouseEvent e) {
-		System.out.println(e);
+		switch (e.getAction()) {
+			case processing.event.MouseEvent.ENTER:
+//				mouseEntered( e );
+				System.out.println("ENTER");
+				break;
+			case processing.event.MouseEvent.MOVE:
+				System.out.println("MOVE");
+//				mouseMoved( e );
+				break;
+			case processing.event.MouseEvent.PRESS:
+				System.out.println("PRESS");
+//				mousePressed( e );
+				break;
+			case processing.event.MouseEvent.DRAG:
+				System.out.println("DRAG");
+//				mouseDragged( e );
+				break;
+			case processing.event.MouseEvent.RELEASE:
+				System.out.println("RELEASE");
+//				mouseReleased( e );
+				break;
+			case processing.event.MouseEvent.CLICK:
+				System.out.println("CLICK");
+				//mousePressed( evt );
+				break;
+			case processing.event.MouseEvent.EXIT:
+				System.out.println("EXIT");
+//				mouseExited( e );
+				break;
+			case processing.event.MouseEvent.WHEEL:
+				System.out.println("WHEEL");
+//				mouseWheelMovedImpl( e.getAmount() );
+				break;
+		}
+		
+		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
+		System.out.println("");
 	}
 
 	public void draw() {
-		System.out.println("draw " + p.frameCount);
+		//System.out.println("draw " + p.frameCount);
 	}
-
 }
