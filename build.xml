@@ -88,7 +88,7 @@
         <delete dir="${project.tmp}"/>
     </target>
 	
-    <!-- build the library -->
+    <!-- build the library. installs it to sketchbook location -->
     <target name="build">
 		<condition property="is.normal">
 			<and>
@@ -178,7 +178,7 @@ ${line}
     </target>
     
 	<!-- build and run processing -->
-    <target name="run" depends="build">
+    <target name="run" depends="build-fast">
 		<echo level="info">Running Processing...</echo>
         <exec executable="${processing.executable}" spawn="false" />
     </target>
