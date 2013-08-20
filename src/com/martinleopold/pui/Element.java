@@ -60,6 +60,14 @@ public class Element extends AbstractElement {
 	@Override
 	public void mousePressed(float mx, float my) {
 	}
+	
+	@Override
+	public void mouseClicked() {
+	}
+
+	@Override
+	public void mouseClicked(float mx, float my) {
+	}
 
 	@Override
 	public void mouseDoubleClicked() {
@@ -92,4 +100,5 @@ public class Element extends AbstractElement {
 	@Override
 	public void draw() {
 	}
+
 }

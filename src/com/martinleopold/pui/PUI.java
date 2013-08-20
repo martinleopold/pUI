@@ -104,7 +104,7 @@ public class PUI {
 				break;
 			case processing.event.MouseEvent.CLICK:
 				System.out.println("CLICK");
-				mousePressed(e);
+				mouseClicked(e);
 				break;
 			case processing.event.MouseEvent.EXIT:
 				System.out.println("EXIT");
@@ -116,7 +116,7 @@ public class PUI {
 				break;
 		}
 
-		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
+//		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
 		System.out.println("");
 	}
 
@@ -163,6 +163,7 @@ public class PUI {
 			// distribute mouseEntered, mouseExited and mouseMoved
 			boolean wasHover = element.hover;
 			element.hover = element.isInside(mx, my);
+			System.out.println("hover: " + element.hover);
 			if (element.hover && !wasHover) {
 				element.mouseEntered();
 				element.mouseEntered(mx, my);
@@ -190,6 +191,21 @@ public class PUI {
 			}
 		}
 	}
+	
+	private void mouseClicked(MouseEvent e) {
+		int mx = e.getX();
+		int my = e.getY();
+
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+
+			if (element.hover) {
+				element.mouseClicked(mx, my);
+			}
+		}
+	}
 
 	private void mouseDragged(processing.event.MouseEvent evt) {
 		int mx = evt.getX();
@@ -199,7 +215,7 @@ public class PUI {
 			if (!element.isActive()) {
 				continue;
 			}
-
+			
 			if (element.hover) {
 				element.mouseDraggedPre(mx, my);
 			}
@@ -223,5 +239,14 @@ public class PUI {
 	}
 
 	private void mouseWheelMoved(MouseEvent e) {
+		for (AbstractElement element : elements) {
+			if (!element.isActive()) {
+				continue;
+			}
+
+			if (element.hover) {
+				element.mouseScrolled(e.getCount());
+			}
+		}
 	}
 }

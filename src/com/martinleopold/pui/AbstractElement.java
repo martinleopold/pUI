@@ -95,6 +95,10 @@ public abstract class AbstractElement extends Rect {
 	abstract public void mousePressed();
 
 	abstract public void mousePressed(float mx, float my);
+	
+	abstract public void mouseClicked();
+
+	abstract public void mouseClicked(float mx, float my);
 
 	abstract public void mouseDoubleClicked();
 
@@ -127,11 +131,13 @@ public abstract class AbstractElement extends Rect {
 			draggedDistX = clickedMouseX - mx;
 			draggedDistY = clickedMouseY - my;
 		}
+		
+		hover = isInside(mx,my); // recalculate hover state, could have dragged outside the element
 
 		if (pressed) {
 			mouseReleased();
+			mouseReleased(mx, my);
 		}
-		mouseReleased(mx, my);
 	}
 
 	abstract public void mouseReleased();

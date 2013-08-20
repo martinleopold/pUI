@@ -49,7 +49,7 @@ public class Bang extends AbstractElement {
 
 	@Override
 	public void mouseExited() {
-		System.out.println("mouseMoved");
+		System.out.println("mouseExited");
 	}
 
 	@Override
@@ -66,7 +66,17 @@ public class Bang extends AbstractElement {
 	public void mousePressed(float mx, float my) {
 		System.out.println("mousePressed: " + mx + " " + my);
 	}
+	
+	@Override
+	public void mouseClicked() {
+		System.out.println("mouseClicked");
+	}
 
+	@Override
+	public void mouseClicked(float mx, float my) {
+		System.out.println("mouseClicked: " + mx + " " + my);
+	}
+	
 	@Override
 	public void mouseDoubleClicked() {
 		System.out.println("mouseDoubleClicked");
@@ -84,7 +94,7 @@ public class Bang extends AbstractElement {
 
 	@Override
 	public void mouseDragged(float mx, float my, float dx, float dy) {
-		System.out.println("mouseReleased: " + mx + " " + my + " " + dx + " " + dy);
+		System.out.println("mouseDragged: " + mx + " " + my + " " + dx + " " + dy);
 	}
 
 	@Override
