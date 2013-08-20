@@ -59,7 +59,7 @@ public class PUI {
 
 	}
 
-	private void welcomeMessage() {
+	protected void welcomeMessage() {
 		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
 	}
 
