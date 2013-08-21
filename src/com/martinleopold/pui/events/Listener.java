@@ -20,11 +20,9 @@ package com.martinleopold.pui.events;
 /**
  *
  * @author Martin Leopold <m@martinleopold.com>
+ * @param <T>
  */
-public class GenericEvent implements Event<GenericEventHandler> {
-	@Override
-	public void notify(GenericEventHandler listener) {
-		//System.out.println( "NullEvent occured -> " + listener.toString() );
-		listener.handleEvent(this);
-	}
+public interface Listener<T> {
+
+	void notify(T args);
 }

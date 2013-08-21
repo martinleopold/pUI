@@ -17,11 +17,46 @@
  */
 package com.martinleopold.pui.events;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  *
  * @author Martin Leopold <m@martinleopold.com>
- * @param <L> Type of listener this Event can notify.
+ * @param <T> Data Type of the Event
  */
-public interface Event<L> {
-   public void notify( final L listener);
+public class Event<T> {
+
+	ArrayList<Listener<T>> listeners;
+
+	Event() {
+		listeners = new ArrayList<Listener<T>>();
+	}
+
+	synchronized void fire(T args) {
+		for (Listener<T> l : listeners) {
+			l.notify(args);
+		}
+	}
+
+	synchronized void addListener(Listener<T> listener) {
+		listeners.add(listener);
+	}
+
+	synchronized void removeListener(Listener<T> listener) {
+		if (listener instanceof Delegate) {
+			Delegate delegate = (Delegate) listener;
+			for (Iterator<Listener<T>> i = listeners.iterator(); i.hasNext();) {
+				Listener<T> l = i.next();
+				if (l instanceof Delegate) {
+					Delegate d = (Delegate) l;
+					if (d.listenerObject == delegate.listenerObject && d.callbackMethodName.equals(delegate.callbackMethodName)) {
+						i.remove();
+					}
+				}
+			}
+		} else {
+			listeners.remove(listener);
+		}
+	}
 }

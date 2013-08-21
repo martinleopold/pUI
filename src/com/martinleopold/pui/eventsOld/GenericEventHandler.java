@@ -15,30 +15,12 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.martinleopold.pui.events;
+package com.martinleopold.pui.eventsOld;
 
 /**
- * Event system based on ofEvent/poco http://www.openframeworks.cc/documentation/events/ofEvent.html
- * http://pocoproject.org/docs/package-Foundation.Events-index.html
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Events {
-	// TODO check this
-
-	static <T> Event<T> createEvent(T type) {
-		return new Event<T>();
-	}
-
-	static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
-		e.addListener(new Delegate<T>(listener, callbackMethodName));
-	}
-
-	static <T> void removeListener(Event<T> e, Object listener, String callbackMethodName) {
-		e.removeListener(new Delegate<T>(listener, callbackMethodName));
-	}
-
-	static <T> void fireEvent(Event<T> e, T args) {
-		e.fire(args);
-	}
+public interface GenericEventHandler {
+	void handleEvent(Event<GenericEventHandler> event);
 }

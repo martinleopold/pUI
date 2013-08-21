@@ -15,12 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-package com.martinleopold.pui.events;
+package com.martinleopold.pui.eventsOld;
 
 /**
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public interface GenericEventHandler {
-	void handleEvent(Event<GenericEventHandler> event);
+public class GenericEvent implements Event<GenericEventHandler> {
+	@Override
+	public void notify(GenericEventHandler listener) {
+		//System.out.println( "NullEvent occured -> " + listener.toString() );
+		listener.handleEvent(this);
+	}
 }
