@@ -40,6 +40,7 @@ GUIDO https://github.com/fjenett/Guido
 tweaker http://bezier.de/processing/tweaker/
 poco events: http://pocoproject.org/docs/package-Foundation.Events-index.html
 
+
 TODO
 ----
 x Base Setup
@@ -67,3 +68,23 @@ x Core System
 	* Saving State
 	* Layout Adjustment
 * More UI Elements
+
+
+System
+* Logger instead of System.out
+* Faster build (reuse preprocessed files/tmp)
+* Proper dist and tagging
+
+Event System
+* List of Events
+* Mouse Events
+	* Support for Different Mouse Buttons
+* Keyboard Events
+
+Class Hierarchy / API
+* Main Class 
+	* Singleton vs. multiple instances
+* Element Base Class
+* Elements
+* Event/Callback Pattern
+
