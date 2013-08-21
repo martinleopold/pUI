@@ -46,9 +46,14 @@ x Base Setup
 	x Repository
 	x Library Template
 	x Build File
-* Core System
-	* Event System
-	* Active Regions
+x Core System
+	x Event System
+	x Active Regions
+	x Dummy UI Element (Bang)
+* Core System / API Review
+	* Events (Mouse, Keyboard)
+	* Class Hierarchy
+	* Element Construction Pattern
 * Basic UI Components
 	* Button
 	* Toggle
