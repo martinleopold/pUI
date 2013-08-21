@@ -43,6 +43,7 @@ poco events: http://pocoproject.org/docs/package-Foundation.Events-index.html
 
 TODO
 ----
+Master
 x Base Setup
 	x Repository
 	x Library Template
@@ -69,22 +70,136 @@ x Core System
 	* Layout Adjustment
 * More UI Elements
 
-
 System
 * Logger instead of System.out
 * Faster build (reuse preprocessed files/tmp)
 * Proper dist and tagging
 
 Event System
-* List of Events
+x List of Events
+x Review Event Systems 
+	x Processing
+ 	x OpenFrameworks
+	x ofxUI
 * Mouse Events
-	* Support for Different Mouse Buttons
+	* Support for different mouse buttons
 * Keyboard Events
 
 Class Hierarchy / API
 * Main Class 
 	* Singleton vs. multiple instances
 * Element Base Class
-* Elements
+* Elements/Widgets
+	* Data/Model
+	* Presentation/View
 * Event/Callback Pattern
+* User controlled drawing
+* User Events
+* Widget creation (without classes)
 
+
+EVENTS
+------
+Processing MouseEvent:
+ENTER
+EXIT
+MOVE
+PRESS - DRAG - RELEASE
+PRESS - RELEASE - CLICK
+WHEEL 
+Parameters:
+getX()
+getY()
+getButton() 
+getCount()
+
+Processing KeyEvent:
+PRESS
+RELEASE
+TYPE
+Parameters
+getKey()
+getKeyCode()
+
+Processing Events without Arguments:
+pre
+draw
+post
+pause
+resume
+dispose
+
+Element:
+mouseEntered(x, y)
+mouseMoved(x, y)
+mouseExited(x, y)
+mousePressed(x, y, button)
+mouseReleased(x, y, button)
+mouseClicked(x, y, button)
+mouseDoubleClicked(x, y, button)
+mouseDragged(x, y, button)
+mouseScrolled(x, y, amount)
+
+Element States:
+active
+hover
+pressed
+dragged
+
+
+OpenFrameworks Events
+---------------------
+class ofEvent<ArgumentsType> : define an event (type)
+ofAddListener(event, object, method) : register any method of any class to an event
+ofRemoveListener(event, object, method)
+ofNotifyEvent(event, arguments)
+
+class ofEventArgs ()
+class ofKeyEventArgs (type, key)
+class ofMouseEventArgs (type, button, x, y)
+class ofMessage (message)
+
+class ofCoreEvents:
+	ofEvent<ofEventArgs> setup, update, draw, exit
+	ofEvent<ofKeyEventArgs> keyPressed, keyReleased
+	ofEvent<ofMouseEventArgs> mouseMoved, mouseDragged, mousePressed, mouseReleased
+	ofEvent<ofMessage> messageEvent
+ofEvents() : returns a static instance of ofCoreEvents
+
+
+ofxUI Classes & Events
+----------------------
+ofUICBGlue : connects to OF events
+
+ofUIWidget : rendering, properties: name, kind, id, parent, visible, hit
+
+ofUIEventArgs : holds a reference to a ofxUIWidget
+
+ofUICanvas : extends ofUIWidget, ofUICBGlue. 
+	ofEvent<ofxUIEventArgs> newGUIEvent : event registry
+
+mechanism:
+	gui = new ofxUICanvas()
+	gui.addSlider("name")
+	gui.addWidget(new ofUIWidget())
+	ofAddListener(gui->newGUIEvent, this, guiEvent)
+	central callback function: guiEvent(ofxUIEventArgs args)
+
+
+Sample Elements
+---------------
+Button
+	label
+	state: down, up
+	events: pressed, released, clicked(count)
+
+Toggle
+	label
+	state: on, off
+	events: toggled, toggledOn, toggledOff
+
+Slider
+	label
+	min, max
+	state: value
+	events: slideStart, sliding(value), valueChanged(value)
