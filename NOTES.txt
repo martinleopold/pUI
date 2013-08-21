@@ -62,8 +62,8 @@ x Core System
 	* Label
 * API Refinement
 * Advanced Features
+	* Theme
 	* Automatic Layout
 	* Saving State
-	* Theme
 	* Layout Adjustment
 * More UI Elements
