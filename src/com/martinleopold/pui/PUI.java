@@ -81,10 +81,11 @@ public class PUI {
 	}
 
 	/**
-	 * Singleton class used to receive Processing's events. This is used as to not expose the
-	 * callback functions in the public API.
+	 * Class used to receive Processing's events. This is used internally as not to expose the
+	 * callback functions in the public API. No need to use this class. Needs to be public for
+	 * Processsing to be able to access it (via reflection).
 	 */
-	private class ProcessingEventHandler {
+	public class ProcessingEventHandler {
 
 		/**
 		 * Callback/handler for processing mouse events. Don't call manually.
@@ -93,35 +94,35 @@ public class PUI {
 		 */
 		public void mouseEvent(MouseEvent e) {
 			switch (e.getAction()) {
-				case processing.event.MouseEvent.ENTER:
+				case MouseEvent.ENTER:
 					mouseEntered(e);
 					System.out.println("ENTER");
 					break;
-				case processing.event.MouseEvent.MOVE:
+				case MouseEvent.MOVE:
 					System.out.println("MOVE");
 					mouseMoved(e);
 					break;
-				case processing.event.MouseEvent.PRESS:
+				case MouseEvent.PRESS:
 					System.out.println("PRESS");
 					mousePressed(e);
 					break;
-				case processing.event.MouseEvent.DRAG:
+				case MouseEvent.DRAG:
 					System.out.println("DRAG");
 					mouseDragged(e);
 					break;
-				case processing.event.MouseEvent.RELEASE:
+				case MouseEvent.RELEASE:
 					System.out.println("RELEASE");
 					mouseReleased(e);
 					break;
-				case processing.event.MouseEvent.CLICK:
+				case MouseEvent.CLICK:
 					System.out.println("CLICK");
 					mouseClicked(e);
 					break;
-				case processing.event.MouseEvent.EXIT:
+				case MouseEvent.EXIT:
 					System.out.println("EXIT");
 					mouseExited(e);
 					break;
-				case processing.event.MouseEvent.WHEEL:
+				case MouseEvent.WHEEL:
 					System.out.println("WHEEL");
 					mouseWheelMoved(e);
 					break;
@@ -136,6 +137,18 @@ public class PUI {
 		 *
 		 */
 		public void keyEvent(KeyEvent e) {
+			switch (e.getAction()) {
+				case KeyEvent.PRESS:
+					System.out.println("PRESS");
+					break;
+				case KeyEvent.RELEASE:
+					System.out.println("RELEASE");
+					break;
+				case KeyEvent.TYPE:
+					System.out.println("TYPE");
+					break;
+			}
+			System.out.println("key: " + e.getKey() + " keyCode: " + e.getKeyCode());
 		}
 
 		/**
