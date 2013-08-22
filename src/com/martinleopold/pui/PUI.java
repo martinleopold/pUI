@@ -27,28 +27,31 @@ package com.martinleopold.pui;
 
 import java.util.ArrayList;
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
- * This is a template class and can be used to start a new processing library or tool. Make sure you rename this class
- * as well as the name of the example package 'template' to your own library or tool naming convention.
+ * This is a template class and can be used to start a new processing library or tool. Make sure you
+ * rename this class as well as the name of the example package 'template' to your own library or
+ * tool naming convention.
  *
  * @example Hello
  *
- * (the tag @example followed by the name of an example included in folder 'examples' will automatically include the
- * example in the javadoc.)
+ * (the tag @example followed by the name of an example included in folder 'examples' will
+ * automatically include the example in the javadoc.)
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class PUI {
 
 	public final static String VERSION = "##library.prettyVersion##";
 	// myParent is a reference to the parent sketch
-	protected PApplet p;
+	PApplet p;
 
-	protected ArrayList<AbstractElement> elements = new ArrayList<AbstractElement>();
+	ArrayList<AbstractElement> elements = new ArrayList<AbstractElement>();
 
 	/**
-	 * A constructor, usually called in the setup() method in your sketch to initialize and start the library.
+	 * A constructor, usually called in the setup() method in your sketch to initialize and start
+	 * the library.
 	 *
 	 * @example Hello
 	 * @param p
@@ -57,12 +60,14 @@ public class PUI {
 		welcomeMessage();
 
 		this.p = p;
-		p.registerMethod("mouseEvent", this);
-		p.registerMethod("draw", this);
+		ProcessingEventHandler peh = new ProcessingEventHandler();
+		p.registerMethod("mouseEvent", peh);
+		p.registerMethod("keyEvent", peh);
+		p.registerMethod("draw", peh);
 
 	}
 
-	protected void welcomeMessage() {
+	private void welcomeMessage() {
 		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
 	}
 
@@ -76,67 +81,82 @@ public class PUI {
 	}
 
 	/**
-	 * Callback/handler for processing mouse events. Don't call manually.
-	 *
-	 * @param e
+	 * Singleton class used to receive Processing's events. This is used as to not expose the
+	 * callback functions in the public API.
 	 */
-	public void mouseEvent(MouseEvent e) {
-		switch (e.getAction()) {
-			case processing.event.MouseEvent.ENTER:
-				mouseEntered(e);
-				System.out.println("ENTER");
-				break;
-			case processing.event.MouseEvent.MOVE:
-				System.out.println("MOVE");
-				mouseMoved(e);
-				break;
-			case processing.event.MouseEvent.PRESS:
-				System.out.println("PRESS");
-				mousePressed(e);
-				break;
-			case processing.event.MouseEvent.DRAG:
-				System.out.println("DRAG");
-				mouseDragged(e);
-				break;
-			case processing.event.MouseEvent.RELEASE:
-				System.out.println("RELEASE");
-				mouseReleased(e);
-				break;
-			case processing.event.MouseEvent.CLICK:
-				System.out.println("CLICK");
-				mouseClicked(e);
-				break;
-			case processing.event.MouseEvent.EXIT:
-				System.out.println("EXIT");
-				mouseExited(e);
-				break;
-			case processing.event.MouseEvent.WHEEL:
-				System.out.println("WHEEL");
-				mouseWheelMoved(e);
-				break;
-		}
+	private class ProcessingEventHandler {
+
+		/**
+		 * Callback/handler for processing mouse events. Don't call manually.
+		 *
+		 * @param e
+		 */
+		public void mouseEvent(MouseEvent e) {
+			switch (e.getAction()) {
+				case processing.event.MouseEvent.ENTER:
+					mouseEntered(e);
+					System.out.println("ENTER");
+					break;
+				case processing.event.MouseEvent.MOVE:
+					System.out.println("MOVE");
+					mouseMoved(e);
+					break;
+				case processing.event.MouseEvent.PRESS:
+					System.out.println("PRESS");
+					mousePressed(e);
+					break;
+				case processing.event.MouseEvent.DRAG:
+					System.out.println("DRAG");
+					mouseDragged(e);
+					break;
+				case processing.event.MouseEvent.RELEASE:
+					System.out.println("RELEASE");
+					mouseReleased(e);
+					break;
+				case processing.event.MouseEvent.CLICK:
+					System.out.println("CLICK");
+					mouseClicked(e);
+					break;
+				case processing.event.MouseEvent.EXIT:
+					System.out.println("EXIT");
+					mouseExited(e);
+					break;
+				case processing.event.MouseEvent.WHEEL:
+					System.out.println("WHEEL");
+					mouseWheelMoved(e);
+					break;
+			}
 
 //		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
-		System.out.println("");
-	}
+			System.out.println("");
+		}
 
-	/**
-	 * Callback/handler for processing draw events. Don't call manually.
-	 *
-	 */
-	public void draw() {
-		//System.out.println("draw " + p.frameCount);
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
+		/**
+		 * Callback/handler for processing key events. Don't call manually.
+		 *
+		 */
+		public void keyEvent(KeyEvent e) {
+		}
+
+		/**
+		 * Callback/handler for processing draw events. Don't call manually.
+		 *
+		 */
+		public void draw() {
+			//System.out.println("draw " + p.frameCount);
+			for (AbstractElement element : elements) {
+				if (!element.isActive()) {
+					continue;
+				}
+				element.draw();
 			}
-			element.draw();
 		}
 	}
 
 	/**
 	 * Add an element to the GUI.
-	 * @param e 
+	 *
+	 * @param e
 	 */
 	public void add(AbstractElement e) {
 		if (!elements.contains(e)) {
@@ -144,22 +164,22 @@ public class PUI {
 		}
 	}
 
-	protected void mouseEntered(processing.event.MouseEvent e) {
-	}
-	
-	protected void mouseExited(MouseEvent e) {
+	private void mouseEntered(MouseEvent e) {
 	}
 
-	protected void mouseMoved(processing.event.MouseEvent e) {
+	private void mouseExited(MouseEvent e) {
+	}
+
+	private void mouseMoved(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
 
 		for (AbstractElement element : elements) {
 			// skip inactive elements
 			if (!element.isActive()) {
-				continue; 
+				continue;
 			}
-			
+
 			// distribute mouseEntered, mouseExited and mouseMoved
 			boolean wasHover = element.hover;
 			element.hover = element.isInside(mx, my);
@@ -177,7 +197,7 @@ public class PUI {
 		}
 	}
 
-	private void mousePressed(processing.event.MouseEvent e) {
+	private void mousePressed(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
 
@@ -191,7 +211,7 @@ public class PUI {
 			}
 		}
 	}
-	
+
 	private void mouseClicked(MouseEvent e) {
 		int mx = e.getX();
 		int my = e.getY();
@@ -207,7 +227,7 @@ public class PUI {
 		}
 	}
 
-	private void mouseDragged(processing.event.MouseEvent evt) {
+	private void mouseDragged(MouseEvent evt) {
 		int mx = evt.getX();
 		int my = evt.getY();
 
@@ -215,14 +235,14 @@ public class PUI {
 			if (!element.isActive()) {
 				continue;
 			}
-			
+
 			if (element.hover) {
 				element.mouseDraggedPre(mx, my);
 			}
 		}
 	}
 
-	private void mouseReleased(processing.event.MouseEvent evt) {
+	private void mouseReleased(MouseEvent evt) {
 		int mx = evt.getX();
 		int my = evt.getY();
 
