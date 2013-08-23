@@ -30,7 +30,7 @@ import processing.event.MouseEvent;
 public class Widget extends Rect implements UIEvents {
 
 	PUI pui;
-	
+
 	// state
 	boolean active = true;
 	boolean hover;
@@ -40,24 +40,11 @@ public class Widget extends Rect implements UIEvents {
 	float clickedMouseX, clickedMouseY;
 	float draggedDistX, draggedDistY;
 
-//	protected float clickedMouseX, clickedMouseY;
-//	protected float clickedPositionX, clickedPositionY;
-//	protected float draggedDistX, draggedDistY;
-//
-//	boolean pressed, dragged, hover = true;
-//
-//	protected boolean debug = false;
-//	long lastPressed = 0;
 	public Widget(float x, float y, float width, float height, PUI pui) {
 		super(x, y, width, height);
 		this.pui = pui;
 		pui.add(this);
-		//Interactive.get().addElement( this );
 	}
-
-//	public void setDebug(boolean tf) {
-//		debug = tf;
-//	}
 
 	public void setActive(boolean tf) {
 		active = tf;
@@ -102,12 +89,12 @@ public class Widget extends Rect implements UIEvents {
 
 			case MouseEvent.RELEASE:
 				if (dragged) {
-					draggedDistX = mx - clickedMouseX;
-					draggedDistY = my - clickedMouseY;
-				}
-				
+				draggedDistX = mx - clickedMouseX;
+				draggedDistY = my - clickedMouseY;
+			}
+
 				hover = isInside(mx, my); // recalculate hover state, could have dragged outside the element
-				
+
 				// if it was pressed, release it
 				if (pressed) {
 					mouseReleased(e.getButton(), mx, my);
@@ -115,9 +102,11 @@ public class Widget extends Rect implements UIEvents {
 				pressed = false;
 				dragged = false;
 				break;
-				
+
 			case MouseEvent.CLICK: // PRESS and RELEASE have to lie inside the widget
-				if (hover) mouseClicked(e.getButton(), e.getCount(), mx, my);
+				if (hover) {
+				mouseClicked(e.getButton(), e.getCount(), mx, my);
+			}
 				break;
 
 			case MouseEvent.DRAG:
@@ -133,8 +122,10 @@ public class Widget extends Rect implements UIEvents {
 				mouseScrolled(e.getCount());
 				break;
 		}
-		
-		if (isInside) onMouse.fire(e);
+
+		if (isInside) {
+			onMouse.fire(e);
+		}
 	}
 
 	void onKeyEvent(KeyEvent e) {
@@ -196,15 +187,15 @@ public class Widget extends Rect implements UIEvents {
 	@Override
 	public void draw(PApplet p) {
 	}
-	
+
 	Event<Widget> onDraw = new Event<Widget>();
-	
+
 	public void onDraw(String methodName) {
 		Events.addListener(onDraw, pui.p, methodName);
 	}
-	
+
 	Event<MouseEvent> onMouse = new Event<MouseEvent>();
-	
+
 	public void onMouse(String methodName) {
 		Events.addListener(onMouse, pui.p, methodName);
 	}

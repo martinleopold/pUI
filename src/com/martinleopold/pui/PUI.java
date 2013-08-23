@@ -94,72 +94,24 @@ public class PUI {
 		 */
 		public void mouseEvent(MouseEvent e) {
 			// filter ENTER and EXIT, because this has to do with whole sketch window
-			if (e.getAction() == MouseEvent.ENTER || e.getAction() == MouseEvent.EXIT) return;
-			
+			if (e.getAction() == MouseEvent.ENTER || e.getAction() == MouseEvent.EXIT) {
+				return;
+			}
+
 			for (Widget w : widgets) {
 				w.onMouseEvent(e);
 			}
-			
-//			switch (e.getAction()) {
-//				case MouseEvent.ENTER:
-//					mouseEntered(e);
-//					System.out.println("ENTER");
-//					break;
-//				case MouseEvent.MOVE:
-//					System.out.println("MOVE");
-//					mouseMoved(e);
-//					break;
-//				case MouseEvent.PRESS:
-//					System.out.println("PRESS");
-//					mousePressed(e);
-//					break;
-//				case MouseEvent.DRAG:
-//					System.out.println("DRAG");
-//					mouseDragged(e);
-//					break;
-//				case MouseEvent.RELEASE:
-//					System.out.println("RELEASE");
-//					mouseReleased(e);
-//					break;
-//				case MouseEvent.CLICK:
-//					System.out.println("CLICK");
-//					mouseClicked(e);
-//					break;
-//				case MouseEvent.EXIT:
-//					System.out.println("EXIT");
-//					mouseExited(e);
-//					break;
-//				case MouseEvent.WHEEL:
-//					System.out.println("WHEEL");
-//					mouseWheelMoved(e);
-//					break;
-//			}
-
-//		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
-//			System.out.println("");
 		}
 
 		/**
 		 * Callback/handler for processing key events. Don't call manually.
 		 *
+		 * @param e
 		 */
 		public void keyEvent(KeyEvent e) {
 			for (Widget w : widgets) {
 				w.onKeyEvent(e);
 			}
-			
-//			switch (e.getAction()) {
-//				case KeyEvent.PRESS:
-//					System.out.println("PRESS");
-//					break;
-//				case KeyEvent.RELEASE:
-//					System.out.println("RELEASE");
-//					break;
-//				case KeyEvent.TYPE:
-//					System.out.println("TYPE");
-//					break;
-//			}
-//			System.out.println("key: " + e.getKey() + " keyCode: " + e.getKeyCode());
 		}
 
 		/**
@@ -184,78 +136,4 @@ public class PUI {
 			widgets.add(e);
 		}
 	}
-
-
-//	private void mousePressed(MouseEvent e) {
-//		int mx = e.getX();
-//		int my = e.getY();
-//
-//		for (Widget element : widgets) {
-//			if (!element.isActive()) {
-//				continue;
-//			}
-//
-//			if (element.hover) {
-//				element.mousePressedPre(mx, my);
-//			}
-//		}
-//	}
-
-//	private void mouseClicked(MouseEvent e) {
-//		int mx = e.getX();
-//		int my = e.getY();
-//
-//		for (Widget element : widgets) {
-//			if (!element.isActive()) {
-//				continue;
-//			}
-//
-//			if (element.hover) {
-//				element.mouseClicked(mx, my);
-//			}
-//		}
-//	}
-
-//	private void mouseDragged(MouseEvent evt) {
-//		int mx = evt.getX();
-//		int my = evt.getY();
-//
-//		for (Widget element : widgets) {
-//			if (!element.isActive()) {
-//				continue;
-//			}
-//
-//			if (element.hover) {
-//				element.mouseDraggedPre(mx, my);
-//			}
-//		}
-//	}
-
-//	private void mouseReleased(MouseEvent evt) {
-//		int mx = evt.getX();
-//		int my = evt.getY();
-//
-//		for (Widget element : widgets) {
-//			if (!element.isActive()) {
-//				continue;
-//			}
-//
-//			if (element.hover) {
-//				element.mouseReleasedPre(mx, my);
-//				element.mouseReleasedPost(mx, my);
-//			}
-//		}
-//	}
-
-//	private void mouseWheelMoved(MouseEvent e) {
-//		for (Widget element : widgets) {
-//			if (!element.isActive()) {
-//				continue;
-//			}
-//
-//			if (element.hover) {
-//				element.mouseScrolled(e.getCount());
-//			}
-//		}
-//	}
 }
