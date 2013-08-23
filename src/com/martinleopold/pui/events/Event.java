@@ -29,21 +29,21 @@ public class Event<T> {
 
 	ArrayList<Listener<T>> listeners;
 
-	Event() {
+	public Event() {
 		listeners = new ArrayList<Listener<T>>();
 	}
 
-	synchronized void fire(T args) {
+	public synchronized void fire(T args) {
 		for (Listener<T> l : listeners) {
 			l.notify(args);
 		}
 	}
 
-	synchronized void addListener(Listener<T> listener) {
+	public synchronized void addListener(Listener<T> listener) {
 		listeners.add(listener);
 	}
 
-	synchronized void removeListener(Listener<T> listener) {
+	public synchronized void removeListener(Listener<T> listener) {
 		if (listener instanceof Delegate) {
 			Delegate delegate = (Delegate) listener;
 			for (Iterator<Listener<T>> i = listeners.iterator(); i.hasNext();) {
