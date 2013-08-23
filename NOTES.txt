@@ -221,3 +221,18 @@ Basic Element Requirements
 	* Bundled: less repeated code:  test for active / boundaries
 * Test Responsibility (mouse position inside element), active, etc. In PUI or Widget?
 * Do Keyboard Events make sense for elements? Need to combine with some kind of focus feature?
+* Where are MouseButton Constants?
+* Don't use UIEvents interface. this way the event methods can be protected and are only accessible in subclasses.
+	Or use an package private abstract BaseWidget and extend it with empty implementations of handler methods
+
+2. Encapsulate State / Model
+Subclass Widget and add instance vars
+* basic state (active, pressed, hover) with getters so vars can't be overridden in subclasses
+
+3. Encapsulate Rendering / View
+Subclass Widget and override draw().
+
+4. Allow User Event Handling
+
+5. Allow User Rendering
+Specify a draw callback, where the complete element state is passed. or the element itself.
