@@ -47,7 +47,7 @@ public class PUI {
 	// myParent is a reference to the parent sketch
 	PApplet p;
 
-	ArrayList<AbstractElement> elements = new ArrayList<AbstractElement>();
+	ArrayList<Widget> widgets = new ArrayList<Widget>();
 
 	/**
 	 * A constructor, usually called in the setup() method in your sketch to initialize and start
@@ -93,43 +93,50 @@ public class PUI {
 		 * @param e
 		 */
 		public void mouseEvent(MouseEvent e) {
-			switch (e.getAction()) {
-				case MouseEvent.ENTER:
-					mouseEntered(e);
-					System.out.println("ENTER");
-					break;
-				case MouseEvent.MOVE:
-					System.out.println("MOVE");
-					mouseMoved(e);
-					break;
-				case MouseEvent.PRESS:
-					System.out.println("PRESS");
-					mousePressed(e);
-					break;
-				case MouseEvent.DRAG:
-					System.out.println("DRAG");
-					mouseDragged(e);
-					break;
-				case MouseEvent.RELEASE:
-					System.out.println("RELEASE");
-					mouseReleased(e);
-					break;
-				case MouseEvent.CLICK:
-					System.out.println("CLICK");
-					mouseClicked(e);
-					break;
-				case MouseEvent.EXIT:
-					System.out.println("EXIT");
-					mouseExited(e);
-					break;
-				case MouseEvent.WHEEL:
-					System.out.println("WHEEL");
-					mouseWheelMoved(e);
-					break;
+			// filter ENTER and EXIT, because this has to do with whole sketch window
+			if (e.getAction() == MouseEvent.ENTER || e.getAction() == MouseEvent.EXIT) return;
+			
+			for (Widget w : widgets) {
+				w.onMouseEvent(e);
 			}
+			
+//			switch (e.getAction()) {
+//				case MouseEvent.ENTER:
+//					mouseEntered(e);
+//					System.out.println("ENTER");
+//					break;
+//				case MouseEvent.MOVE:
+//					System.out.println("MOVE");
+//					mouseMoved(e);
+//					break;
+//				case MouseEvent.PRESS:
+//					System.out.println("PRESS");
+//					mousePressed(e);
+//					break;
+//				case MouseEvent.DRAG:
+//					System.out.println("DRAG");
+//					mouseDragged(e);
+//					break;
+//				case MouseEvent.RELEASE:
+//					System.out.println("RELEASE");
+//					mouseReleased(e);
+//					break;
+//				case MouseEvent.CLICK:
+//					System.out.println("CLICK");
+//					mouseClicked(e);
+//					break;
+//				case MouseEvent.EXIT:
+//					System.out.println("EXIT");
+//					mouseExited(e);
+//					break;
+//				case MouseEvent.WHEEL:
+//					System.out.println("WHEEL");
+//					mouseWheelMoved(e);
+//					break;
+//			}
 
 //		System.out.println("button:" + e.getButton() + " count:" + e.getCount() + " x:" + e.getX() + " y:" + e.getY());
-			System.out.println("");
+//			System.out.println("");
 		}
 
 		/**
@@ -137,18 +144,22 @@ public class PUI {
 		 *
 		 */
 		public void keyEvent(KeyEvent e) {
-			switch (e.getAction()) {
-				case KeyEvent.PRESS:
-					System.out.println("PRESS");
-					break;
-				case KeyEvent.RELEASE:
-					System.out.println("RELEASE");
-					break;
-				case KeyEvent.TYPE:
-					System.out.println("TYPE");
-					break;
+			for (Widget w : widgets) {
+				w.onKeyEvent(e);
 			}
-			System.out.println("key: " + e.getKey() + " keyCode: " + e.getKeyCode());
+			
+//			switch (e.getAction()) {
+//				case KeyEvent.PRESS:
+//					System.out.println("PRESS");
+//					break;
+//				case KeyEvent.RELEASE:
+//					System.out.println("RELEASE");
+//					break;
+//				case KeyEvent.TYPE:
+//					System.out.println("TYPE");
+//					break;
+//			}
+//			System.out.println("key: " + e.getKey() + " keyCode: " + e.getKeyCode());
 		}
 
 		/**
@@ -157,11 +168,8 @@ public class PUI {
 		 */
 		public void draw() {
 			//System.out.println("draw " + p.frameCount);
-			for (AbstractElement element : elements) {
-				if (!element.isActive()) {
-					continue;
-				}
-				element.draw();
+			for (Widget w : widgets) {
+				w.onDraw();
 			}
 		}
 	}
@@ -171,115 +179,83 @@ public class PUI {
 	 *
 	 * @param e
 	 */
-	public void add(AbstractElement e) {
-		if (!elements.contains(e)) {
-			elements.add(e);
+	void add(Widget e) {
+		if (!widgets.contains(e)) {
+			widgets.add(e);
 		}
 	}
 
-	private void mouseEntered(MouseEvent e) {
-	}
 
-	private void mouseExited(MouseEvent e) {
-	}
+//	private void mousePressed(MouseEvent e) {
+//		int mx = e.getX();
+//		int my = e.getY();
+//
+//		for (Widget element : widgets) {
+//			if (!element.isActive()) {
+//				continue;
+//			}
+//
+//			if (element.hover) {
+//				element.mousePressedPre(mx, my);
+//			}
+//		}
+//	}
 
-	private void mouseMoved(MouseEvent e) {
-		int mx = e.getX();
-		int my = e.getY();
+//	private void mouseClicked(MouseEvent e) {
+//		int mx = e.getX();
+//		int my = e.getY();
+//
+//		for (Widget element : widgets) {
+//			if (!element.isActive()) {
+//				continue;
+//			}
+//
+//			if (element.hover) {
+//				element.mouseClicked(mx, my);
+//			}
+//		}
+//	}
 
-		for (AbstractElement element : elements) {
-			// skip inactive elements
-			if (!element.isActive()) {
-				continue;
-			}
+//	private void mouseDragged(MouseEvent evt) {
+//		int mx = evt.getX();
+//		int my = evt.getY();
+//
+//		for (Widget element : widgets) {
+//			if (!element.isActive()) {
+//				continue;
+//			}
+//
+//			if (element.hover) {
+//				element.mouseDraggedPre(mx, my);
+//			}
+//		}
+//	}
 
-			// distribute mouseEntered, mouseExited and mouseMoved
-			boolean wasHover = element.hover;
-			element.hover = element.isInside(mx, my);
-			System.out.println("hover: " + element.hover);
-			if (element.hover && !wasHover) {
-				element.mouseEntered();
-				element.mouseEntered(mx, my);
-			} else if (!element.hover && wasHover) {
-				element.mouseExited();
-				element.mouseExited(mx, my);
-			} else {
-				element.mouseMoved();
-				element.mouseMoved(mx, my);
-			}
-		}
-	}
+//	private void mouseReleased(MouseEvent evt) {
+//		int mx = evt.getX();
+//		int my = evt.getY();
+//
+//		for (Widget element : widgets) {
+//			if (!element.isActive()) {
+//				continue;
+//			}
+//
+//			if (element.hover) {
+//				element.mouseReleasedPre(mx, my);
+//				element.mouseReleasedPost(mx, my);
+//			}
+//		}
+//	}
 
-	private void mousePressed(MouseEvent e) {
-		int mx = e.getX();
-		int my = e.getY();
-
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
-			}
-
-			if (element.hover) {
-				element.mousePressedPre(mx, my);
-			}
-		}
-	}
-
-	private void mouseClicked(MouseEvent e) {
-		int mx = e.getX();
-		int my = e.getY();
-
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
-			}
-
-			if (element.hover) {
-				element.mouseClicked(mx, my);
-			}
-		}
-	}
-
-	private void mouseDragged(MouseEvent evt) {
-		int mx = evt.getX();
-		int my = evt.getY();
-
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
-			}
-
-			if (element.hover) {
-				element.mouseDraggedPre(mx, my);
-			}
-		}
-	}
-
-	private void mouseReleased(MouseEvent evt) {
-		int mx = evt.getX();
-		int my = evt.getY();
-
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
-			}
-
-			if (element.hover) {
-				element.mouseReleasedPre(mx, my);
-				element.mouseReleasedPost(mx, my);
-			}
-		}
-	}
-
-	private void mouseWheelMoved(MouseEvent e) {
-		for (AbstractElement element : elements) {
-			if (!element.isActive()) {
-				continue;
-			}
-
-			if (element.hover) {
-				element.mouseScrolled(e.getCount());
-			}
-		}
-	}
+//	private void mouseWheelMoved(MouseEvent e) {
+//		for (Widget element : widgets) {
+//			if (!element.isActive()) {
+//				continue;
+//			}
+//
+//			if (element.hover) {
+//				element.mouseScrolled(e.getCount());
+//			}
+//		}
+//	}
 }

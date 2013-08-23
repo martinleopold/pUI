@@ -215,3 +215,9 @@ Basic Element Requirements
 3. Encapsulate Rendering / View
 4. Allow User Event Handling
 5. Allow User Rendering
+
+1. Receive Events from PUI
+* Bundled Events (keyEvent, mouseEvent, drawEvent) or split up (mousePressed, mouseReleased, ...)
+	* Bundled: less repeated code:  test for active / boundaries
+* Test Responsibility (mouse position inside element), active, etc. In PUI or Widget?
+* Do Keyboard Events make sense for elements? Need to combine with some kind of focus feature?

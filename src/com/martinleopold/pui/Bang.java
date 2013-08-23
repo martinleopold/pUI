@@ -17,103 +17,60 @@
  */
 package com.martinleopold.pui;
 
+import processing.core.PApplet;
+
 /**
- *
+ * A Widget to test Events
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Bang extends AbstractElement {
+public class Bang extends Widget {
 
 	public Bang(float x, float y, float width, float height, PUI pui) {
 		super(x, y, width, height, pui);
 	}
-	
-	@Override
-	public void mouseEntered() {
-		System.out.println("mouseEntered");
-	}
 
 	@Override
 	public void mouseEntered(float mx, float my) {
-		System.out.println("mouseEntered: " + mx + " " + my);
-	}
-
-	@Override
-	public void mouseMoved() {
-		System.out.println("mouseMoved");
-	}
-
-	@Override
-	public void mouseMoved(float mx, float my) {
-		System.out.println("mouseMoved: " + mx + " " + my);
-	}
-
-	@Override
-	public void mouseExited() {
-		System.out.println("mouseExited");
+		System.out.println("entered: mx:" + mx + " my:" + my);
 	}
 
 	@Override
 	public void mouseExited(float mx, float my) {
-		System.out.println("mouseExited: " + mx + " " + my);
+		System.out.println("exited: mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mousePressed() {
-		System.out.println("mousePressed");
+	public void mouseMoved(float mx, float my) {
+		System.out.println("moved: mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mousePressed(float mx, float my) {
-		System.out.println("mousePressed: " + mx + " " + my);
-	}
-	
-	@Override
-	public void mouseClicked() {
-		System.out.println("mouseClicked");
+	public void mousePressed(int button, float mx, float my) {
+		System.out.println("pressed: button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseClicked(float mx, float my) {
-		System.out.println("mouseClicked: " + mx + " " + my);
-	}
-	
-	@Override
-	public void mouseDoubleClicked() {
-		System.out.println("mouseDoubleClicked");
+	public void mouseReleased(int button, float mx, float my) {
+		System.out.println("released: button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseDoubleClicked(float mx, float my) {
-		System.out.println("mouseDoubleClicked: " + mx + " " + my);
+	public void mouseClicked(int button, int count, float mx, float my) {
+		System.out.println("clicked: count:" + count + " button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseDragged(float mx, float my) {
-		System.out.println("mouseDragged: " + mx + " " + my);
+	public void mouseDragged(int button, float mx, float my, float dx, float dy) {
+		System.out.println("dragged: button:" + button + " mx:" + mx + " my:" + my + " dx:" + dx + " dy:" + dy);
 	}
 
 	@Override
-	public void mouseDragged(float mx, float my, float dx, float dy) {
-		System.out.println("mouseDragged: " + mx + " " + my + " " + dx + " " + dy);
+	public void mouseScrolled(int amount) {
+		System.out.println("scrolled: amount:" + amount);
 	}
 
 	@Override
-	public void mouseReleased() {
-		System.out.println("mouseReleased");
-	}
-
-	@Override
-	public void mouseReleased(float mx, float my) {
-		System.out.println("mouseReleased: " + mx + " " + my);
-	}
-
-	@Override
-	public void mouseScrolled(float step) {
-		System.out.println("mouseScrolled: " + step);
-	}
-
-	@Override
-	public void draw() {
-		pui.p.rect(x, y, width, height);
+	public void draw(PApplet p) {
+		p.rect(x, y, width, height);
 	}
 }

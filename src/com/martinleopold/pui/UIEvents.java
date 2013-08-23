@@ -17,24 +17,22 @@
  */
 package com.martinleopold.pui;
 
+import processing.core.PApplet;
+
 /**
- * Guido: Basic2DElement
- *
+ * User Interface Event Callbacks
  * @author Martin Leopold <m@martinleopold.com>
  */
-class Rect {
-
-	protected float x, y;
-	protected float width, height;
-
-	Rect(float x, float y, float width, float height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-	}
-
-	boolean isInside(float tx, float ty) {
-		return (tx >= x && tx <= x + width && ty >= y && ty <= y + height);
-	}
+interface UIEvents {
+	void mouseEntered(float mx, float my);
+	void mouseExited(float mx, float my);
+	void mouseMoved(float mx, float my);
+	void mousePressed(int button, float mx, float my);
+	void mouseReleased(int button, float mx, float my);
+	void mouseClicked(int button, int count, float mx, float my);
+	void mouseDragged(int button, float mx, float my, float dx, float dy);
+	void mouseScrolled(int amount);
+	void keyPressed(int key, int keyCode);
+	void keyReleased(int key, int keyCode);
+	void draw(PApplet p);
 }
