@@ -233,6 +233,7 @@ Subclass Widget and add instance vars
 Subclass Widget and override draw().
 
 4. Allow User Event Handling
+Specify user events and provide callback registering via reflection.
 
 5. Allow User Rendering
 Specify a draw callback, where the complete element state is passed. or the element itself.
