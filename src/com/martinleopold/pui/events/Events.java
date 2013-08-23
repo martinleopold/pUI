@@ -26,19 +26,19 @@ package com.martinleopold.pui.events;
 public class Events {
 	// TODO check this
 
-	static <T> Event<T> createEvent(T type) {
+	public static <T> Event<T> createEvent(T type) {
 		return new Event<T>();
 	}
 
-	static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
+	public static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
 		e.addListener(new Delegate<T>(listener, callbackMethodName));
 	}
 
-	static <T> void removeListener(Event<T> e, Object listener, String callbackMethodName) {
+	public static <T> void removeListener(Event<T> e, Object listener, String callbackMethodName) {
 		e.removeListener(new Delegate<T>(listener, callbackMethodName));
 	}
 
-	static <T> void fireEvent(Event<T> e, T args) {
+	public static <T> void fireEvent(Event<T> e, T args) {
 		e.fire(args);
 	}
 }

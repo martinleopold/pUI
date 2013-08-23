@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  * @author Martin Leopold <m@martinleopold.com>
  * @param <T>
  */
-public class Delegate<T> implements Listener<T> {
+class Delegate<T> implements Listener<T> {
 
 	Object listenerObject;
 	String callbackMethodName;
