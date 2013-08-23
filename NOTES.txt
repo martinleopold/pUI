@@ -86,12 +86,15 @@ x Review Event Systems
 * Keyboard Events
 
 Class Hierarchy / API
-* Main Class 
+* Main Class (PUI)
 	* Singleton vs. multiple instances
-* Element Base Class
+* Element Base Class / Widget
 * Elements/Widgets
-	* Data/Model
-	* Presentation/View
+	* Handle Events from PUI
+	* Data/State/Model
+	* Presentation/Rendering/View
+	* User Drawing
+	* User Event handling
 * Event/Callback Pattern
 * User controlled drawing
 * User Events
@@ -203,3 +206,12 @@ Slider
 	min, max
 	state: value
 	events: slideStart, sliding(value), valueChanged(value)
+
+
+Basic Element Requirements
+--------------------------
+1. Receive Events from PUI
+2. Encapsulate State / Model
+3. Encapsulate Rendering / View
+4. Allow User Event Handling
+5. Allow User Rendering
