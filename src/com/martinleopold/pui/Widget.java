@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui;
 
+import com.martinleopold.pui.events.Event;
+import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
@@ -131,6 +133,8 @@ public class Widget extends Rect implements UIEvents {
 				mouseScrolled(e.getCount());
 				break;
 		}
+		
+		if (isInside) onMouse.fire(e);
 	}
 
 	void onKeyEvent(KeyEvent e) {
@@ -144,6 +148,7 @@ public class Widget extends Rect implements UIEvents {
 			return;
 		}
 		draw(pui.p);
+		onDraw.fire(this);
 	}
 
 	@Override
@@ -191,5 +196,16 @@ public class Widget extends Rect implements UIEvents {
 	@Override
 	public void draw(PApplet p) {
 	}
-
+	
+	Event<Widget> onDraw = new Event<Widget>();
+	
+	public void onDraw(String methodName) {
+		Events.addListener(onDraw, pui.p, methodName);
+	}
+	
+	Event<MouseEvent> onMouse = new Event<MouseEvent>();
+	
+	public void onMouse(String methodName) {
+		Events.addListener(onMouse, pui.p, methodName);
+	}
 }

@@ -71,6 +71,10 @@ public class Bang extends Widget {
 
 	@Override
 	public void draw(PApplet p) {
+		p.pushStyle();
+		p.fill(64);
+		p.stroke(128);
 		p.rect(x, y, width, height);
+		p.popStyle();
 	}
 }

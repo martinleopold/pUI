@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui;
 
+import com.martinleopold.pui.events.Event;
+import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
 
 /**
@@ -24,7 +26,7 @@ import processing.core.PApplet;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Slider extends Widget {
-	float value = 0.5f;
+	public float value = 0.5f;
 	float min = 0;
 	float max = 1;
 	boolean sliding = false;
@@ -61,15 +63,10 @@ public class Slider extends Widget {
 	}
 	
 	private void setValue(float mx) {
-		System.out.println("mx: " + mx);
 		float dist = mx - x;
-		System.out.println("dist: " + dist);
-		
 		dist = PApplet.constrain(dist/width, 0, max-min);
-		System.out.println("dist: " + dist);
-		
 		value = min + dist;
-		System.out.println("value: " + value);
+		onValueChanged.fire(this);
 	}
 	
 	@Override
@@ -86,5 +83,11 @@ public class Slider extends Widget {
 	@Override
 	public void mouseReleased(int button, float mx, float my) {
 		sliding = false;
+	}
+	
+	Event<Slider> onValueChanged = new Event<Slider>();
+	
+	public void onValueChanged(String methodName) {
+		Events.addListener(onValueChanged, pui.p, methodName);
 	}
 }

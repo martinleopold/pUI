@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui;
 
+import com.martinleopold.pui.events.Event;
+import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
 
 /**
@@ -25,7 +27,7 @@ import processing.core.PApplet;
  */
 public class Button extends Widget {
 	// state
-	boolean pushed; // pressed is already used in superclass
+	public boolean pushed; // pressed is already used in superclass
 	
 	public Button(float x, float y, float width, float height, PUI pui) {
 		super(x, y, width, height, pui);
@@ -54,6 +56,7 @@ public class Button extends Widget {
 	@Override
 	public void mousePressed(int button, float mx, float my) {
 		pushed = true;
+		onButtonClicked.fire(this);
 	}
 	
 	@Override
@@ -61,5 +64,9 @@ public class Button extends Widget {
 		pushed = false;
 	}
 	
+	Event<Button> onButtonClicked = new Event<Button>();
 	
+	public void onButtonClicked(String methodName) {
+		Events.addListener(onButtonClicked, pui.p, methodName);
+	}
 }
