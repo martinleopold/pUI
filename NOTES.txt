@@ -237,3 +237,12 @@ Specify user events and provide callback registering via reflection.
 
 5. Allow User Rendering
 Specify a draw callback, where the complete element state is passed. or the element itself.
+
+
+Feedback Florian 28.8.2013
+--------------------------
+* Widget Constructor: PUI as first Argument
+* Generator Functions for Widgets in PUI. 
+* Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
+* Widgets in own package: com.martinleopold.pui.widget
+* The matrix might be changed when the draw callback comes
