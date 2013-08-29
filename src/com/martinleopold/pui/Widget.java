@@ -138,8 +138,12 @@ public class Widget extends Rect implements UIEvents {
 		if (!isActive()) {
 			return;
 		}
+		PApplet p = pui.p;
+		p.pushMatrix();
+		p.resetMatrix();
 		draw(pui.p);
 		onDraw.fire(this);
+		p.popMatrix();
 	}
 
 	@Override
