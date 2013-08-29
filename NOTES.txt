@@ -26,6 +26,7 @@ IDEAS
 * Simplest way to create a GUI Element?
 * Performance: Draw GUI in offscreen buffer. Only redraw when changed.
 * Possible to avoid class syntax? (beginners!)
+* When an element is created without any callbacks, print help text to the console.
 
 
 REFERENCES
@@ -64,6 +65,7 @@ x Core System
 	* Label
 * API Refinement
 * Advanced Features
+	* Auto Connection
 	* Theme
 	* Automatic Layout
 	* Saving State
@@ -81,9 +83,9 @@ x Review Event Systems
 	x Processing
  	x OpenFrameworks
 	x ofxUI
-* Mouse Events
-	* Support for different mouse buttons
-* Keyboard Events
+x Mouse Events
+	x Support for different mouse buttons
+x Keyboard Events
 
 Class Hierarchy / API
 * Main Class (PUI)
@@ -99,6 +101,23 @@ Class Hierarchy / API
 * User controlled drawing
 * User Events
 * Widget creation (without classes)
+* api revision
+	* encapsulate element data?
+	* element draw override (disable standard draw)
+	* callback arguments (whole object vs. relevant value)
+
+API Review
+* Widget Constructor: PUI as first Argument
+* Generator Functions for Widgets in PUI. 
+* Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
+* Widgets in own package: com.martinleopold.pui.widget
+* The matrix might be changed when the draw callback comes
+* PGraphics instead of PApplet ? 
+
+More
+* Theme System
+* Auto Connection (to variables and methods)
+
 
 
 EVENTS
