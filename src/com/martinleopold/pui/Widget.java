@@ -32,10 +32,11 @@ public class Widget extends Rect implements UIEvents {
 	PUI pui;
 
 	// state
-	boolean active = true;
-	boolean hover;
-	boolean pressed;
-	boolean dragged;
+	// bookean focus; // receives keyboard events
+	boolean active = true; // receives events (mouse, draw, ...)
+	boolean hover; // mouse over
+	boolean pressed; // mouse down
+	boolean dragged; // mouse is dragging
 	// helpers
 	float clickedMouseX, clickedMouseY;
 	float draggedDistX, draggedDistY;
