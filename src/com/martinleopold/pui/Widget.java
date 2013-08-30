@@ -40,7 +40,7 @@ public class Widget extends Rect implements UIEvents {
 	float clickedMouseX, clickedMouseY;
 	float draggedDistX, draggedDistY;
 
-	public Widget(float x, float y, float width, float height, PUI pui) {
+	public Widget(PUI pui, float x, float y, float width, float height) {
 		super(x, y, width, height);
 		this.pui = pui;
 		pui.add(this);

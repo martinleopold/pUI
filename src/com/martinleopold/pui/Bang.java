@@ -25,8 +25,8 @@ import processing.core.PApplet;
  */
 public class Bang extends Widget {
 
-	public Bang(float x, float y, float width, float height, PUI pui) {
-		super(x, y, width, height, pui);
+	public Bang(PUI pui, float x, float y, float width, float height) {
+		super(pui, x, y, width, height);
 	}
 
 	@Override

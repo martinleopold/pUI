@@ -31,8 +31,8 @@ public class Slider extends Widget {
 	float max = 1;
 	boolean sliding = false;
 			
-	public Slider(float x, float y, float width, float height, PUI pui) {
-		super(x, y, width, height, pui);
+	public Slider(PUI pui, float x, float y, float width, float height) {
+		super(pui, x, y, width, height);
 	}
 	
 	@Override
