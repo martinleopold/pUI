@@ -136,4 +136,18 @@ public class PUI {
 			widgets.add(e);
 		}
 	}
+	
+	/**
+	 * Generator Button
+	 * TODO should it return the element or the PUI?
+	 * TODO naming: addButton, newButton, createButton, button -> use a prefix for convention
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height 
+	 * @return  
+	 */
+	public Button addButton(float x, float y, float width, float height) {
+		return new Button(this, x, y, width, height);
+	}
 }
