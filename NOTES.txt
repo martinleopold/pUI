@@ -85,7 +85,8 @@ x Review Event Systems
 	x ofxUI
 x Mouse Events
 	x Support for different mouse buttons
-x Keyboard Events
+* Keyboard Events
+	* Notion of Focus for a widget
 
 Class Hierarchy / API
 * Main Class (PUI)
@@ -102,22 +103,31 @@ Class Hierarchy / API
 * User Events
 * Widget creation (without classes)
 * api revision
-	* encapsulate element data?
-	* element draw override (disable standard draw)
-	* callback arguments (whole object vs. relevant value)
 
-API Review
-* Widget Constructor: PUI as first Argument
+
+API Revision
+x The matrix might be changed when the draw callback comes
+x Widget Constructor: PUI as first Argument
+
+* should UIEvents really be public? maybe just protected
+* support for labeled widgets
+* widget names (e.g. for label, id, auto connect)
+* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+* how to encapsulate special element state (slider value, ...)
+* user callbacks
+	* which events are defined -> documented, convention onEvent
+	* callback arguments (whole object, relevant value, nothing)
+
+* element draw override (disable standard draw)
 * Generator Functions for Widgets in PUI. 
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
 * Widgets in own package: com.martinleopold.pui.widget
-* The matrix might be changed when the draw callback comes
-* PGraphics instead of PApplet ? 
+* PGraphics instead of PApplet? -> Can't use events then.
 
 More
 * Theme System
-* Auto Connection (to variables and methods)
-
+* Auto Connection System (to variables and methods)
+* Grid System
 
 
 EVENTS
@@ -265,3 +275,17 @@ Feedback Florian 28.8.2013
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
 * Widgets in own package: com.martinleopold.pui.widget
 * The matrix might be changed when the draw callback comes
+
+
+Theme System
+------------
+* A Collection of Colors (RGBA)
+* Defined as an interface (background, outline, outline_highlight, fill, fill_highlight, padded, padded_outline
+* A font. 3 sizes
+
+Grid System
+-----------
+
+Auto Connection System
+----------------------
+
