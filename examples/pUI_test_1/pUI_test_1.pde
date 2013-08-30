@@ -6,14 +6,14 @@ void setup() {
   
   PUI ui = new PUI(this);
   
-  Bang bang = new Bang(10,10, 50, 25, ui);
+  Bang bang = new Bang(ui, 10,10, 50, 25);
   bang.onMouse("mouseEvent");
   
-  Button b = new Button(10,50, 50, 25, ui);
+  Button b = new Button(ui, 10,50, 50, 25);
   b.onDraw("drawButton");
   b.onButtonClicked("buttonClicked");
   
-  Slider s = new Slider(10,90, 100, 25, ui);
+  Slider s = new Slider(ui, 10,90, 100, 25);
   s.onValueChanged("sliderValue");
 }
 
