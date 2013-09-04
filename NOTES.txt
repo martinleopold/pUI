@@ -283,9 +283,46 @@ Theme System
 * Defined as an interface (background, outline, outline_highlight, fill, fill_highlight, padded, padded_outline
 * A font. 3 sizes
 
-Grid System
+ofxUI Theme
 -----------
+event handlers -> state -> drawing flags -> drawing stages
+colors: background, outline,  outline highlight, fill, fill highlight, padded, padded outline
+
+widget:
+string name
+int kind
+bool visible
+int ID
+bool hit
+int state (normal, over, down, sustained)
+
+draw steps:
+padded
+padded outline
+background
+outline
+outlinehighlight
+fill
+fillhighlight
+
+
+Grid System / Layout
+--------------------
+
+ofxUI Layout
+------------
+widget positions (relative to last widget): down, up, left, right
+widget alignments (alignment relative to canvas): left, right, top, bottom, center, free
+keep track of last added widget
+
+
+
+Processing drawing / outline / fill
+-----------------------------------
+fill produces the given dimensions (width and height)
+stroke is overlayed starting at the top left corner but is 1px wider and higher
+
+
 
 Auto Connection System
 ----------------------
-
