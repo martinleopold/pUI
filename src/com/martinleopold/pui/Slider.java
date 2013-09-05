@@ -67,6 +67,7 @@ public class Slider extends Widget {
 		dist = PApplet.constrain(dist/width, 0, max-min);
 		value = min + dist;
 		onValueChanged.fire(this);
+		newValue.fire(value);
 	}
 	
 	@Override
@@ -86,8 +87,13 @@ public class Slider extends Widget {
 	}
 	
 	Event<Slider> onValueChanged = new Event<Slider>();
+	Event<Float> newValue = new Event<Float>();
 	
 	public void onValueChanged(String methodName) {
 		Events.addListener(onValueChanged, pui.p, methodName);
+	}
+	
+	public void connectTo(String fieldName) {
+		Events.addListenerField(newValue, pui.p, fieldName);
 	}
 }

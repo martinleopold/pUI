@@ -33,6 +33,10 @@ public class Events {
 	public static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
 		e.addListener(new Delegate<T>(listener, callbackMethodName));
 	}
+	
+	public static <T> void addListenerField(Event<T> e, Object listener, String fielddName) {
+		e.addListener(new DelegateField<T>(listener, fielddName));
+	}
 
 	public static <T> void removeListener(Event<T> e, Object listener, String callbackMethodName) {
 		e.removeListener(new Delegate<T>(listener, callbackMethodName));
