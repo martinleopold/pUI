@@ -238,3 +238,20 @@ stroke is overlayed starting at the top left corner but is 1px wider and higher
 
 Auto Connection System
 ----------------------
+
+
+Sketch Reflection
+-----------------
+Sketch is a public class
+Default Package
+extends processing.core.PApplet
+default access methods are made public
+default access fields remain default.
+
+getDeclaredFields(), getDeclaredMethods() -> also lists non-public members
+getFields(), getMethods() -> only public members, but also inherited
+
+without setAccessible(): can set only public fields, call default (=implicit public) and public methods
+with setAccessible(): can set all fields, call all methods
+
+can access inherited members

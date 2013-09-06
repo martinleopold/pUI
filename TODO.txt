@@ -92,7 +92,7 @@ More
 Top down
 --------
 * base api
-* base elements
+* base elements (slider, button, toggle, label, spacer)
 * callbacks
 * auto connect
 * theme system
