@@ -255,3 +255,21 @@ without setAccessible(): can set only public fields, call default (=implicit pub
 with setAccessible(): can set all fields, call all methods
 
 can access inherited members
+
+System.getSecurityManager():
+222 Mac Java 1.7: null
+2.0.3 Mac Java 1.7: null
+2.0.3 Win XP: null
+2.0.2 Win 7 64bit: ?
+2.0.2 Ubuntu: ?
+
+
+Access Modifiers
+----------------
+private: own class
+default (package private): own package
+protected: own package and subclasses in different packages
+public: everyone
+
+top level classes can have: public, default
+members can have: public, protected, default, private
