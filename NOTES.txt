@@ -260,7 +260,7 @@ System.getSecurityManager():
 222 Mac Java 1.7: null
 2.0.3 Mac Java 1.7: null
 2.0.3 Win XP: null
-2.0.2 Win 7 64bit: ?
+2.0.2 Win 7 64bit: null
 2.0.2 Ubuntu: ?
 
 
