@@ -24,10 +24,10 @@ package com.martinleopold.pui;
  */
 class Rect {
 
-	protected float x, y;
-	protected float width, height;
+	protected int x, y;
+	protected int width, height;
 
-	Rect(float x, float y, float width, float height) {
+	Rect(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;

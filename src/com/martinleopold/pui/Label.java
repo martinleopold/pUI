@@ -28,7 +28,7 @@ public class Label extends Widget {
 	//state
 	String text = "";
 
-	public Label(PUI pui, float x, float y, float width, float height) {
+	public Label(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 		

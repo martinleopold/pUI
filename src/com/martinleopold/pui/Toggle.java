@@ -30,7 +30,7 @@ public class Toggle extends Widget {
 	// state
 	boolean on;
 			
-	public Toggle(PUI pui, float x, float y, float width, float height) {
+	public Toggle(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 	

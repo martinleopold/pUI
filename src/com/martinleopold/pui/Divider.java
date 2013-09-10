@@ -26,7 +26,7 @@ import processing.core.PApplet;
  */
 public class Divider extends Widget {
 
-	public Divider(PUI pui, float x, float y, float width, float height) {
+	public Divider(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 	

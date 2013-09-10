@@ -25,7 +25,7 @@ import processing.core.PApplet;
  */
 public class Dummy extends Widget {
 
-	public Dummy(PUI pui, float x, float y, float width, float height) {
+	public Dummy(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 

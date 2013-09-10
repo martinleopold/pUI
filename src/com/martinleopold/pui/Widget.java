@@ -46,7 +46,7 @@ public class Widget extends Rect implements UIEvents {
 	Theme theme;
 	PFont font;
 
-	public Widget(PUI pui, float x, float y, float width, float height) {
+	public Widget(PUI pui, int x, int y, int width, int height) {
 		super(x, y, width, height);
 		this.pui = pui;
 		pui.add(this);
