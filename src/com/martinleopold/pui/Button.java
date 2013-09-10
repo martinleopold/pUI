@@ -35,22 +35,22 @@ public class Button extends Widget {
 	
 	@Override
 	public void draw(PApplet p) {
-		p.pushStyle();
-		
-		// draw body rect
+		// draw background
 		p.noStroke();
-		if (pressed) p.fill(255);
-		else p.fill(128);
+		p.fill(theme.background);
 		p.rect(x, y, width, height);
 		
 		// draw outline
-		p.noFill();
-		if (hover) {
-			p.stroke(64);
-			p.rect(x, y, width, height);
-		}
+		// draw outline highlight
+		if (hover) p.stroke(theme.outlineHighlight);
+		else p.stroke(theme.outline);
 		
-		p.popStyle();
+		// draw fill
+		// draw fill highlight
+		if (pressed) p.fill(theme.fillHighlight);
+		else p.fill(theme.fill);
+		
+		p.rect(x,y, width-1, height-1); // stroked rect is bigger
 	}
 	
 	@Override
