@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
@@ -67,7 +68,9 @@ public class PUI {
 		p.registerMethod("mouseEvent", peh);
 		p.registerMethod("keyEvent", peh);
 		p.registerMethod("draw", peh);
-
+		
+		setTheme(Theme.DEFAULT);
+		setFont(p.createFont("Source Code Pro", 24));
 	}
 
 	private void welcomeMessage() {
@@ -316,4 +319,13 @@ public class PUI {
 		return findField(o.getClass(), name);
 	}
 	
+	Theme theme;
+	public void setTheme(Theme t) {
+		this.theme = t;
+	}
+	
+	PFont font;
+	public void setFont(PFont f) {
+		this.font = f;
+	}
 }

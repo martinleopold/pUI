@@ -37,29 +37,26 @@ public class Slider extends Widget {
 	
 	@Override
 	public void draw(PApplet p) {
-		p.pushStyle();
-		
-		// draw body rect
+		// draw background
 		p.noStroke();
-		p.fill(128);
+		p.fill(theme.background);
 		p.rect(x, y, width, height);
 		
 		// draw outline
+		// draw outline highlight
+		if (hover) p.stroke(theme.outlineHighlight);
+		else p.stroke(theme.outline);
 		p.noFill();
-		if (hover) {
-			p.stroke(64);
-			p.rect(x, y, width, height);
-		}
+		p.rect(x, y, width-1, height-1); // stroked rect is bigger
 		
-		// draw marker
+		// draw fill
+		// draw fill highlight
 		p.noStroke();
-		if (pressed) p.fill(255);
-		else p.fill(200);
-		
-		float markerX = x + (max-min)*value*width;
-		p.rect(markerX-1, y, 3, height);
-		
-		p.popStyle();
+		if (pressed) p.fill(theme.fillHighlight);
+		else p.fill(theme.fill);
+		float widthX = (max-min)*value*width;
+		float valueX = x + widthX;
+		p.rect(x,y, widthX, height);
 	}
 	
 	private void setValue(float mx) {

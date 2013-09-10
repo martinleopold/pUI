@@ -20,6 +20,7 @@ package com.martinleopold.pui;
 import com.martinleopold.pui.events.Event;
 import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
@@ -37,14 +38,21 @@ public class Widget extends Rect implements UIEvents {
 	boolean hover; // mouse over
 	boolean pressed; // mouse down
 	boolean dragged; // mouse is dragging
+	
 	// helpers
 	float clickedMouseX, clickedMouseY;
 	float draggedDistX, draggedDistY;
+	
+	Theme theme;
+	PFont font;
 
 	public Widget(PUI pui, float x, float y, float width, float height) {
 		super(x, y, width, height);
 		this.pui = pui;
 		pui.add(this);
+		
+		theme = pui.theme;
+		font = pui.font;
 	}
 
 	public void setActive(boolean tf) {
@@ -142,9 +150,11 @@ public class Widget extends Rect implements UIEvents {
 		PApplet p = pui.p;
 		p.pushMatrix();
 		p.resetMatrix();
-		draw(pui.p);
+		p.pushStyle();
+		draw(p);
 		onDraw.fire(this);
 		p.popMatrix();
+		p.popStyle();
 	}
 
 	@Override
