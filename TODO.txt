@@ -26,12 +26,23 @@ x Core System
 	* Saving State
 	* Layout Adjustment
 * More UI Elements
+* Docs
+	* Code
+	* User Documentation
+	* Website
+	* Readme
 
 System
 ------
 * Logger instead of System.out
 * Faster build (reuse preprocessed files/tmp)
 * Proper dist and tagging
+
+
+Documentation
+-------------
+* public callbacks should something not work (SecurityNanager)
+
 
 Event System
 ------------
