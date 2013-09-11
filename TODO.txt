@@ -8,10 +8,6 @@ x Core System
 	x Event System
 	x Active Regions
 	x Dummy UI Element (Bang)
-* Core System / API Review
-	* Events (Mouse, Keyboard)
-	* Class Hierarchy
-	* Element Construction Pattern
 * Basic UI Components
 	* Button
 	* Toggle
@@ -19,18 +15,34 @@ x Core System
 	* Divider
 	* Label
 * API Refinement
+	* Events (Mouse, Keyboard)
+	* Class Hierarchy
+	* Element Construction Pattern
+	* Callback Pattern
 * Advanced Features
 	* Auto Connection
 	* Theme
 	* Automatic Layout
 	* Saving State
 	* Layout Adjustment
+	* Drawing Performance Optimization (Redraw only when changed)
+	* Multiple Layout Modes
+	* Keyboard shortcuts
 * More UI Elements
+	* Vertical Slider
+	* Radio Button
+	* XY Pad
+	* Text Input
+	* Label Button
+	* Label Toggle
+	* Drop Down List
+	* Moving 
 * Docs
 	* Code
 	* User Documentation
 	* Website
 	* Readme
+
 
 System
 ------
@@ -41,7 +53,7 @@ System
 
 Documentation
 -------------
-* public callbacks should something not work (SecurityNanager)
+* use public callbacks in case something doesn't work (SecurityNanager)
 
 
 Event System
@@ -55,6 +67,7 @@ x Mouse Events
 	x Support for different mouse buttons
 * Keyboard Events
 	* Notion of Focus for a widget
+
 
 Class Hierarchy / API
 ---------------------
@@ -78,7 +91,7 @@ API Revision
 ------------
 x The matrix might be changed when the draw callback comes
 x Widget Constructor: PUI as first Argument
-
+* Revise public API (what should the user see)
 * should UIEvents really be public? maybe just protected
 * support for labeled widgets
 * widget names (e.g. for label, id, auto connect)
@@ -95,27 +108,43 @@ x Widget Constructor: PUI as first Argument
 * PGraphics instead of PApplet? -> Can't use events then.
 
 
-Top down
---------
-* base api
-* base elements (slider, button, toggle, label, spacer)
-* callbacks
-* auto connect
-* theme system
-* grid layout
+Main Class
+----------
+* show/hide ui
+* test ui size and position
+* test ui drawing independence of sketch transformations
+* default settings in a file
 
 
-More
-----
-* Base Widget State
-* Special Widget State
-* Drawing Performance (Redraw only when changed)
-* Multiple Layout Modes
-* Default Sizes for widgets (based on grid)
-* use grid for widget dimensions and padding
-* more themes
-* widgets need to be able to overwrite the theme
-* OpenGL: widgedts don't render
+Widgets
+-------
+* constructor possibilities
 * widgets with labels
 * labels with 3 sizes
-* public API
+
+
+Theme System
+------------
+* add more themes
+* widgets need to be able to have a different theme?
+
+
+Grid System
+-----------
+* Default Sizes for widgets (based on grid)
+* Padding based on grid
+
+
+Issues
+------
+* OpenGL: widgedts don't render
+
+
+Top down
+--------
+* Base API
+* Base Widgets (Slider, Button, Toggle, Label, Divider)
+* Callbacks
+* Auto Connect
+* Theme System
+* Grid Layout

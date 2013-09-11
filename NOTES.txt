@@ -27,6 +27,7 @@ IDEAS
 * Performance: Draw GUI in offscreen buffer. Only redraw when changed.
 * Possible to avoid class syntax? (beginners!)
 * When an element is created without any callbacks, print help text to the console.
+* Container Widgets for grouping
 
 
 REFERENCES
