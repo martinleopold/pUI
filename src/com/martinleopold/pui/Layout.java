@@ -63,7 +63,7 @@ class Layout {
 		
 		// ceck if we flow out at the bottom
 		if (nextY + toalHeight > height) {
-			System.out.println("try new column");
+//			System.out.println("try new column");
 			newColumn();
 		}
 		
@@ -81,12 +81,12 @@ class Layout {
 				System.out.println("Warning: Widget is placed outside of the window.");
 			}
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
-			System.out.println("make column wider");
+//			System.out.println("make column wider");
 			// we are at the beginning of a line and it doesn't fit
 			currentColumnWidth = totalWidth; // make this column wider
 			add(e); // try again
 		} else { // it doesn't fit in the current line
-			System.out.println("try new row");
+//			System.out.println("try new row");
 			newRow();
 			add(e);
 		}
