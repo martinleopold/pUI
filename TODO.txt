@@ -94,11 +94,6 @@ x Widget Constructor: PUI as first Argument
 * Widgets in own package: com.martinleopold.pui.widget
 * PGraphics instead of PApplet? -> Can't use events then.
 
-More
-----
-* Theme System
-* Auto Connection System (to variables and methods)
-* Grid System
 
 Top down
 --------
@@ -108,3 +103,19 @@ Top down
 * auto connect
 * theme system
 * grid layout
+
+
+More
+----
+* Base Widget State
+* Special Widget State
+* Drawing Performance (Redraw only when changed)
+* Multiple Layout Modes
+* Default Sizes for widgets (based on grid)
+* use grid for widget dimensions and padding
+* more themes
+* widgets need to be able to overwrite the theme
+* OpenGL: widgedts don't render
+* widgets with labels
+* labels with 3 sizes
+* public API
