@@ -45,7 +45,7 @@ import processing.event.MouseEvent;
  * automatically include the example in the javadoc.)
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class PUI {
+public class PUI extends Rect {
 
 	public final static String VERSION = "##library.prettyVersion##";
 	// myParent is a reference to the parent sketch
@@ -61,6 +61,7 @@ public class PUI {
 	 * @param p
 	 */
 	public PUI(PApplet p) {
+		super(0,0, p.width, p.height);
 		welcomeMessage();
 
 		this.p = p;
@@ -74,7 +75,7 @@ public class PUI {
 		setGrid(GRIDX_DEFAULT, GRIDY_DEFAULT);
 		setPadding(PADDINGX_DEFAULT, PADDINGY_DEFAULT);
 		
-		setLayout(new Layout(p.width, p.height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
+		setLayout(new Layout(width, height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
 	}
 
 	private void welcomeMessage() {
@@ -129,10 +130,39 @@ public class PUI {
 		 *
 		 */
 		public void draw() {
+			p.pushMatrix();
+			p.resetMatrix();
+			
+			p.translate(x,y);
+			p.pushStyle();
+			if (drawBackground) drawBackground();
+			if (drawGrid) drawGrid();
+			p.popStyle();
+			
 			//System.out.println("draw " + p.frameCount);
 			for (Widget w : widgets) {
 				w.onDraw();
 			}
+
+			p.popMatrix();
+		}
+	}
+	
+	void drawBackground() {
+		p.noStroke();
+		p.fill(theme.background);
+		p.rect(0, 0, width, height);
+	}
+	
+	void drawGrid() {
+		p.stroke(theme.outline);
+		// vertical lines
+		for (int x=gridX; x<width; x+=gridX) {
+			p.line(x, 0, x, height-1);
+		}
+		// horizontal lines
+		for (int y=gridY; y<height; y+=gridY) {
+			p.line(0, y, width-1, y);
 		}
 	}
 
@@ -345,6 +375,27 @@ public class PUI {
 		this.gridX = x;
 		this.gridY = y;
 	}
+	
+	boolean drawGrid;
+	
+	public void showGrid() {
+		showGrid(true);
+	}
+	
+	public void showGrid(boolean yes) {
+		drawGrid = yes;
+	}
+	
+	boolean drawBackground;
+	
+	public void showBackground() {
+		showBackground(true);
+	}
+	
+	public void showBackground(boolean yes) {
+		drawBackground = yes;
+	}
+	
 	
 	static final float PADDINGX_DEFAULT = 0.5f;
 	static final float PADDINGY_DEFAULT = 0.5f;

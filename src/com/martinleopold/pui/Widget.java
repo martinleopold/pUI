@@ -149,7 +149,6 @@ public class Widget extends Rect implements UIEvents {
 		}
 		PApplet p = pui.p;
 		p.pushMatrix();
-		p.resetMatrix();
 		p.pushStyle();
 		draw(p);
 		onDraw.fire(this);
