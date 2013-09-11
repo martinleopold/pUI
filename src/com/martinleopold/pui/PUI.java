@@ -71,6 +71,10 @@ public class PUI {
 		
 		setTheme(Theme.DEFAULT);
 		setFont(p.createFont("Source Code Pro", 24));
+		setGrid(GRIDX_DEFAULT, GRIDY_DEFAULT);
+		setPadding(PADDINGX_DEFAULT, PADDINGY_DEFAULT);
+		
+		setLayout(new Layout(p.width, p.height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
 	}
 
 	private void welcomeMessage() {
@@ -140,6 +144,7 @@ public class PUI {
 	void add(Widget e) {
 		if (!widgets.contains(e)) {
 			widgets.add(e);
+			layout.add(e);
 		}
 	}
 	
@@ -153,7 +158,7 @@ public class PUI {
 	 * @param height 
 	 * @return  
 	 */
-	public Button addButton(float x, float y, float width, float height) {
+	public Button addButton(int x, int y, int width, int height) {
 		return new Button(this, x, y, width, height);
 	}
 	
@@ -320,12 +325,60 @@ public class PUI {
 	}
 	
 	Theme theme;
-	public void setTheme(Theme t) {
+	void setTheme(Theme t) {
 		this.theme = t;
 	}
 	
 	PFont font;
 	public void setFont(PFont f) {
 		this.font = f;
+	}
+	
+	
+	static final int GRIDX_DEFAULT = 10;
+	static final int GRIDY_DEFAULT = 10;
+	
+	int gridX;
+	int gridY;
+	
+	public void setGrid(int x, int y) {
+		this.gridX = x;
+		this.gridY = y;
+	}
+	
+	static final float PADDINGX_DEFAULT = 0.5f;
+	static final float PADDINGY_DEFAULT = 0.5f;
+	
+	float paddingX;
+	float paddingY;
+	
+	public void setPadding(float x, float y) {
+		this.paddingX = x;
+		this.paddingY = y;
+	}
+	
+	
+	Layout layout;
+	public void setLayout(Layout l) {
+		this.layout = l;
+	}
+	
+	void addAndLayout(Widget e) {
+		if (!widgets.contains(e)) {
+
+			add(e);
+		}
+	}
+	
+	public void newRow() {
+		layout.newRow();
+	}
+	
+	public void newColumn() {
+		layout.newColumn();
+	}
+	
+	public void columnWidth(int w) {
+		layout.setColumnWidth(w);
 	}
 }
