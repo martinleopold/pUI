@@ -79,7 +79,7 @@ public class PUI extends Rect {
 	}
 
 	private void welcomeMessage() {
-		System.out.println("##library.name## ##library.prettyVersion## by ##author##");
+		System.out.println("##library.name## ##library.prettyVersion## (##library.version##) by ##author##");
 	}
 
 	/**

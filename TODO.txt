@@ -49,7 +49,8 @@ System
 * Logger instead of System.out
 * Faster build (reuse preprocessed files/tmp)
 * Proper dist and tagging
-
+x fix preprocessor (welcomeMessage() not working) -> works on clean & build (non-fast)
+* compiler warnings: [unchecked], [rawtypes]
 
 Documentation
 -------------
