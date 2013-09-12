@@ -193,8 +193,8 @@ public class PUI extends Rect {
 	}
 	
 	public void testReflection() {
-		Class c = p.getClass(); // sketch class
-		Class s = c.getSuperclass();
+		Class<?> c = p.getClass(); // sketch class
+		Class<?> s = c.getSuperclass();
 		System.out.println(c);
 		System.out.println(s);
 		System.out.println("isPublic " + Modifier.isPublic(c.getModifiers()));
@@ -213,7 +213,7 @@ public class PUI extends Rect {
 		
 		System.out.println("getDeclaredClasses");
 		System.out.println("------------------");
-		for (Class cl : c.getDeclaredClasses()) {
+		for (Class<?> cl : c.getDeclaredClasses()) {
 			System.out.println(cl);
 		}
 		
@@ -231,7 +231,7 @@ public class PUI extends Rect {
 		
 		System.out.println("getClasses");
 		System.out.println("----------");
-		for (Class cl : c.getClasses()) {
+		for (Class<?> cl : c.getClasses()) {
 			System.out.println(cl);
 		}
 	}
@@ -269,7 +269,7 @@ public class PUI extends Rect {
 	}
 	
 	public void testObject(String name) {
-		Class c = p.getClass();
+		Class<?> c = p.getClass();
 		try {
 			Field f = c.getDeclaredField(name);
 			System.out.println(f);
@@ -295,14 +295,14 @@ public class PUI extends Rect {
 	 * @param parameterTypes
 	 * @return 
 	 */
-	public static Method findMethod(Class c, String name, Class... parameterTypes) {
+	public static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
 		Method m = null;
 		try {
 			m = c.getDeclaredMethod(name, parameterTypes);
 			m.setAccessible(true);
 		} catch (NoSuchMethodException ex) {
 			// look in superclass
-			Class s = c.getSuperclass();
+			Class<?> s = c.getSuperclass();
 			if (s == null) return null;
 			else return findMethod(s, name, parameterTypes);
 		} catch (SecurityException ex) {
@@ -328,14 +328,14 @@ public class PUI extends Rect {
 	 * @param name
 	 * @return 
 	 */
-	public static Field findField(Class c, String name) {
+	public static Field findField(Class<?> c, String name) {
 		Field f = null;
 		try {
 			f = c.getDeclaredField(name);
 			f.setAccessible(true);
 		} catch (NoSuchFieldException ex) {
 			// look in superclass
-			Class s = c.getSuperclass();
+			Class<?> s = c.getSuperclass();
 			if (s == null) return null;
 			else return findField(s, name);
 		} catch (SecurityException ex) {

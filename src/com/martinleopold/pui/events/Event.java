@@ -45,11 +45,11 @@ public class Event<T> {
 
 	public synchronized void removeListener(Listener<T> listener) {
 		if (listener instanceof Delegate) {
-			Delegate delegate = (Delegate) listener;
+			Delegate<T> delegate = (Delegate<T>) listener;
 			for (Iterator<Listener<T>> i = listeners.iterator(); i.hasNext();) {
 				Listener<T> l = i.next();
 				if (l instanceof Delegate) {
-					Delegate d = (Delegate) l;
+					Delegate<T> d = (Delegate<T>) l;
 					if (d.listenerObject == delegate.listenerObject && d.callbackMethodName.equals(delegate.callbackMethodName)) {
 						i.remove();
 					}
