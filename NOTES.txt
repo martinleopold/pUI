@@ -274,3 +274,51 @@ public: everyone
 
 top level classes can have: public, default
 members can have: public, protected, default, private
+
+
+Access
+------
+library stuff can use private and default access (package private)
+user stuff is public
+widget is designed to be extended. can use protected
+
+
+Ways to use
+-----------
+* Use PUI Object
+* Extending Widget yourself and adding it to PUI
+
+? Multiple PUIs
+
+
+PUI - Public API
+----------------
+* init
+* create (and add) widgets
+* theme
+	* colors
+	* padding
+	* font
+* grid
+	* size
+
+* add (externally created) widgets
+
+
+Widget - Public API
+-------------------
+* register event handlers
+* access state
+* size (in grid units)
+* label
+
+* construct with new
+* custom size
+* individual theme
+* override drawing
+
+
+Widget - Extending
+------------------
+* protected vs. private stuff
+

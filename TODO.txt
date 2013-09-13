@@ -150,3 +150,18 @@ Top down
 * Auto Connect
 * Theme System
 * Grid Layout
+
+
+Test Release
+------------
+* more themes, theme api (PUI)
+* grid: widget dimensions, grid api (PUI
+* widgets with labels
+* public api review
+* docs
+
+
+Next:
+* Widgets with Labels
+* PUI API
+* Widget API
