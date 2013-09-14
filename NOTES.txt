@@ -311,6 +311,7 @@ Widget - Public API
 * access state
 * size (in grid units)
 * label
+* chainable public methods
 
 * construct with new
 * custom size
@@ -322,3 +323,15 @@ Widget - Extending
 ------------------
 * protected vs. private stuff
 
+
+Widgets with Labels
+-------------------
+* Label as member
+* Widget decides where to place the label
+* Needs a label, that can adjust to its contents
+* How should a label react to setting its contents? (cut it's contents? adjust size to contents?)
+* How to adjust its size? Label can be placed next to the widget in either direction.
+* Widgets better have Rect as a member not as a superclass? 
+* have two components (widget and label) and a joint rect
+ 
+* how to space it 
