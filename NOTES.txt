@@ -335,3 +335,5 @@ Widgets with Labels
 * have two components (widget and label) and a joint rect
  
 * how to space it 
+
+* Label default behavior: autowidth or fixed width

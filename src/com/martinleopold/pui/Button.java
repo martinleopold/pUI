@@ -25,7 +25,7 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Button extends Widget {
+public class Button extends WidgetWithLabel {
 	// state
 	public boolean pushed; // pressed is already used in superclass
 	
@@ -51,6 +51,7 @@ public class Button extends Widget {
 		else p.fill(theme.fill);
 		
 		p.rect(x,y, width-1, height-1); // stroked rect is bigger
+		drawLabel();
 	}
 	
 	@Override

@@ -23,30 +23,43 @@ package com.martinleopold.pui;
  */
 public class WidgetWithLabel extends Widget {
 	Label label;
+	Rect widgetRect;
 	
-	enum LabelPlacement {
-		LEFTTOP, LEFTCENTER, LEFTBOTTOM, 
-		RIGHTTOP, RIGHTCENTER, RIGHTBOTTOM, 
-		TOPLEFT, TOPCENTER, TOPRIGHT,
-		BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT
-	}
-	LabelPlacement labelPlacement;
+//	enum LabelPlacement {
+//		LEFTTOP, LEFTCENTER, LEFTBOTTOM, 
+//		RIGHTTOP, RIGHTCENTER, RIGHTBOTTOM, 
+//		TOPLEFT, TOPCENTER, TOPRIGHT,
+//		BOTTOMLEFT, BOTTOMCENTER, BOTTOMRIGHT
+//	}
+//	LabelPlacement labelPlacement;
+
 	
 	public WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
-		labelPlacement = LabelPlacement.BOTTOMLEFT;
+		super(pui, x, y, width, height); // init 
+		widgetRect = new Rect(x, y, width, height); // save dimensions of the widget
+//		labelPlacement = LabelPlacement.BOTTOMLEFT;
+		label = new Label(pui, x, y+height, 0, 20); // place under widget  TODO variable height
+		this.height = widgetRect.height + label.height; // joint height
+		setLabel(""); // sets width
 	}
 	
 	public WidgetWithLabel setLabel(String text) {
-		// TODO adjust label size
+		label.setText(text);
+		label.width = (int)label.textWidth()+1; // adjust label size
+		// adjust width
+		this.width = widgetRect.width > label.width ? widgetRect.width : label.width;
 		return this;
 	}
 	
-	void setLabelPlacement(LabelPlacement placement) {
-		this.labelPlacement = placement;
-	}
+//	void setLabelPlacement(LabelPlacement placement) {
+//		this.labelPlacement = placement;
+//		
+//		// place widgetRect
+//		// place label
+//		// place this
+//	}
 	
 	void drawLabel() {
-		
+		label.draw(pui.p);
 	}
 }

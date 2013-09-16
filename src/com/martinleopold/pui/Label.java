@@ -60,5 +60,14 @@ public class Label extends Widget {
 		return this;
 	}
 	
-	
+	// get width of the current text
+	float textWidth() {
+		PApplet p = pui.p;
+		float w;
+		p.pushStyle();
+		p.textFont(font, height);
+		w = p.textWidth(text);
+		p.popStyle();
+		return w;
+	}
 }
