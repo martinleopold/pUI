@@ -414,13 +414,6 @@ public class PUI extends Rect {
 		this.layout = l;
 	}
 	
-	void addAndLayout(Widget e) {
-		if (!widgets.contains(e)) {
-
-			add(e);
-		}
-	}
-	
 	public void newRow() {
 		layout.newRow();
 	}
