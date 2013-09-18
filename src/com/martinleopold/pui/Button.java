@@ -35,6 +35,11 @@ public class Button extends WidgetWithLabel {
 	
 	@Override
 	public void draw(PApplet p) {
+		int x = widgetRect.x;
+		int y = widgetRect.y;
+		int width = widgetRect.width;
+		int height = widgetRect.height;
+		
 		// draw background
 		p.noStroke();
 		p.fill(theme.background);

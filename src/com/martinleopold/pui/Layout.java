@@ -59,6 +59,8 @@ final class Layout {
 	
 	void add(Rect e) {
 		
+
+		
 		int totalWidth = e.width + 2*paddingX; // total widget width (including padding)
 		int toalHeight = e.height + 2*paddingY; // total widget height (including padding)
 		
@@ -73,6 +75,8 @@ final class Layout {
 			// place it
 			e.x = windowPaddingX + nextX + paddingX;
 			e.y = windowPaddingY + nextY + paddingY;
+			elements.add(e); // add to list of layouted elements
+			System.out.println("placing in layout x:" + e.x + " y:" + e.y);
 			// track row height
 			if (toalHeight > currentRowHeight) currentRowHeight = toalHeight;
 			// widget was placed
@@ -91,7 +95,6 @@ final class Layout {
 			newRow();
 			add(e);
 		}
-		elements.add(e); // add to list of layouted elements
 	}
 	
 	void newRow() {

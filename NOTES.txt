@@ -317,6 +317,7 @@ Widget - Public API
 * custom size
 * individual theme
 * override drawing
+* construct without PUI?
 
 
 Widget - Extending
@@ -337,3 +338,13 @@ Widgets with Labels
 * how to space it 
 
 * Label default behavior: autowidth or fixed width
+
+
+ofxUIWidgetWithLabel
+--------------------
+extends ofxUIWidget
+label as member
+hasLabel method for widgets and widgetwithlabels
+label rectparent to rect of widget
+label set embedded
+padding rect is expanded to include the label rect

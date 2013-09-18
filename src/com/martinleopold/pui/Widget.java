@@ -54,6 +54,15 @@ public class Widget extends Rect implements UIEvents {
 		theme = pui.theme;
 		font = pui.font;
 	}
+	
+	public Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
+		super(x, y, width, height);
+		this.pui = pui;
+		pui.add(this, doLayout);
+		
+		theme = pui.theme;
+		font = pui.font;
+	}
 
 	public void setActive(boolean tf) {
 		active = tf;

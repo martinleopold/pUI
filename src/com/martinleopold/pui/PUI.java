@@ -172,9 +172,13 @@ public class PUI extends Rect {
 	 * @param e
 	 */
 	void add(Widget e) {
+		add(e, true);
+	}
+	
+	void add(Widget e, boolean doLayout) {
 		if (!widgets.contains(e)) {
 			widgets.add(e);
-			layout.add(e);
+			if (doLayout) layout.add(e);
 		}
 	}
 	

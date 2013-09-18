@@ -35,12 +35,23 @@ public class WidgetWithLabel extends Widget {
 
 	
 	public WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height); // init 
-		widgetRect = new Rect(x, y, width, height); // save dimensions of the widget
+		super(pui, x, y, width, height); // init, should 
+		widgetRect = new Rect(x, y, width, height); // save dimensions of the widget 
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
-		label = new Label(pui, x, y+height, 0, 20); // place under widget  TODO variable height
-		this.height = widgetRect.height + label.height; // joint height
+		
+		label = new Label(pui, x, y+height, 0, 20, false); // place under widget. don't layout  TODO variable height
 		setLabel(""); // sets width
+		
+		this.height = widgetRect.height + label.height; // joint height
+		System.out.println("relayouting");
+		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
+		
+		widgetRect.x = this.x;
+		widgetRect.y = this.y;
+		label.x = this.x;
+		label.y = this.y+height;
+		
+		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
 	
 	public WidgetWithLabel setLabel(String text) {
