@@ -17,6 +17,9 @@
  */
 package com.martinleopold.pui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Martin Leopold <m@martinleopold.com>
@@ -34,6 +37,8 @@ class Layout {
 	
 	int windowPaddingX, windowPaddingY; 
 	
+	List<Rect> elements;
+	
 	Layout(int width, int height, int paddingX, int paddingY, int columnWidth) {
 		this.width = width;
 		this.height = height;
@@ -41,11 +46,8 @@ class Layout {
 		this.paddingY = paddingY;
 		this.columnWidth = columnWidth;
 		
-		nextX = 0;
-		nextY = 0;
-		currentColumnX = 0; 
-		currentColumnWidth = columnWidth; 
-		currentRowHeight = 0;
+		elements = new ArrayList<Rect>();
+		resetNext();
 		
 		// window padding
 		if (width - 2*paddingX > 0 && height - 2*paddingY > 0) {
@@ -90,6 +92,7 @@ class Layout {
 			newRow();
 			add(e);
 		}
+		elements.add(e); // add to list of layouted elements
 	}
 	
 	void newRow() {
@@ -109,5 +112,27 @@ class Layout {
 	void setColumnWidth(int w) {
 		columnWidth = w;
 		currentColumnWidth = w;
+	}
+	
+	void remove(Rect e) {
+		if (elements.remove(e)) {
+			reLayout();
+		}
+	}
+	
+	// reset position for next insertion
+	final void resetNext() {
+		nextX = 0;
+		nextY = 0;
+		currentColumnX = 0; 
+		currentColumnWidth = columnWidth; 
+		currentRowHeight = 0;
+	}
+	
+	void reLayout() {
+		resetNext();
+		for (Rect e : elements) {
+			add(e);
+		}
 	}
 }
