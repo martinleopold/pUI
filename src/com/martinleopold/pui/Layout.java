@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-class Layout {
+final class Layout {
 	int width, height;
 	int paddingX, paddingY;
 	int columnWidth;
@@ -46,8 +46,7 @@ class Layout {
 		this.paddingY = paddingY;
 		this.columnWidth = columnWidth;
 		
-		elements = new ArrayList<Rect>();
-		resetNext();
+		reset();
 		
 		// window padding
 		if (width - 2*paddingX > 0 && height - 2*paddingY > 0) {
@@ -120,18 +119,23 @@ class Layout {
 		}
 	}
 	
-	// reset position for next insertion
-	final void resetNext() {
+	void reset() {
 		nextX = 0;
 		nextY = 0;
 		currentColumnX = 0; 
 		currentColumnWidth = columnWidth; 
 		currentRowHeight = 0;
+		
+		elements = new ArrayList<Rect>();
 	}
 	
 	void reLayout() {
-		resetNext();
-		for (Rect e : elements) {
+		List<Rect> oldElements = elements; // save elements
+		
+		reset(); // reset layout
+		
+		// add elements again
+		for (Rect e : oldElements) {
 			add(e);
 		}
 	}
