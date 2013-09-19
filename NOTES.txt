@@ -310,6 +310,7 @@ Widget - Public API
 * register event handlers
 * access state
 * size (in grid units)
+* position (in grid units or pixels)
 * label
 * chainable public methods
 
@@ -334,10 +335,7 @@ Widgets with Labels
 * How to adjust its size? Label can be placed next to the widget in either direction.
 * Widgets better have Rect as a member not as a superclass? 
 * have two components (widget and label) and a joint rect
- 
-* how to space it 
-
-* Label default behavior: autowidth or fixed width
+* Label default behavior: autowidth or fixed width?
 
 
 ofxUIWidgetWithLabel
