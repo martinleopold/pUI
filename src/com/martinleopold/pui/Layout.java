@@ -37,7 +37,7 @@ final class Layout {
 	
 	int windowPaddingX, windowPaddingY; 
 	
-	List<Rect> elements;
+	List<Widget> elements;
 	
 	Layout(int width, int height, int paddingX, int paddingY, int columnWidth) {
 		this.width = width;
@@ -57,12 +57,11 @@ final class Layout {
 		}
 	}
 	
-	void add(Rect e) {
+	void add(Widget w) {
+		Rect r = w.layoutRect;
 		
-
-		
-		int totalWidth = e.width + 2*paddingX; // total widget width (including padding)
-		int toalHeight = e.height + 2*paddingY; // total widget height (including padding)
+		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
+		int toalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// ceck if we flow out at the bottom
 		if (nextY + toalHeight > height) {
@@ -73,27 +72,26 @@ final class Layout {
 		// check if it fits in the current line
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
-			e.x = windowPaddingX + nextX + paddingX;
-			e.y = windowPaddingY + nextY + paddingY;
-			elements.add(e); // add to list of layouted elements
-			System.out.println("placing in layout x:" + e.x + " y:" + e.y);
+			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
+			elements.add(w); // add to list of layouted elements
+			System.out.println("placing in layout x:" + r.x + " y:" + r.y);
 			// track row height
 			if (toalHeight > currentRowHeight) currentRowHeight = toalHeight;
 			// widget was placed
 			nextX += totalWidth;
 			// warn if we flow out to the right
-			if (e.x + totalWidth > width) {
+			if (r.x + totalWidth > width) {
 				System.out.println("Warning: Widget is placed outside of the window.");
 			}
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
 //			System.out.println("make column wider");
 			// we are at the beginning of a line and it doesn't fit
 			currentColumnWidth = totalWidth; // make this column wider
-			add(e); // try again
+			add(w); // try again
 		} else { // it doesn't fit in the current line
 //			System.out.println("try new row");
 			newRow();
-			add(e);
+			add(w);
 		}
 	}
 	
@@ -116,7 +114,7 @@ final class Layout {
 		currentColumnWidth = w;
 	}
 	
-	void remove(Rect e) {
+	void remove(Widget e) {
 		if (elements.remove(e)) {
 			reLayout();
 		}
@@ -129,16 +127,16 @@ final class Layout {
 		currentColumnWidth = columnWidth; 
 		currentRowHeight = 0;
 		
-		elements = new ArrayList<Rect>();
+		elements = new ArrayList<Widget>();
 	}
 	
 	void reLayout() {
-		List<Rect> oldElements = elements; // save elements
+		List<Widget> oldElements = elements; // save elements
 		
 		reset(); // reset layout
 		
 		// add elements again
-		for (Rect e : oldElements) {
+		for (Widget e : oldElements) {
 			add(e);
 		}
 	}

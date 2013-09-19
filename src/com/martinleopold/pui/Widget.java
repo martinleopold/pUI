@@ -45,9 +45,13 @@ public class Widget extends Rect implements UIEvents {
 	
 	Theme theme;
 	PFont font;
+	
+	Rect layoutRect;
 
 	public Widget(PUI pui, int x, int y, int width, int height) {
 		super(x, y, width, height);
+		layoutRect = new Rect(x, y, width, height);
+		
 		this.pui = pui;
 		pui.add(this);
 		
@@ -57,6 +61,8 @@ public class Widget extends Rect implements UIEvents {
 	
 	public Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
+		layoutRect = new Rect(x, y, width, height);
+		
 		this.pui = pui;
 		pui.add(this, doLayout);
 		
@@ -221,5 +227,23 @@ public class Widget extends Rect implements UIEvents {
 
 	public void onMouse(String methodName) {
 		Events.addListener(onMouse, pui.p, methodName);
+	}
+	
+	@Override
+	Widget setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+		layoutRect.x = x;
+		layoutRect.y = y;
+		return this;
+	}
+	
+	@Override
+	Widget setSize(int w, int h) {
+		this.width = w;
+		this.height = h;
+		layoutRect.width = w;
+		layoutRect.height = h;
+		return this;
 	}
 }

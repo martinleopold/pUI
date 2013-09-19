@@ -23,7 +23,6 @@ package com.martinleopold.pui;
  */
 public class WidgetWithLabel extends Widget {
 	Label label;
-	Rect widgetRect;
 	
 //	enum LabelPlacement {
 //		LEFTTOP, LEFTCENTER, LEFTBOTTOM, 
@@ -35,21 +34,21 @@ public class WidgetWithLabel extends Widget {
 
 	
 	public WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height); // init, should 
-		widgetRect = new Rect(x, y, width, height); // save dimensions of the widget 
+		super(pui, x, y, width, height); // init widget
+		
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
-		label = new Label(pui, x, y+height, 0, 20, false); // place under widget. don't layout  TODO variable height
+		//place label
+		label = new Label(pui, this.x, this.y+height, 0, 20, false); // place under widget. don't layout.  TODO variable height
 		setLabel(""); // sets width
 		
-		this.height = widgetRect.height + label.height; // joint height
-		System.out.println("relayouting");
+		layoutRect.height = height + label.height; // joint height
+		layoutRect.width = width > label.width ? width : label.width;
+		
+//		System.out.println("relayouting");
 		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
 		
-		widgetRect.x = this.x;
-		widgetRect.y = this.y;
-		label.x = this.x;
-		label.y = this.y+height;
+		label.setPosition(this.x, this.y+height);		// label needs to be replaced
 		
 		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
@@ -58,7 +57,7 @@ public class WidgetWithLabel extends Widget {
 		label.setText(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		// adjust width
-		this.width = widgetRect.width > label.width ? widgetRect.width : label.width;
+		layoutRect.width = width > label.width ? width : label.width;
 		return this;
 	}
 	
@@ -72,5 +71,14 @@ public class WidgetWithLabel extends Widget {
 	
 	void drawLabel() {
 		label.draw(pui.p);
+	}
+	
+	@Override
+	Widget setSize(int w, int h) {
+		this.width = w;
+		this.height = h;
+		layoutRect.width = w;
+		layoutRect.height = h;
+		return this;
 	}
 }
