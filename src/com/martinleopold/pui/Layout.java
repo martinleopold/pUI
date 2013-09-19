@@ -18,6 +18,7 @@
 package com.martinleopold.pui;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,7 +38,9 @@ final class Layout {
 	
 	int windowPaddingX, windowPaddingY; 
 	
-	List<Widget> elements;
+	enum Action { NewRow, NewColumn, AddWidget };
+	List<Action> actions; // sequence of layout actions
+	List<Widget> elements; // list of added widgets
 	
 	Layout(int width, int height, int paddingX, int paddingY, int columnWidth) {
 		this.width = width;
@@ -74,6 +77,7 @@ final class Layout {
 			// place it
 			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
 			elements.add(w); // add to list of layouted elements
+			actions.add(Action.AddWidget);
 			System.out.println("placing in layout x:" + r.x + " y:" + r.y);
 			// track row height
 			if (toalHeight > currentRowHeight) currentRowHeight = toalHeight;
@@ -99,6 +103,7 @@ final class Layout {
 		nextX = currentColumnX;
 		nextY += currentRowHeight;
 		currentRowHeight = 0;
+		actions.add(Action.NewRow);
 	}
 	
 	void newColumn() {
@@ -107,18 +112,20 @@ final class Layout {
 		currentColumnWidth = columnWidth;
 		nextX = currentColumnX;
 		nextY = 0;
+		actions.add(Action.NewColumn);
 	}
 	
+	// TODO this is recorded as layout action
 	void setColumnWidth(int w) {
 		columnWidth = w;
 		currentColumnWidth = w;
 	}
 	
-	void remove(Widget e) {
-		if (elements.remove(e)) {
-			reLayout();
-		}
-	}
+//	void remove(Widget e) {
+//		if (elements.remove(e)) {
+//			reLayout();
+//		}
+//	}
 	
 	void reset() {
 		nextX = 0;
@@ -128,16 +135,28 @@ final class Layout {
 		currentRowHeight = 0;
 		
 		elements = new ArrayList<Widget>();
+		actions = new ArrayList<Action>();
 	}
 	
 	void reLayout() {
+		List<Action> oldActions = actions; // save actions
 		List<Widget> oldElements = elements; // save elements
 		
 		reset(); // reset layout
 		
-		// add elements again
-		for (Widget e : oldElements) {
-			add(e);
+		Iterator<Widget> widgets = oldElements.iterator();
+		for (Action a : oldActions) {
+			switch (a) {
+				case NewRow:
+					newRow();
+					break;
+				case NewColumn:
+					newColumn();
+					break;
+				case AddWidget:
+					add(widgets.next());
+					break;
+			}
 		}
 	}
 }
