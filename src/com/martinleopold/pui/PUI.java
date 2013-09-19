@@ -76,6 +76,8 @@ public class PUI extends Rect {
 		setPadding(PADDINGX_DEFAULT, PADDINGY_DEFAULT);
 		
 		setLayout(new Layout(width, height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
+		
+		visible = true;
 	}
 
 	private void welcomeMessage() {
@@ -130,6 +132,8 @@ public class PUI extends Rect {
 		 *
 		 */
 		public void draw() {
+			if (!visible) return;
+			
 			p.pushMatrix();
 			p.resetMatrix();
 			
@@ -359,8 +363,11 @@ public class PUI extends Rect {
 	}
 	
 	Theme theme;
-	void setTheme(Theme t) {
+	public void setTheme(Theme t) {
 		this.theme = t;
+		for (Widget w : widgets) {
+			w.theme = t;
+		}
 	}
 	
 	PFont font;
@@ -411,7 +418,7 @@ public class PUI extends Rect {
 		this.paddingX = x;
 		this.paddingY = y;
 	}
-	
+
 	
 	Layout layout;
 	public void setLayout(Layout l) {
@@ -428,5 +435,18 @@ public class PUI extends Rect {
 	
 	public void columnWidth(int w) {
 		layout.setColumnWidth(w);
+	}
+	
+	boolean visible;
+	public void hide() {
+		visible = false;
+	}
+	
+	public void show() {
+		visible = true;
+	}
+	
+	public void toggle() {
+		visible = !visible;
 	}
 }
