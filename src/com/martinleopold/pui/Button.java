@@ -51,7 +51,6 @@ public class Button extends WidgetWithLabel {
 		else p.fill(theme.fill);
 		
 		p.rect(x,y, width-1, height-1); // stroked rect is bigger
-		drawLabel();
 	}
 	
 	@Override

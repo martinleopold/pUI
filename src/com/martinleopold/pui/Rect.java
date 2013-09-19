@@ -33,6 +33,14 @@ class Rect {
 		this.width = width;
 		this.height = height;
 	}
+	
+	// Copy constructor
+	Rect(Rect r) {
+		this.x = r.x;
+		this.y = r.y;
+		this.width = r.width;
+		this.height = r.height;
+	}
 
 	boolean isInside(float tx, float ty) {
 		return (tx >= x && tx <= x + width && ty >= y && ty <= y + height);

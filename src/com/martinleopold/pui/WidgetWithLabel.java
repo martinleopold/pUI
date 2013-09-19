@@ -23,6 +23,7 @@ package com.martinleopold.pui;
  */
 public class WidgetWithLabel extends Widget {
 	Label label;
+	boolean drawLabel;
 	
 //	enum LabelPlacement {
 //		LEFTTOP, LEFTCENTER, LEFTBOTTOM, 
@@ -34,30 +35,35 @@ public class WidgetWithLabel extends Widget {
 
 	
 	public WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height); // init widget
+		super(pui, x, y, width, height); // init widget, causes layout (without label)
 		
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
 		//place label
 		label = new Label(pui, this.x, this.y+height, 0, 20, false); // place under widget. don't layout.  TODO variable height
-		setLabel(""); // sets width
+		label.active = false; // no redraw
 		
-		layoutRect.height = height + label.height; // joint height
-		layoutRect.width = width > label.width ? width : label.width;
-		
-//		System.out.println("relayouting");
-		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
-		
-		label.setPosition(this.x, this.y+height);		// label needs to be replaced
-		
-		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
+//		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
 	
 	public WidgetWithLabel setLabel(String text) {
 		label.setText(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
+		
 		// adjust width
 		layoutRect.width = width > label.width ? width : label.width;
+		layoutRect.height = height + label.height; // joint height
+		
+		//		System.out.println("relayouting");
+		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
+		label.setPosition(this.x, this.y+height);		// label needs to be replaced
+		label.active = true; // redraw
+		return this;
+	}
+	
+	public WidgetWithLabel noLabel() {
+		layoutRect = new Rect(this);
+		label.active = false; // no redraw
 		return this;
 	}
 	
@@ -69,9 +75,11 @@ public class WidgetWithLabel extends Widget {
 //		// place this
 //	}
 	
-	void drawLabel() {
-		label.draw(pui.p);
-	}
+//	void drawLabel() {
+//		if (drawLabel) {
+//			label.draw(pui.p);
+//		}
+//	}
 	
 	@Override
 	Widget setSize(int w, int h) {
