@@ -232,7 +232,195 @@ public class Theme {
 		color( 255, 59, 59, 255 )
 	);
 	
+	/////
+	public final static Theme BLUEBLUE = new Theme(
+		color( 0, 173, 239, 75 ),
+		color( 255, 242, 0, 100 ),
+		color( 0, 0, 0, 200 ),
+		color( 0, 173, 239, 200 ),
+		color( 236, 0, 140, 255 )
+	);
+	
+	public final static Theme PINKPANTHER = new Theme(
+		color( 236, 0, 140, 75 ),
+		color( 0, 0, 0, 100 ),
+		color( 0, 173, 239, 200 ),
+		color( 236, 0, 140, 200 ),
+		color( 255, 242, 0, 255 )
+	);
+	
+	public final static Theme MAROON = new Theme(
+		color( 101, 150, 158, 75 ),
+		color( 219, 217, 210, 100 ),
+		color( 101, 150, 158, 200 ),
+		color( 171, 20, 44, 200 ),
+		color( 189, 219, 222, 255 )
+	);
+	
+	public final static Theme PINKLATTE = new Theme(
+		color( 218, 216, 167, 75 ),
+		color( 127, 199, 175, 100 ),
+		color( 218, 216, 167, 200 ),
+		color( 255, 61, 127, 200 ),
+		color( 255, 158, 157, 255 )
+	);
+	
+	public final static Theme MINGREEN = new Theme(
+		color( 255, 255, 255, 75 ),
+		color( 242, 230, 194, 100 ),
+		color( 255, 255, 255, 200 ),
+		color( 111, 191, 162, 200 ),
+		color( 191, 184, 174, 255 )
+	);
+	
+	public final static Theme HELLOYELLOW = new Theme(
+		color( 255, 211, 0, 75 ),
+		color( 74, 186, 176, 100 ),
+		color( 152, 33, 0, 200 ),
+		color( 255, 211, 0, 200 ),
+		color( 255, 245, 158, 255 )
+	);
+	
+	public final static Theme TEALTEAL = new Theme(
+		color( 74, 186, 176, 75 ),
+		color( 255, 211, 0, 100 ),
+		color( 255, 245, 158, 200 ),
+		color( 74, 186, 176, 200 ),
+		color( 152, 33, 0, 255 )
+	);
+	
+	public final static Theme RUSTICORANGE = new Theme(
+		color( 107, 85, 48, 75 ),
+		color( 49, 48, 66, 100 ),
+		color( 107, 85, 48, 200 ),
+		color( 255, 109, 36, 200 ),
+		color( 255, 235, 107, 255 )
+	);
+
+	public final static Theme TEALSALMON = new Theme(
+		color( 78, 133, 136, 75 ),
+		color( 56, 69, 59, 100 ),
+		color( 78, 133, 136, 200 ),
+		color( 255, 70, 84, 200 ),
+		color( 255, 213, 106, 255 )
+	);
+	
+	public final static Theme CITRUSBLUE = new Theme(
+		color( 57, 142, 182, 75 ),
+		color( 34, 104, 136, 100 ),
+		color( 57, 142, 182, 200 ),
+		color( 255, 162, 0, 200 ),
+		color( 255, 214, 0, 255 )
+	);
+	
+	public final static Theme LIMEPURPLE = new Theme(
+		color( 87, 54, 255, 75 ),
+		color( 38, 38, 38, 100 ),
+		color( 87, 54, 255, 200 ),
+		color( 231, 255, 54, 200 ),
+		color( 255, 54, 111, 255 )
+	);
+	
+	public final static Theme LIMESTONE2 = new Theme(
+		color( 101, 98, 115, 75 ),
+		color( 89, 186, 169, 100 ),
+		color( 101, 98, 115, 200 ),
+		color( 216, 241, 113, 200 ),
+		color( 252, 255, 217, 255 )
+	);
+	
+	public final static Theme COOLPURPLE = new Theme(
+		color( 38, 137, 233, 75 ),
+		color( 11, 246, 147, 100 ),
+		color( 38, 137, 233, 200 ),
+		color( 233, 26, 157, 200 ),
+		color( 246, 182, 11, 255 )
+	);
+	
+	public final static Theme GRAYRED = new Theme(
+		color( 41, 34, 31, 75 ),
+		color( 19, 116, 125, 100 ),
+		color( 41, 34, 31, 200 ),
+		color( 252, 53, 76, 200 ),
+		color( 252, 247, 197, 255 )
+	);
+	
+	public final static Theme METALGEAR2 = new Theme(
+		color( 205, 189, 174, 75 ),
+		color( 122, 91, 62, 100 ),
+		color( 205, 189, 174, 200 ),
+		color( 250, 75, 0, 200 ),
+		color( 250, 250, 250, 255 )
+	);
+	
+	public final static Theme LIGHTPINK = new Theme(
+		color( 158, 30, 76, 75 ),
+		color( 143, 143, 143, 100 ),
+		color( 158, 30, 76, 200 ),
+		color( 236, 236, 236, 200 ),
+		color( 255, 17, 104, 255 )
+	);
+	
+	public final static Theme MINPINK2 = new Theme(
+		color( 236, 236, 236, 75 ),
+		color( 158, 30, 76, 100 ),
+		color( 236, 236, 236, 200 ),
+		color( 255, 17, 104, 200 ),
+		color( 37, 2, 15, 255 )
+	);
+	
+	public final static Theme MAXPINK = new Theme(
+		color( 255, 20, 87, 75 ),
+		color( 10, 10, 10, 100 ),
+		color( 227, 246, 255, 200 ),
+		color( 255, 20, 87, 200 ),
+		color( 255, 216, 125, 255 )
+	);
+	
+	public final static Theme MINYELLOW = new Theme(
+		color( 229, 228, 218, 75 ),
+		color( 216, 210, 153, 100 ),
+		color( 229, 228, 218, 200 ),
+		color( 245, 224, 56, 200 ),
+		color( 23, 22, 92, 255 )
+	);
+	
+	public final static Theme MINLIME = new Theme(
+		color( 245, 225, 226, 75 ),
+		color( 225, 183, 237, 100 ),
+		color( 245, 225, 226, 200 ),
+		color( 185, 222, 81, 200 ),
+		color( 209, 227, 137, 255 )
+	);
+	
+	public final static Theme MINORANGE = new Theme(
+		color( 204, 204, 204, 75 ),
+		color( 111, 111, 111, 100 ),
+		color( 204, 204, 204, 200 ),
+		color( 255, 100, 0, 200 ),
+		color( 255, 255, 255, 255 )
+	);
+	
+	public final static Theme GRAYDAY = new Theme(
+		color( 177, 198, 204, 75 ),
+		color( 255, 255, 255, 100 ),
+		color( 20, 20, 20, 200 ),
+		color( 177, 198, 204, 200 ),
+		color( 255, 239, 94, 255 )
+	);
+	
+	public final static Theme MINBLACK = new Theme(
+		color( 255, 255, 255, 75 ),
+		color( 209, 231, 81, 100 ),
+		color( 255, 255, 255, 200 ),
+		color( 0, 0, 0, 200 ),
+		color( 38, 173, 228, 255 )
+	);
+	
 	public final static Theme[] ALL = {DEFAULT, HACKER, HIPSTER, DIETER, BARBIE, WINDOWS, OSX, 
 		ZOOLANDER, VEGAN2, BERLIN, METALGEAR, TEALLIME, VEGAN, RUSTIC, MIDNIGHT, MINBLUE, LIMESTONE, 
-		SPEARMINT, MINPINK, PEPTOBISMOL, BILEBLUE, COOLCLAY};
+		SPEARMINT, MINPINK, PEPTOBISMOL, BILEBLUE, COOLCLAY, BLUEBLUE, PINKPANTHER, MAROON, 
+		PINKLATTE, MINGREEN, HELLOYELLOW, TEALTEAL, RUSTICORANGE, TEALSALMON, CITRUSBLUE,
+		LIMEPURPLE, LIMESTONE2, COOLPURPLE, GRAYRED, METALGEAR2, LIGHTPINK, MINPINK2, MAXPINK,
+		MINYELLOW, MINLIME, MINORANGE, GRAYDAY, MINBLACK};
 }
