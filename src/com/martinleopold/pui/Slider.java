@@ -54,9 +54,9 @@ public class Slider extends WidgetWithLabel {
 		p.noStroke();
 		if (pressed) p.fill(theme.fillHighlight);
 		else p.fill(theme.fill);
-		float widthX = (max-min)*value*width;
-		float valueX = x + widthX;
-		p.rect(x,y, widthX, height);
+		float widthX = (max-min)*value * width;
+//		float valueX = x + widthX;
+		p.rect(x,y+1, widthX, height-2);
 	}
 	
 	private void setValue(float mx) {
