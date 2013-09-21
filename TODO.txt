@@ -163,7 +163,45 @@ Test Release
 * docs
 
 
-Next:
-x Widgets with Labels
-* PUI API
-* Widget API
+
+Ways to use
+-----------
+* Use PUI Object
+* Extending Widget yourself and adding it to PUI
+
+? Multiple PUIs
+
+
+PUI - Public API
+----------------
+* init
+* create (and add) widgets
+* theme
+	* colors
+	* padding
+	* font
+* grid
+	* size
+
+* add (externally created) widgets
+
+
+Widget - Public API
+-------------------
+* register event handlers
+* access state
+* size (in grid units)
+* position (in grid units or pixels)
+* label
+* chainable public methods
+
+* construct with new
+* custom size
+* individual theme
+* override drawing
+* construct without PUI?
+
+
+Widget - Extending
+------------------
+* protected vs. private stuff

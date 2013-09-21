@@ -28,6 +28,8 @@ IDEAS
 * Possible to avoid class syntax? (beginners!)
 * When an element is created without any callbacks, print help text to the console.
 * Container Widgets for grouping
+* Save defaults in config file
+* Extended PUI class with more features e.g. PUIAdvanced
 
 
 REFERENCES
@@ -283,49 +285,6 @@ user stuff is public
 widget is designed to be extended. can use protected
 
 
-Ways to use
------------
-* Use PUI Object
-* Extending Widget yourself and adding it to PUI
-
-? Multiple PUIs
-
-
-PUI - Public API
-----------------
-* init
-* create (and add) widgets
-* theme
-	* colors
-	* padding
-	* font
-* grid
-	* size
-
-* add (externally created) widgets
-
-
-Widget - Public API
--------------------
-* register event handlers
-* access state
-* size (in grid units)
-* position (in grid units or pixels)
-* label
-* chainable public methods
-
-* construct with new
-* custom size
-* individual theme
-* override drawing
-* construct without PUI?
-
-
-Widget - Extending
-------------------
-* protected vs. private stuff
-
-
 Widgets with Labels
 -------------------
 * Label as member
@@ -346,3 +305,66 @@ hasLabel method for widgets and widgetwithlabels
 label rectparent to rect of widget
 label set embedded
 padding rect is expanded to include the label rect
+
+
+
+PUI - Public API
+----------------
+* init
+	new PUI(PApplet)
+	PUI PUI.init(PApplet), PUI PUI.new(PApplet)
+* create (and add) widgets
+	Button addButton(), Toggle addToggle(), Slider addSlider(), ...
+* retrieve widgets
+	by name? Widget getWidget(name), Widget retrieve(name)
+* theme
+	PUI setTheme(Theme)
+	? setTheme(enum)
+	* colors 
+		PUI setBackground, setOutline, setOutlineHighlight, setFill, setFillHighlight
+		(int color), (r, g, b), (r, g, b, a), (g), (g, a)
+	* padding
+		PUI setPadding(float gridUnits)
+	* font
+		PUI setFont(PFont);
+		PUI setFont(name);
+* grid
+	* size
+		PUI setGrid(float widthPx, float heightPx)
+		(can be stored as float, multiples even out)
+
+* add (externally created) widgets
+	add(Widget)
+
+? naming: background() gets, background(c) sets
+* check p5 naming for getters / setters
+* p5 exposes fields: frameCount, width, displayWidth, focused, frameRate --> these vars will be updated each frame
+
+
+Widget - Public API
+-------------------
+* register event handlers
+	Widget onEvent(String method/field)
+* access state
+	getters/setters vs. vars
+* size (in grid units)
+	Widget setSize(gUs, gUs), setWidth(gUs), setheight(gUs)
+	? get size
+* position (in grid units or pixels)
+	Widget setPosition(guX, guY)
+	? get position
+* label
+	Widget setLabel(text)
+
+* construct with new
+* custom size
+* individual theme
+* override drawing
+	Widget onDraw(String method)
+* construct without PUI?
+
+* don't use UIEvents interface -> these methods should be package private / protected
+
+
+Accessors
+---------
