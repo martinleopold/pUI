@@ -33,7 +33,7 @@ public class Widget extends Rect implements UIEvents {
 	PUI pui;
 
 	// state
-	// bookean focus; // receives keyboard events
+	// boolean focus; // receives keyboard events
 	boolean active = true; // receives events (mouse, draw, ...)
 	boolean hover; // mouse over
 	boolean pressed; // mouse down
