@@ -30,6 +30,7 @@ IDEAS
 * Container Widgets for grouping
 * Save defaults in config file
 * Extended PUI class with more features e.g. PUIAdvanced
+* keyboard events for adding hotkeys (add focus property to widgets)
 
 
 REFERENCES
@@ -341,12 +342,30 @@ PUI - Public API
 * p5 exposes fields: frameCount, width, displayWidth, focused, frameRate --> these vars will be updated each frame
 
 
+Widget Base Class API
+---------------------
+* name: used for auto connect, retrieval, auto label
+	? should they be unique
+* id (int)
+	? do i need to use this if i have unique names
+* visible (is drawn)
+* active (receive events)
+	? split active and visible
+		doesn't make sense to be invisble but receive events?
+* state: normal, over, down, sustained / hover, pressed, dragged
+	internally, work with mutually exclusive state enum (NORMAL, HOVERED, PRESSED, DRAGGED)
+	provide public methods hovered(), pressed(), dragged()
+* label
+
+
 Widget - Public API
 -------------------
 * register event handlers
 	Widget onEvent(String method/field)
 * access state
-	getters/setters vs. vars
+	? getters/setters vs. vars
+	? separate object to encapsulate state
+		methods on same object simpler
 * size (in grid units)
 	Widget setSize(gUs, gUs), setWidth(gUs), setheight(gUs)
 	? get size
@@ -357,14 +376,18 @@ Widget - Public API
 	Widget setLabel(text)
 
 * construct with new
-* custom size
+	new Button(name), new Button(name, x, y, w, h)
+	? pui in constructor (auto add) or not
+	? name in constuctor
 * individual theme
+	cascading theme structure, where a child can override its parents properties
 * override drawing
 	Widget onDraw(String method)
-* construct without PUI?
 
 * don't use UIEvents interface -> these methods should be package private / protected
 
 
 Accessors
 ---------
+in private, fields can be used
+for public interfaces, use accessors
