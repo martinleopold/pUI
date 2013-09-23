@@ -36,44 +36,51 @@ API
 ===
 
 PUI
-* PUI.init(PApplet) : PUI
-* addButton() : Button
-* addToggle() : Toggle
-* addSlider() : Slider
-* addDivider() : Divider
-* addLabel(String text) : Label
-* newRow() : PUI
-* newColumn() : PUI
-* grid(int x, int y) : PUI
-* padding(float x, float y) :PUI
-* show() : PUI
-* hide() : PUI
-* toggle() : PUI
-* toggleGrid() : PUI
-* font(String font) : PUI
-* theme(Theme t) : PUI
+* PUI.init(PApplet) : PUI // init the library with the sketch (e.g PUI.init(this))
+* addButton() : Button // add a Button
+* addToggle() : Toggle // add a Toggle
+* addSlider() : Slider // add a Slider
+* addDivider() : Divider // add a Divider
+* addLabel(String text) : Label // add a Label
+* newRow() : PUI // following widgets will be created in the next row
+* newColumn() : PUI // following widgets will be created in another column
+* grid(int x, int y) : PUI // set grid unit in pixels
+* padding(float x, float y) : PUI // set padding (around all widgets) in grid units
+* show() : PUI // show GUI overlay
+* hide() : PUI // hide GUI overlay
+* toggle() : PUI // toggle GUI overlay
+* toggleGrid() : PUI // toggle drawing grid
+* font(String font) : PUI // set font by name (uses createFont())
+* font(PFont font) : PUI // set font
+* theme(Theme t) : PUI // set color theme (e.g. Theme.DEFAULT, Theme.METALGEAR, Theme.MINBLACK, Theme.PEPTOBISMOL)
 
 Button
-* onClick(String method) : Button
-* connect(String field) : Button
-* label(String text) : Button
-* noLabel() : Button
+* onClick(String method) : Button // method to be called when the button is clicked. Parameters: Button
+* connect(String field) : Button // name of boolean field to connect the button to
+* label(String text) : Button // set label text
+* noLabel() : Button // remove the label
+* clicked : boolean // true if the button is being clicked
 
 Toggle
-* onClick(String method) : Toggle
-* connect(String field) : Toggle
-* label(String text) : Toggle
-* noLabel() : Toggle
+* onClick(String method) : Toggle // method to be called when the toggle is toggled. Parameters: Toggle
+* connect(String field) : Toggle // name of a boolean field to connect the toggle to
+* label(String text) : Toggle // set label text
+* noLabel() : Toggle // remove the label
+* on : boolean // true if the toggle is on
 
 Slider
-* onValue(String method) : Slider
-* connect(String field) : Slider
-* label(String text): Slider 
-* noLabel() : Slider
+* onValue(String method) : Slider // method to be called when the value is changed. Parameters: Slider
+* connect(String field) : Slider // name of a float field to connect the slider to
+* label(String text): Slider // set label text
+* noLabel() : Slider // remove the label
+* value : float // current value of the slider between 0 and 1
 
 Label
-* text(String text) : Label
+* text(String text) : Label // set label text
+* small() : Label // use small size
+* medium() : Label // use medium size
+* large() : Label // use large size
 
 All Widgets
-* onMouse(String method) : <WidgetType>
-* onDraw(String method) : <WidgetType>
+* onMouse(String method) : <WidgetType> // method to be called when a mouse event happens. Parameters: MouseEvent
+* onDraw(String method) : <WidgetType> // method to be called when the widget is drawn. Parameters: <WidgetType>
