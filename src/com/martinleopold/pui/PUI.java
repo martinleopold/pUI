@@ -374,16 +374,18 @@ public final class PUI extends Rect {
 	}
 	
 	Theme theme;
-	public void setTheme(Theme t) {
+	public PUI setTheme(Theme t) {
 		this.theme = t;
 		for (Widget w : widgets) {
 			w.theme = t;
 		}
+		return this;
 	}
 	
 	PFont font;
-	public void setFont(PFont f) {
+	public PUI setFont(PFont f) {
 		this.font = f;
+		return this;
 	}
 	
 	
@@ -393,29 +395,32 @@ public final class PUI extends Rect {
 	int gridX;
 	int gridY;
 	
-	public void setGrid(int x, int y) {
+	public PUI setGrid(int x, int y) {
 		this.gridX = x;
 		this.gridY = y;
+		return this;
 	}
 	
 	boolean drawGrid;
 	
-	public void showGrid() {
-		showGrid(true);
+	public PUI showGrid() {
+		return showGrid(true);
 	}
 	
-	public void showGrid(boolean yes) {
+	public PUI showGrid(boolean yes) {
 		drawGrid = yes;
+		return this;
 	}
 	
 	boolean drawBackground;
 	
-	public void showBackground() {
-		showBackground(true);
+	public PUI showBackground() {
+		return showBackground(true);
 	}
 	
-	public void showBackground(boolean yes) {
+	public PUI showBackground(boolean yes) {
 		drawBackground = yes;
+		return this;
 	}
 	
 	
@@ -425,9 +430,10 @@ public final class PUI extends Rect {
 	float paddingX;
 	float paddingY;
 	
-	public void setPadding(float x, float y) {
+	public PUI setPadding(float x, float y) {
 		this.paddingX = x;
 		this.paddingY = y;
+		return this;
 	}
 
 	
@@ -436,28 +442,34 @@ public final class PUI extends Rect {
 		this.layout = l;
 	}
 	
-	public void newRow() {
+	public PUI newRow() {
 		layout.newRow();
+		return this;
 	}
 	
-	public void newColumn() {
+	public PUI newColumn() {
 		layout.newColumn();
+		return this;
 	}
 	
-	public void columnWidth(int w) {
+	public PUI columnWidth(int w) {
 		layout.setColumnWidth(w);
+		return this;
 	}
 	
 	boolean visible;
-	public void hide() {
+	public PUI hide() {
 		visible = false;
+		return this;
 	}
 	
-	public void show() {
+	public PUI show() {
 		visible = true;
+		return this;
 	}
 	
-	public void toggle() {
+	public PUI toggle() {
 		visible = !visible;
+		return this;
 	}
 }
