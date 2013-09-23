@@ -22,7 +22,7 @@ package com.martinleopold.pui;
  * @author martinleopold
  * @param <TWidget> Base Widget Type. Used so methods can return the actual Widget Type
  */
-abstract class WidgetWithLabel<TWidget> extends Widget {
+abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 	Label label;
 	boolean drawLabel;
 	

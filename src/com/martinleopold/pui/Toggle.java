@@ -58,11 +58,18 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	void mousePressed(int button, float mx, float my) {
 		on = !on;
 		onToggle.fire(this);
+		connect.fire(on);
 	}
 	
 	Event<Toggle> onToggle = new Event<Toggle>();
-	
-	public void onToggle(String methodName) {
+	public Toggle onToggle(String methodName) {
 		Events.addListener(onToggle, pui.p, methodName);
+		return this;
+	}
+	
+	Event<Boolean> connect = new Event<Boolean>();
+	public Toggle connect(String fieldName) {
+		Events.addListenerField(connect, pui.p, fieldName);
+		return this;
 	}
 }

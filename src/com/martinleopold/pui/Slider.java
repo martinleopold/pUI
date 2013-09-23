@@ -65,8 +65,8 @@ public class Slider extends WidgetWithLabel<Slider> {
 		float dist = mx - x;
 		dist = PApplet.constrain(dist/width, 0, max-min);
 		value = min + dist;
-		onValueChanged.fire(this);
-		newValue.fire(value);
+		onValue.fire(this);
+		connect.fire(value);
 	}
 	
 	@Override
@@ -85,14 +85,15 @@ public class Slider extends WidgetWithLabel<Slider> {
 		sliding = false;
 	}
 	
-	Event<Slider> onValueChanged = new Event<Slider>();
-	Event<Float> newValue = new Event<Float>();
-	
-	public void onValue(String methodName) {
-		Events.addListener(onValueChanged, pui.p, methodName);
+	Event<Slider> onValue = new Event<Slider>();
+	public Slider onValue(String methodName) {
+		Events.addListener(onValue, pui.p, methodName);
+		return this;
 	}
 	
-	public void connect(String fieldName) {
-		Events.addListenerField(newValue, pui.p, fieldName);
+	Event<Float> connect = new Event<Float>();
+	public Slider connect(String fieldName) {
+		Events.addListenerField(connect, pui.p, fieldName);
+		return this;
 	}
 }

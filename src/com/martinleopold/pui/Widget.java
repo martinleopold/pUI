@@ -28,7 +28,7 @@ import processing.event.MouseEvent;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-abstract class Widget extends Rect {
+abstract class Widget<TWidget> extends Rect {
 
 	PUI pui;
 
@@ -199,14 +199,16 @@ abstract class Widget extends Rect {
 
 	Event<Widget> onDraw = new Event<Widget>();
 
-	public void onDraw(String methodName) {
+	public TWidget onDraw(String methodName) {
 		Events.addListener(onDraw, pui.p, methodName);
+		return (TWidget)this;
 	}
 
 	Event<MouseEvent> onMouse = new Event<MouseEvent>();
 
-	public void onMouse(String methodName) {
+	public TWidget onMouse(String methodName) {
 		Events.addListener(onMouse, pui.p, methodName);
+		return (TWidget)this;
 	}
 	
 	@Override
