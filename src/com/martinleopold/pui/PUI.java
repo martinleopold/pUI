@@ -111,7 +111,7 @@ public final class PUI extends Rect {
 		 * @param e
 		 */
 		public void mouseEvent(MouseEvent e) {
-			if (!visible) return; //
+			if (!visible) return; // don't process mouse events when GUI is invisible
 						
 			// filter ENTER and EXIT, because this has to do with whole sketch window
 			if (e.getAction() == MouseEvent.ENTER || e.getAction() == MouseEvent.EXIT) {
