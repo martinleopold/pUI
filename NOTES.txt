@@ -343,8 +343,9 @@ PUI - Public API
 * p5 exposes fields: frameCount, width, displayWidth, focused, frameRate --> these vars will be updated each frame
 
 
-Widget Base Class API
----------------------
+
+Widget - Public API
+-------------------
 * name: used for auto connect, retrieval, auto label
 	? should they be unique
 * id (int)
@@ -358,9 +359,6 @@ Widget Base Class API
 	provide public methods hovered(), pressed(), dragged()
 * label
 	Widget setLabel(text)
-
-Widget - Public API
--------------------
 * register event handlers
 	Widget onEvent(String method/field)
 * access state
@@ -392,10 +390,6 @@ in private, fields can be used
 for public interfaces, use accessors
 
 
-Constructors
-------------
-
-
 Guidelines
 ----------
 * minimal
@@ -404,5 +398,9 @@ Guidelines
 * when in doubt: keep it simple i.e. leave it out (for now)
 
 
-Test Release Features
----------------------
+Sample Program
+--------------
+* Widgets
+* Themes
+* Grid
+

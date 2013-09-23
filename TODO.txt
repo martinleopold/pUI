@@ -232,3 +232,6 @@ x remove UIEvents (forces public on ui callbacks methods)
 x label size
 x remove label interactions
 * create widgets without PUI ?
+
+* slider set min/max
+* label sizes

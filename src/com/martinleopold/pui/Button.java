@@ -27,7 +27,7 @@ import processing.core.PApplet;
  */
 public class Button extends WidgetWithLabel<Button> {
 	// state
-	public boolean pushed; // pressed is already used in superclass
+	public boolean clicked; // pressed is already used in superclass
 	
 	public Button(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
@@ -55,18 +55,18 @@ public class Button extends WidgetWithLabel<Button> {
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
-		pushed = true;
-		onButtonClicked.fire(this);
+		clicked = true;
+		onClick.fire(this);
 	}
 	
 	@Override
 	void mouseReleased(int button, float mx, float my) {
-		pushed = false;
+		clicked = false;
 	}
 	
-	Event<Button> onButtonClicked = new Event<Button>();
+	Event<Button> onClick = new Event<Button>();
 	
-	public void onButtonClicked(String methodName) {
-		Events.addListener(onButtonClicked, pui.p, methodName);
+	public void onClick(String methodName) {
+		Events.addListener(onClick, pui.p, methodName);
 	}
 }

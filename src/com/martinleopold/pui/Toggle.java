@@ -28,7 +28,7 @@ import processing.core.PApplet;
 public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	// state
-	boolean on;
+	public boolean on;
 			
 	public Toggle(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
@@ -57,12 +57,12 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	@Override
 	void mousePressed(int button, float mx, float my) {
 		on = !on;
-		onToggled.fire(this);
+		onToggle.fire(this);
 	}
 	
-	Event<Toggle> onToggled = new Event<Toggle>();
+	Event<Toggle> onToggle = new Event<Toggle>();
 	
-	public void onToggled(String methodName) {
-		Events.addListener(onToggled, pui.p, methodName);
+	public void onToggle(String methodName) {
+		Events.addListener(onToggle, pui.p, methodName);
 	}
 }

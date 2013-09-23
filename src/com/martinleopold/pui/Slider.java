@@ -88,11 +88,11 @@ public class Slider extends WidgetWithLabel<Slider> {
 	Event<Slider> onValueChanged = new Event<Slider>();
 	Event<Float> newValue = new Event<Float>();
 	
-	public void onValueChanged(String methodName) {
+	public void onValue(String methodName) {
 		Events.addListener(onValueChanged, pui.p, methodName);
 	}
 	
-	public void connectTo(String fieldName) {
+	public void connect(String fieldName) {
 		Events.addListenerField(newValue, pui.p, fieldName);
 	}
 }
