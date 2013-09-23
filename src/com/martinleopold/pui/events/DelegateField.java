@@ -35,9 +35,9 @@ public class DelegateField<T> implements Listener<T> {
 		this.fieldName = fieldName;
 		// try to find field on the object
 		Field[] declaredFields = listenerObject.getClass().getDeclaredFields();
-		for ( Field f : declaredFields) {
-			System.out.println(f.getName());
-		}
+//		for ( Field f : declaredFields) {
+//			System.out.println(f.getName());
+//		}
 	}
 	@Override
 	public void notify(T args) {
