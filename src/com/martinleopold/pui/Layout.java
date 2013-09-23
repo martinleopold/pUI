@@ -78,7 +78,7 @@ final class Layout {
 			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
-			System.out.println("placing in layout x:" + r.x + " y:" + r.y);
+			//System.out.println("placing in layout x:" + r.x + " y:" + r.y);
 			// track row height
 			if (toalHeight > currentRowHeight) currentRowHeight = toalHeight;
 			// widget was placed

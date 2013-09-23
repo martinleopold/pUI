@@ -213,7 +213,7 @@ x close public API
 x static init
 x chainability
 x widget creation / generators
-* remove layout comments
+x remove layout debug out
 * set theme
 * set grid
 
