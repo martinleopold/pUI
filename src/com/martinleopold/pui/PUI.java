@@ -243,167 +243,103 @@ public final class PUI extends Rect {
 	 * 
 	 */
 	
-	void testReflection() {
-		Class<?> c = p.getClass(); // sketch class
-		Class<?> s = c.getSuperclass();
-		System.out.println(c);
-		System.out.println(s);
-		System.out.println("isPublic " + Modifier.isPublic(c.getModifiers()));
-		
-		System.out.println("getDeclaredMethods");
-		System.out.println("------------------");
-		for (Method m : c.getDeclaredMethods()) {
-			System.out.println(m);
-		}
-		
-		System.out.println("getDeclaredFields");
-		System.out.println("-----------------");
-		for (Field f : c.getDeclaredFields()) {
-			System.out.println(f);
-		}
-		
-		System.out.println("getDeclaredClasses");
-		System.out.println("------------------");
-		for (Class<?> cl : c.getDeclaredClasses()) {
-			System.out.println(cl);
-		}
-		
-		System.out.println("getMethods");
-		System.out.println("----------");
-		for (Method m : c.getMethods()) {
-			System.out.println(m);
-		}
-		
-		System.out.println("getFields");
-		System.out.println("---------");
-		for (Field f : c.getFields()) {
-			System.out.println(f);
-		}
-		
-		System.out.println("getClasses");
-		System.out.println("----------");
-		for (Class<?> cl : c.getClasses()) {
-			System.out.println(cl);
-		}
-	}
+//	void testReflection() {
+//		Class<?> c = p.getClass(); // sketch class
+//		Class<?> s = c.getSuperclass();
+//		System.out.println(c);
+//		System.out.println(s);
+//		System.out.println("isPublic " + Modifier.isPublic(c.getModifiers()));
+//		
+//		System.out.println("getDeclaredMethods");
+//		System.out.println("------------------");
+//		for (Method m : c.getDeclaredMethods()) {
+//			System.out.println(m);
+//		}
+//		
+//		System.out.println("getDeclaredFields");
+//		System.out.println("-----------------");
+//		for (Field f : c.getDeclaredFields()) {
+//			System.out.println(f);
+//		}
+//		
+//		System.out.println("getDeclaredClasses");
+//		System.out.println("------------------");
+//		for (Class<?> cl : c.getDeclaredClasses()) {
+//			System.out.println(cl);
+//		}
+//		
+//		System.out.println("getMethods");
+//		System.out.println("----------");
+//		for (Method m : c.getMethods()) {
+//			System.out.println(m);
+//		}
+//		
+//		System.out.println("getFields");
+//		System.out.println("---------");
+//		for (Field f : c.getFields()) {
+//			System.out.println(f);
+//		}
+//		
+//		System.out.println("getClasses");
+//		System.out.println("----------");
+//		for (Class<?> cl : c.getClasses()) {
+//			System.out.println(cl);
+//		}
+//	}
+//	
+//	void testField(Object o, String name) {
+//		Field f = findField(o, name);
+//		try {
+//			f.setInt(o,1);
+//		} catch (IllegalArgumentException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (IllegalAccessException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//	}
+//	
+//	void testField(String name) {
+//		testField(p, name);
+//	}
+//	
+//	void testMethod(Object o, String name) {
+//		Method m = findMethod(o, name);
+//		try {
+//			m.invoke(o);
+//		} catch (IllegalAccessException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (IllegalArgumentException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (InvocationTargetException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//	}
+//	
+//	void testMethod(String name) {
+//		testMethod(p, name);
+//	}
+//	
+//	void testObject(String name) {
+//		Class<?> c = p.getClass();
+//		try {
+//			Field f = c.getDeclaredField(name);
+//			System.out.println(f);
+//			c = f.getType();
+//			for (Field fx : c.getDeclaredFields()) {
+//				System.out.println(fx);
+//			}
+//			for (Method mx : c.getDeclaredMethods()) {
+//				System.out.println(mx);
+//			}
+//					
+//		} catch (NoSuchFieldException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		} catch (SecurityException ex) {
+//			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//	}
 	
-	void testField(Object o, String name) {
-		Field f = findField(o, name);
-		try {
-			f.setInt(o,1);
-		} catch (IllegalArgumentException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
-	void testField(String name) {
-		testField(p, name);
-	}
-	
-	void testMethod(Object o, String name) {
-		Method m = findMethod(o, name);
-		try {
-			m.invoke(o);
-		} catch (IllegalAccessException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IllegalArgumentException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (InvocationTargetException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
-	void testMethod(String name) {
-		testMethod(p, name);
-	}
-	
-	void testObject(String name) {
-		Class<?> c = p.getClass();
-		try {
-			Field f = c.getDeclaredField(name);
-			System.out.println(f);
-			c = f.getType();
-			for (Field fx : c.getDeclaredFields()) {
-				System.out.println(fx);
-			}
-			for (Method mx : c.getDeclaredMethods()) {
-				System.out.println(mx);
-			}
-					
-		} catch (NoSuchFieldException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (SecurityException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
-	/**
-	 * Look for a Method in a Class and its superclasses.
-	 * @param c
-	 * @param name
-	 * @param parameterTypes
-	 * @return 
-	 */
-	static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
-		Method m = null;
-		try {
-			m = c.getDeclaredMethod(name, parameterTypes);
-			m.setAccessible(true);
-		} catch (NoSuchMethodException ex) {
-			// look in superclass
-			Class<?> s = c.getSuperclass();
-			if (s == null) return null;
-			else return findMethod(s, name, parameterTypes);
-		} catch (SecurityException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return m;
-	}
-	
-	/**
-	 * Look for a Method in an Object including inherited members.
-	 * @param o
-	 * @param name
-	 * @param parameterTypes
-	 * @return 
-	 */
-	static Method findMethod(Object o, String name, Class... parameterTypes) {
-		return findMethod(o.getClass(), name, parameterTypes);
-	}
-	
-	/**
-	 * Look for a Field in a Class and its superclasses.
-	 * @param c
-	 * @param name
-	 * @return 
-	 */
-	public static Field findField(Class<?> c, String name) {
-		Field f = null;
-		try {
-			f = c.getDeclaredField(name);
-			f.setAccessible(true);
-		} catch (NoSuchFieldException ex) {
-			// look in superclass
-			Class<?> s = c.getSuperclass();
-			if (s == null) return null;
-			else return findField(s, name);
-		} catch (SecurityException ex) {
-			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		return f;
-	}
-	
-	/**
-	 * Look for a Field in an Object including inherited members.
-	 * @param o
-	 * @param name
-	 * @return 
-	 */
-	static Field findField(Object o, String name) {
-		return findField(o.getClass(), name);
-	}
+
 	
 	Theme theme;
 	public PUI theme(Theme t) {

@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui.events;
 
+import com.martinleopold.pui.PUI;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
@@ -39,14 +41,9 @@ class Delegate<T> implements Listener<T> {
 
 	@Override
 	public void notify(T args) {
-		Method method;
+		Method method = findMethod(listenerObject, callbackMethodName, args.getClass());
 		try {
-			method = listenerObject.getClass().getMethod(callbackMethodName, args.getClass());
 			method.invoke(listenerObject, args);
-		} catch (NoSuchMethodException ex) {
-			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (SecurityException ex) {
-			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
 			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalArgumentException ex) {
@@ -54,5 +51,39 @@ class Delegate<T> implements Listener<T> {
 		} catch (InvocationTargetException ex) {
 			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+	
+		/**
+	 * Look for a Method in a Class and its superclasses.
+	 * @param c
+	 * @param name
+	 * @param parameterTypes
+	 * @return 
+	 */
+	static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
+		Method m = null;
+		try {
+			m = c.getDeclaredMethod(name, parameterTypes);
+			m.setAccessible(true);
+		} catch (NoSuchMethodException ex) {
+			// look in superclass
+			Class<?> s = c.getSuperclass();
+			if (s == null) return null;
+			else return findMethod(s, name, parameterTypes);
+		} catch (SecurityException ex) {
+			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return m;
+	}
+	
+	/**
+	 * Look for a Method in an Object including inherited members.
+	 * @param o
+	 * @param name
+	 * @param parameterTypes
+	 * @return 
+	 */
+	static Method findMethod(Object o, String name, Class... parameterTypes) {
+		return findMethod(o.getClass(), name, parameterTypes);
 	}
 }

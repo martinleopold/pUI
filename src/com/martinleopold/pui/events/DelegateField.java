@@ -17,6 +17,7 @@
  */
 package com.martinleopold.pui.events;
 
+import com.martinleopold.pui.PUI;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,19 +41,46 @@ public class DelegateField<T> implements Listener<T> {
 	}
 	@Override
 	public void notify(T args) {
-		Field field;
+		Field field = findField(listenerObject, fieldName);
 		try {
-			field = listenerObject.getClass().getField(fieldName);
 			field.set(listenerObject, args);
-		} catch (NoSuchFieldException ex) {
-			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (SecurityException ex) {
-			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalArgumentException ex) {
 			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
 			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
 		}
+	}
+	
+	/**
+	 * Look for a Field in a Class and its superclasses.
+	 * @param c
+	 * @param name
+	 * @return 
+	 */
+	 static Field findField(Class<?> c, String name) {
+		Field f = null;
+		try {
+			f = c.getDeclaredField(name);
+			f.setAccessible(true);
+		} catch (NoSuchFieldException ex) {
+			// look in superclass
+			Class<?> s = c.getSuperclass();
+			if (s == null) return null;
+			else return findField(s, name);
+		} catch (SecurityException ex) {
+			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return f;
+	}
+	
+	/**
+	 * Look for a Field in an Object including inherited members.
+	 * @param o
+	 * @param name
+	 * @return 
+	 */
+	static Field findField(Object o, String name) {
+		return findField(o.getClass(), name);
 	}
 	
 }
