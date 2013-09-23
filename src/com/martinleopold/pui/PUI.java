@@ -72,10 +72,10 @@ public final class PUI extends Rect {
 		
 		setTheme(Theme.DEFAULT);
 		setFont(p.createFont("Source Code Pro", DEFAULT_FONTSIZE_MEDIUM));
+		setLayout(new Layout(width, height, 0, 0, 0));
 		setGrid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
-		setPadding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y);
-		
-		setLayout(new Layout(width, height, gridX2Px(paddingX), gridY2Px(paddingY), gridX2Px(DEFAULT_COLUMNWIDTH)));
+		setPadding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
+		columnWidth(DEFAULT_COLUMNWIDTH);
 		
 		visible = true;
 	}
@@ -434,6 +434,11 @@ public final class PUI extends Rect {
 	public PUI setGrid(int x, int y) {
 		this.gridX = x;
 		this.gridY = y;
+		// set padding in layout
+		layout.paddingX = layout.windowPaddingX = gridX2Px(paddingX);
+		layout.paddingY = layout.windowPaddingY = gridY2Px(paddingY);
+		// set column width in layout
+		layout.setColumnWidth(gridX2Px(columnWidth));
 		return this;
 	}
 	
@@ -478,6 +483,8 @@ public final class PUI extends Rect {
 	public PUI setPadding(float x, float y) {
 		this.paddingX = x;
 		this.paddingY = y;
+		layout.paddingX = layout.windowPaddingX = gridX2Px(paddingX);
+		layout.paddingY = layout.windowPaddingY = gridY2Px(paddingY);
 		return this;
 	}
 
@@ -499,8 +506,11 @@ public final class PUI extends Rect {
 	
 	static float DEFAULT_COLUMNWIDTH = 13; // in grid X unit
 	
-	public PUI columnWidth(int w) {
-		layout.setColumnWidth(w);
+
+	float columnWidth;	// in grid units
+	public PUI columnWidth(float w) {
+		this.columnWidth = w;
+		layout.setColumnWidth(gridX2Px(w));
 		return this;
 	}
 	

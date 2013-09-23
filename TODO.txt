@@ -215,11 +215,12 @@ x chainability
 x widget creation / generators
 x remove layout debug out
 * set theme
-* set grid
+* set grid, padding
 
 * retrieve widgets
 * Theme constants in PUI object ?
-* revise themes (text not legible, bg color too light)
+* revise themes (text not legible, bg color too light
+* should setting grid, font, padding have an effect on widgets created before?
 
 
 Widget API (now / later)
