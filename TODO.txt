@@ -206,7 +206,7 @@ theme api (PUI)
 * public api review
 * docs
 
- 
+
 PUI API (now / later)
 -------
 x close public API
@@ -214,18 +214,21 @@ x static init
 x chainability
 x widget creation / generators
 x remove layout debug out
-* set theme
-* set grid, padding
+x set grid, padding
+x set theme
 
 * retrieve widgets
 * Theme constants in PUI object ?
 * revise themes (text not legible, bg color too light
 * should setting grid, font, padding have an effect on widgets created before?
+* remove "add" prefix from widget generators?
 
 
 Widget API (now / later)
 ----------
+x remove UIEvents (forces public on ui callbacks methods)
 
+* name
 x label size
 x remove label interactions
 * create widgets without PUI ?

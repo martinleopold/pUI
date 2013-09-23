@@ -28,7 +28,7 @@ import processing.event.MouseEvent;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Widget extends Rect implements UIEvents {
+abstract class Widget extends Rect {
 
 	PUI pui;
 
@@ -163,51 +163,38 @@ public class Widget extends Rect implements UIEvents {
 		p.popMatrix();
 		p.popStyle();
 	}
-
-	@Override
-	public void mouseEntered(float mx, float my) {
+	
+	void mouseEntered(float mx, float my) {
 	}
 
-	@Override
-	public void mouseExited(float mx, float my) {
+	void mouseExited(float mx, float my) {
 	}
 
-	@Override
-	public void mouseMoved(float mx, float my) {
+	void mouseMoved(float mx, float my) {
 	}
 
-	@Override
-	public void mousePressed(int button, float mx, float my) {
+	void mousePressed(int button, float mx, float my) {
 	}
 
-	@Override
-	public void mouseReleased(int button, float mx, float my) {
+	void mouseReleased(int button, float mx, float my) {
 	}
 
-	@Override
-	public void mouseClicked(int button, int count, float mx, float my) {
+	void mouseClicked(int button, int count, float mx, float my) {
 	}
 
-	@Override
-	public void mouseDragged(int button, float mx, float my, float dx, float dy) {
+	void mouseDragged(int button, float mx, float my, float dx, float dy) {
 	}
 
-	@Override
-	public void mouseScrolled(int amount) {
+	void mouseScrolled(int amount) {
 	}
 
-	@Override
-	public void keyPressed(int key, int keyCode) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	void keyPressed(int key, int keyCode) {
 	}
 
-	@Override
-	public void keyReleased(int key, int keyCode) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	void keyReleased(int key, int keyCode) {
 	}
 
-	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 	}
 
 	Event<Widget> onDraw = new Event<Widget>();
