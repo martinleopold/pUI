@@ -25,11 +25,11 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Button extends WidgetWithLabel {
+public class Button extends WidgetWithLabel<Button> {
 	// state
 	public boolean pushed; // pressed is already used in superclass
 	
-	public Button(PUI pui, int x, int y, int width, int height) {
+	Button(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 	

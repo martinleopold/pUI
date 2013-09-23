@@ -52,7 +52,7 @@ public final class PUI extends Rect {
 	PApplet p;
 
 	ArrayList<Widget> widgets = new ArrayList<Widget>(); // list of widgets managed by this PUI
-
+		
 	/**
 	 * A constructor, usually called in the setup() method in your sketch to initialize and start
 	 * the library.
@@ -71,17 +71,17 @@ public final class PUI extends Rect {
 		p.registerMethod("draw", peh);
 		
 		setTheme(Theme.DEFAULT);
-		setFont(p.createFont("Source Code Pro", 24));
-		setGrid(GRIDX_DEFAULT, GRIDY_DEFAULT);
-		setPadding(PADDINGX_DEFAULT, PADDINGY_DEFAULT);
+		setFont(p.createFont("Source Code Pro", DEFAULT_FONTSIZE_MEDIUM));
+		setGrid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
+		setPadding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y);
 		
-		setLayout(new Layout(width, height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
+		setLayout(new Layout(width, height, gridX2Px(paddingX), gridY2Px(paddingY), gridX2Px(DEFAULT_COLUMNWIDTH)));
 		
 		visible = true;
 	}
 	
 	// static initializer to avoid new syntax
-	static PUI init(PApplet p) {
+	public static PUI init(PApplet p) {
 		return new PUI(p);
 	}
 
@@ -193,19 +193,40 @@ public final class PUI extends Rect {
 		}
 	}
 	
-	/**
-	 * Generator Button
-	 * TODO should it return the element or the PUI?
-	 * TODO naming: addButton, newButton, createButton, button -> use a prefix for convention
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height 
-	 * @return  
-	 */
-	public Button addButton(int x, int y, int width, int height) {
-		return new Button(this, x, y, width, height);
+	
+	float DEFAULT_BUTTON_W = 5;
+	float DEFAULT_BUTTON_H = 2;
+	// return a default size button at the layout without label
+	public Button addButton() {
+		return new Button(this, 0, 0, gridX2Px(DEFAULT_BUTTON_W), gridY2Px(DEFAULT_BUTTON_H));
 	}
+	
+//	public Button addButton(String name) {
+//		return null;
+//	}
+	
+//	public Toggle addToggle() {
+//		return null;
+//	}
+//	
+//	public Slider addSlider() {
+//		return null;
+//	}
+//	
+//	public Label addLabel(String text) {
+//		return null;
+//	}
+//	
+//	public Label addDivider() {
+//		return null;
+//	}
+	
+	// TODO: use name as: label, retrieval handle, default callback (method or variable)
+//	public Button addButton(String name) {
+//		return null;
+//	}
+	
+	
 	
 	/*
 	 * 
@@ -384,6 +405,10 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
+	float DEFAULT_FONTSIZE_SMALL = 1; 
+	float DEFAULT_FONTSIZE_MEDIUM = 1.5f;
+	float DEFAULT_FONTSIZE_LARGE = 2;
+	
 	PFont font;
 	public PUI setFont(PFont f) {
 		this.font = f;
@@ -391,8 +416,8 @@ public final class PUI extends Rect {
 	}
 	
 	
-	static final int GRIDX_DEFAULT = 10;
-	static final int GRIDY_DEFAULT = 10;
+	static final int DEFAULT_GRID_X = 12;
+	static final int DEFAULT_GRID_Y = 12;
 	
 	int gridX;
 	int gridY;
@@ -401,6 +426,14 @@ public final class PUI extends Rect {
 		this.gridX = x;
 		this.gridY = y;
 		return this;
+	}
+	
+	int gridX2Px(float x) {
+		return Math.round(gridX * x);
+	}
+			
+	int gridY2Px(float y) {
+		return Math.round(gridY * y);
 	}
 	
 	boolean drawGrid;
@@ -414,24 +447,25 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
-	boolean drawBackground;
+	boolean drawBackground = true;
 	
 	public PUI showBackground() {
 		return showBackground(true);
 	}
 	
-	public PUI showBackground(boolean yes) {
-		drawBackground = yes;
+	public PUI showBackground(boolean tf) {
+		drawBackground = tf;
 		return this;
 	}
 	
 	
-	static final float PADDINGX_DEFAULT = 0.5f;
-	static final float PADDINGY_DEFAULT = 0.5f;
+	static final float DEFAULT_PADDING_X = 0.5f;
+	static final float DEFAULT_PADDING_Y = 0.5f;
 	
 	float paddingX;
 	float paddingY;
 	
+	// set padding in grid units
 	public PUI setPadding(float x, float y) {
 		this.paddingX = x;
 		this.paddingY = y;
@@ -453,6 +487,8 @@ public final class PUI extends Rect {
 		layout.newColumn();
 		return this;
 	}
+	
+	float DEFAULT_COLUMNWIDTH = 13; // in grid X unit
 	
 	public PUI columnWidth(int w) {
 		layout.setColumnWidth(w);

@@ -49,14 +49,7 @@ public class Widget extends Rect implements UIEvents {
 	Rect layoutRect;
 
 	public Widget(PUI pui, int x, int y, int width, int height) {
-		super(x, y, width, height);
-		layoutRect = new Rect(x, y, width, height);
-		
-		this.pui = pui;
-		pui.add(this);
-		
-		theme = pui.theme;
-		font = pui.font;
+		this(pui, x, y, width, height, true);
 	}
 	
 	public Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {

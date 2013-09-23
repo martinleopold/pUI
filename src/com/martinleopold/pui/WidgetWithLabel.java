@@ -18,10 +18,11 @@
 package com.martinleopold.pui;
 
 /**
- *
+ * 
  * @author martinleopold
+ * @param <TWidget> Base Widget Type. Used so methods can return the actual Widget Type
  */
-public class WidgetWithLabel extends Widget {
+public class WidgetWithLabel<TWidget> extends Widget {
 	Label label;
 	boolean drawLabel;
 	
@@ -34,7 +35,7 @@ public class WidgetWithLabel extends Widget {
 //	LabelPlacement labelPlacement;
 
 	
-	public WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
+	WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height); // init widget, causes layout (without label)
 		
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
@@ -46,7 +47,7 @@ public class WidgetWithLabel extends Widget {
 //		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
 	
-	public WidgetWithLabel setLabel(String text) {
+	public TWidget setLabel(String text) {
 		label.setText(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		
@@ -58,13 +59,13 @@ public class WidgetWithLabel extends Widget {
 		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
 		label.setPosition(this.x, this.y+height);		// label needs to be replaced
 		label.active = true; // redraw
-		return this;
+		return (TWidget)this;
 	}
 	
-	public WidgetWithLabel noLabel() {
+	public TWidget noLabel() {
 		layoutRect = new Rect(this);
 		label.active = false; // no redraw
-		return this;
+		return (TWidget)this;
 	}
 	
 //	void setLabelPlacement(LabelPlacement placement) {
