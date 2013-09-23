@@ -70,11 +70,11 @@ public final class PUI extends Rect {
 		p.registerMethod("keyEvent", peh);
 		p.registerMethod("draw", peh);
 		
-		setTheme(Theme.DEFAULT);
-		setFont(p.createFont("Source Code Pro", DEFAULT_FONTSIZE_MEDIUM));
+		theme(Theme.DEFAULT);
+		font(p.createFont("Source Code Pro", DEFAULT_FONTSIZE_MEDIUM));
 		setLayout(new Layout(width, height, 0, 0, 0));
-		setGrid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
-		setPadding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
+		grid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
+		padding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
 		columnWidth(DEFAULT_COLUMNWIDTH);
 		
 		visible = true;
@@ -406,7 +406,7 @@ public final class PUI extends Rect {
 	}
 	
 	Theme theme;
-	public PUI setTheme(Theme t) {
+	public PUI theme(Theme t) {
 		this.theme = t;
 		for (Widget w : widgets) {
 			w.theme = t;
@@ -419,7 +419,7 @@ public final class PUI extends Rect {
 	static float DEFAULT_FONTSIZE_LARGE = 2;
 	
 	PFont font;
-	public PUI setFont(PFont f) {
+	public PUI font(PFont f) {
 		this.font = f;
 		return this;
 	}
@@ -431,7 +431,7 @@ public final class PUI extends Rect {
 	int gridX;
 	int gridY;
 	
-	public PUI setGrid(int x, int y) {
+	public PUI grid(int x, int y) {
 		this.gridX = x;
 		this.gridY = y;
 		// set padding in layout
@@ -480,7 +480,7 @@ public final class PUI extends Rect {
 	float paddingY;
 	
 	// set padding in grid units
-	public PUI setPadding(float x, float y) {
+	public PUI padding(float x, float y) {
 		this.paddingX = x;
 		this.paddingY = y;
 		layout.paddingX = layout.windowPaddingX = gridX2Px(paddingX);
