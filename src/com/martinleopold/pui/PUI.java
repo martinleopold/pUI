@@ -163,7 +163,7 @@ public final class PUI extends Rect {
 	}
 	
 	void drawGrid() {
-		p.stroke(theme.outline);
+		p.stroke(Theme.setAlpha(theme.outline, 64));
 		// vertical lines
 		for (int x=gridX; x<width; x+=gridX) {
 			p.line(x, 0, x, height-1);
