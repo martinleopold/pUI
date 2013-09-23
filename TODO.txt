@@ -212,7 +212,7 @@ PUI API (now / later)
 x close public API
 x static init
 x chainability
-* widget creation / generators
+x widget creation / generators
 * remove layout comments
 * set theme
 * set grid
