@@ -154,16 +154,6 @@ Top down
 * Grid Layout
 
 
-Test Release
-------------
-* more themes, theme api (PUI)
-* grid: widget dimensions, grid api (PUI)
-* widgets with labels
-* public api review
-* docs
-
-
-
 Ways to use
 -----------
 * Use PUI Object
@@ -205,3 +195,32 @@ Widget - Public API
 Widget - Extending
 ------------------
 * protected vs. private stuff
+
+
+Test Release
+------------
+x widgets with labels
+x more themes
+theme api (PUI)
+* grid: widget dimensions, grid api (PUI)
+* public api review
+* docs
+
+ 
+PUI API (now / later)
+-------
+x close public API
+x static init
+x chainability
+* widget creation / generators
+* remove layout comments
+* set theme
+* set grid
+
+* retrieve widgets
+* Theme constants in PUI object ?
+
+Widget API (now / later)
+----------
+
+* create widgets without PUI ?
