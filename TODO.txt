@@ -219,8 +219,12 @@ x chainability
 
 * retrieve widgets
 * Theme constants in PUI object ?
+* revise themes (text not legible, bg color too light)
+
 
 Widget API (now / later)
 ----------
 
+* label size
+* remove label interactions
 * create widgets without PUI ?

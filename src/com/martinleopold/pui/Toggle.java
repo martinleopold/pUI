@@ -25,7 +25,7 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Toggle extends WidgetWithLabel {
+public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	// state
 	boolean on;

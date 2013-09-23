@@ -61,6 +61,8 @@ public class Label extends Widget {
 	
 	public Label setText(String text) {
 		this.text = text;
+		setSize((int)(textWidth()+1), height);
+		pui.layout.reLayout();
 		return this;
 	}
 	

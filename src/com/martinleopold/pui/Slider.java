@@ -25,7 +25,7 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Slider extends WidgetWithLabel {
+public class Slider extends WidgetWithLabel<Slider> {
 	public float value = 0.5f;
 	float min = 0;
 	float max = 1;

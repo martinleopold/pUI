@@ -205,21 +205,30 @@ public final class PUI extends Rect {
 //		return null;
 //	}
 	
-//	public Toggle addToggle() {
-//		return null;
-//	}
-//	
-//	public Slider addSlider() {
-//		return null;
-//	}
-//	
-//	public Label addLabel(String text) {
-//		return null;
-//	}
-//	
-//	public Label addDivider() {
-//		return null;
-//	}
+	float DEFAULT_TOGGLE_W = 2;
+	float DEFAULT_TOGGLE_H = 2;
+	public Toggle addToggle() {
+		return new Toggle(this, 0, 0, gridX2Px(DEFAULT_TOGGLE_W), gridY2Px(DEFAULT_TOGGLE_H));
+	}
+	
+	float DEFAULT_SLIDER_W = 11;
+	float DEFAULT_SLIDER_H = 2;
+	public Slider addSlider() {
+		return new Slider(this, 0, 0, gridX2Px(DEFAULT_SLIDER_W), gridY2Px(DEFAULT_SLIDER_H));
+	}
+	
+	
+	float DEFAULT_DIVIDER_W = 11;
+	float DEFAULT_DIVIDER_H = 1;
+	public Divider addDivider() {
+		return new Divider(this, 0, 0, gridX2Px(DEFAULT_DIVIDER_W), gridY2Px(DEFAULT_DIVIDER_H));
+	}
+	
+	public Label addLabel(String text) {
+		Label l = new Label(this, 0, 0, 0, gridY2Px(DEFAULT_FONTSIZE_MEDIUM));
+		l.setText(text);
+		return l;
+	}
 	
 	// TODO: use name as: label, retrieval handle, default callback (method or variable)
 //	public Button addButton(String name) {
