@@ -45,15 +45,16 @@ public class Label extends Widget {
 		
 		// draw outline
 		// draw outline highlight
-		if (hover) p.stroke(theme.outlineHighlight);
-		else p.stroke(theme.outline);
-		p.noFill();
-		p.rect(x, y, width-1, height-1);
+//		if (hover) p.stroke(theme.outlineHighlight);
+//		else p.stroke(theme.outline);
+//		p.noFill();
+//		p.rect(x, y, width-1, height-1);
 		
 		// draw fill
 		// draw fill highlight
-		if (hover) p.fill(theme.fillHighlight);
-		else p.fill(theme.fill);
+//		if (hover) p.fill(theme.fillHighlight);
+//		else p.fill(theme.fill);
+		p.fill(theme.fill);
 		p.textFont(font, height);
 		p.textAlign(PApplet.LEFT, PApplet.TOP);
 		p.text(text, x, y);

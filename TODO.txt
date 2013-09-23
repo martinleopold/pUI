@@ -226,5 +226,5 @@ Widget API (now / later)
 ----------
 
 x label size
-* remove label interactions
+x remove label interactions
 * create widgets without PUI ?
