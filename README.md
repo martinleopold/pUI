@@ -1,14 +1,12 @@
 pUI
 ===
 
-Graphical User Interface Library for Processing
+A Graphical User Interface Library for Processing<br />
+The goal of the project outlined in this proposal is to create a functional prototype for a new Graphical User Interface Library for Processing. There is no core GUI system built into Processing as of date but some third-party GUI solutions exist. This project attempts to learn from and build on the existing libraries while keeping in mind the design principles that lie at the heart of Processing: Minimalism, accessibility and extensibility. Ultimately the aim is to spark discussion on what a core GUI library for Processing might encompass.
 
-Project Info:
-http://static.martinleopold.com/gsoc13/
+Project Info: http://static.martinleopold.com/gsoc13/
 
-Current Release: 
-v0.1<br />
-Test Release<br />
+Current Release: v0.1 (Test Release)
 
 Download: https://github.com/martinleopold/pUI/raw/495d333ad5ea19851441340d8602a6b0771a874a/dist/pUI-320.zip
 
@@ -16,7 +14,7 @@ INSTALLATION:
 * Requires Processing 2.0 http://www.processing.org/download
 * If not already present, create a folder named "libraries" inside your Sketchbook folder. (The location of the sketchbook folder is shown in Processing's Preferences dialog)
 * Extract the .zip into the "libraries" folder. (There is one folder named "pUI" in the .zip)
-* Restart Processing.
+* Restart Processing
 
 EXAMPLES:
 * In Processing click File -> Examples... then select Contributed Libraries/pUI and select an example
@@ -35,44 +33,44 @@ API
 ===
 
 PUI
-* PUI.init(PApplet)
-* addButton()
-* addToggle()
-* addSlider()
-* addDivider()
-* addLabel(String text)
-* newRow()
-* newColumn()
-* grid(int x, int y)
-* padding(float x, float y)
-* show()
-* hide()
-* toggle()
-* toggleGrid()
-* font(String font)
-* theme(Theme t)
+* PUI.init(PApplet) : PUI
+* addButton() : Button
+* addToggle() : Toggle
+* addSlider() : Slider
+* addDivider() : Divider
+* addLabel(String text) : Label
+* newRow() : PUI
+* newColumn() : PUI
+* grid(int x, int y) : PUI
+* padding(float x, float y) :PUI
+* show() : PUI
+* hide() : PUI
+* toggle() : PUI
+* toggleGrid() : PUI
+* font(String font) : PUI
+* theme(Theme t) : PUI
 
 Button
-* onClick(String method)
-* connect(String field)
-* label(String text)
-* noLabel()
+* onClick(String method) : Button
+* connect(String field) : Button
+* label(String text) : Button
+* noLabel() : Button
 
 Toggle
-* onClick(String method)
-* connect(String field)
-* label(String text)
-* noLabel()
+* onClick(String method) : Toggle
+* connect(String field) : Toggle
+* label(String text) : Toggle
+* noLabel() : Toggle
 
 Slider
-* onValue(String method)
-* connect(String field)
-* label(String text)
-* noLabel()
+* onValue(String method) : Slider
+* connect(String field) : Slider
+* label(String text): Slider 
+* noLabel() : Slider
 
 Label
-* text(String text)
+* text(String text) : Label
 
 All Widgets
-* onMouse(String method)
-* onDraw(String method)
+* onMouse(String method) : <WidgetType>
+* onDraw(String method) : <WidgetType>
