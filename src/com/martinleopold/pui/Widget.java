@@ -35,9 +35,9 @@ abstract class Widget extends Rect {
 	// state
 	// boolean focus; // receives keyboard events
 	boolean active = true; // receives events (mouse, draw, ...)
-	boolean hover; // mouse over
-	boolean pressed; // mouse down
-	boolean dragged; // mouse is dragging
+	public boolean hovered; // mouse over
+	public boolean pressed; // mouse down
+	public boolean dragged; // mouse is dragging
 	
 	// helpers
 	float clickedMouseX, clickedMouseY;
@@ -63,11 +63,11 @@ abstract class Widget extends Rect {
 		font = pui.font;
 	}
 
-	public void setActive(boolean tf) {
-		active = tf;
-	}
+//	public void setActive(boolean tf) {
+//		active = tf;
+//	}
 
-	public boolean isActive() {
+	boolean isActive() {
 		return active;
 	}
 
@@ -82,15 +82,15 @@ abstract class Widget extends Rect {
 		switch (e.getAction()) {
 			case MouseEvent.MOVE:
 				// distribute mouseEntered, mouseExited and mouseMoved
-				boolean wasHover = hover; // previous hover state
-				hover = isInside; // set hover state
+				boolean wasHover = hovered; // previous hover state
+				hovered = isInside; // set hover state
 
-				if (hover && !wasHover) {
+				if (hovered && !wasHover) {
 					mouseEntered(mx, my);
-				} else if (!hover && wasHover) {
+				} else if (!hovered && wasHover) {
 					mouseExited(mx, my);
 				}
-				if (hover) {
+				if (hovered) {
 					mouseMoved(mx, my);
 				}
 				break;
@@ -110,7 +110,7 @@ abstract class Widget extends Rect {
 				draggedDistY = my - clickedMouseY;
 			}
 
-				hover = isInside(mx, my); // recalculate hover state, could have dragged outside the element
+				hovered = isInside(mx, my); // recalculate hover state, could have dragged outside the element
 
 				// if it was pressed, release it
 				if (pressed) {
@@ -121,7 +121,7 @@ abstract class Widget extends Rect {
 				break;
 
 			case MouseEvent.CLICK: // PRESS and RELEASE have to lie inside the widget
-				if (hover) {
+				if (hovered) {
 				mouseClicked(e.getButton(), e.getCount(), mx, my);
 			}
 				break;

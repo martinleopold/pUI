@@ -357,7 +357,7 @@ Widget Base Class API
 	internally, work with mutually exclusive state enum (NORMAL, HOVERED, PRESSED, DRAGGED)
 	provide public methods hovered(), pressed(), dragged()
 * label
-
+	Widget setLabel(text)
 
 Widget - Public API
 -------------------
@@ -367,15 +367,13 @@ Widget - Public API
 	? getters/setters vs. vars
 	? separate object to encapsulate state
 		methods on same object simpler
+
 * size (in grid units)
 	Widget setSize(gUs, gUs), setWidth(gUs), setheight(gUs)
 	? get size
 * position (in grid units or pixels)
 	Widget setPosition(guX, guY)
 	? get position
-* label
-	Widget setLabel(text)
-
 * construct with new
 	new Button(name), new Button(name, x, y, w, h)
 	? pui in constructor (auto add) or not

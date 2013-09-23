@@ -43,7 +43,7 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 		
 		// draw outline
 		// draw outline highlight
-		if (hover) p.stroke(theme.outlineHighlight);
+		if (hovered) p.stroke(theme.outlineHighlight);
 		else p.stroke(theme.outline);
 		
 		// draw fill

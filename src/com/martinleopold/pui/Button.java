@@ -42,7 +42,7 @@ public class Button extends WidgetWithLabel<Button> {
 		
 		// draw outline
 		// draw outline highlight
-		if (hover) p.stroke(theme.outlineHighlight);
+		if (hovered) p.stroke(theme.outlineHighlight);
 		else p.stroke(theme.outline);
 		
 		// draw fill

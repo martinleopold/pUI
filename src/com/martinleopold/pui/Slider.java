@@ -44,7 +44,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 		
 		// draw outline
 		// draw outline highlight
-		if (hover) p.stroke(theme.outlineHighlight);
+		if (hovered) p.stroke(theme.outlineHighlight);
 		else p.stroke(theme.outline);
 		p.noFill();
 		p.rect(x, y, width-1, height-1); // stroked rect is bigger
