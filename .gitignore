@@ -9,6 +9,10 @@ ehthumbs.db
 Thumbs.db
 
 /bin/
-/dist/
 /tmp/
 /nbproject/private/
+
+
+# allow zipped distributions
+/dist/*
+!/dist/*.zip
