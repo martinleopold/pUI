@@ -222,6 +222,7 @@ x set theme
 * revise themes (text not legible, bg color too light
 * should setting grid, font, padding have an effect on widgets created before?
 * remove "add" prefix from widget generators?
+* add default font as ttf
 
 
 Widget API (now / later)

@@ -25,10 +25,7 @@
  */
 package com.martinleopold.pui;
 
-import java.lang.reflect.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.event.KeyEvent;
@@ -71,7 +68,7 @@ public final class PUI extends Rect {
 		p.registerMethod("draw", peh);
 		
 		theme(Theme.DEFAULT);
-		font(p.createFont("Source Code Pro", DEFAULT_FONTSIZE_MEDIUM));
+		font("SansSerif");
 		setLayout(new Layout(width, height, 0, 0, 0));
 		grid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
 		padding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
@@ -360,6 +357,10 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
+	public PUI font(String fontName) {
+		return font(p.createFont(fontName, DEFAULT_FONTSIZE_LARGE));
+	}
+	
 	
 	static final int DEFAULT_GRID_X = 12;
 	static final int DEFAULT_GRID_Y = 12;
@@ -395,6 +396,10 @@ public final class PUI extends Rect {
 	public PUI showGrid(boolean yes) {
 		drawGrid = yes;
 		return this;
+	}
+	
+	public PUI toggleGrid() {
+		return showGrid(!drawGrid);
 	}
 	
 	boolean drawBackground = true;
