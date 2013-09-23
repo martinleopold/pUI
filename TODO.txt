@@ -234,4 +234,4 @@ x remove label interactions
 * create widgets without PUI ?
 
 * slider set min/max
-* label sizes
+x label sizes

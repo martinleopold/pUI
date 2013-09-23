@@ -35,7 +35,7 @@ public class Label extends Widget {
 	Label(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(pui, x, y, width, height, doLayout);
 	}
-		
+	
 	@Override
 	void draw(PApplet p) {
 		// draw background
@@ -69,12 +69,33 @@ public class Label extends Widget {
 	
 	// get width of the current text
 	float textWidth() {
+		return textWidth(height);
+	}
+	
+	float textWidth(float atHeight) {
 		PApplet p = pui.p;
-		float w;
 		p.pushStyle();
-		p.textFont(font, height);
-		w = p.textWidth(text);
+		p.textFont(font, atHeight);
+		float w = p.textWidth(text);
 		p.popStyle();
 		return w;
+	}
+	
+	Label setFontSize(int sizePx) {
+		setSize((int)(textWidth(sizePx)+1), sizePx);
+		pui.layout.reLayout();
+		return this;
+	}
+	
+	public Label small() {
+		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL));
+	}
+	
+	public Label medium() {
+		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_MEDIUM));
+	}
+	
+	public Label large() {
+		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_LARGE));
 	}
 }
