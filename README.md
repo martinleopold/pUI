@@ -25,6 +25,7 @@ EXAMPLES:
 FEATURES:
 * GUI Overlay
 * Widgets: Button, Toggle, Slider, Label, Divider
+* Create new widget by extending the Widget class
 * Automatic Column Based Layout
 * Color Themes
 * Callback Methods
@@ -82,5 +83,5 @@ Label
 * large() : Label // use large size
 
 All Widgets
-* onMouse(String method) : <WidgetType> // method to be called when a mouse event happens. Parameters: MouseEvent
-* onDraw(String method) : <WidgetType> // method to be called when the widget is drawn. Parameters: <WidgetType>
+* onMouse(String method) : &lt;WidgetType&gt; // method to be called when a mouse event happens. Parameters: MouseEvent
+* onDraw(String method) : &lt;WidgetType&gt; // method to be called when the widget is drawn. Parameters: &lt;WidgetType&gt;
