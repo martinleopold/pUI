@@ -48,11 +48,11 @@ abstract class Widget extends Rect {
 	
 	Rect layoutRect;
 
-	public Widget(PUI pui, int x, int y, int width, int height) {
+	Widget(PUI pui, int x, int y, int width, int height) {
 		this(pui, x, y, width, height, true);
 	}
 	
-	public Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
+	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
 		layoutRect = new Rect(x, y, width, height);
 		

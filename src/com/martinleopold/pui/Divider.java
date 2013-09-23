@@ -31,7 +31,7 @@ public class Divider extends Widget {
 	}
 	
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		// draw background
 //		p.noStroke();
 //		p.fill(theme.background);

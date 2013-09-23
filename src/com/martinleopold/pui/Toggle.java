@@ -35,7 +35,7 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	}
 	
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		// draw background
 		p.noStroke();
 		p.fill(theme.background);
@@ -55,7 +55,7 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	}
 	
 	@Override
-	public void mousePressed(int button, float mx, float my) {
+	void mousePressed(int button, float mx, float my) {
 		on = !on;
 		onToggled.fire(this);
 	}

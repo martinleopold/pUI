@@ -36,7 +36,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 	}
 	
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		// draw background
 		p.noStroke();
 		p.fill(theme.background);
@@ -70,18 +70,18 @@ public class Slider extends WidgetWithLabel<Slider> {
 	}
 	
 	@Override
-	public void mousePressed(int button, float mx, float my) {
+	void mousePressed(int button, float mx, float my) {
 		sliding = true;
 		setValue(mx);
 	}
 	
 	@Override
-	public void mouseDragged(int button, float mx, float my, float dx, float dy) {
+	void mouseDragged(int button, float mx, float my, float dx, float dy) {
 		setValue(mx);
 	}
 	
 	@Override
-	public void mouseReleased(int button, float mx, float my) {
+	void mouseReleased(int button, float mx, float my) {
 		sliding = false;
 	}
 	

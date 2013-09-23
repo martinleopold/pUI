@@ -32,12 +32,12 @@ public class Label extends Widget {
 		super(pui, x, y, width, height);
 	}
 	
-	public Label(PUI pui, int x, int y, int width, int height, boolean doLayout) {
+	Label(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(pui, x, y, width, height, doLayout);
 	}
 		
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		// draw background
 		p.noStroke();
 		p.fill(theme.background);

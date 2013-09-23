@@ -29,12 +29,12 @@ public class Button extends WidgetWithLabel<Button> {
 	// state
 	public boolean pushed; // pressed is already used in superclass
 	
-	Button(PUI pui, int x, int y, int width, int height) {
+	public Button(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
 	}
 	
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		// draw background
 		p.noStroke();
 		p.fill(theme.background);
@@ -54,13 +54,13 @@ public class Button extends WidgetWithLabel<Button> {
 	}
 	
 	@Override
-	public void mousePressed(int button, float mx, float my) {
+	void mousePressed(int button, float mx, float my) {
 		pushed = true;
 		onButtonClicked.fire(this);
 	}
 	
 	@Override
-	public void mouseReleased(int button, float mx, float my) {
+	void mouseReleased(int button, float mx, float my) {
 		pushed = false;
 	}
 	

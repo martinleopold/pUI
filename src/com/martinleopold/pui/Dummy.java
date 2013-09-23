@@ -30,47 +30,47 @@ public class Dummy extends Widget {
 	}
 
 	@Override
-	public void mouseEntered(float mx, float my) {
+	void mouseEntered(float mx, float my) {
 		System.out.println("entered: mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseExited(float mx, float my) {
+	void mouseExited(float mx, float my) {
 		System.out.println("exited: mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseMoved(float mx, float my) {
+	void mouseMoved(float mx, float my) {
 		System.out.println("moved: mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mousePressed(int button, float mx, float my) {
+	void mousePressed(int button, float mx, float my) {
 		System.out.println("pressed: button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseReleased(int button, float mx, float my) {
+	void mouseReleased(int button, float mx, float my) {
 		System.out.println("released: button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseClicked(int button, int count, float mx, float my) {
+	void mouseClicked(int button, int count, float mx, float my) {
 		System.out.println("clicked: count:" + count + " button:" + button + " mx:" + mx + " my:" + my);
 	}
 
 	@Override
-	public void mouseDragged(int button, float mx, float my, float dx, float dy) {
+	void mouseDragged(int button, float mx, float my, float dx, float dy) {
 		System.out.println("dragged: button:" + button + " mx:" + mx + " my:" + my + " dx:" + dx + " dy:" + dy);
 	}
 
 	@Override
-	public void mouseScrolled(int amount) {
+	void mouseScrolled(int amount) {
 		System.out.println("scrolled: amount:" + amount);
 	}
 
 	@Override
-	public void draw(PApplet p) {
+	void draw(PApplet p) {
 		p.pushStyle();
 		p.fill(64);
 		p.stroke(128);
