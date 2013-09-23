@@ -1,14 +1,17 @@
 pUI
 ===
 
-A Graphical User Interface Library for Processing<br />
+A Graphical User Interface Library for Processing
+
 The goal of the project outlined in this proposal is to create a functional prototype for a new Graphical User Interface Library for Processing. There is no core GUI system built into Processing as of date but some third-party GUI solutions exist. This project attempts to learn from and build on the existing libraries while keeping in mind the design principles that lie at the heart of Processing: Minimalism, accessibility and extensibility. Ultimately the aim is to spark discussion on what a core GUI library for Processing might encompass.
 
-Project Info: http://static.martinleopold.com/gsoc13/
+Full Project Description: http://static.martinleopold.com/gsoc13/
 
-Current Release: v0.1 (Test Release)
+CURRENT RELEASE: 
+v0.1 (Test Release)
 
-Download: https://github.com/martinleopold/pUI/raw/495d333ad5ea19851441340d8602a6b0771a874a/dist/pUI-320.zip
+DOWNLOAD: 
+https://github.com/martinleopold/pUI/raw/v0.1/dist/pUI-320.zip
 
 INSTALLATION:
 * Requires Processing 2.0 http://www.processing.org/download
