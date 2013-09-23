@@ -194,8 +194,8 @@ public final class PUI extends Rect {
 	}
 	
 	
-	float DEFAULT_BUTTON_W = 5;
-	float DEFAULT_BUTTON_H = 2;
+	static float DEFAULT_BUTTON_W = 5;
+	static float DEFAULT_BUTTON_H = 2;
 	// return a default size button at the layout without label
 	public Button addButton() {
 		return new Button(this, 0, 0, gridX2Px(DEFAULT_BUTTON_W), gridY2Px(DEFAULT_BUTTON_H));
@@ -205,21 +205,21 @@ public final class PUI extends Rect {
 //		return null;
 //	}
 	
-	float DEFAULT_TOGGLE_W = 2;
-	float DEFAULT_TOGGLE_H = 2;
+	static float DEFAULT_TOGGLE_W = 2;
+	static float DEFAULT_TOGGLE_H = 2;
 	public Toggle addToggle() {
 		return new Toggle(this, 0, 0, gridX2Px(DEFAULT_TOGGLE_W), gridY2Px(DEFAULT_TOGGLE_H));
 	}
 	
-	float DEFAULT_SLIDER_W = 11;
-	float DEFAULT_SLIDER_H = 2;
+	static float DEFAULT_SLIDER_W = 11;
+	static float DEFAULT_SLIDER_H = 2;
 	public Slider addSlider() {
 		return new Slider(this, 0, 0, gridX2Px(DEFAULT_SLIDER_W), gridY2Px(DEFAULT_SLIDER_H));
 	}
 	
 	
-	float DEFAULT_DIVIDER_W = 11;
-	float DEFAULT_DIVIDER_H = 1;
+	static float DEFAULT_DIVIDER_W = 11;
+	static float DEFAULT_DIVIDER_H = 1;
 	public Divider addDivider() {
 		return new Divider(this, 0, 0, gridX2Px(DEFAULT_DIVIDER_W), gridY2Px(DEFAULT_DIVIDER_H));
 	}
@@ -414,9 +414,9 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
-	float DEFAULT_FONTSIZE_SMALL = 1; 
-	float DEFAULT_FONTSIZE_MEDIUM = 1.5f;
-	float DEFAULT_FONTSIZE_LARGE = 2;
+	static float DEFAULT_FONTSIZE_SMALL = 1; 
+	static float DEFAULT_FONTSIZE_MEDIUM = 1.5f;
+	static float DEFAULT_FONTSIZE_LARGE = 2;
 	
 	PFont font;
 	public PUI setFont(PFont f) {
@@ -468,8 +468,8 @@ public final class PUI extends Rect {
 	}
 	
 	
-	static final float DEFAULT_PADDING_X = 0.5f;
-	static final float DEFAULT_PADDING_Y = 0.5f;
+	static float DEFAULT_PADDING_X = 0.5f;
+	static float DEFAULT_PADDING_Y = 0.5f;
 	
 	float paddingX;
 	float paddingY;
@@ -497,7 +497,7 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
-	float DEFAULT_COLUMNWIDTH = 13; // in grid X unit
+	static float DEFAULT_COLUMNWIDTH = 13; // in grid X unit
 	
 	public PUI columnWidth(int w) {
 		layout.setColumnWidth(w);

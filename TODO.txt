@@ -225,6 +225,6 @@ x remove layout debug out
 Widget API (now / later)
 ----------
 
-* label size
+x label size
 * remove label interactions
 * create widgets without PUI ?

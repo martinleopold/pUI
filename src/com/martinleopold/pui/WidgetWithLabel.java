@@ -41,7 +41,7 @@ public class WidgetWithLabel<TWidget> extends Widget {
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
 		//place label
-		label = new Label(pui, this.x, this.y+height, 0, 20, false); // place under widget. don't layout.  TODO variable height
+		label = new Label(pui, this.x, this.y+height, 0, pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL), false); // place under widget. don't layout.  TODO variable height
 		label.active = false; // no redraw
 		
 //		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
