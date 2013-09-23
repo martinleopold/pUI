@@ -45,13 +45,13 @@ import processing.event.MouseEvent;
  * automatically include the example in the javadoc.)
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class PUI extends Rect {
+public final class PUI extends Rect {
 
-	public final static String VERSION = "##library.prettyVersion##";
+	final static String VERSION = "##library.prettyVersion##";
 	// myParent is a reference to the parent sketch
 	PApplet p;
 
-	ArrayList<Widget> widgets = new ArrayList<Widget>();
+	ArrayList<Widget> widgets = new ArrayList<Widget>(); // list of widgets managed by this PUI
 
 	/**
 	 * A constructor, usually called in the setup() method in your sketch to initialize and start
@@ -78,6 +78,11 @@ public class PUI extends Rect {
 		setLayout(new Layout(width, height, (int)(gridX*paddingX), (int)(gridY*paddingY), p.width));
 		
 		visible = true;
+	}
+	
+	// static initializer to avoid new syntax
+	static PUI init(PApplet p) {
+		return new PUI(p);
 	}
 
 	private void welcomeMessage() {
@@ -200,7 +205,13 @@ public class PUI extends Rect {
 		return new Button(this, x, y, width, height);
 	}
 	
-	public void testReflection() {
+	/*
+	 * 
+	 * Test Methods TODO: remove / refactor
+	 * 
+	 */
+	
+	void testReflection() {
 		Class<?> c = p.getClass(); // sketch class
 		Class<?> s = c.getSuperclass();
 		System.out.println(c);
@@ -244,7 +255,7 @@ public class PUI extends Rect {
 		}
 	}
 	
-	public void testField(Object o, String name) {
+	void testField(Object o, String name) {
 		Field f = findField(o, name);
 		try {
 			f.setInt(o,1);
@@ -255,11 +266,11 @@ public class PUI extends Rect {
 		}
 	}
 	
-	public void testField(String name) {
+	void testField(String name) {
 		testField(p, name);
 	}
 	
-	public void testMethod(Object o, String name) {
+	void testMethod(Object o, String name) {
 		Method m = findMethod(o, name);
 		try {
 			m.invoke(o);
@@ -272,11 +283,11 @@ public class PUI extends Rect {
 		}
 	}
 	
-	public void testMethod(String name) {
+	void testMethod(String name) {
 		testMethod(p, name);
 	}
 	
-	public void testObject(String name) {
+	void testObject(String name) {
 		Class<?> c = p.getClass();
 		try {
 			Field f = c.getDeclaredField(name);
@@ -303,7 +314,7 @@ public class PUI extends Rect {
 	 * @param parameterTypes
 	 * @return 
 	 */
-	public static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
+	static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
 		Method m = null;
 		try {
 			m = c.getDeclaredMethod(name, parameterTypes);
@@ -326,7 +337,7 @@ public class PUI extends Rect {
 	 * @param parameterTypes
 	 * @return 
 	 */
-	public static Method findMethod(Object o, String name, Class... parameterTypes) {
+	static Method findMethod(Object o, String name, Class... parameterTypes) {
 		return findMethod(o.getClass(), name, parameterTypes);
 	}
 	
@@ -358,7 +369,7 @@ public class PUI extends Rect {
 	 * @param name
 	 * @return 
 	 */
-	public static Field findField(Object o, String name) {
+	static Field findField(Object o, String name) {
 		return findField(o.getClass(), name);
 	}
 	
@@ -421,7 +432,7 @@ public class PUI extends Rect {
 
 	
 	Layout layout;
-	public void setLayout(Layout l) {
+	void setLayout(Layout l) {
 		this.layout = l;
 	}
 	
