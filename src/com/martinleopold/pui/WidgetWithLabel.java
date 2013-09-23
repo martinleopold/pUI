@@ -47,8 +47,8 @@ abstract class WidgetWithLabel<TWidget> extends Widget {
 //		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
 	
-	public TWidget setLabel(String text) {
-		label.setText(text);
+	public TWidget label(String text) {
+		label.text(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		
 		// adjust width

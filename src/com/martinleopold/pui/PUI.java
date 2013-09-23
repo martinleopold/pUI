@@ -226,7 +226,7 @@ public final class PUI extends Rect {
 	
 	public Label addLabel(String text) {
 		Label l = new Label(this, 0, 0, 0, gridY2Px(DEFAULT_FONTSIZE_MEDIUM));
-		l.setText(text);
+		l.text(text);
 		return l;
 	}
 	
