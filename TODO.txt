@@ -202,9 +202,9 @@ Test Release
 x widgets with labels
 x more themes
 theme api (PUI)
-* grid: widget dimensions, grid api (PUI)
-* public api review
-* docs
+x grid: widget dimensions, grid api (PUI)
+x public api review
+x docs
 
 
 PUI API (now / later)
@@ -217,22 +217,57 @@ x remove layout debug out
 x set grid, padding
 x set theme
 
-* retrieve widgets
-* Theme constants in PUI object ?
-* revise themes (text not legible, bg color too light
-* should setting grid, font, padding have an effect on widgets created before?
-* remove "add" prefix from widget generators?
-* add default font as ttf
-
 
 Widget API (now / later)
 ----------
 x remove UIEvents (forces public on ui callbacks methods)
 
-* name
+/ name
 x label size
 x remove label interactions
-* create widgets without PUI ?
+/ create widgets without PUI ?
 
-* slider set min/max
+/ slider set min/max
 x label sizes
+
+
+Review/Refinement
+-----------------
+* add credits to reza ali (visuals/theme)
+* on normal build create dist/pUI-xxx.zip (and delete old ones)
+* javadocs should only show public API
+PUI
+* custom size
+* theme
+	* review color themes (text not legible, bg color too light
+	* Theme constants in PUI object ?
+	* overridable bg color
+* add default font as TTF
+* retrieve widgets
+* remove "add" prefix from widget generators?
+* layout
+	* should setting grid, font, padding have an effect on widgets created before?
+	* how to deal with custom widget sizes and positions?
+	* layout direction
+
+Widgets
+* name (default label, auto connect, retrieval)
+* widgets without pui?
+* custom size
+* custom position
+* label position
+* overridable themes
+* custom drawing disables vanialla drawing?
+* state as methods instead of public fields?
+
+Slider
+* min/max support
+* vertical slider
+* show value in the UI ?
+
+Extra Widgets
+* Radio, Button
+* MultiToggle, ToggleMatrix
+* 2D Pad
+* Graph
+* (Knob)
