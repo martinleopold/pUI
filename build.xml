@@ -269,6 +269,7 @@ ${line}
             <fileset dir="${project.tmp}/${project.name}/src" defaultexcludes="yes">
                 <!-- add packages to be added to reference. -->
                 <include name="**/*"/>
+				<exclude name="com/martinleopold/pui/events/*" /> <!-- exclude event package -->
             </fileset>
         </javadoc>
     </target>
@@ -446,4 +447,3 @@ ${line}
     </target>
     
 </project>
-

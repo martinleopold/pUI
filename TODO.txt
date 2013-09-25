@@ -235,7 +235,10 @@ Review/Refinement
 -----------------
 x on normal build create dist/pUI-xxx.zip (and delete old ones)
 * add credits to reza ali (visuals/theme)
-* javadocs should only show public API
+javadocs
+	x javadocs should only show public API
+	x exclude events package
+	* TWidget return type should show as actual class
 PUI
 * custom size
 * theme
