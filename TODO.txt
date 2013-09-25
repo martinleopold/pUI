@@ -233,8 +233,8 @@ x label sizes
 
 Review/Refinement
 -----------------
+x on normal build create dist/pUI-xxx.zip (and delete old ones)
 * add credits to reza ali (visuals/theme)
-* on normal build create dist/pUI-xxx.zip (and delete old ones)
 * javadocs should only show public API
 PUI
 * custom size

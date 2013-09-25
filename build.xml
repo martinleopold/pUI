@@ -339,6 +339,10 @@ ${line}
         <copy file="${project.dist.version}/web/download/${project.name}.zip" tofile="${project.dist.version}/web/download/${project.name}-${library.version}.zip" />
         <copy file="${project.dist.version}/web/download/${project.name}.txt" tofile="${project.dist.version}/web/download/${project.name}-${library.version}.txt" />
 		
+		<!-- also copy zip to dist root (for upload to repo -->
+		<delete><fileset dir="${project.dist}" includes="*.zip"/></delete>
+		<copy file="${project.dist.version}/web/download/${project.name}.zip" tofile="${project.dist}/${project.name}-${library.version}.zip" />
+		
         <move todir="${project.dist.version}">
             <fileset dir="${project.dist.version}/web" />
         </move>
