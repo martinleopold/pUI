@@ -16,3 +16,4 @@ Thumbs.db
 # allow zipped distributions
 /dist/*
 !/dist/*.zip
+!/tmp/pUI/src/com/martinleopold/pui/Widget.java

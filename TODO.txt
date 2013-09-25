@@ -8,21 +8,21 @@ x Core System
 	x Event System
 	x Active Regions
 	x Dummy UI Element (Bang)
-* Basic UI Components
-	* Button
-	* Toggle
-	* Slider
-	* Divider
-	* Label
+x Basic UI Components
+	x Button
+	x Toggle
+	x Slider
+	x Divider
+	x Label
 * API Refinement
-	* Events (Mouse, Keyboard)
-	* Class Hierarchy
+	x Events (Mouse, Keyboard)
+	x Class Hierarchy
 	* Element Construction Pattern
 	* Callback Pattern
 * Advanced Features
+	x Theme
+	x Automatic Layout
 	* Auto Connection
-	* Theme
-	* Automatic Layout
 	* Saving State
 	* Layout Adjustment
 	* Drawing Performance Optimization (Redraw only when changed)
@@ -36,7 +36,6 @@ x Core System
 	* Label Button
 	* Label Toggle
 	* Drop Down List
-	* Moving 
 * Docs
 	* Code
 	* User Documentation
@@ -48,9 +47,9 @@ System
 ------
 x fix preprocessor (welcomeMessage() not working) -> works on clean & build (non-fast)
 x compiler warnings: [unchecked], [rawtypes]
+x Proper dist and tagging
 * Logger instead of System.out
 * Faster build (reuse preprocessed files/tmp)
-* Proper dist and tagging
 
 
 Documentation
@@ -93,9 +92,9 @@ API Revision
 ------------
 x The matrix might be changed when the draw callback comes
 x Widget Constructor: PUI as first Argument
-* Revise public API (what should the user see)
-* should UIEvents really be public? maybe just protected
-* support for labeled widgets
+x Revise public API (what should the user see)
+/ should UIEvents really be public? maybe just protected
+x support for labeled widgets
 * widget names (e.g. for label, id, auto connect)
 * how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
 * how to encapsulate special element state (slider value, ...)
@@ -104,7 +103,7 @@ x Widget Constructor: PUI as first Argument
 	* callback arguments (whole object, relevant value, nothing)
 
 * element draw override (disable standard draw)
-* Generator Functions for Widgets in PUI. 
+x Generator Functions for Widgets in PUI. 
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
 * Widgets in own package: com.martinleopold.pui.widget
 * PGraphics instead of PApplet? -> Can't use events then.
@@ -127,21 +126,21 @@ Widgets
 
 Theme System
 ------------
-* add more themes
-* widgets need to be able to have a different theme?
+x add more themes
+/ widgets need to be able to have a different theme?
 
 
 Grid System
 -----------
-* Default Sizes for widgets (based on grid)
-* Padding based on grid
+x Default Sizes for widgets (based on grid)
+x Padding based on grid
 
 
 Issues
 ------
 * OpenGL: widgedts don't render
-* newRow(), newColumn() with Labels
-* Labels optional for widgets
+x newRow(), newColumn() with Labels
+x Labels optional for widgets
 
 
 Top down
@@ -239,6 +238,7 @@ javadocs
 	x javadocs should only show public API
 	x exclude events package
 	* TWidget return type should show as actual class
+	* hide inner class ProcessingEventHandler
 PUI
 * custom size
 * theme
