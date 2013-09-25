@@ -240,28 +240,30 @@ javadocs
 	* TWidget return type should show as actual class
 	* hide inner class ProcessingEventHandler
 PUI
+* layout
+	* how to deal with custom widget sizes and positions?
+	* layout direction
+	* should setting grid, font, padding have an effect on widgets created before?
 * custom size
+* retrieve widgets
+* add default font as TTF
+* remove "add" prefix from widget generators?
 * theme
 	* review color themes (text not legible, bg color too light
 	* Theme constants in PUI object ?
 	* overridable bg color
-* add default font as TTF
-* retrieve widgets
-* remove "add" prefix from widget generators?
-* layout
-	* should setting grid, font, padding have an effect on widgets created before?
-	* how to deal with custom widget sizes and positions?
-	* layout direction
 
 Widgets
-* name (default label, auto connect, retrieval)
-* widgets without pui?
+* state as methods instead of public fields?
+* connect should also work with methods (not only fields)
+* callbacks for multiple method signatures (e.g. Slider and float)
 * custom size
 * custom position
 * label position
+* name (default label, auto connect, retrieval)
+* widgets without PUI?
 * overridable themes
-* custom drawing disables vanialla drawing?
-* state as methods instead of public fields?
+* custom drawing disables vanilla drawing? (-> needs access to state)
 
 Slider
 * min/max support
