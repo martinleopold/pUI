@@ -234,11 +234,12 @@ Review/Refinement
 -----------------
 x on normal build create dist/pUI-xxx.zip (and delete old ones)
 * add credits to reza ali (visuals/theme)
+* loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
 javadocs
 	x javadocs should only show public API
 	x exclude events package
+	x hide inner class ProcessingEventHandler -> exclude doclet
 	* TWidget return type should show as actual class
-	* hide inner class ProcessingEventHandler
 PUI
 * layout
 	* how to deal with custom widget sizes and positions?

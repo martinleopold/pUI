@@ -259,7 +259,8 @@ ${line}
                          stylesheetfile="resources/stylesheet.css" 
                          doctitle="Javadocs: ${project.name}" 
                          public="true" version="false" 
-                         windowtitle="Javadocs: ${project.name}">
+                         windowtitle="Javadocs: ${project.name}"
+						doclet="ExcludeDoclet" docletpath="./resources/code">
             <classpath>
                 <path refid="classpath"/>
             </classpath>

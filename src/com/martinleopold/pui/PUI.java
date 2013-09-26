@@ -99,6 +99,7 @@ public final class PUI extends Rect {
 	 * Class used to receive Processing's events. This is used internally as not to expose the
 	 * callback functions in the public API. No need to use this class. Needs to be public for
 	 * Processsing to be able to access it (via reflection).
+	 * @exclude
 	 */
 	public class ProcessingEventHandler {
 
