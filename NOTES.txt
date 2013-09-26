@@ -405,3 +405,26 @@ Sample Program
 * Grid
 * custom drawing
 * widget events
+
+
+Review 
+------
+* custom widget size
+	-> just set and relayout
+* custom widget position
+	-> add ability to pin objects in layout
+* loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
+	-> Generics: ugly, lots of compiler warnings
+	-> override all these methods in subclasses to return the respective types
+	?
+* state as methods instead of public fields?
+	-> base state maybe not, for extended state it's maybe ok because setting the state should be possible
+	-> but: does't fire callbacks when setting the state this way
+	?
+* name (default label, auto connect, retrieval)
+	-> makes code a good deal shorter
+		ui.addButton().label("b1").onClick("buttonClick") vs. ui.addButton("b1");
+	-> not so obvious what happens
+* widgets without PUI?
+	-> pui needed for draw, callbacks, relayout (i.e. setting size)
+	-> why have a widget without PUI? add a widget to multiple PUIs?

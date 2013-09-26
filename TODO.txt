@@ -235,7 +235,7 @@ Review/Refinement
 x on normal build create dist/pUI-xxx.zip (and delete old ones)
 * add credits to reza ali (visuals/theme)
 * loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
-javadocs
+* javadocs
 	x javadocs should only show public API
 	x exclude events package
 	x hide inner class ProcessingEventHandler -> exclude doclet
