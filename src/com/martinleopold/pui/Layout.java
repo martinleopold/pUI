@@ -64,10 +64,10 @@ final class Layout {
 		Rect r = w.layoutRect;
 		
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
-		int toalHeight = r.height + 2*paddingY; // total widget height (including padding)
+		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// ceck if we flow out at the bottom
-		if (nextY + toalHeight > height) {
+		if (nextY + totalHeight > height) {
 //			System.out.println("try new column");
 			newColumn();
 		}
@@ -76,11 +76,16 @@ final class Layout {
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
 			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
+			System.out.println("postition: x=" + w.x + " y=" + w.y);
+			
+			placeAgainstPinned(w); // adjust position to avoid pinned elements
+			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
+			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
 			//System.out.println("placing in layout x:" + r.x + " y:" + r.y);
 			// track row height
-			if (toalHeight > currentRowHeight) currentRowHeight = toalHeight;
+			if (totalHeight > currentRowHeight) currentRowHeight = totalHeight;
 			// widget was placed
 			nextX += totalWidth;
 			// warn if we flow out to the right
@@ -121,11 +126,21 @@ final class Layout {
 		currentColumnWidth = w;
 	}
 	
-//	void remove(Widget e) {
-//		if (elements.remove(e)) {
-//			reLayout();
-//		}
-//	}
+	void remove(Widget e) {
+		int idx = elements.indexOf(e); // index of the add action
+		if (idx > -1) {
+			elements.remove(e);
+			int count = 0; // count number of add action
+			for (Action a : actions) {
+				if (a == Action.AddWidget) {
+					if (count++ == idx) {
+						actions.remove(a);
+						return;
+					}
+				}
+			}
+		}
+	}
 	
 	void reset() {
 		nextX = 0;
@@ -136,13 +151,16 @@ final class Layout {
 		
 		elements = new ArrayList<Widget>();
 		actions = new ArrayList<Action>();
+		pinned = new ArrayList<Widget>();
 	}
 	
 	void reLayout() {
 		List<Action> oldActions = actions; // save actions
 		List<Widget> oldElements = elements; // save elements
+		List<Widget> oldPinned = pinned; // save pinned elements
 		
 		reset(); // reset layout
+		pinned = oldPinned; // restore pinned
 		
 		Iterator<Widget> widgets = oldElements.iterator();
 		for (Action a : oldActions) {
@@ -156,6 +174,49 @@ final class Layout {
 				case AddWidget:
 					add(widgets.next());
 					break;
+			}
+		}
+	}
+	
+	List<Widget> pinned; // list of added widgets
+	void pin(Widget w) {
+		remove(w); // remove from normal flow (if present)
+		pinned.add(w);
+		System.out.println("relayout");
+		reLayout();
+	}
+	
+	// assumes w and p are colliding. place w against pinned p
+	private void placeAgainstPinned(Widget w, Widget p) {
+		Rect r = w.layoutRect;
+		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
+		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
+		
+		// try to fit w next to (i.e. right of) p in this column
+		if (p.layoutRect.x + p.layoutRect.width + paddingX + totalWidth <= currentColumnX + currentColumnWidth) {
+			System.out.println("fit next to pin");
+			w.setPosition(p.layoutRect.x + p.layoutRect.width + paddingX*2, w.y);
+		}
+		// try to fit w after (i.e. below) p in this column
+		else if (p.layoutRect.y + p.layoutRect.height + paddingY + totalHeight <= height) {
+			System.out.println("fit below");
+			w.setPosition(w.x, p.layoutRect.y + p.layoutRect.height + paddingY*2);
+		}
+		// try next column
+		else {
+			System.out.println("fit in next column");
+			newColumn();
+			placeAgainstPinned(w, p); // retry
+		}
+	}
+	// place w against all pinned. moves next to pinned, down, or continues in next column until a suitable spot is found
+	private void placeAgainstPinned(Widget w) {
+		// check against all pinned 
+		for (Widget p : pinned) {
+			System.out.println("check against pin");
+			if (w.isOverapping(p)) { // the widget collides with a previously pinned one (p)
+				System.out.println("found overlap");
+				placeAgainstPinned(w, p);
 			}
 		}
 	}

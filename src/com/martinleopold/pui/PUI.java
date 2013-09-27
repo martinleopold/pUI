@@ -471,4 +471,8 @@ public final class PUI extends Rect {
 		visible = !visible;
 		return this;
 	}
+	
+	public void pin(Widget w) {
+		layout.pin(w);
+	}
 }

@@ -46,6 +46,13 @@ class Rect {
 		return (tx >= x && tx <= x + width && ty >= y && ty <= y + height);
 	}
 	
+	boolean isOverapping(Rect r) {
+		return r.isInside(x, y) ||
+			r.isInside(x, y+height) ||
+			r.isInside(x+width, y+height) ||
+			r.isInside(x+width, y);
+	}
+	
 	Rect setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
