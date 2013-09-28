@@ -53,15 +53,15 @@ class Rect {
 			r.isInside(x+width, y);
 	}
 	
-	Rect setPosition(int x, int y) {
-		this.x = x;
-		this.y = y;
-		return this;
-	}
-	
-	Rect setSize(int w, int h) {
-		this.width = w;
-		this.height = h;
-		return this;
-	}
+//	void setPosition(int x, int y) {
+//		this.x = x;
+//		this.y = y;
+////		return this;
+//	}
+//	
+//	void setSize(int w, int h) {
+//		this.width = w;
+//		this.height = h;
+////		return this;
+//	}
 }

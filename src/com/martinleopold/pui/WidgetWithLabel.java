@@ -51,9 +51,10 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		label.text(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		
-		// adjust width
-		layoutRect.width = width > label.width ? width : label.width;
-		layoutRect.height = height + label.height; // joint height
+//		// adjust width
+//		layoutRect.width = width > label.width ? width : label.width;
+//		layoutRect.height = height + label.height; // joint height
+		setSize(width, height); // adjust layoutRect size
 		
 		//		System.out.println("relayouting");
 		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
@@ -82,12 +83,31 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 //		}
 //	}
 	
-	@Override
-	Widget setSize(int w, int h) {
+	public TWidget position(int x, int y) {
+		// TODO. assuming label position below widget
+		this.x = x; 
+		this.y = y;
+		layoutRect.x = x;
+		layoutRect.y = y;
+		label.setPosition(x, x+height);
+		pui.layout.pin(this);
+		pui.layout.reLayout();
+		return (TWidget)this;
+	}
+	
+	
+	public TWidget size(int w, int h) {
 		this.width = w;
 		this.height = h;
-		layoutRect.width = w;
-		layoutRect.height = h;
-		return this;
+
+//		if (label == null) { // label might not yet be initialized
+//			layoutRect.width = w;
+//			layoutRect.height = h;
+//		} else {
+			layoutRect.width = width > label.width ? width : label.width;
+			layoutRect.height = height + label.height; // joint height
+//		}
+		pui.layout.reLayout();
+		return (TWidget)this;
 	}
 }

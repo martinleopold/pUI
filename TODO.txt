@@ -277,3 +277,17 @@ Extra Widgets
 * 2D Pad
 * Graph
 * (Knob)
+
+
+
+New
+---
+size(): next layout element starts to low
+position(): also has to big a gap
+
+revise: setPosition and public position (and setSize/size)
+pinned algo: need to try next row (it might fit before the pin)
+pin algo: correctly set for next insertion point
+
+remove constructors only used with 0,0 size that use auto layout anyway?
+which constructors to have for widgets

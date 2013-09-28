@@ -48,6 +48,7 @@ abstract class Widget<TWidget> extends Rect {
 	
 	Rect layoutRect;
 
+	// TODO having x, y here doesn't make sense since it's put in the layout immediately
 	Widget(PUI pui, int x, int y, int width, int height) {
 		this(pui, x, y, width, height, true);
 	}
@@ -211,21 +212,17 @@ abstract class Widget<TWidget> extends Rect {
 		return (TWidget)this;
 	}
 	
-	@Override
-	Widget setPosition(int x, int y) {
+	void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 		layoutRect.x = x;
 		layoutRect.y = y;
-		return this;
 	}
 	
-	@Override
-	Widget setSize(int w, int h) {
+	void setSize(int w, int h) {
 		this.width = w;
 		this.height = h;
 		layoutRect.width = w;
 		layoutRect.height = h;
-		return this;
 	}
 }
