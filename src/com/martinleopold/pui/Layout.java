@@ -78,8 +78,8 @@ final class Layout {
 			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
 			System.out.println("postition: x=" + w.x + " y=" + w.y);
 			
-			placeAgainstPinned(w); // adjust position to avoid pinned elements
-			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
+//			placeAgainstPinned(w); // adjust position to avoid pinned elements
+//			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
 			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
@@ -181,7 +181,7 @@ final class Layout {
 	List<Widget> pinned; // list of added widgets
 	void pin(Widget w) {
 		remove(w); // remove from normal flow (if present)
-		pinned.add(w);
+		if (!pinned.contains(w)) pinned.add(w);
 		System.out.println("relayout");
 		reLayout();
 	}
