@@ -69,17 +69,17 @@ final class Layout {
 		// ceck if we flow out at the bottom
 		if (nextY + totalHeight > height) {
 			System.out.println("try new column");
-			newColumn();
+			nextColumn();
 		}
 		
 		// check if it fits in the current line
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
-			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
+			positionWidget(w, nextX, nextY);
 //			System.out.println("position: x=" + w.x + " y=" + w.y);
 			
-//			placeAgainstPinned(w); // adjust position to avoid pinned elements
-//			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
+			placeAgainstPinned(w); // adjust position to avoid pinned elements
+			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
 			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
@@ -102,25 +102,33 @@ final class Layout {
 			add(w); // try again
 		} else { // it doesn't fit in the current line
 			System.out.println("try new row");
-			newRow();
+			nextRow();
 			add(w);
 		}
 	}
 	
-	void newRow() {
+	private void nextRow() {
 		nextX = currentColumnX;
 		nextY += currentRowHeight;
 		currentRowHeight = 0;
-		actions.add(Action.NewRow);
 		System.out.println("new row x:" + nextX + " y:" + nextY);
 	}
 	
-	void newColumn() {
+	private void nextColumn() {
 		currentRowHeight = 0;
 		currentColumnX += currentColumnWidth;
 		currentColumnWidth = columnWidth;
 		nextX = currentColumnX;
 		nextY = 0;
+	}
+	
+	void newRow() {
+		nextRow();
+		actions.add(Action.NewRow);
+	}
+	
+	void newColumn() {
+		nextColumn();
 		actions.add(Action.NewColumn);
 	}
 	
@@ -201,11 +209,19 @@ final class Layout {
 		if (p.layoutRect.x + p.layoutRect.width + paddingX + totalWidth <= currentColumnX + currentColumnWidth) {
 			System.out.println("fit next to pin");
 			w.setPosition(p.layoutRect.x + p.layoutRect.width + paddingX*2, w.y);
+			nextX = w.x - paddingX + totalWidth;
+		}
+		// try to fit in nextRow (before) p
+		else if (currentColumnX + totalWidth < p.layoutRect.x && nextY + totalHeight < height) {
+			nextRow();
+			positionWidget(w, nextX, nextY);
+			nextX+=totalWidth;
 		}
 		// try to fit w after (i.e. below) p in this column
 		else if (p.layoutRect.y + p.layoutRect.height + paddingY + totalHeight <= height) {
 			System.out.println("fit below");
 			w.setPosition(w.x, p.layoutRect.y + p.layoutRect.height + paddingY*2);
+			nextX+=totalWidth;
 		}
 		// try next column
 		else {
@@ -224,5 +240,10 @@ final class Layout {
 				placeAgainstPinned(w, p);
 			}
 		}
+	}
+	
+	// absolute positioning (adding global and widget padding)
+	private void positionWidget(Widget w, int x, int y) {
+		w.setPosition(windowPaddingX + x + paddingX, windowPaddingY + y + paddingY);
 	}
 }

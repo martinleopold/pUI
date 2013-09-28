@@ -55,7 +55,7 @@ abstract class Widget<TWidget> extends Rect {
 	
 	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
-		layoutRect = new Rect(x, y, width, height);
+		layoutRect = new Rect(this);
 		
 		this.pui = pui;
 		pui.add(this, doLayout);
@@ -224,5 +224,19 @@ abstract class Widget<TWidget> extends Rect {
 		this.height = h;
 		layoutRect.width = w;
 		layoutRect.height = h;
+	}
+	
+	public TWidget position(int x, int y) {
+		// TODO. assuming label position below widget
+		setPosition(x,y);
+		pui.layout.pin(this);
+		pui.layout.reLayout();
+		return (TWidget)this;
+	}
+	
+	public TWidget size(int w, int h) {
+		setSize(w,h);
+		pui.layout.reLayout();
+		return (TWidget)this;
 	}
 }

@@ -284,11 +284,14 @@ New
 ---
 x size(): next layout element starts to low
 	x at relayout (after size()) height of the element is higher (+10)
-position(): also has to big a gap
+x position(): also has to big a gap
+x widgets with labels: no gap after
+window padding at the bottom not respected
 
 revise: setPosition and public position (and setSize/size)
-pinned algo: need to try next row (it might fit before the pin)
-pin algo: correctly set for next insertion point
+x pinned algo: need to try next row (it might fit before the pin)
+x pin algo: correctly set for next insertion point
+* layout: private functions for placing (w/o padding, setting next, etc)
 
 remove constructors only used with 0,0 size that use auto layout anyway?
 which constructors to have for widgets

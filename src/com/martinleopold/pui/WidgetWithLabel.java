@@ -41,6 +41,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
 		//place label
+		System.out.println("label const");
 		label = new Label(pui, this.x, this.y+height, 0, pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL), false); // place under widget. don't layout.  TODO variable height
 		label.active = false; // no redraw
 		
@@ -51,6 +52,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		label.text(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		
+		label.active = true; // redraw
 //		// adjust width
 //		layoutRect.width = width > label.width ? width : label.width;
 //		layoutRect.height = height + label.height; // joint height
@@ -58,8 +60,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		
 		//		System.out.println("relayouting");
 		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
-		label.setPosition(this.x, this.y+height);		// label needs to be replaced
-		label.active = true; // redraw
+		label.setPosition(this.x, this.y+height);		// label needs to be replaced, singe position might have changeds
 		return (TWidget)this;
 	}
 	
@@ -82,18 +83,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 //			label.draw(pui.p);
 //		}
 //	}
-	
-	public TWidget position(int x, int y) {
-		// TODO. assuming label position below widget
-		this.x = x; 
-		this.y = y;
-		layoutRect.x = x;
-		layoutRect.y = y;
-		label.setPosition(x, x+height);
-		pui.layout.pin(this);
-		pui.layout.reLayout();
-		return (TWidget)this;
-	}
+
 	
 	@Override
 	void setSize(int w, int h) {
@@ -106,11 +96,14 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		} else {
 			layoutRect = new Rect(this);
 		}
+			label.setPosition(x, y+height); // label needs to be replaced
 	}
 	
-	public TWidget size(int w, int h) {
-		setSize(w,h);
-		pui.layout.reLayout();
-		return (TWidget)this;
+	@Override
+	void setPosition(int x, int y) {
+		super.setPosition(x, y);
+		if (label != null) { // TODO label might not be initialized, since the constructor causes a layout, which sets the position
+			label.setPosition(x, y+height); // label needs to be replaced
+		}
 	}
 }
