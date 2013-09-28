@@ -64,7 +64,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 	}
 	
 	public TWidget noLabel() {
-		layoutRect = new Rect(this);
+		layoutRect = new Rect(this); // 
 		label.active = false; // no redraw
 		return (TWidget)this;
 	}
@@ -95,18 +95,21 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		return (TWidget)this;
 	}
 	
-	
-	public TWidget size(int w, int h) {
+	@Override
+	void setSize(int w, int h) {
 		this.width = w;
 		this.height = h;
 
-//		if (label == null) { // label might not yet be initialized
-//			layoutRect.width = w;
-//			layoutRect.height = h;
-//		} else {
+		if (label.active) {
 			layoutRect.width = width > label.width ? width : label.width;
 			layoutRect.height = height + label.height; // joint height
-//		}
+		} else {
+			layoutRect = new Rect(this);
+		}
+	}
+	
+	public TWidget size(int w, int h) {
+		setSize(w,h);
 		pui.layout.reLayout();
 		return (TWidget)this;
 	}

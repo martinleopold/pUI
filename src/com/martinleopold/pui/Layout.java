@@ -34,7 +34,7 @@ final class Layout {
 	
 	int currentColumnX; // columnX . padding . widget
 	int currentColumnWidth; // width to place widgets and padding in
-	int currentRowHeight; // height of row including widgets and padding
+	int currentRowHeight; // height of row including widgets and their padding
 	
 	int windowPaddingX, windowPaddingY; 
 	
@@ -68,7 +68,7 @@ final class Layout {
 		
 		// ceck if we flow out at the bottom
 		if (nextY + totalHeight > height) {
-//			System.out.println("try new column");
+			System.out.println("try new column");
 			newColumn();
 		}
 		
@@ -76,16 +76,19 @@ final class Layout {
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
 			w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
-			System.out.println("postition: x=" + w.x + " y=" + w.y);
+//			System.out.println("position: x=" + w.x + " y=" + w.y);
 			
 //			placeAgainstPinned(w); // adjust position to avoid pinned elements
 //			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
 			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
-			//System.out.println("placing in layout x:" + r.x + " y:" + r.y);
+			System.out.println(elements.indexOf(w) + ": placing in layout x:" + r.x + " y:" + r.y + " tw:" + totalWidth + " th:" + totalHeight);
 			// track row height
-			if (totalHeight > currentRowHeight) currentRowHeight = totalHeight;
+			if (totalHeight > currentRowHeight) {
+				currentRowHeight = totalHeight;
+				System.out.println("currentRowHeight: " + currentRowHeight );
+			}
 			// widget was placed
 			nextX += totalWidth;
 			// warn if we flow out to the right
@@ -93,12 +96,12 @@ final class Layout {
 				System.out.println("Warning: Widget is placed outside of the window.");
 			}
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
-//			System.out.println("make column wider");
+			System.out.println("make column wider");
 			// we are at the beginning of a line and it doesn't fit
 			currentColumnWidth = totalWidth; // make this column wider
 			add(w); // try again
 		} else { // it doesn't fit in the current line
-//			System.out.println("try new row");
+			System.out.println("try new row");
 			newRow();
 			add(w);
 		}
@@ -109,6 +112,7 @@ final class Layout {
 		nextY += currentRowHeight;
 		currentRowHeight = 0;
 		actions.add(Action.NewRow);
+		System.out.println("new row x:" + nextX + " y:" + nextY);
 	}
 	
 	void newColumn() {
@@ -155,6 +159,7 @@ final class Layout {
 	}
 	
 	void reLayout() {
+		System.out.println("reLayout");
 		List<Action> oldActions = actions; // save actions
 		List<Widget> oldElements = elements; // save elements
 		List<Widget> oldPinned = pinned; // save pinned elements

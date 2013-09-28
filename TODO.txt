@@ -282,7 +282,8 @@ Extra Widgets
 
 New
 ---
-size(): next layout element starts to low
+x size(): next layout element starts to low
+	x at relayout (after size()) height of the element is higher (+10)
 position(): also has to big a gap
 
 revise: setPosition and public position (and setSize/size)
