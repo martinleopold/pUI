@@ -39,7 +39,8 @@ public class Divider extends Widget<Divider> {
 		
 		// draw outline
 		// draw outline highlight
-		p.stroke(theme.outline);
+		p.stroke(theme.fill);
+		p.strokeWeight(2);
 		if (width >= height) p.line(x, y+height/2, x+width-1, y+height/2);
 		else p.line(x+width/2, y, x+width/2, y+height-1);
 	}
