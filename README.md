@@ -5,7 +5,8 @@ A Graphical User Interface Library for Processing
 
 The goal of this project is to create a functional prototype for a new Graphical User Interface Library for Processing. There is no core GUI system built into Processing as of date but some third-party GUI solutions exist. This project attempts to learn from and build on the existing libraries while keeping in mind the design principles that lie at the heart of Processing: Minimalism, accessibility and extensibility. Ultimately the aim is to spark discussion on what a core GUI library for Processing might encompass.
 
-Full Project Description: http://static.martinleopold.com/gsoc13/
+Project Info: http://martinleopold.com/pui/ <br/>
+Source: https://github.com/martinleopold/pUI
 
 CURRENT RELEASE: 
 v0.1 (Test Release)
