@@ -294,7 +294,7 @@ x pinned algo: need to try next row (it might fit before the pin)
 x pin algo: correctly set for next insertion point
 
 x window padding at the bottom not respected
-* layout: private functions for placing (w/o padding, setting next, etc)
+x layout: private functions for placing (w/o padding, setting next, etc)
 * revise: setPosition and public position (and setSize/size)
 * remove constructors only used with 0,0 size that use auto layout anyway?
 * which constructors to have for widgets?

@@ -71,7 +71,7 @@ final class Layout {
 		// check if it fits in the current line
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
-			positionWidget(w, nextX, nextY);
+			placeNext(w);
 //			System.out.println("position: x=" + w.x + " y=" + w.y);
 			
 			placeAgainstPinned(w); // adjust position to avoid pinned elements
@@ -211,7 +211,7 @@ final class Layout {
 		// try to fit in nextRow (before) p
 		else if (currentColumnX + totalWidth < p.layoutRect.x && nextY + totalHeight < height) {
 			nextRow();
-			positionWidget(w, nextX, nextY);
+			placeNext(w);
 			nextX+=totalWidth;
 		}
 		// try to fit w after (i.e. below) p in this column
@@ -239,9 +239,9 @@ final class Layout {
 		}
 	}
 	
-	// absolute positioning (adding global and widget padding)
-	private void positionWidget(Widget<?> w, int x, int y) {
-		w.setPosition(windowPaddingX + x + paddingX, windowPaddingY + y + paddingY);
+	// place a widget at next position (adding global and widget padding)
+	private void placeNext(Widget<?> w) {
+		w.setPosition(windowPaddingX + nextX + paddingX, windowPaddingY + nextY + paddingY);
 	}
 	
 	void setPadding(int px, int py) {
