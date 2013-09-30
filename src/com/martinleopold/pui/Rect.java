@@ -53,6 +53,10 @@ class Rect {
 			r.isInside(x+width, y);
 	}
 	
+	Rect padded(int px, int py) {
+		return new Rect(x-px, y-py, width + 2*px, height + 2*py);
+	}
+	
 //	void setPosition(int x, int y) {
 //		this.x = x;
 //		this.y = y;

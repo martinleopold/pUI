@@ -51,7 +51,7 @@ final class Layout {
 		reset();
 		
 		setPadding(paddingX, paddingY);
-		System.out.println("width:" + width + " height:" + height + " paddingX:" + paddingX + " paddingY:" + paddingY);
+//		System.out.println("width:" + width + " height:" + height + " paddingX:" + paddingX + " paddingY:" + paddingY);
 	}
 	
 	void add(Widget<?> w) {
@@ -62,7 +62,7 @@ final class Layout {
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// ceck if we flow out at the bottom
-		System.out.println("nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
+		System.out.println("nextX:" + nextX + " nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
 		if (nextY + totalHeight > height) {
 			System.out.println("try new column");
 			nextColumn();
@@ -203,27 +203,28 @@ final class Layout {
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// try to fit w next to (i.e. right of) p in this column
-		if (p.layoutRect.x + p.layoutRect.width + paddingX + totalWidth <= currentColumnX + currentColumnWidth) {
+		if (p.layoutRect.x + p.layoutRect.width + paddingX + totalWidth <= windowPaddingX + currentColumnX + currentColumnWidth ) {
 			System.out.println("fit next to pin");
-			w.setPosition(p.layoutRect.x + p.layoutRect.width + paddingX*2, w.y);
-			nextX = w.x - paddingX + totalWidth;
+			w.setPosition(p.layoutRect.x + p.layoutRect.width + paddingX*2, r.y);
+			nextX = r.x - windowPaddingX - paddingX; // set where next should have been
 		}
 		// try to fit in nextRow (before) p
-		else if (currentColumnX + totalWidth < p.layoutRect.x && nextY + totalHeight < height) {
+		else if (windowPaddingX + currentColumnX + totalWidth < p.layoutRect.x && nextY + totalHeight < height) {
+			System.out.println("in next row");
 			nextRow();
 			placeNext(w);
-			nextX+=totalWidth;
 		}
 		// try to fit w after (i.e. below) p in this column
-		else if (p.layoutRect.y + p.layoutRect.height + paddingY + totalHeight <= height) {
+		else if (p.layoutRect.y + p.layoutRect.height + paddingY + totalHeight <= windowPaddingY + height) {
 			System.out.println("fit below");
-			w.setPosition(w.x, p.layoutRect.y + p.layoutRect.height + paddingY*2);
-			nextX+=totalWidth;
+			w.setPosition(r.x, p.layoutRect.y + p.layoutRect.height + paddingY*2);
+//			System.out.println("nextX:" + nextX + " nextY:" + nextY);
+			nextY = r.y - windowPaddingY - paddingY; // set where next should have been
 		}
 		// try next column
 		else {
 			System.out.println("fit in next column");
-			newColumn();
+			nextColumn();
 			placeAgainstPinned(w, p); // retry
 		}
 	}
@@ -232,7 +233,7 @@ final class Layout {
 		// check against all pinned 
 		for (Widget<?> p : pinned) {
 			System.out.println("check against pin");
-			if (w.isOverapping(p)) { // the widget collides with a previously pinned one (p)
+			if (w.padded(paddingX, paddingY).isOverapping(p.padded(paddingX, paddingY))) { // the widget collides with a previously pinned one (p)
 				System.out.println("found overlap");
 				placeAgainstPinned(w, p);
 			}
