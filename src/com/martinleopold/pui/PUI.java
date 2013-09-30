@@ -363,8 +363,8 @@ public final class PUI extends Rect {
 	}
 	
 	
-	static final int DEFAULT_GRID_X = 12;
-	static final int DEFAULT_GRID_Y = 12;
+	static final int DEFAULT_GRID_X = 10;
+	static final int DEFAULT_GRID_Y = 10;
 	
 	int gridX;
 	int gridY;
@@ -373,8 +373,7 @@ public final class PUI extends Rect {
 		this.gridX = x;
 		this.gridY = y;
 		// set padding in layout
-		layout.paddingX = layout.windowPaddingX = gridX2Px(paddingX);
-		layout.paddingY = layout.windowPaddingY = gridY2Px(paddingY);
+		layout.setPadding(gridX2Px(paddingX), gridY2Px(paddingY));
 		// set column width in layout
 		layout.setColumnWidth(gridX2Px(columnWidth));
 		return this;
@@ -425,8 +424,7 @@ public final class PUI extends Rect {
 	public PUI padding(float x, float y) {
 		this.paddingX = x;
 		this.paddingY = y;
-		layout.paddingX = layout.windowPaddingX = gridX2Px(paddingX);
-		layout.paddingY = layout.windowPaddingY = gridY2Px(paddingY);
+		layout.setPadding(gridX2Px(paddingX), gridY2Px(paddingY));
 		return this;
 	}
 

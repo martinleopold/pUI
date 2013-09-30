@@ -26,47 +26,43 @@ import java.util.List;
  * @author Martin Leopold <m@martinleopold.com>
  */
 final class Layout {
-	int width, height;
-	int paddingX, paddingY;
-	int columnWidth;
+	private int originalWidth, originalHeight;
+	private int width, height;
+	private int paddingX, paddingY;
+	private int columnWidth;
 	
-	int nextX, nextY; // where to place the next widget *and* it's padding
+	private int nextX, nextY; // where to place the next widget *and* it's padding
 	
-	int currentColumnX; // columnX . padding . widget
-	int currentColumnWidth; // width to place widgets and padding in
-	int currentRowHeight; // height of row including widgets and their padding
+	private int currentColumnX; // columnX . padding . widget
+	private int currentColumnWidth; // width to place widgets and padding in
+	private int currentRowHeight; // height of row including widgets and their padding
 	
-	int windowPaddingX, windowPaddingY; 
+	private int windowPaddingX, windowPaddingY; 
 	
-	enum Action { NewRow, NewColumn, AddWidget };
-	List<Action> actions; // sequence of layout actions
-	List<Widget<?>> elements; // list of added widgets
+	private enum Action { NewRow, NewColumn, AddWidget };
+	private List<Action> actions; // sequence of layout actions
+	private List<Widget<?>> elements; // list of added widgets
 	
 	Layout(int width, int height, int paddingX, int paddingY, int columnWidth) {
-		this.width = width;
-		this.height = height;
-		this.paddingX = paddingX;
-		this.paddingY = paddingY;
+		this.originalWidth = this.width = width;
+		this.originalHeight = this.height = height;
 		this.columnWidth = columnWidth;
 		
 		reset();
 		
-		// window padding
-		if (width - 2*paddingX > 0 && height - 2*paddingY > 0) {
-			windowPaddingX = paddingX;
-			windowPaddingY = paddingY;
-			width -= 2*paddingX;
-			height -= 2*paddingY;
-		}
+		setPadding(paddingX, paddingY);
+		System.out.println("width:" + width + " height:" + height + " paddingX:" + paddingX + " paddingY:" + paddingY);
 	}
 	
 	void add(Widget<?> w) {
+		System.out.println("adding " + elements.size());
 		Rect r = w.layoutRect;
 		
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// ceck if we flow out at the bottom
+		System.out.println("nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
 		if (nextY + totalHeight > height) {
 			System.out.println("try new column");
 			nextColumn();
@@ -79,7 +75,6 @@ final class Layout {
 //			System.out.println("position: x=" + w.x + " y=" + w.y);
 			
 			placeAgainstPinned(w); // adjust position to avoid pinned elements
-			System.out.println("adjusted: x=" + w.x + " y=" + w.y);
 			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
@@ -89,12 +84,14 @@ final class Layout {
 				currentRowHeight = totalHeight;
 				System.out.println("currentRowHeight: " + currentRowHeight );
 			}
+			
+			// warn if we flow out to the right
+			if (nextX + totalWidth > width) {
+				System.out.println("Warning: Widget is placed outside of the window.");
+			}
+			
 			// widget was placed
 			nextX += totalWidth;
-			// warn if we flow out to the right
-			if (r.x + totalWidth > width) {
-				System.out.println("Warning: Widget<?> is placed outside of the window.");
-			}
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
 			System.out.println("make column wider");
 			// we are at the beginning of a line and it doesn't fit
@@ -138,7 +135,7 @@ final class Layout {
 		currentColumnWidth = w;
 	}
 	
-	void remove(Widget<?> e) {
+	private void remove(Widget<?> e) {
 		int idx = elements.indexOf(e); // index of the add action
 		if (idx > -1) {
 			elements.remove(e);
@@ -154,7 +151,7 @@ final class Layout {
 		}
 	}
 	
-	void reset() {
+	private void reset() {
 		nextX = 0;
 		nextY = 0;
 		currentColumnX = 0; 
@@ -191,7 +188,7 @@ final class Layout {
 		}
 	}
 	
-	List<Widget<?>> pinned; // list of added widgets
+	private List<Widget<?>> pinned; // list of added widgets
 	void pin(Widget<?> w) {
 		remove(w); // remove from normal flow (if present)
 		if (!pinned.contains(w)) pinned.add(w);
@@ -245,5 +242,17 @@ final class Layout {
 	// absolute positioning (adding global and widget padding)
 	private void positionWidget(Widget<?> w, int x, int y) {
 		w.setPosition(windowPaddingX + x + paddingX, windowPaddingY + y + paddingY);
+	}
+	
+	void setPadding(int px, int py) {
+		this.paddingX = px;
+		this.paddingY = py;
+		// adjust window padding
+		if (width - 2*paddingX > 0 && height - 2*paddingY > 0) {
+			windowPaddingX = paddingX;
+			windowPaddingY = paddingY;
+			width = originalWidth - 2*paddingX;
+			height = originalHeight - 2*paddingY;
+		}
 	}
 }
