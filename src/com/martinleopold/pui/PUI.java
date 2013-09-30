@@ -60,7 +60,7 @@ public final class PUI extends Rect {
 	public PUI(PApplet p) {
 		super(0,0, p.width, p.height);
 		welcomeMessage();
-
+		
 		this.p = p;
 		ProcessingEventHandler peh = new ProcessingEventHandler();
 		p.registerMethod("mouseEvent", peh);
@@ -68,7 +68,7 @@ public final class PUI extends Rect {
 		p.registerMethod("draw", peh);
 		
 		theme(Theme.DEFAULT);
-		font("SansSerif");
+		font("SourceSansPro-Semibold.ttf"); // this loads the TTF from the data/ bundled in the jar. simple as that
 		setLayout(new Layout(width, height, 0, 0, 0));
 		grid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
 		padding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding

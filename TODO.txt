@@ -251,8 +251,8 @@ PUI
 	* layout direction
 	* should setting grid, font, padding have an effect on widgets created before?
 x custom size
+x add default font as TTF
 * retrieve widgets
-* add default font as TTF
 * remove "add" prefix from widget generators?
 * theme
 	* review color themes (text not legible, bg color too light
