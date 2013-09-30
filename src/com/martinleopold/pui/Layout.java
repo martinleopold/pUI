@@ -256,4 +256,10 @@ final class Layout {
 			height = originalHeight - 2*paddingY;
 		}
 	}
+	
+	void setSize(int w, int h) {
+		this.width = w;
+		this.height = h;
+		setPadding(paddingX, paddingY);
+	}
 }

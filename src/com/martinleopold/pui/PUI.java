@@ -469,4 +469,12 @@ public final class PUI extends Rect {
 		visible = !visible;
 		return this;
 	}
+	
+	public PUI size(int w, int h) {
+		this.width = w;
+		this.height = h;
+		layout.setSize(w, h);
+		layout.reLayout();
+		return this;
+	}
 }

@@ -247,10 +247,10 @@ x warnings: [unckecked], [rawtypes]
 	* TWidget return type should show as actual class
 PUI
 * layout
-	* how to deal with custom widget sizes and positions?
+	x how to deal with custom widget sizes and positions?
 	* layout direction
 	* should setting grid, font, padding have an effect on widgets created before?
-* custom size
+x custom size
 * retrieve widgets
 * add default font as TTF
 * remove "add" prefix from widget generators?
@@ -297,10 +297,10 @@ x window padding at the bottom not respected
 x layout: private functions for placing (w/o padding, setting next, etc)
 x revise: setPosition and public position (and setSize/size)
 x position() and size() should work in grid units
+x placement bug w/position(1,1). pUI_test_9
 * remove constructors only used with 0,0 size that use auto layout anyway?
-* which constructors to have for widgets?
-* placement bug w/position(1,1). pUI_test_9
 * infinite loop when adding a huge button (bigger than window)
+
 
 Next revision(s)
 ----------------
@@ -313,17 +313,25 @@ Next
 ----
 x warnings / loop through code
 x submit code samples
-* layout engine review. widget size / position
-* PUI custom size
+x layout engine review. widget size / position
+x PUI custom size
 * theme review
-* questions
-	* where to have theme constants? (or how else to set theme)
-	* widget state as method or field?
-	* 
 
 
 Log
 ---
-* snap to grid or use relational paddings
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
+* redo column width, maybe add a column gap
+	* it's apparent from pinning, that there is more space in a column than is used.
+* outside placement warning doesn't work anymore, because of relayout
+* rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
+* smaller pui size: widget can draw outsize of pui. should this be ok?
+
+
+Decisions
+---------
+* where to have theme constants? (or how else to set theme)
+* widget state as method or field?
+* snap to grid or use relational paddings?
+* which constructors to have for widgets?
