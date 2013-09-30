@@ -217,7 +217,7 @@ public final class PUI extends Rect {
 	
 	
 	static float DEFAULT_DIVIDER_W = 11;
-	static float DEFAULT_DIVIDER_H = 1;
+	static float DEFAULT_DIVIDER_H = 0;
 	public Divider addDivider() {
 		return new Divider(this, 0, 0, gridX2Px(DEFAULT_DIVIDER_W), gridY2Px(DEFAULT_DIVIDER_H));
 	}

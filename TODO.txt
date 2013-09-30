@@ -327,6 +327,10 @@ Log
 * outside placement warning doesn't work anymore, because of relayout
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
 * smaller pui size: widget can draw outsize of pui. should this be ok?
+x draw label without background
+x divider needs to be resized
+* can label be drawn with highlight color in certain circumstances for widget with label??
+* custom padding per widget
 
 
 Decisions
