@@ -96,4 +96,9 @@ public class Slider extends WidgetWithLabel<Slider> {
 		Events.addListenerField(connect, pui.p, fieldName);
 		return this;
 	}
+
+	@Override
+	protected Slider getThis() {
+		return this;
+	}
 }

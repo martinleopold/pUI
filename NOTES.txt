@@ -429,7 +429,3 @@ Review
 	-> pui needed for draw, callbacks, relayout (i.e. setting size)
 	-> why have a widget without PUI? add a widget to multiple PUIs?
 
-
-Questions
----------
-* snap to grid or use relational paddings

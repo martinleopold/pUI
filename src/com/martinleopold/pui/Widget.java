@@ -28,7 +28,7 @@ import processing.event.MouseEvent;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-abstract class Widget<TWidget> extends Rect {
+abstract class Widget<T extends Widget<T>> extends Rect {
 
 	PUI pui;
 
@@ -63,6 +63,8 @@ abstract class Widget<TWidget> extends Rect {
 		theme = pui.theme;
 		font = pui.font;
 	}
+	
+	protected abstract T getThis();
 
 //	public void setActive(boolean tf) {
 //		active = tf;
@@ -198,18 +200,18 @@ abstract class Widget<TWidget> extends Rect {
 	void draw(PApplet p) {
 	}
 
-	Event<Widget> onDraw = new Event<Widget>();
+	Event<Widget<T>> onDraw = new Event<Widget<T>>();
 
-	public TWidget onDraw(String methodName) {
+	public T onDraw(String methodName) {
 		Events.addListener(onDraw, pui.p, methodName);
-		return (TWidget)this;
+		return getThis();
 	}
 
 	Event<MouseEvent> onMouse = new Event<MouseEvent>();
 
-	public TWidget onMouse(String methodName) {
+	public T onMouse(String methodName) {
 		Events.addListener(onMouse, pui.p, methodName);
-		return (TWidget)this;
+		return getThis();
 	}
 	
 	void setPosition(int x, int y) {
@@ -226,17 +228,17 @@ abstract class Widget<TWidget> extends Rect {
 		layoutRect.height = h;
 	}
 	
-	public TWidget position(int x, int y) {
+	public T position(int x, int y) {
 		// TODO. assuming label position below widget
 		setPosition(x,y);
 		pui.layout.pin(this);
 		pui.layout.reLayout();
-		return (TWidget)this;
+		return getThis();
 	}
 	
-	public TWidget size(int w, int h) {
+	public T size(int w, int h) {
 		setSize(w,h);
 		pui.layout.reLayout();
-		return (TWidget)this;
+		return getThis();
 	}
 }

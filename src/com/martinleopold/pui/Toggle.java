@@ -72,4 +72,9 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 		Events.addListenerField(connect, pui.p, fieldName);
 		return this;
 	}
+
+	@Override
+	protected Toggle getThis() {
+		return this;
+	}
 }

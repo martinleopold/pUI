@@ -40,7 +40,7 @@ final class Layout {
 	
 	enum Action { NewRow, NewColumn, AddWidget };
 	List<Action> actions; // sequence of layout actions
-	List<Widget> elements; // list of added widgets
+	List<Widget<?>> elements; // list of added widgets
 	
 	Layout(int width, int height, int paddingX, int paddingY, int columnWidth) {
 		this.width = width;
@@ -60,7 +60,7 @@ final class Layout {
 		}
 	}
 	
-	void add(Widget w) {
+	void add(Widget<?> w) {
 		Rect r = w.layoutRect;
 		
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
@@ -93,7 +93,7 @@ final class Layout {
 			nextX += totalWidth;
 			// warn if we flow out to the right
 			if (r.x + totalWidth > width) {
-				System.out.println("Warning: Widget is placed outside of the window.");
+				System.out.println("Warning: Widget<?> is placed outside of the window.");
 			}
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
 			System.out.println("make column wider");
@@ -138,7 +138,7 @@ final class Layout {
 		currentColumnWidth = w;
 	}
 	
-	void remove(Widget e) {
+	void remove(Widget<?> e) {
 		int idx = elements.indexOf(e); // index of the add action
 		if (idx > -1) {
 			elements.remove(e);
@@ -161,21 +161,21 @@ final class Layout {
 		currentColumnWidth = columnWidth; 
 		currentRowHeight = 0;
 		
-		elements = new ArrayList<Widget>();
+		elements = new ArrayList<Widget<?>>();
 		actions = new ArrayList<Action>();
-		pinned = new ArrayList<Widget>();
+		pinned = new ArrayList<Widget<?>>();
 	}
 	
 	void reLayout() {
 		System.out.println("reLayout");
 		List<Action> oldActions = actions; // save actions
-		List<Widget> oldElements = elements; // save elements
-		List<Widget> oldPinned = pinned; // save pinned elements
+		List<Widget<?>> oldElements = elements; // save elements
+		List<Widget<?>> oldPinned = pinned; // save pinned elements
 		
 		reset(); // reset layout
 		pinned = oldPinned; // restore pinned
 		
-		Iterator<Widget> widgets = oldElements.iterator();
+		Iterator<Widget<?>> widgets = oldElements.iterator();
 		for (Action a : oldActions) {
 			switch (a) {
 				case NewRow:
@@ -191,8 +191,8 @@ final class Layout {
 		}
 	}
 	
-	List<Widget> pinned; // list of added widgets
-	void pin(Widget w) {
+	List<Widget<?>> pinned; // list of added widgets
+	void pin(Widget<?> w) {
 		remove(w); // remove from normal flow (if present)
 		if (!pinned.contains(w)) pinned.add(w);
 		System.out.println("relayout");
@@ -200,7 +200,7 @@ final class Layout {
 	}
 	
 	// assumes w and p are colliding. place w against pinned p
-	private void placeAgainstPinned(Widget w, Widget p) {
+	private void placeAgainstPinned(Widget<?> w, Widget<?> p) {
 		Rect r = w.layoutRect;
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
@@ -231,9 +231,9 @@ final class Layout {
 		}
 	}
 	// place w against all pinned. moves next to pinned, down, or continues in next column until a suitable spot is found
-	private void placeAgainstPinned(Widget w) {
+	private void placeAgainstPinned(Widget<?> w) {
 		// check against all pinned 
-		for (Widget p : pinned) {
+		for (Widget<?> p : pinned) {
 			System.out.println("check against pin");
 			if (w.isOverapping(p)) { // the widget collides with a previously pinned one (p)
 				System.out.println("found overlap");
@@ -243,7 +243,7 @@ final class Layout {
 	}
 	
 	// absolute positioning (adding global and widget padding)
-	private void positionWidget(Widget w, int x, int y) {
+	private void positionWidget(Widget<?> w, int x, int y) {
 		w.setPosition(windowPaddingX + x + paddingX, windowPaddingY + y + paddingY);
 	}
 }

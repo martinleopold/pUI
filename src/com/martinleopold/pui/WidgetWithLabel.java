@@ -20,9 +20,9 @@ package com.martinleopold.pui;
 /**
  * 
  * @author martinleopold
- * @param <TWidget> Base Widget Type. Used so methods can return the actual Widget Type
+ * @param <T> Base Widget Type. Used so methods can return the actual Widget Type
  */
-abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
+abstract class WidgetWithLabel<T extends WidgetWithLabel<T>> extends Widget<T> {
 	Label label;
 	boolean drawLabel;
 	
@@ -48,7 +48,7 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 //		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);
 	}
 	
-	public TWidget label(String text) {
+	public T label(String text) {
 		label.text(text);
 		label.width = (int)label.textWidth()+1; // adjust label size
 		
@@ -61,13 +61,13 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 		//		System.out.println("relayouting");
 		pui.layout.reLayout(); // need to relayout cause dimensions changed after first layout (in super())
 		label.setPosition(this.x, this.y+height);		// label needs to be replaced, singe position might have changeds
-		return (TWidget)this;
+		return getThis();
 	}
 	
-	public TWidget noLabel() {
+	public T noLabel() {
 		layoutRect = new Rect(this); // 
 		label.active = false; // no redraw
-		return (TWidget)this;
+		return getThis();
 	}
 	
 //	void setLabelPlacement(LabelPlacement placement) {
@@ -87,16 +87,12 @@ abstract class WidgetWithLabel<TWidget> extends Widget<TWidget> {
 	
 	@Override
 	void setSize(int w, int h) {
-		this.width = w;
-		this.height = h;
-
-		if (label.active) {
+		super.setSize(w, h);
+		if (label != null && label.active) {
 			layoutRect.width = width > label.width ? width : label.width;
 			layoutRect.height = height + label.height; // joint height
-		} else {
-			layoutRect = new Rect(this);
 		}
-			label.setPosition(x, y+height); // label needs to be replaced
+		label.setPosition(x, y+height); // label needs to be replaced
 	}
 	
 	@Override

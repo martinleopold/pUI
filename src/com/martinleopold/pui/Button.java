@@ -77,4 +77,9 @@ public class Button extends WidgetWithLabel<Button> {
 		Events.addListenerField(connect, pui.p, fieldName);
 		return this;
 	}
+	
+	@Override
+	protected Button getThis() {
+		return this;
+	}
 }

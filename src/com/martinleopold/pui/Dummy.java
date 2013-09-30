@@ -23,7 +23,7 @@ import processing.core.PApplet;
  * A Widget to test Events
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Dummy extends Widget {
+public class Dummy extends Widget<Dummy> {
 
 	public Dummy(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
@@ -76,5 +76,10 @@ public class Dummy extends Widget {
 		p.stroke(128);
 		p.rect(x, y, width, height);
 		p.popStyle();
+	}
+
+	@Override
+	protected Dummy getThis() {
+		return this;
 	}
 }

@@ -23,7 +23,7 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Label extends Widget {
+public class Label extends Widget<Label> {
 	
 	//state
 	String text = "";
@@ -97,5 +97,10 @@ public class Label extends Widget {
 	
 	public Label large() {
 		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_LARGE));
+	}
+
+	@Override
+	protected Label getThis() {
+		return this;
 	}
 }

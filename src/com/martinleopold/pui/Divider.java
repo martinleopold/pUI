@@ -24,7 +24,7 @@ import processing.core.PApplet;
  *
  * @author Martin Leopold <m@martinleopold.com>
  */
-public class Divider extends Widget {
+public class Divider extends Widget<Divider> {
 
 	public Divider(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
@@ -42,5 +42,10 @@ public class Divider extends Widget {
 		p.stroke(theme.outline);
 		if (width >= height) p.line(x, y+height/2, x+width-1, y+height/2);
 		else p.line(x+width/2, y, x+width/2, y+height-1);
+	}
+
+	@Override
+	protected Divider getThis() {
+		return this;
 	}
 }

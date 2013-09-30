@@ -233,8 +233,13 @@ x label sizes
 Review/Refinement
 -----------------
 x on normal build create dist/pUI-xxx.zip (and delete old ones)
+x loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
+	/ override these 4 methods in all sub classes to return the correct type
+	x or use generics + getThis() 
+		base methods don't need to be overridden in each subclass (only getThis)
+		widget needs to be subclassed using generics ?? 
+x warnings: [unckecked], [rawtypes]
 * add credits to reza ali (visuals/theme)
-* loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
 * javadocs
 	x javadocs should only show public API
 	x exclude events package
@@ -279,19 +284,44 @@ Extra Widgets
 * (Knob)
 
 
-
 New
 ---
 x size(): next layout element starts to low
 	x at relayout (after size()) height of the element is higher (+10)
 x position(): also has to big a gap
 x widgets with labels: no gap after
-window padding at the bottom not respected
-
-revise: setPosition and public position (and setSize/size)
 x pinned algo: need to try next row (it might fit before the pin)
 x pin algo: correctly set for next insertion point
-* layout: private functions for placing (w/o padding, setting next, etc)
 
-remove constructors only used with 0,0 size that use auto layout anyway?
-which constructors to have for widgets
+* window padding at the bottom not respected
+* revise: setPosition and public position (and setSize/size)
+* layout: private functions for placing (w/o padding, setting next, etc)
+* remove constructors only used with 0,0 size that use auto layout anyway?
+* which constructors to have for widgets?
+
+
+
+Next revision(s)
+----------------
+* overhaul / next revision
+* extra widgets
+* sample program
+
+
+Next
+----
+x warnings / loop through code
+* layout engine review. widget size / position
+* PUI custom size
+* theme review
+* questions
+	* where to have theme constants? (or how else to set theme)
+	* widget state as method or field?
+	* 
+
+
+Questions
+---------
+* snap to grid or use relational paddings
+* subclassing Widget: need to use generics
+	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?

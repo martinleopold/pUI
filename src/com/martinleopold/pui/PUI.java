@@ -48,7 +48,7 @@ public final class PUI extends Rect {
 	// myParent is a reference to the parent sketch
 	PApplet p;
 
-	ArrayList<Widget> widgets = new ArrayList<Widget>(); // list of widgets managed by this PUI
+	ArrayList<Widget<?>> widgets = new ArrayList<Widget<?>>(); // list of widgets managed by this PUI
 		
 	/**
 	 * A constructor, usually called in the setup() method in your sketch to initialize and start
@@ -116,7 +116,7 @@ public final class PUI extends Rect {
 				return;
 			}
 
-			for (Widget w : widgets) {
+			for (Widget<?> w : widgets) {
 				w.onMouseEvent(e);
 			}
 		}
@@ -127,7 +127,7 @@ public final class PUI extends Rect {
 		 * @param e
 		 */
 		public void keyEvent(KeyEvent e) {
-			for (Widget w : widgets) {
+			for (Widget<?> w : widgets) {
 				w.onKeyEvent(e);
 			}
 		}
@@ -149,7 +149,7 @@ public final class PUI extends Rect {
 			p.popStyle();
 			
 			//System.out.println("draw " + p.frameCount);
-			for (Widget w : widgets) {
+			for (Widget<?> w : widgets) {
 				w.onDraw();
 			}
 
@@ -180,11 +180,11 @@ public final class PUI extends Rect {
 	 *
 	 * @param e
 	 */
-	void add(Widget e) {
+	void add(Widget<?> e) {
 		add(e, true);
 	}
 	
-	void add(Widget e, boolean doLayout) {
+	void add(Widget<?> e, boolean doLayout) {
 		if (!widgets.contains(e)) {
 			widgets.add(e);
 			if (doLayout) layout.add(e);
@@ -342,7 +342,7 @@ public final class PUI extends Rect {
 	Theme theme;
 	public PUI theme(Theme t) {
 		this.theme = t;
-		for (Widget w : widgets) {
+		for (Widget<?> w : widgets) {
 			w.theme = t;
 		}
 		return this;
