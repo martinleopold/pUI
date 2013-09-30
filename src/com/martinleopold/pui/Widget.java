@@ -228,16 +228,18 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 		layoutRect.height = h;
 	}
 	
-	public T position(int x, int y) {
+	// grid units
+	public T position(float x, float y) {
 		// TODO. assuming label position below widget
-		setPosition(x,y);
+		setPosition(pui.gridX2Px(x), pui.gridY2Px(y));
 		pui.layout.pin(this);
 		pui.layout.reLayout();
 		return getThis();
 	}
 	
-	public T size(int w, int h) {
-		setSize(w,h);
+	// grid units
+	public T size(float w, float h) {
+		setSize(pui.gridX2Px(w), pui.gridY2Px(h));
 		pui.layout.reLayout();
 		return getThis();
 	}

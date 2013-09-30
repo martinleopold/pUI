@@ -284,8 +284,8 @@ Extra Widgets
 * (Knob)
 
 
-New
----
+Layout Review
+-------------
 x size(): next layout element starts to low
 	x at relayout (after size()) height of the element is higher (+10)
 x position(): also has to big a gap
@@ -295,11 +295,12 @@ x pin algo: correctly set for next insertion point
 
 x window padding at the bottom not respected
 x layout: private functions for placing (w/o padding, setting next, etc)
-* revise: setPosition and public position (and setSize/size)
+x revise: setPosition and public position (and setSize/size)
+x position() and size() should work in grid units
 * remove constructors only used with 0,0 size that use auto layout anyway?
 * which constructors to have for widgets?
-
-
+* placement bug w/position(1,1). pUI_test_9
+* infinite loop when adding a huge button (bigger than window)
 
 Next revision(s)
 ----------------
@@ -321,8 +322,8 @@ x submit code samples
 	* 
 
 
-Questions
----------
+Log
+---
 * snap to grid or use relational paddings
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
