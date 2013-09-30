@@ -24,6 +24,7 @@ import processing.core.PApplet;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Label extends Widget<Label> {
+	boolean drawBackground;
 	
 	//state
 	String text = "";
@@ -39,9 +40,11 @@ public class Label extends Widget<Label> {
 	@Override
 	void draw(PApplet p) {
 		// draw background
-		p.noStroke();
-		p.fill(theme.background);
-		p.rect(x, y, width, height);
+		if (drawBackground) {
+			p.noStroke();
+			p.fill(theme.background);
+			p.rect(x, y, width, height);
+		}
 		
 		// draw outline
 		// draw outline highlight
