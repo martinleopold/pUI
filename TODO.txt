@@ -320,17 +320,17 @@ x PUI custom size
 
 Log
 ---
+x draw label without background
+x divider needs to be resized
+x can label be drawn with highlight color in certain circumstances for widget with label??
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
 * redo column width, maybe add a column gap
 	* it's apparent from pinning, that there is more space in a column than is used.
 * outside placement warning doesn't work anymore, because of relayout
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
-* smaller pui size: widget can draw outsize of pui. should this be ok?
-x draw label without background
-x divider needs to be resized
-* can label be drawn with highlight color in certain circumstances for widget with label??
-* custom padding per widget
+* with smaller pui size: widget can draw outsize of pui. should this be ok?
+* review themes and define a specific background color for pui.
 
 
 Decisions
@@ -339,3 +339,4 @@ Decisions
 * widget state as method or field?
 * snap to grid or use relational paddings?
 * which constructors to have for widgets?
+* custom padding per widget?
