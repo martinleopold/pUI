@@ -56,6 +56,7 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
+		label.drawHighlight = !label.drawHighlight;
 		on = !on;
 		onToggle.fire(this);
 		connect.fire(on);

@@ -25,6 +25,7 @@ import processing.core.PApplet;
  */
 public class Label extends Widget<Label> {
 	boolean drawBackground;
+	boolean drawHighlight;
 	
 	//state
 	String text = "";
@@ -57,7 +58,8 @@ public class Label extends Widget<Label> {
 		// draw fill highlight
 //		if (hover) p.fill(theme.fillHighlight);
 //		else p.fill(theme.fill);
-		p.fill(theme.fill);
+		if (drawHighlight)p .fill(theme.fillHighlight);
+		else p.fill(theme.fill);
 		p.textFont(font, height);
 		p.textAlign(PApplet.LEFT, PApplet.TOP);
 		p.text(text, x, y);

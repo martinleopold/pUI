@@ -55,6 +55,7 @@ public class Button extends WidgetWithLabel<Button> {
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
+		label.drawHighlight = true;
 		clicked = true;
 		onClick.fire(this);
 		connect.fire(clicked);
@@ -62,6 +63,7 @@ public class Button extends WidgetWithLabel<Button> {
 	
 	@Override
 	void mouseReleased(int button, float mx, float my) {
+		label.drawHighlight = false;
 		clicked = false;
 		connect.fire(clicked);
 	}

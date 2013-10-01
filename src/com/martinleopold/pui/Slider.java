@@ -71,6 +71,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
+		label.drawHighlight = true;
 		sliding = true;
 		setValue(mx);
 	}
@@ -82,6 +83,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 	
 	@Override
 	void mouseReleased(int button, float mx, float my) {
+		label.drawHighlight = false;
 		sliding = false;
 	}
 	
