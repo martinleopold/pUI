@@ -43,7 +43,7 @@ class Rect {
 	}
 
 	boolean isInside(float tx, float ty) {
-		return (tx >= x && tx <= x + width && ty >= y && ty <= y + height);
+		return (tx >= x && tx < x + width && ty >= y && ty < y + height);
 	}
 	
 	boolean isOverapping(Rect r) {
