@@ -26,7 +26,7 @@ EXAMPLES:
 
 FEATURES:
 * GUI Overlay
-* Widgets: Button, Toggle, Slider, Label, Divider
+* Widgets: Button, Toggle, Slider, VSlider, Label, Divider
 * Create new widget by extending the Widget class
 * Automatic Column Based Layout
 * Color Themes
@@ -71,11 +71,13 @@ Toggle
 * noLabel() : Toggle // remove the label
 * on : boolean // true if the toggle is on
 
-Slider
+Slider, VSlider
 * onValue(String method) : Slider // method to be called when the value is changed. Parameters: Slider
 * connect(String field) : Slider // name of a float field to connect the slider to
 * label(String text): Slider // set label text
 * noLabel() : Slider // remove the label
+* min(float min) : Slider // set minimum value
+* max(float max) : Slider // set maximum value
 * value : float // current value of the slider between 0 and 1
 
 Label

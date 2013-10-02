@@ -106,4 +106,16 @@ public class Slider extends WidgetWithLabel<Slider> {
 	protected Slider getThis() {
 		return this;
 	}
+	
+	public Slider min(float m) {
+		//value = PApplet.map(value, min, max, m, max); // map value to new range
+		min = m;
+		return getThis();
+	}
+	
+	public Slider max(float m) {
+		//value = PApplet.map(value, min, max, min, m); // map value to new range
+		max = m;
+		return getThis();
+	}
 }

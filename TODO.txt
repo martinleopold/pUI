@@ -272,8 +272,8 @@ Widgets
 * custom drawing disables vanilla drawing? (-> needs access to state)
 
 Slider
-* min/max support
-* vertical slider
+x min/max support
+x vertical slider
 * show value in the UI ?
 
 Extra Widgets
