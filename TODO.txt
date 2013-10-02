@@ -260,11 +260,11 @@ x add default font as TTF
 	* overridable bg color
 
 Widgets
+x custom size
+x custom position
 * state as methods instead of public fields?
 * connect should also work with methods (not only fields)
 * callbacks for multiple method signatures (e.g. Slider and float)
-* custom size
-* custom position
 * label position
 * name (default label, auto connect, retrieval)
 * widgets without PUI?
@@ -292,14 +292,15 @@ x position(): also has to big a gap
 x widgets with labels: no gap after
 x pinned algo: need to try next row (it might fit before the pin)
 x pin algo: correctly set for next insertion point
-
 x window padding at the bottom not respected
 x layout: private functions for placing (w/o padding, setting next, etc)
 x revise: setPosition and public position (and setSize/size)
 x position() and size() should work in grid units
 x placement bug w/position(1,1). pUI_test_9
-* remove constructors only used with 0,0 size that use auto layout anyway?
+x pinning algo bug: newColumn() with a pinned element. nextColumn() called too early!
+* pinning algo bug: b3 placed next to big button
 * infinite loop when adding a huge button (bigger than window)
+
 
 
 Next revision(s)
@@ -324,6 +325,7 @@ x draw label without background
 x divider needs to be resized
 x can label be drawn with highlight color in certain circumstances for widget with label??
 x review/fix slider mouseover
+* remove constructors only used with 0,0 size that use auto layout anyway?
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
 * redo column width, maybe add a column gap

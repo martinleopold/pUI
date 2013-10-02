@@ -41,7 +41,6 @@ abstract class WidgetWithLabel<T extends WidgetWithLabel<T>> extends Widget<T> {
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
 		//place label
-		System.out.println("label const");
 		label = new Label(pui, this.x, this.y+height, 0, pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL), false); // place under widget. don't layout.  TODO variable height
 		label.active = false; // no redraw
 		

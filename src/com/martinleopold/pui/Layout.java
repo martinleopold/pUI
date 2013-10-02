@@ -62,7 +62,7 @@ final class Layout {
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
 		// ceck if we flow out at the bottom
-		System.out.println("nextX:" + nextX + " nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
+//		System.out.println("nextX:" + nextX + " nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
 		if (nextY + totalHeight > height) {
 			System.out.println("try new column");
 			nextColumn();
@@ -108,7 +108,7 @@ final class Layout {
 		nextX = currentColumnX;
 		nextY += currentRowHeight;
 		currentRowHeight = 0;
-		System.out.println("new row x:" + nextX + " y:" + nextY);
+		System.out.println("next row x:" + nextX + " y:" + nextY);
 	}
 	
 	private void nextColumn() {
@@ -117,6 +117,7 @@ final class Layout {
 		currentColumnWidth = columnWidth;
 		nextX = currentColumnX;
 		nextY = 0;
+		System.out.println("next column x:" + nextX + " y:" + nextY);
 	}
 	
 	void newRow() {
@@ -136,14 +137,15 @@ final class Layout {
 	}
 	
 	private void remove(Widget<?> e) {
-		int idx = elements.indexOf(e); // index of the add action
+		int idx = elements.indexOf(e); // index in elements = index of add action
 		if (idx > -1) {
 			elements.remove(e);
-			int count = 0; // count number of add action
-			for (Action a : actions) {
-				if (a == Action.AddWidget) {
-					if (count++ == idx) {
-						actions.remove(a);
+			int addCount = 0; // count number of add action
+			for (int i=0; i<actions.size(); i++) {
+				if (actions.get(i) == Action.AddWidget) {
+					if (addCount++ == idx) {
+						actions.remove(i);
+						System.out.println("XXX removed add action:" + addCount);
 						return;
 					}
 				}
@@ -164,7 +166,7 @@ final class Layout {
 	}
 	
 	void reLayout() {
-		System.out.println("reLayout");
+		System.out.println("***** reLayout ******************************");
 		List<Action> oldActions = actions; // save actions
 		List<Widget<?>> oldElements = elements; // save elements
 		List<Widget<?>> oldPinned = pinned; // save pinned elements
