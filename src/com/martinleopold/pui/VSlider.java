@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Martin Leopold <m@martinleopold.com>
+ * Copyright (C) 2013 martinleopold
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,20 @@
  */
 package com.martinleopold.pui;
 
-import com.martinleopold.pui.events.Event;
-import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
 
 /**
  *
- * @author Martin Leopold <m@martinleopold.com>
+ * @author martinleopold
  */
-public class Slider extends WidgetWithLabel<Slider> {
-	public float value = 0.5f;
-	float min = 0;
-	float max = 1;
-	boolean sliding = false;
-			
-	public Slider(PUI pui, int x, int y, int width, int height) {
+public class VSlider extends Slider {
+	public VSlider(PUI pui, int x, int y, int width, int height) {
 		super(pui, x, y, width, height);
+	}
+	
+	@Override
+	protected VSlider getThis() {
+		return this;
 	}
 	
 	@Override
@@ -56,17 +54,22 @@ public class Slider extends WidgetWithLabel<Slider> {
 		else p.fill(theme.fill);
 		
 		// only the "inside" (i.e. without the outline) of the rect is used to represent the value
-		// the maximum width of the bar is width-2 (to exclude the outlines)
-		float bw = PApplet.map(value, min, max, 0, width-2); // bar width
-		bw = PApplet.ceil(bw); // round up to get hard pixels
-		p.rect(x+1, y+1, bw, height-2);
+		// the maximum height of the bar is height-2 (to exclude the outlines)
+		float bh = PApplet.map(value, min, max, 0, height-2); // bar height
+		bh = PApplet.ceil(bh);
+		p.rect(x+1, y+height-1-bh, width-2, bh);
 	}
 	
-	protected void setValue(float mx) {
+	/**
+	 * 
+	 * @param my 
+	 */
+	@Override
+	protected void setValue(float my) {
 		// only the "inside" (i.e. without the outline) of the rect is used to represent the value
-		// the point on the left outline (x) represents 0/min 
-		// the point left of the right outline (x+width-2) represents 1/max
-		value = PApplet.map(mx, x, x+width-2, min, max);
+		// the point on the lower outline (y+height-1) represents 0/min 
+		// the point below the upper outline (y+1) represents 1/max
+		value = PApplet.map(my, y+height-1, y+1, min, max);
 		value = PApplet.constrain(value, min, max);
 		onValue.fire(this);
 		connect.fire(value);
@@ -76,34 +79,11 @@ public class Slider extends WidgetWithLabel<Slider> {
 	void mousePressed(int button, float mx, float my) {
 		label.drawHighlight = true;
 		sliding = true;
-		setValue(mx);
+		setValue(my);
 	}
 	
 	@Override
 	void mouseDragged(int button, float mx, float my, float dx, float dy) {
-		setValue(mx);
-	}
-	
-	@Override
-	void mouseReleased(int button, float mx, float my) {
-		label.drawHighlight = false;
-		sliding = false;
-	}
-	
-	Event<Slider> onValue = new Event<Slider>();
-	public Slider onValue(String methodName) {
-		Events.addListener(onValue, pui.p, methodName);
-		return this;
-	}
-	
-	Event<Float> connect = new Event<Float>();
-	public Slider connect(String fieldName) {
-		Events.addListenerField(connect, pui.p, fieldName);
-		return this;
-	}
-
-	@Override
-	protected Slider getThis() {
-		return this;
+		setValue(my);
 	}
 }

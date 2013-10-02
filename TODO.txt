@@ -323,6 +323,7 @@ Log
 x draw label without background
 x divider needs to be resized
 x can label be drawn with highlight color in certain circumstances for widget with label??
+x review/fix slider mouseover
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
 * redo column width, maybe add a column gap
@@ -331,6 +332,7 @@ x can label be drawn with highlight color in certain circumstances for widget wi
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
 * with smaller pui size: widget can draw outsize of pui. should this be ok?
 * review themes and define a specific background color for pui.
+* remove events package from imports
 
 
 Decisions
