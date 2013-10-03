@@ -196,17 +196,17 @@ Widget - Extending
 * protected vs. private stuff
 
 
-Test Release
+X Test Release
 ------------
 x widgets with labels
 x more themes
-theme api (PUI)
+x theme api (PUI)
 x grid: widget dimensions, grid api (PUI)
 x public api review
 x docs
 
 
-PUI API (now / later)
+X PUI API (now / later)
 -------
 x close public API
 x static init
@@ -217,7 +217,7 @@ x set grid, padding
 x set theme
 
 
-Widget API (now / later)
+X Widget API (now / later)
 ----------
 x remove UIEvents (forces public on ui callbacks methods)
 
@@ -245,43 +245,40 @@ x warnings: [unckecked], [rawtypes]
 	x exclude events package
 	x hide inner class ProcessingEventHandler -> exclude doclet
 	* TWidget return type should show as actual class
-PUI
-* layout
-	x how to deal with custom widget sizes and positions?
-	* layout direction
-	* should setting grid, font, padding have an effect on widgets created before?
-x custom size
-x add default font as TTF
-* retrieve widgets
-* remove "add" prefix from widget generators?
-* theme
-	* review color themes (text not legible, bg color too light
-	* Theme constants in PUI object ?
-	* overridable bg color
-
-Widgets
-x custom size
-x custom position
-* state as methods instead of public fields?
-* connect should also work with methods (not only fields)
-* callbacks for multiple method signatures (e.g. Slider and float)
-* label position
-* name (default label, auto connect, retrieval)
-* widgets without PUI?
-* overridable themes
-* custom drawing disables vanilla drawing? (-> needs access to state)
-
-Slider
-x min/max support
-x vertical slider
-* show value in the UI ?
-
-Extra Widgets
-* Radio, Button
-* MultiToggle, ToggleMatrix
-* 2D Pad
-* Graph
-* (Knob)
+* PUI
+	* layout
+		x how to deal with custom widget sizes and positions?
+		* layout direction
+		* should setting grid, font, padding have an effect on widgets created before?
+	x custom size
+	x add default font as TTF
+	* retrieve widgets
+	* remove "add" prefix from widget generators?
+	* theme
+		* review color themes (text not legible, bg color too light
+		* Theme constants in PUI object ?
+		* overridable bg color
+* Widgets
+	x custom size
+	x custom position
+	* state as methods instead of public fields?
+	* connect should also work with methods (not only fields)
+	* callbacks for multiple method signatures (e.g. Slider and float)
+	* label position
+	* name (default label, auto connect, retrieval)
+	* widgets without PUI?
+	* overridable themes
+	* custom drawing disables vanilla drawing? (-> needs access to state)
+* Slider
+	x min/max support
+	x vertical slider
+	* show value in the UI ?
+* Extra Widgets
+	* Radio, Button
+	* MultiToggle, ToggleMatrix
+	* 2D Pad
+	* Graph
+	* (Knob)
 
 
 Layout Review
@@ -347,3 +344,10 @@ Decisions
 * snap to grid or use relational paddings?
 * which constructors to have for widgets?
 * custom padding per widget?
+
+
+Next
+----
+* Review TODOs
+* List of Questions / Decisions
+* Review Florians Feedback
