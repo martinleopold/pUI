@@ -298,7 +298,7 @@ x revise: setPosition and public position (and setSize/size)
 x position() and size() should work in grid units
 x placement bug w/position(1,1). pUI_test_9
 x pinning algo bug: newColumn() with a pinned element. nextColumn() called too early!
-* pinning algo bug: b3 placed next to big button
+x pinning algo bug: b3 placed next to big button
 * infinite loop when adding a huge button (bigger than window)
 
 
@@ -332,6 +332,7 @@ x review/fix slider mouseover
 	* it's apparent from pinning, that there is more space in a column than is used.
 * outside placement warning doesn't work anymore, because of relayout
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
+	* maybe rethink with pinning in mind, from the get-go
 * with smaller pui size: widget can draw outsize of pui. should this be ok?
 * review themes and define a specific background color for pui.
 * remove events package from imports

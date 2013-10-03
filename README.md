@@ -40,6 +40,7 @@ API
 
 PUI
 * PUI.init(PApplet) : PUI // init the library with the sketch (e.g PUI.init(this))
+* size(int width, int height) : PUI // set the size of the GUI overlay in px
 * addButton() : Button // add a Button
 * addToggle() : Toggle // add a Toggle
 * addSlider() : Slider // add a Slider
@@ -56,6 +57,12 @@ PUI
 * font(String font) : PUI // set font by name (uses createFont())
 * font(PFont font) : PUI // set font
 * theme(Theme t) : PUI // set color theme (e.g. Theme.DEFAULT, Theme.METALGEAR, Theme.MINBLACK, Theme.PEPTOBISMOL)
+
+All Widgets
+* position(float x, float y) : &lt;WidgetType&gt; // set widget position in grid units
+* size(float width, float height)) : &lt;WidgetType&gt; // set widget size in grid units
+* onMouse(String method) : &lt;WidgetType&gt; // method to be called when a mouse event happens. Parameters: MouseEvent
+* onDraw(String method) : &lt;WidgetType&gt; // method to be called when the widget is drawn. Parameters: &lt;WidgetType&gt;
 
 Button
 * onClick(String method) : Button // method to be called when the button is clicked. Parameters: Button
@@ -85,7 +92,3 @@ Label
 * small() : Label // use small size
 * medium() : Label // use medium size
 * large() : Label // use large size
-
-All Widgets
-* onMouse(String method) : &lt;WidgetType&gt; // method to be called when a mouse event happens. Parameters: MouseEvent
-* onDraw(String method) : &lt;WidgetType&gt; // method to be called when the widget is drawn. Parameters: &lt;WidgetType&gt;
