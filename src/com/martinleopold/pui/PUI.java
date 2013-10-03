@@ -159,7 +159,7 @@ public final class PUI extends Rect {
 	
 	void drawBackground() {
 		p.noStroke();
-		p.fill(theme.background);
+		p.fill(theme.overlay);
 		p.rect(0, 0, width, height);
 	}
 	
@@ -353,7 +353,7 @@ public final class PUI extends Rect {
 		}
 		return this;
 	}
-	
+
 	static float DEFAULT_FONTSIZE_SMALL = 1; 
 	static float DEFAULT_FONTSIZE_MEDIUM = 1.5f;
 	static float DEFAULT_FONTSIZE_LARGE = 2;

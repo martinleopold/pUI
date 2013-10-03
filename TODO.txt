@@ -310,13 +310,13 @@ Next revision(s)
 * sample program
 
 
-Next
+X Next
 ----
 x warnings / loop through code
 x submit code samples
 x layout engine review. widget size / position
 x PUI custom size
-* theme review
+x theme review
 
 
 Log
@@ -325,6 +325,7 @@ x draw label without background
 x divider needs to be resized
 x can label be drawn with highlight color in certain circumstances for widget with label??
 x review/fix slider mouseover
+x review themes and define a specific background color for pui.
 * remove constructors only used with 0,0 size that use auto layout anyway?
 * subclassing Widget: need to use generics
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
@@ -334,8 +335,9 @@ x review/fix slider mouseover
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
 	* maybe rethink with pinning in mind, from the get-go
 * with smaller pui size: widget can draw outsize of pui. should this be ok?
-* review themes and define a specific background color for pui.
-* remove events package from imports
+* remove events package from imports -> compile into separate events.jar
+* newRow(), newColumn() also on Widgets, for convenience?
+* be tolerant with wxistence of callbacks (i.e. don't fail when it doesn't exist)
 
 
 Decisions
