@@ -115,6 +115,11 @@ public final class PUI extends Rect {
 			if (e.getAction() == MouseEvent.ENTER || e.getAction() == MouseEvent.EXIT) {
 				return;
 			}
+			/*
+				* (Object nativeObject, long millis, int action, int modifiers, int x, int y, int button, int count)
+			 */
+				// adjust the coordinates of the mouse event 
+			e = new MouseEvent(e.getNative(), e.getMillis(), e.getAction(), e.getModifiers(), e.getX()-x, e.getY()-y, e.getButton(), e.getCount());
 
 			for (Widget<?> w : widgets) {
 				w.onMouseEvent(e);
@@ -476,11 +481,19 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
+	// in px
 	public PUI size(int w, int h) {
 		this.width = w;
 		this.height = h;
 		layout.setSize(w, h);
 		layout.reLayout();
+		return this;
+	}
+	
+	// in px
+	public PUI position(int x, int y) {
+		this.x = x;
+		this.y = y;
 		return this;
 	}
 }

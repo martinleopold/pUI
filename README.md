@@ -41,6 +41,7 @@ API
 PUI
 * PUI.init(PApplet) : PUI // init the library with the sketch (e.g PUI.init(this))
 * size(int width, int height) : PUI // set the size of the GUI overlay in px
+* position(int x, int y) : PUI // set the position of the GUI overlay in px
 * addButton() : Button // add a Button
 * addToggle() : Toggle // add a Toggle
 * addSlider() : Slider // add a Slider
