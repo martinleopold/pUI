@@ -31,6 +31,8 @@ IDEAS
 * Save defaults in config file
 * Extended PUI class with more features e.g. PUIAdvanced
 * keyboard events for adding hotkeys (add focus property to widgets)
+* PGraphics as render target -> (still need PApplet e.g. for events)
+* put default settings in a config file
 
 
 REFERENCES
@@ -429,3 +431,9 @@ Review
 	-> pui needed for draw, callbacks, relayout (i.e. setting size)
 	-> why have a widget without PUI? add a widget to multiple PUIs?
 
+
+Ways to use
+-----------
+* Use PUI Object
+* Extending Widget yourself and adding it to PUI
+? Multiple PUIs

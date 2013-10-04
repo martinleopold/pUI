@@ -14,33 +14,36 @@ x Basic UI Components
 	x Slider
 	x Divider
 	x Label
-* API Refinement
+	x Widgets with Labels
+x API Refinement
 	x Events (Mouse, Keyboard)
 	x Class Hierarchy
-	* Element Construction Pattern
-	* Callback Pattern
+	x Element Construction Pattern
+	x Callback Pattern
 * Advanced Features
 	x Theme
 	x Automatic Layout
-	* Auto Connection
+	* Auto Connection (given a name, connects to methods or variables)
 	* Saving State
 	* Layout Adjustment
 	* Drawing Performance Optimization (Redraw only when changed)
 	* Multiple Layout Modes
 	* Keyboard shortcuts
 * More UI Elements
-	* Vertical Slider
+	x Vertical Slider
+	* Range Slider
+	* Text Input
 	* Radio Button
 	* XY Pad
-	* Text Input
 	* Label Button
 	* Label Toggle
 	* Drop Down List
 * Docs
+	x Readme
 	* Code
 	* User Documentation
 	* Website
-	* Readme
+
 
 
 System
@@ -54,7 +57,7 @@ x Proper dist and tagging
 
 Documentation
 -------------
-* use public callbacks in case something doesn't work (SecurityNanager)
+* mention to use public callbacks in case something doesn't work (SecurityNanager)
 
 
 Event System
@@ -85,115 +88,53 @@ Class Hierarchy / API
 * User controlled drawing
 * User Events
 * Widget creation (without classes)
-* api revision
 
 
-API Revision
-------------
+X API Revision
+--------------
 x The matrix might be changed when the draw callback comes
 x Widget Constructor: PUI as first Argument
 x Revise public API (what should the user see)
-/ should UIEvents really be public? maybe just protected
+x should UIEvents really be public? maybe just protected
 x support for labeled widgets
-* widget names (e.g. for label, id, auto connect)
-* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
-* how to encapsulate special element state (slider value, ...)
-* user callbacks
-	* which events are defined -> documented, convention onEvent
-	* callback arguments (whole object, relevant value, nothing)
-
-* element draw override (disable standard draw)
-x Generator Functions for Widgets in PUI. 
-* Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
-* Widgets in own package: com.martinleopold.pui.widget
-* PGraphics instead of PApplet? -> Can't use events then.
-
-
-Main Class
-----------
-* show/hide ui
-* test ui size and position
-* test ui drawing independence of sketch transformations
-* default settings in a file
+x Generator Functions for Widgets in PUI
+/ widget names (e.g. for label, id, auto connect)
+/ how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+/ how to encapsulate special element state (slider value, ...)
+/ user callbacks
+	/ which events are defined -> documented, convention onEvent
+	/ callback arguments (whole object, relevant value, nothing)
+/ element draw override (disable standard draw)
+/ Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
+/ Widgets in own package: com.martinleopold.pui.widget
+/  PGraphics instead of PApplet? -> Can't use events then.
 
 
-Widgets
--------
-* constructor possibilities
-* widgets with labels
-* labels with 3 sizes
-
-
-Theme System
-------------
-x add more themes
-/ widgets need to be able to have a different theme?
-
-
-Grid System
------------
-x Default Sizes for widgets (based on grid)
-x Padding based on grid
-
-
-Issues
-------
-* OpenGL: widgedts don't render
-x newRow(), newColumn() with Labels
-x Labels optional for widgets
-
-
-Top down
---------
-* Base API
-* Base Widgets (Slider, Button, Toggle, Label, Divider)
-* Callbacks
-* Auto Connect
-* Theme System
-* Grid Layout
-
-
-Ways to use
------------
-* Use PUI Object
-* Extending Widget yourself and adding it to PUI
-
-? Multiple PUIs
-
-
-PUI - Public API
-----------------
-* init
-* create (and add) widgets
-* theme
-	* colors
-	* padding
-	* font
-* grid
-	* size
-
-* add (externally created) widgets
-
-
-Widget - Public API
--------------------
-* register event handlers
-* access state
-* size (in grid units)
-* position (in grid units or pixels)
-* label
-* chainable public methods
-
-* construct with new
-* custom size
-* individual theme
-* override drawing
-* construct without PUI?
-
-
-Widget - Extending
-------------------
-* protected vs. private stuff
+x Main Class
+	x show/hide ui
+	x test ui size and position
+	/ test ui drawing independence of sketch transformations
+x Widgets
+	x constructor possibilities
+	x widgets with labels
+	x labels with 3 sizes
+x Theme System
+	x add more themes
+	/ widgets need to be able to have a different theme?
+x Grid System
+	x Default Sizes for widgets (based on grid)
+	x Padding based on grid
+x Issues
+	/ OpenGL: widgedts don't render
+	x newRow(), newColumn() with Labels
+	x Labels optional for widgets
+x Top down
+	x Base API
+	x Base Widgets (Slider, Button, Toggle, Label, Divider)
+	x Callbacks
+	/ Auto Connect
+	x Theme System
+	x Grid Layout
 
 
 X Test Release
@@ -207,7 +148,7 @@ x docs
 
 
 X PUI API (now / later)
--------
+---------
 x close public API
 x static init
 x chainability
@@ -218,7 +159,7 @@ x set theme
 
 
 X Widget API (now / later)
-----------
+------------
 x remove UIEvents (forces public on ui callbacks methods)
 
 / name
@@ -230,8 +171,8 @@ x remove label interactions
 x label sizes
 
 
-Review/Refinement
------------------
+X Revision 1/2
+--------------
 x on normal build create dist/pUI-xxx.zip (and delete old ones)
 x loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) with return type of respective class
 	/ override these 4 methods in all sub classes to return the correct type
@@ -239,103 +180,121 @@ x loop through onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLab
 		base methods don't need to be overridden in each subclass (only getThis)
 		widget needs to be subclassed using generics ?? 
 x warnings: [unckecked], [rawtypes]
-* add credits to reza ali (visuals/theme)
+/ add credits to reza ali (visuals/theme)
 * javadocs
 	x javadocs should only show public API
 	x exclude events package
 	x hide inner class ProcessingEventHandler -> exclude doclet
-	* TWidget return type should show as actual class
-* PUI
-	* layout
-		x how to deal with custom widget sizes and positions?
-		* layout direction
-		* should setting grid, font, padding have an effect on widgets created before?
+	/ TWidget return type should show as actual class
+X Layout
+	x how to deal with custom widget sizes and positions?
+	/ layout direction
+	/ should setting grid, font, padding have an effect on widgets created before?
+	x size(): next layout element starts to low
+		x at relayout (after size()) height of the element is higher (+10)
+	x position(): also has to big a gap
+	x widgets with labels: no gap after
+	x pinned algo: need to try next row (it might fit before the pin)
+	x pin algo: correctly set for next insertion point
+	x window padding at the bottom not respected
+	x layout: private functions for placing (w/o padding, setting next, etc)
+	x revise: setPosition and public position (and setSize/size)
+	x position() and size() should work in grid units
+	x placement bug w/position(1,1). pUI_test_9
+	x pinning algo bug: newColumn() with a pinned element. nextColumn() called too early!
+	x pinning algo bug: b3 placed next to big button
+/ PUI
 	x custom size
 	x add default font as TTF
-	* retrieve widgets
-	* remove "add" prefix from widget generators?
-	* theme
-		* review color themes (text not legible, bg color too light
-		* Theme constants in PUI object ?
-		* overridable bg color
-* Widgets
+	/ retrieve widgets
+	/ remove "add" prefix from widget generators?
+	/ theme
+		x overridable bg color
+		x review color themes (text not legible, bg color too light
+		/ Theme constants in PUI object ?
+		x review themes and define a specific background color for pui.
+/ Widgets
 	x custom size
 	x custom position
-	* state as methods instead of public fields?
-	* connect should also work with methods (not only fields)
-	* callbacks for multiple method signatures (e.g. Slider and float)
-	* label position
-	* name (default label, auto connect, retrieval)
-	* widgets without PUI?
-	* overridable themes
-	* custom drawing disables vanilla drawing? (-> needs access to state)
-* Slider
+	/ state as methods instead of public fields?
+	/ connect should also work with methods (not only fields)
+	/ callbacks for multiple method signatures (e.g. Slider and float)
+	/ label position
+	/ name (default label, auto connect, retrieval)
+	/ widgets without PUI?
+	/ overridable themes
+	x custom drawing disables vanilla drawing? (-> needs access to state)
+/ Slider
 	x min/max support
 	x vertical slider
-	* show value in the UI ?
-* Extra Widgets
-	* Radio, Button
-	* MultiToggle, ToggleMatrix
-	* 2D Pad
-	* Graph
-	* (Knob)
-
-
-Layout Review
--------------
-x size(): next layout element starts to low
-	x at relayout (after size()) height of the element is higher (+10)
-x position(): also has to big a gap
-x widgets with labels: no gap after
-x pinned algo: need to try next row (it might fit before the pin)
-x pin algo: correctly set for next insertion point
-x window padding at the bottom not respected
-x layout: private functions for placing (w/o padding, setting next, etc)
-x revise: setPosition and public position (and setSize/size)
-x position() and size() should work in grid units
-x placement bug w/position(1,1). pUI_test_9
-x pinning algo bug: newColumn() with a pinned element. nextColumn() called too early!
-x pinning algo bug: b3 placed next to big button
-* infinite loop when adding a huge button (bigger than window)
-
-
-
-Next revision(s)
-----------------
-* overhaul / next revision
-* extra widgets
-* sample program
-
-
-X Next
-----
-x warnings / loop through code
-x submit code samples
-x layout engine review. widget size / position
-x PUI custom size
-x theme review
-
-
-Log
----
-x draw label without background
-x divider needs to be resized
-x can label be drawn with highlight color in certain circumstances for widget with label??
+	/ show value in the UI ?
 x review/fix slider mouseover
-x review themes and define a specific background color for pui.
-* remove constructors only used with 0,0 size that use auto layout anyway?
-* subclassing Widget: need to use generics
-	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
-* redo column width, maybe add a column gap
-	* it's apparent from pinning, that there is more space in a column than is used.
-* outside placement warning doesn't work anymore, because of relayout
+x Misc
+	x draw label without background
+	x divider needs to be resized
+	x can label be drawn with highlight color in certain circumstances for widget with label??
+
+
+Next
+----
+x Review TODOs
+x List of Questions / Decisions
+* Review Florians Feedback
+* Release Revision 2 (v0.2)
+
+
+General
+* javadocs: TWidget return type should show as actual class
+* remove events package from imports -> compile into separate events.jar
+
+PUI
+* Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
+* test ui drawing independence of sketch transformations
+* OpenGL: widgedts don't render
+* retrieve widgets
+
+Layout
+* layout direction
+* should setting grid, font, padding have an effect on widgets created before?
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
 	* maybe rethink with pinning in mind, from the get-go
-* with smaller pui size: widget can draw outsize of pui. should this be ok?
-* remove events package from imports -> compile into separate events.jar
-* newRow(), newColumn() also on Widgets, for convenience?
-* be tolerant with wxistence of callbacks (i.e. don't fail when it doesn't exist)
+* infinite loop when adding a huge button (bigger than window)
+* redo column width, add a column gap
+	* it's apparent from pinning, that there is more space in a column than is used.
+* outside placement warning doesn't work anymore, because of relayout
 
+Widgets
+* names (retrieval, auto connect, label)
+* flexible callback arguments (no args, one value, whole object)
+* be tolerant with existence of callbacks (i.e. don't fail when it doesn't exist)
+* element draw override: disable standard draw
+* state as methods instead of public fields?
+* connect should also work with methods (not only fields)
+* callbacks for multiple method signatures (e.g. Slider and float)
+* label position
+* name (default label, auto connect, retrieval)
+* widgets without PUI?
+* overridable themes
+* callbacks on specific objects: PUI.addButton().connect(thatObject,"methodOfThatObject");
+
+Label
+* background should wrap the whole text (including descenders)
+
+Extra Widgets
+* Text Input
+* Range Slider
+* Radio, Button
+* MultiToggle, ToggleMatrix
+* 2D Pad
+* Graph
+* (Knob)
+
+Docs
+* HTML Docs
+* Demo Program ("real world example")
+* Examples (Which?)
+	* Create own widgets
+* Check out Docco: http://thelogbox.com/javascript-docco-for-java-files/ 
 
 Decisions
 ---------
@@ -344,10 +303,27 @@ Decisions
 * snap to grid or use relational paddings?
 * which constructors to have for widgets?
 * custom padding per widget?
+* Slider: show value in UI?
+* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+* how to encapsulate special element state (slider value, ...)
+* Theme constants in PUI object?
+* remove "add" prefix from widget generators?
+* newRow(), newColumn() also on Widgets, for convenience?
+* with smaller pui size: widget can draw outsize of pui. should this be ok?
+* remove constructors only used with 0,0 size that use auto layout anyway?
+* subclassing Widget: needs to use generics? warnings in PDE?
+	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
+* layout manager vs. exact placement? layout not default.
+* draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
+
+Revision 2
+----------
+* changes since v0.1
 
 
-Next
-----
-* Review TODOs
-* List of Questions / Decisions
-* Review Florians Feedback
+Revision 3
+----------
+* make decisions
+* review
+* extra widgets
+* docs / sample program
