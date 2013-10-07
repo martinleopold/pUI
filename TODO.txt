@@ -327,3 +327,13 @@ Revision 3
 * review
 * extra widgets
 * docs / sample program
+
+
+Next
+----
+* fix onDraw()
+* connect to specific objects
+* connection utils
+	* connect to field (obj, name, type)
+	* connect to method (obj, name, args...)
+	* auto connect (obj, name, field type, args..., widget?)

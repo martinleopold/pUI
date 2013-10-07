@@ -437,3 +437,24 @@ Ways to use
 * Use PUI Object
 * Extending Widget yourself and adding it to PUI
 ? Multiple PUIs
+
+
+Examples
+--------
+* Simple GUI (some elements with callback, simple use case)
+* create elements
+* connect elements (callback options)
+* general element options (position, size, label)
+* specific element options (label, slider, button, ..)
+
+Auto Connect
+------------
+* connect to method with specific args
+* if not found connect to method with widget as arg
+* if not found connect to methos without arg
+* if not found connect to field with type
+
+Connection Options
+------------------
+* onEvent() -> specific events with callback methods
+* connect(), attach() -> auto connect to methods, fields
