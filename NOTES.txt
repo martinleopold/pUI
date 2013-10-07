@@ -469,3 +469,9 @@ Release Procedure
 * create tag
 * push upstream
 * create release on github
+
+
+How to calculate columns
+------------------------
+* column width 12
+* column gap 1

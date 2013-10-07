@@ -29,7 +29,7 @@ final class Layout {
 	private int originalWidth, originalHeight;
 	private int width, height;
 	private int paddingX, paddingY;
-	private int columnWidth;
+	private int columnWidth, columnGap;
 	
 	private int nextX, nextY; // where to place the next widget *and* it's padding
 	
@@ -47,6 +47,7 @@ final class Layout {
 		this.originalWidth = this.width = width;
 		this.originalHeight = this.height = height;
 		this.columnWidth = columnWidth;
+		this.columnGap = 0;
 		
 		reset();
 		
@@ -69,6 +70,8 @@ final class Layout {
 		}
 		
 		// check if it fits in the current line
+		System.out.print("check line: nextX:" + nextX + "+tw:" + totalWidth + "=" + (nextX+totalWidth) + " <= ");
+		System.out.println("currentColumnX:" + currentColumnX + "+currentColumnWidth:" + currentColumnWidth + "=" + (currentColumnX + currentColumnWidth));
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
 			placeNext(w);
@@ -113,7 +116,7 @@ final class Layout {
 	
 	private void nextColumn() {
 		currentRowHeight = 0;
-		currentColumnX += currentColumnWidth;
+		currentColumnX += (currentColumnWidth + columnGap);
 		currentColumnWidth = columnWidth;
 		nextX = currentColumnX;
 		nextY = 0;
@@ -134,6 +137,10 @@ final class Layout {
 	void setColumnWidth(int w) {
 		columnWidth = w;
 		currentColumnWidth = w;
+	}
+	
+	void setColumnGap(int g) {
+		columnGap = g;
 	}
 	
 	private void remove(Widget<?> e) {

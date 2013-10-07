@@ -52,6 +52,8 @@ PUI
 * newColumn() : PUI // following widgets will be created in another column
 * grid(int x, int y) : PUI // set grid unit in pixels
 * padding(float x, float y) : PUI // set padding (around all widgets) in grid units
+* columnWidth(float w) : PUI // set column width (in grid units). widgets including padding are fit in this width
+* columnGap(float g) : PUI // set gap between columns (in grid units)
 * show() : PUI // show GUI overlay
 * hide() : PUI // hide GUI overlay
 * toggle() : PUI // toggle GUI overlay

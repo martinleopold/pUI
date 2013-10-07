@@ -255,14 +255,13 @@ PUI
 * retrieve widgets
 
 Layout
+x redo column width, add a column gap
+	x it's apparent from pinning, that there is more space in a column than is used.
+* outside placement warning doesn't work anymore, because of relayout
 * layout direction
-* should setting grid, font, padding have an effect on widgets created before?
 * rethink layout engine (difference between actual widget coordinates and internal ones. -> windowPadding)
 	* maybe rethink with pinning in mind, from the get-go
 * infinite loop when adding a huge button (bigger than window)
-* redo column width, add a column gap
-	* it's apparent from pinning, that there is more space in a column than is used.
-* outside placement warning doesn't work anymore, because of relayout
 
 Widgets
 * names (retrieval, auto connect, label)
@@ -317,10 +316,11 @@ Decisions
 * layout manager vs. exact placement? layout not default.
 * draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
 * bundle a selection of fonts with the lib?
+* should setting grid, font, padding have an effect on widgets created before?
 
-Revision 2
-----------
-* changes since v0.1
+X Revision 2
+------------
+x changes since v0.1
 
 
 Revision 3
@@ -333,9 +333,11 @@ Revision 3
 
 Next
 ----
-* fix onDraw()
+x redo column width, add a column gap
 * connect to specific objects
 * connection utils
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)
+* check doc tool (docco)
+* fix onDraw()

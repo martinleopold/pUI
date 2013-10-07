@@ -73,6 +73,7 @@ public final class PUI extends Rect {
 		grid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
 		padding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
 		columnWidth(DEFAULT_COLUMNWIDTH);
+		columnGap(DEFAULT_COLUMNGAP);
 		
 		visible = true;
 	}
@@ -455,13 +456,20 @@ public final class PUI extends Rect {
 		return this;
 	}
 	
-	static float DEFAULT_COLUMNWIDTH = 13; // in grid X unit
-	
-
+	static float DEFAULT_COLUMNWIDTH = 12; // in grid X unit
 	float columnWidth;	// in grid units
+
 	public PUI columnWidth(float w) {
 		this.columnWidth = w;
 		layout.setColumnWidth(gridX2Px(w));
+		return this;
+	}
+	
+	static float DEFAULT_COLUMNGAP = 1; // in grid X unit
+	float columnGap;
+	public PUI columnGap(float g) {
+		this.columnGap = g;
+		layout.setColumnGap(gridX2Px(g));
 		return this;
 	}
 	
