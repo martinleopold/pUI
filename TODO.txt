@@ -246,6 +246,7 @@ x List of Questions / Decisions
 General
 * javadocs: TWidget return type should show as actual class
 * remove events package from imports -> compile into separate events.jar
+* different standard font
 
 PUI
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
@@ -315,6 +316,7 @@ Decisions
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
 * layout manager vs. exact placement? layout not default.
 * draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
+* bundle a selection of fonts with the lib?
 
 Revision 2
 ----------
