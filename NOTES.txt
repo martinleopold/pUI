@@ -458,3 +458,14 @@ Connection Options
 ------------------
 * onEvent() -> specific events with callback methods
 * connect(), attach() -> auto connect to methods, fields
+
+Release Procedure
+-----------------
+* update examples
+* update resources/build.properties (library.prettyVersion)
+* update README.md
+* clean and build
+* commit
+* create tag
+* push upstream
+* create release on github

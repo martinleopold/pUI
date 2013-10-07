@@ -12,10 +12,11 @@ float s2Value;
 void setup() {
   size(500, 500);
   
-  ui = PUI.init(this);  
-//  ui.grid(20,10); // set grid size
+  ui = PUI.init(this).size(300, height);
+//  ui.position(10,10);
+//  ui.grid(12,12); // set grid size
 //  ui.padding(0.25, 0.25); // set padding (in grid units)
-//  ui.font("Monospaced"); // set font
+  ui.font("NewMedia Fett.ttf"); // set font
   
   ui.addLabel("Buttons");
   ui.newRow();
@@ -34,22 +35,27 @@ void setup() {
   ui.addDivider();
   
   ui.addLabel("Sliders");
-  ui.addSlider().label("s1").onValue("sliderValue");
+  ui.addSlider().label("s1").onValue("sliderValue").max(100);
   ui.addSlider().label("s2").connect("s2Value");
-  
   ui.addDivider();
+  
+  ui.addLabel("VSliders"); ui.newRow();
+  ui.addVSlider().label("v1").onValue("vSliderValue");
+  ui.addVSlider().label("v2");
+  
+  ui.newColumn();
   ui.addLabel("Dividers");
   ui.addDivider();
   ui.addDivider();
+  ui.addDivider();
   
-  ui.newColumn();
   ui.addLabel("Labels"); ui.newRow();
   ui.addLabel("small").small(); ui.newRow();
   ui.addLabel("medium").medium(); ui.newRow();
   ui.addLabel("large").large();
   
   ui.addDivider();
-  ui.addLabel("Keys");
+  ui.addLabel("Keys"); ui.newRow();
   ui.addLabel("space: toggle UI").small();
   ui.addLabel("n: next theme").small();
   ui.addLabel("b: previous theme").small();
@@ -85,6 +91,11 @@ void toggleToggled(Toggle t) {
 // callback for s1
 void sliderValue(Slider s) {
   println("s1 value=" + s.value);
+}
+
+// callback for s1
+void vSliderValue(VSlider v) {
+  println("v1 value=" + v.value);
 }
 
 // callback for all mouseEvents in b3

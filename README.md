@@ -10,10 +10,10 @@ Full Project Description: http://static.martinleopold.com/gsoc13/ <br/>
 Source: https://github.com/martinleopold/pUI
 
 CURRENT RELEASE: 
-v0.1 (Test Release)
+v0.2 (Test Release)
 
 DOWNLOAD: 
-https://github.com/martinleopold/pUI/raw/v0.1/dist/pUI-320.zip
+https://github.com/martinleopold/pUI/raw/v0.2/dist/pUI-508.zip
 
 INSTALLATION:
 * Requires Processing 2.0 http://www.processing.org/download
@@ -44,7 +44,8 @@ PUI
 * position(int x, int y) : PUI // set the position of the GUI overlay in px
 * addButton() : Button // add a Button
 * addToggle() : Toggle // add a Toggle
-* addSlider() : Slider // add a Slider
+* addSlider() : Slider // add a Slider (horizontal)
+* addVSlider() : VSlider // add a vertical Slider
 * addDivider() : Divider // add a Divider
 * addLabel(String text) : Label // add a Label
 * newRow() : PUI // following widgets will be created in the next row
