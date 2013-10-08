@@ -249,8 +249,8 @@ General
 * different standard font
 
 PUI
+x test ui drawing independence of sketch transformations
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
-* test ui drawing independence of sketch transformations
 * OpenGL: widgedts don't render
 * retrieve widgets
 
@@ -298,25 +298,27 @@ Docs
 
 Decisions
 ---------
-* where to have theme constants? (or how else to set theme)
+* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+* how to encapsulate special element state (slider value, ...)
 * widget state as method or field?
+* where to have theme constants? (or how else to set theme)
+* Theme constants in PUI object?
+* remove constructors only used with 0,0 size that use auto layout anyway?
 * snap to grid or use relational paddings?
 * which constructors to have for widgets?
 * custom padding per widget?
 * Slider: show value in UI?
-* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
-* how to encapsulate special element state (slider value, ...)
-* Theme constants in PUI object?
+* name constructor: keep empty constructor?
 * remove "add" prefix from widget generators?
 * newRow(), newColumn() also on Widgets, for convenience?
 * with smaller pui size: widget can draw outsize of pui. should this be ok?
-* remove constructors only used with 0,0 size that use auto layout anyway?
 * subclassing Widget: needs to use generics? warnings in PDE?
 	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
 * layout manager vs. exact placement? layout not default.
 * draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
 * bundle a selection of fonts with the lib?
 * should setting grid, font, padding have an effect on widgets created before?
+
 
 X Revision 2
 ------------
@@ -341,3 +343,4 @@ x redo column width, add a column gap
 	* auto connect (obj, name, field type, args..., widget?)
 * check doc tool (docco)
 * fix onDraw()
+* OpenGL: widgedts don't render
