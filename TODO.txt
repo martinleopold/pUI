@@ -327,15 +327,27 @@ x changes since v0.1
 
 Revision 3
 ----------
+* auto connect
+* review widget data
+* review naming
 * make decisions
-* review
 * extra widgets
+	* range slider
+	* text input
+	* multi select / drop down
 * docs / sample program
 
 
 Next
 ----
 x redo column width, add a column gap
+x build p5 git
+	x update to jdk 7u40
+	x revert to 2.0.3
+x OpenGL: widgedts don't render
+	x isolate problem : resetMatrix()
+	x post issue on github
+	x test with  newest p5 build : issue persists
 * connect to specific objects
 * connection utils
 	* connect to field (obj, name, type)
@@ -343,4 +355,3 @@ x redo column width, add a column gap
 	* auto connect (obj, name, field type, args..., widget?)
 * check doc tool (docco)
 * fix onDraw()
-* OpenGL: widgedts don't render
