@@ -34,7 +34,8 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 
 	// state
 	// boolean focus; // receives keyboard events
-	boolean active = true; // receives events (mouse, draw, ...)
+	boolean active = true; // receives events (mouse, keyooard) except draw!
+	boolean visible = true; // widget is drawn (onDraw() is called in any case)
 	public boolean hovered; // mouse over
 	public boolean pressed; // mouse down
 	public boolean dragged; // mouse is dragging
@@ -155,14 +156,13 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 	}
 
 	void onDraw() {
-		if (!isActive()) {
-			return;
-		}
 		PApplet p = pui.p;
 		p.pushMatrix();
 		p.pushStyle();
-		draw(p);
-		onDraw.fire(this);
+		if (visible) {
+			draw(p); // only draw if visible
+		}
+		onDraw.fire(this); // onDraw Event is fired in any case
 		p.popMatrix();
 		p.popStyle();
 	}
@@ -204,6 +204,7 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 
 	public T onDraw(String methodName) {
 		Events.addListener(onDraw, pui.p, methodName);
+		visible = false; // disable default rendering. widget needs to be drawn via the onDraw callback now
 		return getThis();
 	}
 

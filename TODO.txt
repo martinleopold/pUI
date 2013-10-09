@@ -264,10 +264,10 @@ x redo column width, add a column gap
 * infinite loop when adding a huge button (bigger than window)
 
 Widgets
+x element draw override: disable standard draw
 * names (retrieval, auto connect, label)
 * flexible callback arguments (no args, one value, whole object)
 * be tolerant with existence of callbacks (i.e. don't fail when it doesn't exist)
-* element draw override: disable standard draw
 * state as methods instead of public fields?
 * connect should also work with methods (not only fields)
 * callbacks for multiple method signatures (e.g. Slider and float)
@@ -276,6 +276,7 @@ Widgets
 * widgets without PUI?
 * overridable themes
 * callbacks on specific objects: PUI.addButton().connect(thatObject,"methodOfThatObject");
+* for onDraw() to be usable: need to access x,y,width,height,label
 
 Label
 * background should wrap the whole text (including descenders)
@@ -299,6 +300,7 @@ Docs
 Decisions
 ---------
 * how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
 * how to encapsulate special element state (slider value, ...)
 * widget state as method or field?
 * where to have theme constants? (or how else to set theme)
@@ -318,6 +320,7 @@ Decisions
 * draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
 * bundle a selection of fonts with the lib?
 * should setting grid, font, padding have an effect on widgets created before?
+* how to best allow disable widget interaction (but still redraw)?
 
 
 X Revision 2
@@ -348,10 +351,10 @@ x OpenGL: widgedts don't render
 	x isolate problem : resetMatrix()
 	x post issue on github
 	x test with  newest p5 build : issue persists
+x fix onDraw()
 * connect to specific objects
 * connection utils
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)
 * check doc tool (docco)
-* fix onDraw()

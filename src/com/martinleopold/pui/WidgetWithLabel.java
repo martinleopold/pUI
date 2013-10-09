@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui;
 
+import com.martinleopold.pui.events.Events;
+
 /**
  * 
  * @author martinleopold
@@ -100,5 +102,12 @@ abstract class WidgetWithLabel<T extends WidgetWithLabel<T>> extends Widget<T> {
 		if (label != null) { // TODO label might not be initialized, since the constructor causes a layout, which sets the position
 			label.setPosition(x, y+height); // label needs to be replaced
 		}
+	}
+	
+	@Override
+	public T onDraw(String methodName) {
+		super.onDraw(methodName);
+		label.visible = false; // disable label rendering
+		return getThis();
 	}
 }
