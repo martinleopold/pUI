@@ -347,14 +347,17 @@ x redo column width, add a column gap
 x build p5 git
 	x update to jdk 7u40
 	x revert to 2.0.3
+	x find error
+	x submit patch
 x OpenGL: widgedts don't render
 	x isolate problem : resetMatrix()
 	x post issue on github
 	x test with  newest p5 build : issue persists
 x fix onDraw()
-* connect to specific objects
 * connection utils
+	x how to callback void methods
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)
+* connect to specific objects
 * check doc tool (docco)

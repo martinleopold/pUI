@@ -33,7 +33,7 @@ class Delegate<T> implements Listener<T> {
 
 	Object listenerObject;
 	String callbackMethodName;
-
+	
 	Delegate(Object listenerObject, String callbackMethodName) {
 		this.listenerObject = listenerObject;
 		this.callbackMethodName = callbackMethodName;
@@ -41,9 +41,18 @@ class Delegate<T> implements Listener<T> {
 
 	@Override
 	public void notify(T args) {
-		Method method = findMethod(listenerObject, callbackMethodName, args.getClass());
+		// create explicit array arguments for findMethod and Method.invoke
+		// this avoids problems e.g. when putting args=null directly into Method.invoke an array containing a null element is passed in instead of a null array
+		Class<?>[] argsTypes = null;
+		Object[] argsArray = null;
+		if (args != null) {
+			argsTypes = new Class<?>[] {args.getClass()};
+			argsArray = new Object[] {args};
+		}
+		
+		Method method = findMethod(listenerObject, callbackMethodName, argsTypes);
 		try {
-			method.invoke(listenerObject, args);
+			method.invoke(listenerObject, argsArray);
 		} catch (IllegalAccessException ex) {
 			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (IllegalArgumentException ex) {
@@ -53,7 +62,7 @@ class Delegate<T> implements Listener<T> {
 		}
 	}
 	
-		/**
+	/**
 	 * Look for a Method in a Class and its superclasses.
 	 * @param c
 	 * @param name

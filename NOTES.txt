@@ -475,3 +475,9 @@ How to calculate columns
 ------------------------
 * column width 12
 * column gap 1
+
+
+Parameterless Callbacks
+-----------------------
+* create void event: Event<Void> onClickVoid = new Event<Void>();
+* fire it using null argument: onClickVoid.fire(null);

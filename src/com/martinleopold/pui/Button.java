@@ -58,6 +58,7 @@ public class Button extends WidgetWithLabel<Button> {
 		label.drawHighlight = true;
 		clicked = true;
 		onClick.fire(this);
+		onClickVoid.fire(null);
 		connect.fire(clicked);
 	}
 	
@@ -69,8 +70,10 @@ public class Button extends WidgetWithLabel<Button> {
 	}
 	
 	Event<Button> onClick = new Event<Button>();
+	Event<Void> onClickVoid = new Event<Void>();
 	public Button onClick(String methodName) {
 		Events.addListener(onClick, pui.p, methodName);
+		Events.addListener(onClickVoid, pui.p, methodName);
 		return this;
 	}
 	
