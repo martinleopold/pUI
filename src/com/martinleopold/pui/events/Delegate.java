@@ -18,47 +18,64 @@
 package com.martinleopold.pui.events;
 
 import com.martinleopold.pui.PUI;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * A Listener that calls a method on an object when notified of an event.
  * @author Martin Leopold <m@martinleopold.com>
- * @param <T>
+ * @param <T> Data type of the Event
  */
 class Delegate<T> implements Listener<T> {
-
+	
 	Object listenerObject;
 	String callbackMethodName;
+	Method callbackMethod;
+	
+	// TODO use static factory, so it can return null if no callback is found
+	// or: raise an exception in the constructor
 	
 	Delegate(Object listenerObject, String callbackMethodName) {
 		this.listenerObject = listenerObject;
 		this.callbackMethodName = callbackMethodName;
+
+	}
+	
+	// find callback method on instantiation, instead of in notify()
+	// need argument types to find the method
+	Delegate(Object listenerObject, String callbackMethodName, Class<T> argType) {
+		this(listenerObject, callbackMethodName);
+		
+		if (argType != null) {
+			callbackMethod = findMethod(listenerObject, callbackMethodName, argType);
+//			if (callbackMethod == null) {
+//				System.out.println("Warning: Couldn't find callback method " + callbackMethodName + "(" + argType.getName() + ")");
+//			}
+		}
 	}
 
 	@Override
 	public void notify(T args) {
-		// create explicit array arguments for findMethod and Method.invoke
-		// this avoids problems e.g. when putting args=null directly into Method.invoke an array containing a null element is passed in instead of a null array
-		Class<?>[] argsTypes = null;
-		Object[] argsArray = null;
-		if (args != null) {
-			argsTypes = new Class<?>[] {args.getClass()};
-			argsArray = new Object[] {args};
+		if (callbackMethod == null) {
+			// create explicit array arguments for findMethod and Method.invoke
+			// this avoids problems e.g. when putting args=null directly into Method.invoke an array containing a null element is passed in instead of a null array
+			Class<?>[] argTypes = (args != null) ? new Class<?>[] {args.getClass()} : null;
+			callbackMethod = findMethod(listenerObject, callbackMethodName, argTypes);
 		}
 		
-		Method method = findMethod(listenerObject, callbackMethodName, argsTypes);
-		try {
-			method.invoke(listenerObject, argsArray);
-		} catch (IllegalAccessException ex) {
-			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IllegalArgumentException ex) {
-			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (InvocationTargetException ex) {
-			Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+		Object[] argsArray = (args != null ) ? new Object[] {args} : null;
+		if (callbackMethod != null) {
+			try {
+				callbackMethod.invoke(listenerObject, argsArray);
+			} catch (IllegalAccessException ex) {
+				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (IllegalArgumentException ex) {
+				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (InvocationTargetException ex) {
+				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 	}
 	
@@ -67,7 +84,7 @@ class Delegate<T> implements Listener<T> {
 	 * @param c
 	 * @param name
 	 * @param parameterTypes
-	 * @return 
+	 * @return the Method or null if not found
 	 */
 	static Method findMethod(Class<?> c, String name, Class... parameterTypes) {
 		Method m = null;
@@ -90,7 +107,7 @@ class Delegate<T> implements Listener<T> {
 	 * @param o
 	 * @param name
 	 * @param parameterTypes
-	 * @return 
+	 * @return the Method or null if not found
 	 */
 	static Method findMethod(Object o, String name, Class... parameterTypes) {
 		return findMethod(o.getClass(), name, parameterTypes);

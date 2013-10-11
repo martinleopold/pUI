@@ -24,14 +24,14 @@ package com.martinleopold.pui.events;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Events {
-	// TODO check this
 
-	public static <T> Event<T> createEvent(T type) {
-		return new Event<T>();
+	public static <T> Event<T> createEvent(Class<T> argType) {
+		return new Event<T>(argType);
 	}
 
 	public static <T> void addListener(Event<T> e, Object listener, String callbackMethodName) {
-		e.addListener(new Delegate<T>(listener, callbackMethodName));
+		// TODO : only add if a delegate could be constructed 
+		e.addListener(new Delegate<T>(listener, callbackMethodName, e.dataType));
 	}
 	
 	public static <T> void addListenerField(Event<T> e, Object listener, String fielddName) {

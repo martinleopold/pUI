@@ -57,9 +57,10 @@ public class Button extends WidgetWithLabel<Button> {
 	void mousePressed(int button, float mx, float my) {
 		label.drawHighlight = true;
 		clicked = true;
-		onClick.fire(this);
-		onClickVoid.fire(null);
+		
 		connect.fire(clicked);
+		onClickVoid.fire(null);
+		onClick.fire(this);
 	}
 	
 	@Override
@@ -69,18 +70,22 @@ public class Button extends WidgetWithLabel<Button> {
 		connect.fire(clicked);
 	}
 	
-	Event<Button> onClick = new Event<Button>();
-	Event<Void> onClickVoid = new Event<Void>();
+	Event<Button> onClick = Events.createEvent(Button.class);
+	Event<Void> onClickVoid = Events.createEvent(Void.class);
 	public Button onClick(String methodName) {
 		Events.addListener(onClick, pui.p, methodName);
 		Events.addListener(onClickVoid, pui.p, methodName);
-		return this;
+		return getThis();
 	}
 	
 	Event<Boolean> connect = new Event<Boolean>();
 	public Button connect(String fieldName) {
 		Events.addListenerField(connect, pui.p, fieldName);
-		return this;
+		return getThis();
+	}
+	
+	public Button attach(String name) {
+		return getThis();
 	}
 	
 	@Override

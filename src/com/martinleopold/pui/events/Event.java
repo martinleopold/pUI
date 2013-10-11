@@ -21,16 +21,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- *
+ * A registry where listeners can be added to be notified when the event is fired.
  * @author Martin Leopold <m@martinleopold.com>
- * @param <T> Data Type of the Event
+ * @param <T> Data type of the Event
  */
 public class Event<T> {
 
 	ArrayList<Listener<T>> listeners;
-
+	Class<T> dataType;
+			
 	public Event() {
 		listeners = new ArrayList<Listener<T>>();
+	}
+	
+	public Event(Class<T> argType) {
+		this();
+		this.dataType = argType;
 	}
 
 	public synchronized void fire(T args) {

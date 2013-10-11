@@ -18,7 +18,7 @@
 package com.martinleopold.pui.events;
 
 /**
- *
+ * Can be added to an Event and will be notified when the event fires.
  * @author Martin Leopold <m@martinleopold.com>
  * @param <T>
  */
