@@ -253,6 +253,7 @@ x test ui drawing independence of sketch transformations
 * Modular Generator function:  ui.new( "com.martinleopold.pui.widget.Bang", x, y, … );
 * OpenGL: widgedts don't render
 * retrieve widgets
+* PGraphics rendering target can be set, in which case the rendering of the PGraphics into the canvas is disable
 
 Layout
 x redo column width, add a column gap
@@ -277,6 +278,8 @@ x element draw override: disable standard draw
 * overridable themes
 * callbacks on specific objects: PUI.addButton().connect(thatObject,"methodOfThatObject");
 * for onDraw() to be usable: need to access x,y,width,height,label
+* warn if no callback could be attached
+* output info when callbacks are attached
 
 Label
 * background should wrap the whole text (including descenders)
@@ -296,31 +299,6 @@ Docs
 * Examples (Which?)
 	* Create own widgets
 * Check out Docco: http://thelogbox.com/javascript-docco-for-java-files/ 
-
-Decisions
----------
-* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
-	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
-* how to encapsulate special element state (slider value, ...)
-* widget state as method or field?
-* where to have theme constants? (or how else to set theme)
-* Theme constants in PUI object?
-* remove constructors only used with 0,0 size that use auto layout anyway?
-* snap to grid or use relational paddings?
-* which constructors to have for widgets?
-* custom padding per widget?
-* Slider: show value in UI?
-* name constructor: keep empty constructor?
-* remove "add" prefix from widget generators?
-* newRow(), newColumn() also on Widgets, for convenience?
-* with smaller pui size: widget can draw outsize of pui. should this be ok?
-* subclassing Widget: needs to use generics? warnings in PDE?
-	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
-* layout manager vs. exact placement? layout not default.
-* draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
-* bundle a selection of fonts with the lib?
-* should setting grid, font, padding have an effect on widgets created before?
-* how to best allow disable widget interaction (but still redraw)?
 
 
 X Revision 2
@@ -356,6 +334,7 @@ x OpenGL: widgedts don't render
 x fix onDraw()
 * connection utils
 	x how to callback void methods
+	* find callback methods only once, on event creation, not on every event
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)

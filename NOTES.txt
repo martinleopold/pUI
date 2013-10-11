@@ -1,4 +1,4 @@
-DESIGN PRINCIPLES
+1DESIGN PRINCIPLES
 -----------------
 * Accessibility. The library should be easy to set up and use. It should be easy and painless to quickly throw together a UI to control some parameters of a sketch. This is in spirit of the 'sketching metaphor' of processing.
 * Minimalism. Graphic elements should be clean in design, easily readable and understandable. A basic but usable set of user interface elements should be provided.
@@ -457,6 +457,7 @@ Auto Connect
 Connection Options
 ------------------
 * onEvent() -> specific events with callback methods
+	* can have multiple parameter options
 * connect(), attach() -> auto connect to methods, fields
 
 Release Procedure
@@ -481,3 +482,49 @@ Parameterless Callbacks
 -----------------------
 * create void event: Event<Void> onClickVoid = new Event<Void>();
 * fire it using null argument: onClickVoid.fire(null);
+
+
+Decisions
+---------
+x layout manager vs. exact placement? layout not default.
+	exact placement is possible. having an automatic layout by default facilitates quick guis
+x snap to grid better than relational paddings?
+	stick to relational for now. find reasons why snap to grid might be better.
+	better for interactive / drag & drop placement of widgets
+x bundle a selection of fonts with the lib?
+	a good default font, maybe provide 2 alternatives?
+x remove "add" prefix from widget generators?
+	good to identify and group all generators
+	can't really compare to p5 rect(), ellipse(), ...
+x with smaller pui size: widget can draw outsize of pui. should this be ok?
+	then, size is only for the background
+	-> draw into PGraphics, but it's not a priority
+x draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
+	adds flexibility. PGraphics can be set, in which case the rendering of the PGraphics into the canvas is disable
+* where to have theme constants? (or how else to set theme)
+	* Theme constants in PUI object?
+
+
+* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
+	* widget state as method or field?
+* how to encapsulate special element state (slider value, ...)
+* which constructors to have for widgets?
+	* remove constructors only used with 0,0 size that use auto layout anyway?
+	* name constructor: keep empty constructor?
+* subclassing Widget: needs to use generics? warnings in PDE?
+	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
+
+* decide on callback possibilities (onEvent, connect, attach, ...)
+* widget changes
+	* custom padding per widget?
+	* Slider: show value in UI?
+* where to have theme constants? (or how else to set theme)
+	* Theme constants in PUI object?
+* should setting grid, font, padding have an effect on widgets created before?
+
+Discussion / Ask:
+* newRow(), newColumn() also on Widgets, for convenience?
+	not right now / doesn't add functionality / keep it minimal
+* bundle a selection of fonts with the lib?
+
