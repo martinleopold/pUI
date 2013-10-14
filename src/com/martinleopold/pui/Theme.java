@@ -477,4 +477,56 @@ public class Theme {
 		PINKLATTE, MINGREEN, HELLOYELLOW, TEALTEAL, RUSTICORANGE, TEALSALMON, CITRUSBLUE,
 		LIMEPURPLE, LIMESTONE2, COOLPURPLE, GRAYRED, METALGEAR2, LIGHTPINK, MINPINK2, MAXPINK,
 		MINYELLOW, MINLIME, MINORANGE, GRAYDAY, MINBLACK};
+	
+	public static enum Preset {
+		DEFAULT, HACKER, HIPSTER, DIETER, BARBIE, WINDOWS, OSX, 
+		ZOOLANDER, VEGAN2, BERLIN, METALGEAR, TEALLIME, VEGAN, RUSTIC, MIDNIGHT, MINBLUE, LIMESTONE, 
+		SPEARMINT, MINPINK, PEPTOBISMOL, BILEBLUE, COOLCLAY, BLUEBLUE, PINKPANTHER, MAROON, 
+		PINKLATTE, MINGREEN, HELLOYELLOW, TEALTEAL, RUSTICORANGE, TEALSALMON, CITRUSBLUE,
+		LIMEPURPLE, LIMESTONE2, COOLPURPLE, GRAYRED, METALGEAR2, LIGHTPINK, MINPINK2, MAXPINK,
+		MINYELLOW, MINLIME, MINORANGE, GRAYDAY, MINBLACK
+	}
+	
+	// get preset by enum
+	public static Theme preset(Preset preset) {
+		switch (preset) {
+			case DEFAULT:
+				return DEFAULT;
+			case HACKER:
+				return HACKER;
+		}
+		return DEFAULT;
+	}
+	
+	// get preset by int
+	public static Theme preset(int presetNo) {
+		if (presetNo < 0 || presetNo >= Preset.values().length) {
+			return preset(Preset.DEFAULT);
+		}
+		return preset( Preset.values()[presetNo] );
+	}
+	
+	// get preset by name (case insensitive)
+	public static Theme preset(String presetName) {
+		try {
+			return preset( Preset.valueOf(presetName.toUpperCase()) );
+		} catch (IllegalArgumentException e) { // preset not found
+			return preset(Preset.DEFAULT);
+		}
+	}
+	
+	// array containing all preset names
+	public static String[] presetNames() {
+		String[] names = new String[numPresets()];
+		int i=0;
+		for (Preset p : Preset.values()) {
+			names[i++] = p.name();
+		}
+		return names;
+	}
+	
+	// get the number of presets
+	public static int numPresets() {
+		return Preset.values().length;
+	}
 }
