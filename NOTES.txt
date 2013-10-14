@@ -501,14 +501,27 @@ x with smaller pui size: widget can draw outsize of pui. should this be ok?
 	-> draw into PGraphics, but it's not a priority
 x draw into a PGraphics? (make it settable). the PGraphics is drawn onto the canvas when not custom set.
 	adds flexibility. PGraphics can be set, in which case the rendering of the PGraphics into the canvas is disable
-* where to have theme constants? (or how else to set theme)
-	* Theme constants in PUI object?
-
+x where to have theme constants? (or how else to set theme) * Theme constants in PUI object?
+	setTheme(int), setTheme(String) or: theme(int), theme(String), theme() -> get the theme
 
 * how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
 	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
 	* widget state as method or field?
+	-> needs to be publicly available (for callbacks)
+	-> generally not writable, except active, visible
+	use: isHovered(), isPressed(), isDragged(), isActive(), isVisible()
+	activate(), deactivate(), show(), hide()
+	hovered, pressed, dragged are generalizations. dragged includes pressed includes hovered -> enum could be used
+	expose metrics: positionX(), positionY(), width(), height()
+	expose last mouse position: mouseX(), mouseY() (relative to widget)
+	can't do it consistently as fields: x, y, width, height -> don't represent layout rect
+
 * how to encapsulate special element state (slider value, ...)
+	possible to use fields.
+	if view is always updated from the field, the field can be used to set the value.
+	buffering: needs a check for changed values, instead of dirty flags. at the end of draw the drawn value is saved
+	Slider: value, Button: pressed, Toggle: on, RangeSlider: float[2] range, Label: text
+
 * which constructors to have for widgets?
 	* remove constructors only used with 0,0 size that use auto layout anyway?
 	* name constructor: keep empty constructor?
@@ -528,3 +541,18 @@ Discussion / Ask:
 	not right now / doesn't add functionality / keep it minimal
 * bundle a selection of fonts with the lib?
 
+
+
+Theme Review
+------------
+* Setting: PUI.setTheme(), Widget.setTheme()
+* Options:
+	preset Theme objects: setTheme(Theme.THEME_NAME)
+	enum: enum ThemePreset {DEFAULT, THEME_NAME1, THEME_NAME2 }
+	int, string: no need for prefixes
+* Setting individual colors ?
+* Overriding individual colors ?
+
+
+Method Naming Review
+--------------------

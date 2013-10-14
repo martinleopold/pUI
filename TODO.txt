@@ -235,12 +235,12 @@ x Misc
 	x can label be drawn with highlight color in certain circumstances for widget with label??
 
 
-Next
-----
+X Next
+------
 x Review TODOs
 x List of Questions / Decisions
-* Review Florians Feedback
-* Release Revision 2 (v0.2)
+x Review Florians Feedback
+x Release Revision 2 (v0.2)
 
 
 General
@@ -305,18 +305,25 @@ X Revision 2
 ------------
 x changes since v0.1
 
-
 Revision 3
 ----------
-* auto connect
-* review widget data
-* review naming
+* review theme system (*)
+* review widget data API
+* review method naming
+* auto connect (*)
 * make decisions
+
+Revision 4
+----------
 * extra widgets
 	* range slider
 	* text input
 	* multi select / drop down
-* docs / sample program
+
+Revision 5
+----------
+* Docs
+* Sample program
 
 
 Next
