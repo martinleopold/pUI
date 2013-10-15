@@ -55,7 +55,7 @@ import processing.event.MouseEvent;
 		this(pui, x, y, width, height, true);
 	}
 	
-	protected Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
+	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
 		layoutRect = new Rect(this);
 		
