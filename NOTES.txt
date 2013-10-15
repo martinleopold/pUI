@@ -33,6 +33,7 @@ IDEAS
 * keyboard events for adding hotkeys (add focus property to widgets)
 * PGraphics as render target -> (still need PApplet e.g. for events)
 * put default settings in a config file
+* use in real project. get first hand/practical feedback.
 
 
 REFERENCES
@@ -486,6 +487,8 @@ Parameterless Callbacks
 
 Decisions
 ---------
+x newRow(), newColumn() also on Widgets, for convenience?
+	not right now / doesn't add functionality / keep it minimal
 x layout manager vs. exact placement? layout not default.
 	exact placement is possible. having an automatic layout by default facilitates quick guis
 x snap to grid better than relational paddings?
@@ -503,8 +506,17 @@ x draw into a PGraphics? (make it settable). the PGraphics is drawn onto the can
 	adds flexibility. PGraphics can be set, in which case the rendering of the PGraphics into the canvas is disable
 x where to have theme constants? (or how else to set theme) * Theme constants in PUI object?
 	setTheme(int), setTheme(String) or: theme(int), theme(String), theme() -> get the theme
+x should setting grid, font, padding have an effect on widgets created before?
+	-> no. can stay the way it is. if you want to change all, do it first.
+x custom padding per widget?
+	-> yes, for the sake of customizability. but not now.
+x Slider: show value in UI?
+	-> yes, as an extension. for now a label can be hooked up to the slider
+x how to control an int, with a slider?
+	just truncate the slider output to int. if the slider is long enough, you will get all ints in the range
+	x should a slider be able to connect to an int? (automatically truncating its value)
 
-* how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+~ how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
 	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
 	* widget state as method or field?
 	-> needs to be publicly available (for callbacks)
@@ -515,33 +527,78 @@ x where to have theme constants? (or how else to set theme) * Theme constants in
 	expose metrics: positionX(), positionY(), width(), height()
 	expose last mouse position: mouseX(), mouseY() (relative to widget)
 	can't do it consistently as fields: x, y, width, height -> don't represent layout rect
-
-* how to encapsulate special element state (slider value, ...)
+	
+~ how to encapsulate special element state (slider value, ...)
 	possible to use fields.
 	if view is always updated from the field, the field can be used to set the value.
 	buffering: needs a check for changed values, instead of dirty flags. at the end of draw the drawn value is saved
 	Slider: value, Button: pressed, Toggle: on, RangeSlider: float[2] range, Label: text
 
+	pro: easier?
+		 processing uses fields to get values
+		 easier to translate to js
+	con: can't do it consistently with base state (x, y, width, height need to be different for Widget with label)
+		 -> could have extra fields which represent the public value, and update them accordingly
+		 hard to trigger callbacks when value is set from the ouside (need to double all values and compare them)
+	
+	beides implementieren: man kann die felder einfach offen lassen. aber macht es komplizierter. 
+
+	I have: 
+	widget metrics:
+	positionX
+	positionY
+	width
+	height
+
+	mouse state:
+	isHovered / mouse over widget
+	isPressed / mouse pressed over widget
+	isDragged / dragging widget
+	(mouseX, mouseY)  / last mouse position relative to widget
+
+	general state:
+	isActive / receives and handles mouse events
+	isVisible / is displayed
+
+	special state:
+	e.g. Slider: value
+	e.g. Button: pressed
+	e.g. Label: text
+
+~ decide on callback possibilities (onEvent, connect, attach, ...)
+	specific events: onEvent(method)
+	connect to field : connectToField(fieldName)
+		connects to the field, if it's available with the correct type. may have a fallback type
+	connect to method: connectToMethod(methodName)
+	auto connect: connect(name) -> does it connect to both, or with priorities?
+	naming alternative: attach()
+
+~ name constructor
+	keep empty constructor?
+
+x subclassing Widget:
+	-> "must implement the inherited abstract method Widget.getThis()"
+	-> needs default constructor (), or a defined explicit constructor (PUI) ...
+	-> Widget needs to be public, its constructors protected
+	-> draw(), mousePressed() etc. need to be protected
+	-> no need to use type argument when instantiating
+	   should produce:  warning: [rawtypes] found raw type: Widget,  but processing doesn't show that warning
+	   missing type arguments for generic class Widget<T> where T is a type-variable: T extends Widget<T> declared in class Widget
+	-> should processing somtime decide to show warnings, we will get them
+
+x Widgets: use generics for chainability or manual overrides to return the correct widget type?
+	-> need to override: onDraw(), onMouse(), position(), size(), label(), noLabel()
+	-> a user made subclass also needs to override those methods
+	-> no need to override: isActive(), isVisible(). (they return a value, not the Widget)
+	-> use generics for now. 
+	   it works, and subclasses don't have to implement all base functions for chainability.
+	   subclasses need to be defined as MyWidget extends Widget<MyWidget> for chainability to work.
+	   should be easier than implementing 6 functions, and subclassing is advanced anyway
+
 * which constructors to have for widgets?
-	* remove constructors only used with 0,0 size that use auto layout anyway?
-	* name constructor: keep empty constructor?
-* subclassing Widget: needs to use generics? warnings in PDE?
-	* better manually onDraw, onMouse (from Widget), label, noLabel (from WidgetWithLabel) in all sub classes to return the correct type?
-
-* decide on callback possibilities (onEvent, connect, attach, ...)
-* widget changes
-	* custom padding per widget?
-	* Slider: show value in UI?
-* where to have theme constants? (or how else to set theme)
-	* Theme constants in PUI object?
-* should setting grid, font, padding have an effect on widgets created before?
-
-Discussion / Ask:
-* newRow(), newColumn() also on Widgets, for convenience?
-	not right now / doesn't add functionality / keep it minimal
-* bundle a selection of fonts with the lib?
-
-
+	-> remove constructors only used with 0,0 size that use auto layout anyway?
+	? what about the doLayout constructor
+	? a constructor that doesn't use the layout module?
 
 Theme Review
 ------------
@@ -554,5 +611,72 @@ Theme Review
 * Overriding individual colors ?
 
 
-Method Naming Review
---------------------
+Features Review
+---------------
+PUI
+* init. new PUI() / PUI.init()
+* create (and add) widgets. addButton(), addToggle(), ...
+* theme
+	* colors
+	* color presets
+	* font
+* layout
+	* grid
+	* padding
+* size
+* position
+* toggle
+
+* create widgets with name. -> default label, connect, retrieve
+? retrieve widgets. find(name)
+? add (externally created) widgets
+* more layout modes and direction
+
+
+
+Widget
+* base state. hovered, pressed, dragged
+* base settings. active, visible.
+* label
+* register event handlers. onEvent()
+* connect
+	* to method
+	* to variable
+	* auto.
+* special state. Slider value, etc.
+* size (in grid units)
+* position (in grid units or pixels)
+
+* override drawing
+* construct with new
+* individual theme. colors, font, padding
+* label position
+* callbacks on specific objects
+
+
+Guidelines
+----------
+Stick with features I already have and try them out in real projects and get user feedback.
+Then decide on changes.
+Get a good, usable core set of features out and put them to the test.
+
+
+Main Goals
+----------
+* accessibility: easily create widgets and connect them to the sketch
+  -> auto layout, auto connect, special widget state
+* customize: change looks and behavior
+  -> color presets, individual overrides, base widget state
+* extend: create own widgets
+
+
+Processing Getters/Setters
+--------------------------
+displayHeight, displayWidth, focused, frameCount, frameRate, height, width
+size(), frameRate()
+mouseButton, mousePressed, mouseX, mouseY, pmouseX, pmouseY
+key, keyCode, keyPressed
+day(), hour(), millis(), minute(), month(), second(), year()s
+-> setters are all methods
+-> some getters are methods
+-> fields are (probably) all reset every frame, so overwriting doesn't matter

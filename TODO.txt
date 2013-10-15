@@ -280,9 +280,15 @@ x element draw override: disable standard draw
 * for onDraw() to be usable: need to access x,y,width,height,label
 * warn if no callback could be attached
 * output info when callbacks are attached
+* connect to specific objects
+* individual padding
 
 Label
 * background should wrap the whole text (including descenders)
+
+Slider
+* show value
+? ability to connect to an int
 
 Extra Widgets
 * Text Input
@@ -305,13 +311,14 @@ X Revision 2
 ------------
 x changes since v0.1
 
-Revision 3
+Revision 3 (Friday 18.10.2013)
 ----------
 * review theme system (*)
 * review widget data API
 * review method naming
 * auto connect (*)
 * make decisions
+(*) ... has progress
 
 Revision 4
 ----------
@@ -339,11 +346,20 @@ x OpenGL: widgedts don't render
 	x post issue on github
 	x test with  newest p5 build : issue persists
 x fix onDraw()
+
 * connection utils
 	x how to callback void methods
 	* find callback methods only once, on event creation, not on every event
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)
-* connect to specific objects
 * check doc tool (docco)
+
+
+x review features (what is necessary? what is an extension and can wait?)
+x ask opinions on fields vs. methods
+* make decisions
+* auto connect and callback options
+* special widget state
+
+* themes
