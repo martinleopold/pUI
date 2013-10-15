@@ -25,10 +25,11 @@ import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 /**
- *
+ * 
  * @author Martin Leopold <m@martinleopold.com>
+ * @param <T> Concrete Type of the Widget
  */
-abstract class Widget<T extends Widget<T>> extends Rect {
+ public abstract class Widget<T extends Widget<T>> extends Rect {
 
 	PUI pui;
 
@@ -50,11 +51,11 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 	Rect layoutRect;
 
 	// TODO having x, y here doesn't make sense since it's put in the layout immediately
-	Widget(PUI pui, int x, int y, int width, int height) {
+	protected Widget(PUI pui, int x, int y, int width, int height) {
 		this(pui, x, y, width, height, true);
 	}
 	
-	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
+	protected Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
 		layoutRect = new Rect(this);
 		
@@ -65,7 +66,15 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 		font = pui.font;
 	}
 	
-	protected abstract T getThis();
+	// warning: [unchecked] unchecked cast
+	//	required: T
+	//  found:    Widget<T>
+	//  where T is a type-variable:
+	//    T extends Widget<T> declared in class Widget
+	@SuppressWarnings("unchecked")
+	protected T getThis() {
+		return (T)this;
+	}
 
 //	public void setActive(boolean tf) {
 //		active = tf;
@@ -165,6 +174,8 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 		onDraw.fire(this); // onDraw Event is fired in any case
 		p.popMatrix();
 		p.popStyle();
+		
+//		test();
 	}
 	
 	void mouseEntered(float mx, float my) {
@@ -199,6 +210,10 @@ abstract class Widget<T extends Widget<T>> extends Rect {
 
 	void draw(PApplet p) {
 	}
+	
+//	protected void test() {
+//		System.out.println("test()");
+//	}
 
 	Event<Widget<T>> onDraw = new Event<Widget<T>>();
 
