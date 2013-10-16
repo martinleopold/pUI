@@ -17,8 +17,6 @@
  */
 package com.martinleopold.pui;
 
-import com.martinleopold.pui.events.Events;
-
 /**
  * 
  * @author martinleopold

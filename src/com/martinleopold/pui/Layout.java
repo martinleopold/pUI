@@ -143,7 +143,12 @@ final class Layout {
 		columnGap = g;
 	}
 	
-	private void remove(Widget<?> e) {
+	/**
+	 * Remove from normal flow (not pinned)
+	 * @param e
+	 * @return true if widget was removed
+	 */
+	private boolean remove(Widget<?> e) {
 		int idx = elements.indexOf(e); // index in elements = index of add action
 		if (idx > -1) {
 			elements.remove(e);
@@ -153,10 +158,13 @@ final class Layout {
 					if (addCount++ == idx) {
 						actions.remove(i);
 						System.out.println("XXX removed add action:" + addCount);
-						return;
+						break;
 					}
 				}
 			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -197,12 +205,17 @@ final class Layout {
 		}
 	}
 	
-	private List<Widget<?>> pinned; // list of added widgets
+	private List<Widget<?>> pinned; // list of pinned widgets
+	/**
+	 * pin a widget. (doesn't have to be added before)
+	 * @param w 
+	 */
 	void pin(Widget<?> w) {
 		remove(w); // remove from normal flow (if present)
-		if (!pinned.contains(w)) pinned.add(w);
-		System.out.println("relayout");
-		reLayout();
+		if (!pinned.contains(w)) {
+			pinned.add(w);
+			reLayout(); // only relayout if things changed
+		}
 	}
 	
 	// assumes w and p are colliding. place w against pinned p
@@ -273,5 +286,9 @@ final class Layout {
 		this.width = w;
 		this.height = h;
 		setPadding(paddingX, paddingY);
+	}
+	
+	boolean contains(Widget<?> w) {
+		return elements.contains(w) || pinned.contains(w);
 	}
 }

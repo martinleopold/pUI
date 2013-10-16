@@ -55,6 +55,15 @@ import processing.event.MouseEvent;
 		this(pui, x, y, width, height, true);
 	}
 	
+	/**
+	 * Create a Widget. Choose whether to add it to the layout manager or not.
+	 * @param pui
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param doLayout 
+	 */
 	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
 		super(x, y, width, height);
 		layoutRect = new Rect(this);
@@ -248,15 +257,19 @@ import processing.event.MouseEvent;
 	public T position(float x, float y) {
 		// TODO. assuming label position below widget
 		setPosition(pui.gridX2Px(x), pui.gridY2Px(y));
-		pui.layout.pin(this);
-		pui.layout.reLayout();
+		// only pin if it is in layout
+		if (pui.layout.contains(this)) {
+			pui.layout.pin(this);
+		}
 		return getThis();
 	}
 	
 	// grid units
 	public T size(float w, float h) {
 		setSize(pui.gridX2Px(w), pui.gridY2Px(h));
-		pui.layout.reLayout();
+		if (pui.layout.contains(this)) {
+			pui.layout.reLayout();
+		}
 		return getThis();
 	}
 }

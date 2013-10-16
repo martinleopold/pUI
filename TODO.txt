@@ -346,6 +346,7 @@ x OpenGL: widgedts don't render
 	x post issue on github
 	x test with  newest p5 build : issue persists
 x fix onDraw()
+x check doc tool (docco)
 
 * connection utils
 	x how to callback void methods
@@ -353,12 +354,12 @@ x fix onDraw()
 	* connect to field (obj, name, type)
 	* connect to method (obj, name, args...)
 	* auto connect (obj, name, field type, args..., widget?)
-* check doc tool (docco)
 
 
 x review features (what is necessary? what is an extension and can wait?)
 x ask opinions on fields vs. methods
 * make decisions
+* revise widget constructors
 * auto connect and callback options
 * special widget state
 
