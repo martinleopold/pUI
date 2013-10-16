@@ -56,7 +56,7 @@ final class Layout {
 	}
 	
 	void add(Widget<?> w) {
-		System.out.println("adding " + elements.size());
+//		System.out.println("adding " + elements.size());
 		Rect r = w.layoutRect;
 		
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
@@ -65,13 +65,13 @@ final class Layout {
 		// ceck if we flow out at the bottom
 //		System.out.println("nextX:" + nextX + " nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
 		if (nextY + totalHeight > height) {
-			System.out.println("try new column");
+//			System.out.println("try new column");
 			nextColumn();
 		}
 		
 		// check if it fits in the current line
-		System.out.print("check line: nextX:" + nextX + "+tw:" + totalWidth + "=" + (nextX+totalWidth) + " <= ");
-		System.out.println("currentColumnX:" + currentColumnX + "+currentColumnWidth:" + currentColumnWidth + "=" + (currentColumnX + currentColumnWidth));
+//		System.out.print("check line: nextX:" + nextX + "+tw:" + totalWidth + "=" + (nextX+totalWidth) + " <= ");
+//		System.out.println("currentColumnX:" + currentColumnX + "+currentColumnWidth:" + currentColumnWidth + "=" + (currentColumnX + currentColumnWidth));
 		if (nextX + totalWidth <= currentColumnX + currentColumnWidth) {
 			// place it
 			placeNext(w);
@@ -81,27 +81,28 @@ final class Layout {
 			
 			elements.add(w); // add to list of layouted elements
 			actions.add(Action.AddWidget);
-			System.out.println(elements.indexOf(w) + ": placing in layout x:" + r.x + " y:" + r.y + " tw:" + totalWidth + " th:" + totalHeight);
+//			System.out.println(elements.indexOf(w) + ": placing in layout x:" + r.x + " y:" + r.y + " tw:" + totalWidth + " th:" + totalHeight);
 			// track row height
 			if (totalHeight > currentRowHeight) {
 				currentRowHeight = totalHeight;
-				System.out.println("currentRowHeight: " + currentRowHeight );
+//				System.out.println("currentRowHeight: " + currentRowHeight );
 			}
 			
+			//TODO warning needs to work differently
 			// warn if we flow out to the right
-			if (nextX + totalWidth > width) {
-				System.out.println("Warning: Widget is placed outside of the window.");
-			}
+//			if (nextX + totalWidth > width) {
+//				System.out.println("Warning: Widget is placed outside of the window.");
+//			}
 			
 			// widget was placed
 			nextX += totalWidth;
 		} else if (nextX == currentColumnX) { // check if we are at the beginning of a line
-			System.out.println("make column wider");
+//			System.out.println("make column wider");
 			// we are at the beginning of a line and it doesn't fit
 			currentColumnWidth = totalWidth; // make this column wider
 			add(w); // try again
 		} else { // it doesn't fit in the current line
-			System.out.println("try new row");
+//			System.out.println("try new row");
 			nextRow();
 			add(w);
 		}
@@ -111,7 +112,7 @@ final class Layout {
 		nextX = currentColumnX;
 		nextY += currentRowHeight;
 		currentRowHeight = 0;
-		System.out.println("next row x:" + nextX + " y:" + nextY);
+//		System.out.println("next row x:" + nextX + " y:" + nextY);
 	}
 	
 	private void nextColumn() {
@@ -120,7 +121,7 @@ final class Layout {
 		currentColumnWidth = columnWidth;
 		nextX = currentColumnX;
 		nextY = 0;
-		System.out.println("next column x:" + nextX + " y:" + nextY);
+//		System.out.println("next column x:" + nextX + " y:" + nextY);
 	}
 	
 	void newRow() {
@@ -157,7 +158,7 @@ final class Layout {
 				if (actions.get(i) == Action.AddWidget) {
 					if (addCount++ == idx) {
 						actions.remove(i);
-						System.out.println("XXX removed add action:" + addCount);
+//						System.out.println("XXX removed add action:" + addCount);
 						break;
 					}
 				}
@@ -181,7 +182,7 @@ final class Layout {
 	}
 	
 	void reLayout() {
-		System.out.println("***** reLayout ******************************");
+//		System.out.println("***** reLayout ******************************");
 		List<Action> oldActions = actions; // save actions
 		List<Widget<?>> oldElements = elements; // save elements
 		List<Widget<?>> oldPinned = pinned; // save pinned elements
@@ -221,36 +222,36 @@ final class Layout {
 	// assumes w and p are colliding. place w against pinned p
 	private void placeAgainstPinned(Widget<?> w, Widget<?> p) {
 		if (w.padded(paddingX, paddingY).isOverapping(p.padded(paddingX, paddingY))) { // the widget collides with a previously pinned one (p)
-			System.out.println("found overlap");
+//			System.out.println("found overlap");
 			Rect r = w.layoutRect;
 			int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
 			int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 
 			// try to fit w next to (i.e. right of) p in this column
 			if (p.layoutRect.x + p.layoutRect.width + paddingX + totalWidth <= windowPaddingX + currentColumnX + currentColumnWidth ) {
-				System.out.println("fit next to pin");
+//				System.out.println("fit next to pin");
 				w.setPosition(p.layoutRect.x + p.layoutRect.width + paddingX*2, r.y);
 				nextX = r.x - windowPaddingX - paddingX; // set where next should have been
 			}
 			// try to fit in nextRow (before) p
 			else if (windowPaddingX + currentColumnX + totalWidth < p.layoutRect.x && nextY + totalHeight < height) {
-				System.out.println("in next row");
+//				System.out.println("in next row");
 				nextRow();
 				placeNext(w);
 			}
 			// try to fit w after (i.e. below) p in this column
 			else if (p.layoutRect.y + p.layoutRect.height + paddingY + totalHeight <= windowPaddingY + height) {
-				System.out.println("fit below");
+//				System.out.println("fit below");
 				w.setPosition(r.x, p.layoutRect.y + p.layoutRect.height + paddingY*2);
 	//			System.out.println("nextX:" + nextX + " nextY:" + nextY);
 				nextY = r.y - windowPaddingY - paddingY; // set where next should have been
 			}
 			// try next column
 			else {
-				System.out.println("fit in next column");
+//				System.out.println("fit in next column");
 				nextColumn();
 				placeNext(w); // adjust position of w to the next column
-				System.out.println("placed next x:" + w.layoutRect.x + " y:" + w.layoutRect.y);
+//				System.out.println("placed next x:" + w.layoutRect.x + " y:" + w.layoutRect.y);
 				placeAgainstPinned(w, p); // retry
 			}
 		}
@@ -260,7 +261,7 @@ final class Layout {
 	private void placeAgainstPinned(Widget<?> w) {
 		// check against all pinned 
 		for (Widget<?> p : pinned) {
-			System.out.println("check against pin");
+//			System.out.println("check against pin");
 			placeAgainstPinned(w, p);
 		}
 	}
