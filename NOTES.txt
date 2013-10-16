@@ -595,10 +595,17 @@ x Widgets: use generics for chainability or manual overrides to return the corre
 	   subclasses need to be defined as MyWidget extends Widget<MyWidget> for chainability to work.
 	   should be easier than implementing 6 functions, and subclassing is advanced anyway
 
-* which constructors to have for widgets?
-	-> remove constructors only used with 0,0 size that use auto layout anyway?
+x which constructors to have for widgets?
+	-> remove constructors only used with 0,0 size that use auto layout anyway
 	? what about the doLayout constructor
 	? a constructor that doesn't use the layout module?
+	  -> needed for labels contained in widgetswithlabels
+	  every widget is added to the layout by default
+	  what about *not* adding it to the layout by default? 
+	  -> when it's created with new, it's not in the layout
+		 widgets created with new can't be added. need a public addToLayout method in PUI
+		 subclasses need to add it, which they can't. need to add a protected addToLayout method to Widget
+	
 
 Theme Review
 ------------

@@ -358,8 +358,8 @@ x check doc tool (docco)
 
 x review features (what is necessary? what is an extension and can wait?)
 x ask opinions on fields vs. methods
-* make decisions
-* revise widget constructors
+x make decisions
+x revise widget constructors
 * auto connect and callback options
 * special widget state
 
