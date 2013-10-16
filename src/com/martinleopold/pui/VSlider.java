@@ -24,8 +24,8 @@ import processing.core.PApplet;
  * @author martinleopold
  */
 public class VSlider extends Slider {
-	public VSlider(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
+	public VSlider(PUI pui, int width, int height) {
+		super(pui, width, height);
 	}
 	
 	@Override

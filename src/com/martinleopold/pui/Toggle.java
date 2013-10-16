@@ -30,8 +30,8 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	// state
 	public boolean on;
 			
-	public Toggle(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
+	public Toggle(PUI pui, int width, int height) {
+		super(pui, width, height);
 	}
 	
 	@Override

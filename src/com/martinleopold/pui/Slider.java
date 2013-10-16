@@ -31,8 +31,8 @@ public class Slider extends WidgetWithLabel<Slider> {
 	float max = 1;
 	boolean sliding = false;
 			
-	public Slider(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
+	public Slider(PUI pui, int width, int height) {
+		super(pui, width, height);
 	}
 	
 	@Override

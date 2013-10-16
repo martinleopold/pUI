@@ -50,13 +50,13 @@ import processing.event.MouseEvent;
 	
 	Rect layoutRect;
 
-	// TODO having x, y here doesn't make sense since it's put in the layout immediately
-	protected Widget(PUI pui, int x, int y, int width, int height) {
-		this(pui, x, y, width, height, true);
+	protected Widget(PUI pui, int width, int height) {
+		this(pui, width, height, true);
 	}
 	
 	/**
 	 * Create a Widget. Choose whether to add it to the layout manager or not.
+	 * If not put in layout the position can be set via setPosition() or position()
 	 * @param pui
 	 * @param x
 	 * @param y
@@ -64,8 +64,8 @@ import processing.event.MouseEvent;
 	 * @param height
 	 * @param doLayout 
 	 */
-	Widget(PUI pui, int x, int y, int width, int height, boolean doLayout) {
-		super(x, y, width, height);
+	Widget(PUI pui, int width, int height, boolean doLayout) {
+		super(0, 0, width, height);
 		layoutRect = new Rect(this);
 		
 		this.pui = pui;

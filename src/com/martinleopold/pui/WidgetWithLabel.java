@@ -35,13 +35,14 @@ abstract class WidgetWithLabel<T extends WidgetWithLabel<T>> extends Widget<T> {
 //	LabelPlacement labelPlacement;
 
 	
-	WidgetWithLabel(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height); // init widget, causes layout (without label)
+	WidgetWithLabel(PUI pui, int width, int height) {
+		super(pui, width, height); // init widget, causes layout (without label)
 		
 //		labelPlacement = LabelPlacement.BOTTOMLEFT;
 		
 		//place label
-		label = new Label(pui, this.x, this.y+height, 0, pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL), false); // place under widget. don't layout.  TODO variable height
+		label = new Label(pui, 0, pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL), false); // place under widget. don't layout.  TODO variable height
+		label.setPosition(this.x, this.y+height);
 		label.active = false; // no redraw
 		
 //		System.out.println("x:" + this.x + " y:" + this.y + " width:" + this.width + " height:" + this.height);

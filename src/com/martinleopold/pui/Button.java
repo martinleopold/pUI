@@ -29,8 +29,8 @@ public class Button extends WidgetWithLabel<Button> {
 	// state
 	public boolean clicked; // pressed is already used in superclass
 	
-	public Button(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
+	public Button(PUI pui, int width, int height) {
+		super(pui, width, height);
 	}
 	
 	@Override

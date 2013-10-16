@@ -202,7 +202,7 @@ public final class PUI extends Rect {
 	static float DEFAULT_BUTTON_H = 2;
 	// return a default size button at the layout without label
 	public Button addButton() {
-		return new Button(this, 0, 0, gridX2Px(DEFAULT_BUTTON_W), gridY2Px(DEFAULT_BUTTON_H));
+		return new Button(this, gridX2Px(DEFAULT_BUTTON_W), gridY2Px(DEFAULT_BUTTON_H));
 	}
 	
 //	public Button addButton(String name) {
@@ -212,30 +212,30 @@ public final class PUI extends Rect {
 	static float DEFAULT_TOGGLE_W = 2;
 	static float DEFAULT_TOGGLE_H = 2;
 	public Toggle addToggle() {
-		return new Toggle(this, 0, 0, gridX2Px(DEFAULT_TOGGLE_W), gridY2Px(DEFAULT_TOGGLE_H));
+		return new Toggle(this, gridX2Px(DEFAULT_TOGGLE_W), gridY2Px(DEFAULT_TOGGLE_H));
 	}
 	
 	static float DEFAULT_SLIDER_W = 11;
 	static float DEFAULT_SLIDER_H = 2;
 	public Slider addSlider() {
-		return new Slider(this, 0, 0, gridX2Px(DEFAULT_SLIDER_W), gridY2Px(DEFAULT_SLIDER_H));
+		return new Slider(this, gridX2Px(DEFAULT_SLIDER_W), gridY2Px(DEFAULT_SLIDER_H));
 	}
 	
 	static float DEFAULT_VSLIDER_W = 2;
 	static float DEFAULT_VSLIDER_H = 11;
 	public Slider addVSlider() {
-		return new VSlider(this, 0, 0, gridX2Px(DEFAULT_VSLIDER_W), gridY2Px(DEFAULT_VSLIDER_H));
+		return new VSlider(this, gridX2Px(DEFAULT_VSLIDER_W), gridY2Px(DEFAULT_VSLIDER_H));
 	}
 	
 	
 	static float DEFAULT_DIVIDER_W = 11;
 	static float DEFAULT_DIVIDER_H = 0;
 	public Divider addDivider() {
-		return new Divider(this, 0, 0, gridX2Px(DEFAULT_DIVIDER_W), gridY2Px(DEFAULT_DIVIDER_H));
+		return new Divider(this, gridX2Px(DEFAULT_DIVIDER_W), gridY2Px(DEFAULT_DIVIDER_H));
 	}
 	
 	public Label addLabel(String text) {
-		Label l = new Label(this, 0, 0, 0, gridY2Px(DEFAULT_FONTSIZE_MEDIUM));
+		Label l = new Label(this, 0, gridY2Px(DEFAULT_FONTSIZE_MEDIUM));
 		l.text(text);
 		return l;
 	}

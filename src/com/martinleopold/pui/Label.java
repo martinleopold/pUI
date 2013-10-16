@@ -30,12 +30,12 @@ public class Label extends Widget<Label> {
 	//state
 	String text = "";
 
-	public Label(PUI pui, int x, int y, int width, int height) {
-		super(pui, x, y, width, height);
+	public Label(PUI pui, int width, int height) {
+		super(pui, width, height);
 	}
 	
-	Label(PUI pui, int x, int y, int width, int height, boolean doLayout) {
-		super(pui, x, y, width, height, doLayout);
+	Label(PUI pui, int width, int height, boolean doLayout) {
+		super(pui, width, height, doLayout);
 	}
 	
 	@Override
