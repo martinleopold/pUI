@@ -38,7 +38,7 @@ import processing.event.MouseEvent;
 	boolean active = true; // receives events (mouse, keyooard) except draw!
 	boolean visible = true; // widget is drawn (onDraw() is called in any case)
 	boolean hovered; // mouse over
-	boolean pressed; // mouse down
+	boolean clicked; // mouse down
 	boolean dragged; // mouse is dragging
 	
 	// helpers
@@ -114,7 +114,7 @@ import processing.event.MouseEvent;
 				break;
 
 			case MouseEvent.PRESS:
-				pressed = isInside;
+				clicked = isInside;
 				if (isInside) {
 					clickedMouseX = mx;
 					clickedMouseY = my;
@@ -131,10 +131,10 @@ import processing.event.MouseEvent;
 				hovered = isInside(mx, my); // recalculate hover state, could have dragged outside the element
 
 				// if it was pressed, release it
-				if (pressed) {
+				if (clicked) {
 					mouseReleased(e.getButton(), mx, my);
 				}
-				pressed = false;
+				clicked = false;
 				dragged = false;
 				break;
 
@@ -145,7 +145,7 @@ import processing.event.MouseEvent;
 				break;
 
 			case MouseEvent.DRAG:
-				dragged = pressed;
+				dragged = clicked;
 				if (dragged) {
 					draggedDistX = mx - clickedMouseX;
 					draggedDistY = my - clickedMouseY;
@@ -266,8 +266,8 @@ import processing.event.MouseEvent;
 		return hovered;
 	}
 	
-	public boolean isPressed() {
-		return pressed;
+	public boolean isClicked() {
+		return clicked;
 	}
 	
 	public boolean isDragged() {

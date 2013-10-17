@@ -28,7 +28,7 @@ import processing.core.PApplet;
 public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	// state
-	public boolean on;
+	boolean on;
 			
 	public Toggle(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -60,6 +60,19 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 		on = !on;
 		onToggle.fire(this);
 		connect.fire(on);
+	}
+	
+	/*
+	 * State
+	 */
+	public boolean isOn() {
+		return on;
+	}
+	
+	public Toggle setOn(boolean on) {
+		this.on = on;
+		// TODO fire callback
+		return getThis();
 	}
 	
 	Event<Toggle> onToggle = new Event<Toggle>();

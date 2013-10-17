@@ -27,7 +27,7 @@ import processing.core.PApplet;
  */
 public class Button extends WidgetWithLabel<Button> {
 	// state
-	public boolean clicked; // pressed is already used in superclass
+	public boolean clicked;
 	
 	public Button(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -47,7 +47,7 @@ public class Button extends WidgetWithLabel<Button> {
 		
 		// draw fill
 		// draw fill highlight
-		if (pressed) p.fill(theme.fillHighlight);
+		if (clicked) p.fill(theme.fillHighlight);
 		else p.fill(theme.fill);
 		
 		p.rect(x,y, width-1, height-1); // stroked rect is bigger

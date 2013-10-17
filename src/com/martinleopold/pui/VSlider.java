@@ -50,7 +50,7 @@ public class VSlider extends Slider {
 		// draw fill
 		// draw fill highlight
 		p.noStroke();
-		if (pressed) p.fill(theme.fillHighlight);
+		if (clicked) p.fill(theme.fillHighlight);
 		else p.fill(theme.fill);
 		
 		// only the "inside" (i.e. without the outline) of the rect is used to represent the value
