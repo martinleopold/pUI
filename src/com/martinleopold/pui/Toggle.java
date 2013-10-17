@@ -58,8 +58,8 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	void mousePressed(int button, float mx, float my) {
 		label.drawHighlight = !label.drawHighlight;
 		pressed = !pressed;
+		onToggleBoolean.fire(pressed);
 		onToggle.fire(this);
-		connect.fire(pressed);
 	}
 	
 	/*
@@ -79,16 +79,33 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	 * Callbacks
 	 */
 	
-	Event<Toggle> onToggle = new Event<Toggle>();
+	Event<Toggle> onToggle = Events.createEvent(Toggle.class);
+	Event<Boolean> onToggleBoolean = Events.createEvent(boolean.class);
 	public Toggle onToggle(String methodName) {
-		Events.addListener(onToggle, pui.p, methodName);
-		return this;
+		if (Events.addListener(onToggleBoolean, pui.p, methodName)) {
+			System.out.println("Toggle -> " + methodName + "(boolean)");
+		}
+		if (Events.addListener(onToggle, pui.p, methodName)) {
+			System.out.println("Toggle -> " + methodName + "(Toggle)");
+		}
+		return getThis();
 	}
 	
-	Event<Boolean> connect = new Event<Boolean>();
-	public Toggle connect(String fieldName) {
-		Events.addListenerField(connect, pui.p, fieldName);
-		return this;
+	public Toggle sets(String fieldName) {
+		if (Events.addListenerField(onToggleBoolean, pui.p, fieldName)) {
+			System.out.println("Toggle -> " + fieldName);
+		}
+		return getThis();
+	}
+	
+	public Toggle calls(String methodName) {
+		return onToggle(methodName);
+	}
+	
+	public Toggle connect(String name) {
+		sets(name);
+		calls(name);
+		return getThis();
 	}
 
 	@Override

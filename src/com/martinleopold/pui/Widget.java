@@ -328,6 +328,7 @@ import processing.event.MouseEvent;
 	 * Events / Callbacks
 	 */
 
+	// TODO: how to convert this to Events.createEvent(Widget<T>.class) ? 
 	Event<Widget<T>> onDraw = new Event<Widget<T>>();
 
 	public T onDraw(String methodName) {

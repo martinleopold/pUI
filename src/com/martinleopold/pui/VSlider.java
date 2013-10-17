@@ -71,8 +71,8 @@ public class VSlider extends Slider {
 		// the point below the upper outline (y+1) represents 1/max
 		value = PApplet.map(my, y+height-1, y+1, min, max);
 		value = PApplet.constrain(value, min, max);
+		onValueFloat.fire(value);
 		onValue.fire(this);
-		connect.fire(value);
 	}
 	
 	@Override

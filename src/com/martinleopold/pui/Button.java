@@ -58,7 +58,7 @@ public class Button extends WidgetWithLabel<Button> {
 		label.drawHighlight = true;
 		clicked = true;
 		
-		sets.fire(clicked);
+		onClickBoolean.fire(clicked);
 		onClickVoid.fire(null);
 		onClick.fire(this);
 	}
@@ -67,7 +67,7 @@ public class Button extends WidgetWithLabel<Button> {
 	void mouseReleased(int button, float mx, float my) {
 		label.drawHighlight = false;
 		clicked = false;
-		sets.fire(clicked);
+		onClickBoolean.fire(clicked);
 	}
 	
 	/*
@@ -88,9 +88,10 @@ public class Button extends WidgetWithLabel<Button> {
 	 * Callbacks
 	 */
 	
-	// Void.class != void.class == Void.TYPE
 	Event<Void> onClickVoid = Events.createEvent(void.class);
 	Event<Button> onClick = Events.createEvent(Button.class);
+	Event<Boolean> onClickBoolean = Events.createEvent(boolean.class);
+		
 	public Button onClick(String methodName) {
 		if (Events.addListener(onClickVoid, pui.p, methodName)) {
 			System.out.println("Button -> " + methodName + "()");
@@ -101,11 +102,9 @@ public class Button extends WidgetWithLabel<Button> {
 		return getThis();
 	}
 	
-	// Boolean.class != boolean.class == Boolean.TYPE
-	Event<Boolean> sets = Events.createEvent(boolean.class);
 	// connect to a field
 	public Button sets(String fieldName) {
-		if (Events.addListenerField(sets, pui.p, fieldName)) {
+		if (Events.addListenerField(onClickBoolean, pui.p, fieldName)) {
 			System.out.println("Button -> " + fieldName);
 		}
 		return getThis();

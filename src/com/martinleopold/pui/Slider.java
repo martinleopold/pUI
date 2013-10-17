@@ -71,8 +71,8 @@ public class Slider extends WidgetWithLabel<Slider> {
 		// the point left of the right outline (x+width-2) represents 1/max
 		value = PApplet.map(mx, x, x+width-2, min, max);
 		value = PApplet.constrain(value, min, max);
+		onValueFloat.fire(value);
 		onValue.fire(this);
-		connect.fire(value);
 	}
 	
 	@Override
@@ -122,16 +122,33 @@ public class Slider extends WidgetWithLabel<Slider> {
 	 * Callbacks
 	 */
 	
-	Event<Slider> onValue = new Event<Slider>();
+	Event<Slider> onValue = Events.createEvent(Slider.class);
+	Event<Float> onValueFloat = Events.createEvent(float.class);
 	public Slider onValue(String methodName) {
-		Events.addListener(onValue, pui.p, methodName);
-		return this;
+		if (Events.addListener(onValueFloat, pui.p, methodName)) {
+			System.out.println("Slider -> " + methodName + "(float)");
+		}
+		if (Events.addListener(onValue, pui.p, methodName)) {
+			System.out.println("Slider -> " + methodName + "(Slider)");
+		}
+		return getThis();
 	}
 	
-	Event<Float> connect = new Event<Float>();
-	public Slider connect(String fieldName) {
-		Events.addListenerField(connect, pui.p, fieldName);
-		return this;
+	public Slider sets(String fieldName) {
+		if (Events.addListenerField(onValueFloat, pui.p, fieldName)) {
+			System.out.println("Slider -> " + fieldName);
+		}
+		return getThis();
+	}
+	
+	public Slider calls(String methodName) {
+		return onValue(methodName);
+	}
+	
+	public Slider connect(String name) {
+		sets(name);
+		calls(name);
+		return getThis();
 	}
 
 	@Override
