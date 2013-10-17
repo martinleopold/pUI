@@ -101,6 +101,10 @@ public class Label extends Widget<Label> {
 		return this;
 	}
 	
+	public String text() {
+		return text;
+	}
+	
 	public Label small() {
 		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL));
 	}
