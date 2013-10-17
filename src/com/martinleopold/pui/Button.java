@@ -58,7 +58,7 @@ public class Button extends WidgetWithLabel<Button> {
 		label.drawHighlight = true;
 		clicked = true;
 		
-		connect.fire(clicked);
+		sets.fire(clicked);
 		onClickVoid.fire(null);
 		onClick.fire(this);
 	}
@@ -67,24 +67,41 @@ public class Button extends WidgetWithLabel<Button> {
 	void mouseReleased(int button, float mx, float my) {
 		label.drawHighlight = false;
 		clicked = false;
-		connect.fire(clicked);
+		sets.fire(clicked);
 	}
 	
+	// Void.class != void.class == Void.TYPE
+	Event<Void> onClickVoid = Events.createEvent(void.class);
 	Event<Button> onClick = Events.createEvent(Button.class);
-	Event<Void> onClickVoid = Events.createEvent(Void.class);
 	public Button onClick(String methodName) {
-		Events.addListener(onClick, pui.p, methodName);
-		Events.addListener(onClickVoid, pui.p, methodName);
+		if (Events.addListener(onClickVoid, pui.p, methodName)) {
+			System.out.println("Button -> " + methodName + "()");
+		}
+		if (Events.addListener(onClick, pui.p, methodName)) {
+			System.out.println("Button -> " + methodName + "(Button)");
+		}
 		return getThis();
 	}
 	
-	Event<Boolean> connect = new Event<Boolean>();
-	public Button connect(String fieldName) {
-		Events.addListenerField(connect, pui.p, fieldName);
+	// Boolean.class != boolean.class == Boolean.TYPE
+	Event<Boolean> sets = Events.createEvent(boolean.class);
+	// connect to a field
+	public Button sets(String fieldName) {
+		if (Events.addListenerField(sets, pui.p, fieldName)) {
+			System.out.println("Button -> " + fieldName);
+		}
 		return getThis();
 	}
 	
-	public Button attach(String name) {
+	// connect to a method
+	public Button calls(String methodName) {
+		return onClick(methodName);
+	}
+	
+	// auto connect to fields and methods
+	public Button connect(String name) {
+		sets(name);
+		calls(name);
 		return getThis();
 	}
 	

@@ -313,11 +313,11 @@ x changes since v0.1
 
 Revision 3 (Friday 18.10.2013)
 ----------
+x make decisions
 * review theme system (*)
 * review widget data API
 * review method naming
 * auto connect (*)
-* make decisions
 (*) ... has progress
 
 Revision 4
@@ -347,20 +347,20 @@ x OpenGL: widgedts don't render
 	x test with  newest p5 build : issue persists
 x fix onDraw()
 x check doc tool (docco)
-
-* connection utils
+x connection utils
 	x how to callback void methods
-	* find callback methods only once, on event creation, not on every event
-	* connect to field (obj, name, type)
-	* connect to method (obj, name, args...)
-	* auto connect (obj, name, field type, args..., widget?)
-
+	x find callback methods only once, on event creation, not on every event
+	x connect to field (obj, name, type)
+	x connect to method (obj, name, args...)
+	x auto connect (obj, name, field type, args..., widget?)
 
 x review features (what is necessary? what is an extension and can wait?)
 x ask opinions on fields vs. methods
 x make decisions
 x revise widget constructors
-* auto connect and callback options
+x auto connect and callback options
+
+* new connection options for all widgets
+* theme revision 
 * special widget state
 
-* themes
