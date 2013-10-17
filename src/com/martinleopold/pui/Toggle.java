@@ -28,7 +28,7 @@ import processing.core.PApplet;
 public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	// state
-	boolean on;
+	boolean pressed;
 			
 	public Toggle(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -48,7 +48,7 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 		
 		// draw fill
 		// draw fill highlight
-		if (on) p.fill(theme.fillHighlight);
+		if (pressed) p.fill(theme.fillHighlight);
 		else p.fill(theme.fill);
 		
 		p.rect(x,y, width-1, height-1); // stroked rect is bigger
@@ -57,23 +57,27 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	@Override
 	void mousePressed(int button, float mx, float my) {
 		label.drawHighlight = !label.drawHighlight;
-		on = !on;
+		pressed = !pressed;
 		onToggle.fire(this);
-		connect.fire(on);
+		connect.fire(pressed);
 	}
 	
 	/*
 	 * State
 	 */
-	public boolean isOn() {
-		return on;
+	public boolean isPressed() {
+		return pressed;
 	}
 	
-	public Toggle setOn(boolean on) {
-		this.on = on;
+	public Toggle isPressed(boolean pressed) {
+		this.pressed = pressed;
 		// TODO fire callback
 		return getThis();
 	}
+	
+	/*
+	 * Callbacks
+	 */
 	
 	Event<Toggle> onToggle = new Event<Toggle>();
 	public Toggle onToggle(String methodName) {

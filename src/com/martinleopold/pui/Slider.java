@@ -26,9 +26,12 @@ import processing.core.PApplet;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Slider extends WidgetWithLabel<Slider> {
-	public float value = 0.5f;
+	// state
+	float value = 0.5f;
 	float min = 0;
 	float max = 1;
+	
+	// helpers
 	boolean sliding = false;
 			
 	public Slider(PUI pui, int width, int height) {
@@ -62,7 +65,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 		p.rect(x+1, y+1, bw, height-2);
 	}
 	
-	protected void setValue(float mx) {
+	void setValue(float mx) {
 		// only the "inside" (i.e. without the outline) of the rect is used to represent the value
 		// the point on the left outline (x) represents 0/min 
 		// the point left of the right outline (x+width-2) represents 1/max
@@ -90,6 +93,35 @@ public class Slider extends WidgetWithLabel<Slider> {
 		sliding = false;
 	}
 	
+	/*
+	 * State
+	 */
+	
+	public Slider min(float m) {
+		//value = PApplet.map(value, min, max, m, max); // map value to new range
+		min = m;
+		return getThis();
+	}
+	
+	public Slider max(float m) {
+		//value = PApplet.map(value, min, max, min, m); // map value to new range
+		max = m;
+		return getThis();
+	}
+	
+	public float value() {
+		return value;
+	}
+	
+	public Slider value(float value) {
+		this.value = value();
+		return getThis();
+	}
+	
+	/*
+	 * Callbacks
+	 */
+	
 	Event<Slider> onValue = new Event<Slider>();
 	public Slider onValue(String methodName) {
 		Events.addListener(onValue, pui.p, methodName);
@@ -105,17 +137,5 @@ public class Slider extends WidgetWithLabel<Slider> {
 	@Override
 	protected Slider getThis() {
 		return this;
-	}
-	
-	public Slider min(float m) {
-		//value = PApplet.map(value, min, max, m, max); // map value to new range
-		min = m;
-		return getThis();
-	}
-	
-	public Slider max(float m) {
-		//value = PApplet.map(value, min, max, min, m); // map value to new range
-		max = m;
-		return getThis();
 	}
 }

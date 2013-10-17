@@ -24,11 +24,12 @@ import processing.core.PApplet;
  * @author Martin Leopold <m@martinleopold.com>
  */
 public class Label extends Widget<Label> {
-	boolean drawBackground;
-	boolean drawHighlight;
-	
 	//state
 	String text = "";
+	
+	// some (internal) switches
+	boolean drawBackground; // defaults to false
+	boolean drawHighlight; // defaults to false
 
 	public Label(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -58,18 +59,11 @@ public class Label extends Widget<Label> {
 		// draw fill highlight
 //		if (hover) p.fill(theme.fillHighlight);
 //		else p.fill(theme.fill);
-		if (drawHighlight)p .fill(theme.fillHighlight);
+		if (drawHighlight) p .fill(theme.fillHighlight);
 		else p.fill(theme.fill);
 		p.textFont(font, height);
 		p.textAlign(PApplet.LEFT, PApplet.TOP);
 		p.text(text, x, y);
-	}
-	
-	public Label text(String text) {
-		this.text = text;
-		setSize((int)(textWidth()+1), height);
-		pui.layout.reLayout();
-		return this;
 	}
 	
 	// get width of the current text
@@ -92,6 +86,21 @@ public class Label extends Widget<Label> {
 		return this;
 	}
 	
+	@Override
+	protected Label getThis() {
+		return this;
+	}
+	
+	/*
+	 * State
+	 */
+	public Label text(String text) {
+		this.text = text;
+		setSize((int)(textWidth()+1), height);
+		pui.layout.reLayout();
+		return this;
+	}
+	
 	public Label small() {
 		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_SMALL));
 	}
@@ -102,10 +111,5 @@ public class Label extends Widget<Label> {
 	
 	public Label large() {
 		return setFontSize(pui.gridY2Px(PUI.DEFAULT_FONTSIZE_LARGE));
-	}
-
-	@Override
-	protected Label getThis() {
-		return this;
 	}
 }

@@ -27,7 +27,7 @@ import processing.core.PApplet;
  */
 public class Button extends WidgetWithLabel<Button> {
 	// state
-	public boolean clicked;
+	boolean pressed;
 	
 	public Button(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -69,6 +69,24 @@ public class Button extends WidgetWithLabel<Button> {
 		clicked = false;
 		sets.fire(clicked);
 	}
+	
+	/*
+	 * State
+	 */
+	
+	public boolean isPressed() {
+		return pressed;
+	}
+	
+	public Button isPressed(boolean pressed) {
+		this.pressed = pressed;
+		// TODO fire callback
+		return getThis();
+	}
+	
+	/*
+	 * Callbacks
+	 */
 	
 	// Void.class != void.class == Void.TYPE
 	Event<Void> onClickVoid = Events.createEvent(void.class);
