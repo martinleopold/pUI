@@ -572,6 +572,7 @@ x how to control an int, with a slider?
 	connect to method: connectToMethod(methodName)
 	auto connect: connect(name) -> does it connect to both, or with priorities?
 	naming alternative: attach()
+	
 
 ~ name constructor
 	keep empty constructor?
@@ -605,7 +606,7 @@ x which constructors to have for widgets?
 	  -> when it's created with new, it's not in the layout
 		 widgets created with new can't be added. need a public addToLayout method in PUI
 		 subclasses need to add it, which they can't. need to add a protected addToLayout method to Widget
-	
+
 
 Theme Review
 ------------
@@ -687,3 +688,9 @@ day(), hour(), millis(), minute(), month(), second(), year()s
 -> setters are all methods
 -> some getters are methods
 -> fields are (probably) all reset every frame, so overwriting doesn't matter
+
+
+Documentation
+-------------
+docco. not really usable with java (out of the box). atlassian-docco (for java) has loads of dependencies
+processing docs. web/index.html -> just write it in html. use prettyfy.js or highlight.js for code
