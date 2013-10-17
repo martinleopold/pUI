@@ -29,11 +29,18 @@ public class Event<T> {
 
 	ArrayList<Listener<T>> listeners;
 	Class<T> dataType;
-			
+	
+	// TODO remove this constructor
 	public Event() {
 		listeners = new ArrayList<Listener<T>>();
 	}
 	
+	/**
+	 * Extra constructor to explicitly provide the argument data type so it's usable. 
+	 * Finding the actual class of a type parameter is nigh impossible, so just provide it explicitly 
+	 * for other classes to use.
+	 * @param argType 
+	 */
 	public Event(Class<T> argType) {
 		this();
 		this.dataType = argType;
@@ -50,12 +57,12 @@ public class Event<T> {
 	}
 
 	public synchronized void removeListener(Listener<T> listener) {
-		if (listener instanceof Delegate) {
-			Delegate<T> delegate = (Delegate<T>) listener;
+		if (listener instanceof DelegateMethod) {
+			DelegateMethod<T> delegate = (DelegateMethod<T>) listener;
 			for (Iterator<Listener<T>> i = listeners.iterator(); i.hasNext();) {
 				Listener<T> l = i.next();
-				if (l instanceof Delegate) {
-					Delegate<T> d = (Delegate<T>) l;
+				if (l instanceof DelegateMethod) {
+					DelegateMethod<T> d = (DelegateMethod<T>) l;
 					if (d.listenerObject == delegate.listenerObject && d.callbackMethodName.equals(delegate.callbackMethodName)) {
 						i.remove();
 					}

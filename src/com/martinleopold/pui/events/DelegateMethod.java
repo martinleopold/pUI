@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  * @author Martin Leopold <m@martinleopold.com>
  * @param <T> Data type of the Event
  */
-class Delegate<T> implements Listener<T> {
+class DelegateMethod<T> implements Listener<T> {
 	
 	Object listenerObject;
 	String callbackMethodName;
@@ -37,44 +37,46 @@ class Delegate<T> implements Listener<T> {
 	// TODO use static factory, so it can return null if no callback is found
 	// or: raise an exception in the constructor
 	
-	Delegate(Object listenerObject, String callbackMethodName) {
+	DelegateMethod(Object listenerObject, String callbackMethodName) {
 		this.listenerObject = listenerObject;
 		this.callbackMethodName = callbackMethodName;
-
 	}
 	
 	// find callback method on instantiation, instead of in notify()
 	// need argument types to find the method
-	Delegate(Object listenerObject, String callbackMethodName, Class<T> argType) {
+	DelegateMethod(Object listenerObject, String callbackMethodName, Class<T> argType) throws NoSuchMethodException {
 		this(listenerObject, callbackMethodName);
-		
 		if (argType != null) {
-			callbackMethod = findMethod(listenerObject, callbackMethodName, argType);
-//			if (callbackMethod == null) {
-//				System.out.println("Warning: Couldn't find callback method " + callbackMethodName + "(" + argType.getName() + ")");
-//			}
+			// create explicit array arguments for findMethod
+			// Void.class != void.class == Void.TYPE
+			Class<?>[] argTypes = (argType != Void.class && argType != void.class) ? new Class<?>[] {argType} : null;
+			callbackMethod = findMethod(listenerObject, callbackMethodName, argTypes);
+			if (callbackMethod == null) {
+				throw new NoSuchMethodException();
+			}
 		}
 	}
 
 	@Override
 	public void notify(T args) {
 		if (callbackMethod == null) {
-			// create explicit array arguments for findMethod and Method.invoke
+			// create explicit array arguments for findMethod varargs parameter
 			// this avoids problems e.g. when putting args=null directly into Method.invoke an array containing a null element is passed in instead of a null array
 			Class<?>[] argTypes = (args != null) ? new Class<?>[] {args.getClass()} : null;
 			callbackMethod = findMethod(listenerObject, callbackMethodName, argTypes);
 		}
 		
 		Object[] argsArray = (args != null ) ? new Object[] {args} : null;
-		if (callbackMethod != null) {
+		if (callbackMethod != null) { // don't do anything if there is no valid method to call
 			try {
+				// create explicit array arguments for Method.invoke
 				callbackMethod.invoke(listenerObject, argsArray);
 			} catch (IllegalAccessException ex) {
-				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(DelegateMethod.class.getName()).log(Level.SEVERE, null, ex);
 			} catch (IllegalArgumentException ex) {
-				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(DelegateMethod.class.getName()).log(Level.SEVERE, null, ex);
 			} catch (InvocationTargetException ex) {
-				Logger.getLogger(Delegate.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(DelegateMethod.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 	}

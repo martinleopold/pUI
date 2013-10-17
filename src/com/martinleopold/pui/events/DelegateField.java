@@ -22,32 +22,52 @@ import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
- *
+ * A Listener that sets a field on an object when notified of an event.
  * @author Martin Leopold <m@martinleopold.com>
+ * @param <T> 
  */
 public class DelegateField<T> implements Listener<T> {
+	
 	Object listenerObject;
 	String fieldName;
+	
+	Field field;
 	
 	DelegateField(Object listenerObject, String fieldName) {
 		this.listenerObject = listenerObject;
 		this.fieldName = fieldName;
-		// try to find field on the object
-		Field[] declaredFields = listenerObject.getClass().getDeclaredFields();
-//		for ( Field f : declaredFields) {
-//			System.out.println(f.getName());
-//		}
 	}
+	
+	// find the field on instantiation, instead of in notify()
+	// also checks for the type of field
+	DelegateField(Object listenerObject, String fieldName, Class<T> fieldType) throws NoSuchFieldException {
+		this(listenerObject, fieldName);
+		if (fieldType != null) {
+//			System.out.println("find field of type " + fieldType);
+			field = findField(listenerObject, fieldName, fieldType);
+			if (field == null) {
+//				System.out.println("not found");
+				throw new NoSuchFieldException();
+			}
+		}
+	}
+	
+	
 	@Override
 	public void notify(T args) {
-		Field field = findField(listenerObject, fieldName);
-		try {
-			field.set(listenerObject, args);
-		} catch (IllegalArgumentException ex) {
-			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
+		if (field == null) {
+			field = findField(listenerObject, fieldName, args.getClass());
+		}
+		if (field != null) { // don't do anything if there is no valid field
+			try {
+				field.set(listenerObject, args);
+			} catch (IllegalArgumentException ex) {
+				Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
+			} catch (IllegalAccessException ex) {
+				Logger.getLogger(DelegateField.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		}
 	}
 	
@@ -55,18 +75,21 @@ public class DelegateField<T> implements Listener<T> {
 	 * Look for a Field in a Class and its superclasses.
 	 * @param c
 	 * @param name
-	 * @return 
+	 * @param type type of the field
+	 * @return the Field or null, if not found.
 	 */
-	 static Field findField(Class<?> c, String name) {
+	 static Field findField(Class<?> c, String name, Class<?> type) {
 		Field f = null;
 		try {
 			f = c.getDeclaredField(name);
+//			System.out.println(f.getType() + " =? " + type);
+			if (f.getType() != type) throw new NoSuchFieldException(); // check type
 			f.setAccessible(true);
 		} catch (NoSuchFieldException ex) {
 			// look in superclass
 			Class<?> s = c.getSuperclass();
 			if (s == null) return null;
-			else return findField(s, name);
+			else return findField(s, name, type);
 		} catch (SecurityException ex) {
 			Logger.getLogger(PUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -77,10 +100,11 @@ public class DelegateField<T> implements Listener<T> {
 	 * Look for a Field in an Object including inherited members.
 	 * @param o
 	 * @param name
-	 * @return 
+	 * @param type type of the field
+	 * @return the field or null, if not found.
 	 */
-	static Field findField(Object o, String name) {
-		return findField(o.getClass(), name);
+	static Field findField(Object o, String name, Class<?> type) {
+		return findField(o.getClass(), name, type);
 	}
 	
 }
