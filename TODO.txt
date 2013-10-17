@@ -314,10 +314,10 @@ x changes since v0.1
 Revision 3 (Friday 18.10.2013)
 ----------
 x make decisions
-* review theme system (*)
-* review widget data API
-* review method naming
+* revise theme system (*)
 * auto connect (*)
+* revise widget data API (*)
+* revise method naming
 (*) ... has progress
 
 Revision 4
@@ -333,8 +333,8 @@ Revision 5
 * Sample program
 
 
-Next
-----
+X Next
+------
 x redo column width, add a column gap
 x build p5 git
 	x update to jdk 7u40
@@ -360,7 +360,12 @@ x make decisions
 x revise widget constructors
 x auto connect and callback options
 
+
+10/17
+-----
+* incorporate feedback from Florian, Ben.
+* discuss w/Florian
 * new connection options for all widgets
 * theme revision 
-* special widget state
+* new widget state / accessors
 

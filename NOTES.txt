@@ -516,7 +516,7 @@ x how to control an int, with a slider?
 	just truncate the slider output to int. if the slider is long enough, you will get all ints in the range
 	x should a slider be able to connect to an int? (automatically truncating its value)
 
-~ how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
+x how to best encapsulate base widget state (active, hover, pressed, focus, ...). who needs to see it?
 	* maybe visible should be a method, so WidgetWithLabel can override to also hide label
 	* widget state as method or field?
 	-> needs to be publicly available (for callbacks)
@@ -565,14 +565,15 @@ x how to control an int, with a slider?
 	e.g. Button: pressed
 	e.g. Label: text
 
-~ decide on callback possibilities (onEvent, connect, attach, ...)
+x decide on callback possibilities (onEvent, connect, attach, ...)
 	specific events: onEvent(method)
-	connect to field : connectToField(fieldName)
+	connect to field : connectToField(fieldName), sets(), updates()
 		connects to the field, if it's available with the correct type. may have a fallback type
-	connect to method: connectToMethod(methodName)
-	auto connect: connect(name) -> does it connect to both, or with priorities?
-	naming alternative: attach()
-	
+	connect to method: connectToMethod(methodName), calls()
+	auto connect: connect(name) -> does it connect to both, or with priorities? naming alternative: attach()
+	* its easier to remember/handle: connection options connect to *all* functions/vars of the given name
+	* -> so scrap priorities. connect to all.
+	* -> if you don't want a connection, change the name in your program!
 
 ~ name constructor
 	keep empty constructor?

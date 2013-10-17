@@ -37,13 +37,16 @@ import processing.event.MouseEvent;
 	// boolean focus; // receives keyboard events
 	boolean active = true; // receives events (mouse, keyooard) except draw!
 	boolean visible = true; // widget is drawn (onDraw() is called in any case)
-	public boolean hovered; // mouse over
-	public boolean pressed; // mouse down
-	public boolean dragged; // mouse is dragging
+	boolean hovered; // mouse over
+	boolean pressed; // mouse down
+	boolean dragged; // mouse is dragging
 	
 	// helpers
 	float clickedMouseX, clickedMouseY;
 	float draggedDistX, draggedDistY;
+	
+	// last mouse position
+	int mx, my;
 	
 	Theme theme;
 	PFont font;
@@ -85,20 +88,13 @@ import processing.event.MouseEvent;
 		return (T)this;
 	}
 
-//	public void setActive(boolean tf) {
-//		active = tf;
-//	}
-
-	boolean isActive() {
-		return active;
-	}
-
 	void onMouseEvent(MouseEvent e) {
 		if (!isActive()) {
 			return;
 		}
 
-		int mx = e.getX(), my = e.getY();
+		mx = e.getX();
+		my = e.getY();
 		boolean isInside = isInside(mx, my); // is the mouse inside the element
 
 		switch (e.getAction()) {
@@ -177,14 +173,12 @@ import processing.event.MouseEvent;
 		PApplet p = pui.p;
 		p.pushMatrix();
 		p.pushStyle();
-		if (visible) {
+		if (isVisible()) {
 			draw(p); // only draw if visible
 		}
 		onDraw.fire(this); // onDraw Event is fired in any case
 		p.popMatrix();
 		p.popStyle();
-		
-//		test();
 	}
 	
 	void mouseEntered(float mx, float my) {
@@ -220,25 +214,11 @@ import processing.event.MouseEvent;
 	void draw(PApplet p) {
 	}
 	
-//	protected void test() {
-//		System.out.println("test()");
-//	}
-
-	Event<Widget<T>> onDraw = new Event<Widget<T>>();
-
-	public T onDraw(String methodName) {
-		Events.addListener(onDraw, pui.p, methodName);
-		visible = false; // disable default rendering. widget needs to be drawn via the onDraw callback now
-		return getThis();
-	}
-
-	Event<MouseEvent> onMouse = new Event<MouseEvent>();
-
-	public T onMouse(String methodName) {
-		Events.addListener(onMouse, pui.p, methodName);
-		return getThis();
-	}
+	/*
+	 * Base State
+	 */
 	
+	// in px
 	void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -246,6 +226,7 @@ import processing.event.MouseEvent;
 		layoutRect.y = y;
 	}
 	
+	// in px
 	void setSize(int w, int h) {
 		this.width = w;
 		this.height = h;
@@ -270,6 +251,95 @@ import processing.event.MouseEvent;
 		if (pui.layout.contains(this)) {
 			pui.layout.reLayout();
 		}
+		return getThis();
+	}
+	
+	public boolean isActive() {
+		return active;
+	}
+	
+	public boolean isVisible() {
+		return visible;
+	}
+	
+	public boolean isHovered() {
+		return hovered;
+	}
+	
+	public boolean isPressed() {
+		return pressed;
+	}
+	
+	public boolean isDragged() {
+		return dragged;
+	}
+	
+	public T activate() {
+		active = true;
+		return getThis();
+	}
+	
+	public T deactivate() {
+		active = false;
+		return getThis();
+	}
+	
+	public T show() {
+		visible = true;
+		return getThis();
+	}
+	
+	public T hide() {
+		visible = false;
+		return getThis();
+	}
+	
+	// in px
+	public int positionX() {
+		return layoutRect.x;
+	}
+	
+	// in px	
+	public int positionY() {
+		return layoutRect.y;
+	}
+	
+	// in px
+	public int width() {
+		return layoutRect.width;
+	}
+	
+	// in px	
+	public int height() {
+		return layoutRect.height;
+	}
+	
+	// relative to widget
+	public int mouseX() {
+		return mx - positionX();
+	}
+	
+	// relative to widget
+	public int mouseY() {
+		return my - positionY();
+	}
+	
+	/*
+	 * Events / Callbacks
+	 */
+
+	Event<Widget<T>> onDraw = new Event<Widget<T>>();
+
+	public T onDraw(String methodName) {
+		Events.addListener(onDraw, pui.p, methodName);
+		visible = false; // disable default rendering. widget needs to be drawn via the onDraw callback now
+		return getThis();
+	}
+
+	Event<MouseEvent> onMouse = new Event<MouseEvent>();
+
+	public T onMouse(String methodName) {
+		Events.addListener(onMouse, pui.p, methodName);
 		return getThis();
 	}
 }
