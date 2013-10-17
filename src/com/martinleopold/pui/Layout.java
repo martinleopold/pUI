@@ -62,7 +62,7 @@ final class Layout {
 		int totalWidth = r.width + 2*paddingX; // total widget width (including padding)
 		int totalHeight = r.height + 2*paddingY; // total widget height (including padding)
 		
-		// ceck if we flow out at the bottom
+		// check if we flow out at the bottom
 //		System.out.println("nextX:" + nextX + " nextY: " + nextY + " totalHeight:" + totalHeight + " height: " + height);
 		if (nextY + totalHeight > height) {
 //			System.out.println("try new column");
