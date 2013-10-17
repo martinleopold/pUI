@@ -86,16 +86,4 @@ public class VSlider extends Slider {
 	void mouseDragged(int button, float mx, float my, float dx, float dy) {
 		setValue(my);
 	}
-	
-	@Override
-	public VSlider min(float min) {
-		super.min(min);
-		return getThis();
-	}
-	
-	@Override
-	public VSlider max(float max) {
-		super.max(max);
-		return getThis();
-	}
 }
