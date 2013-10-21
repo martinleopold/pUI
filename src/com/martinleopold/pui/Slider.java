@@ -114,7 +114,7 @@ public class Slider extends WidgetWithLabel<Slider> {
 	}
 	
 	public Slider value(float value) {
-		this.value = value();
+		this.value = value;
 		return getThis();
 	}
 	
