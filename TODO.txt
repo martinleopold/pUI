@@ -326,6 +326,7 @@ Revision 4
 	* range slider
 	* text input
 	* multi select / drop down
+	* color picker
 
 Revision 5
 ----------
@@ -367,6 +368,16 @@ x incorporate feedback from Florian, Ben.
 x discuss w/Florian
 x new widget state / accessors
 x new connection options for all widgets
-* theme revision 
+/ theme revision 
 
 
+10/21
+-----
+* notes from pixdance project
+* theme revision
+* method naming
+* put out rev.3
+
+* check fonts w/beniamin
+* rework theme legibility (again)
+	* color picker

@@ -695,3 +695,22 @@ Documentation
 -------------
 docco. not really usable with java (out of the box). atlassian-docco (for java) has loads of dependencies
 processing docs. web/index.html -> just write it in html. use prettyfy.js or highlight.js for code
+
+
+First use in real Project
+-------------------------
+* Worked quite well, overall!
+* use label for displaying a var. 
+	* easily putting ints and stuff in. 
+	* relayout problem?
+* simple hotkeys for buttons.
+* need multitoggle
+	* switching modes in a project
+* color picker (hsb, rgb)
+* widget initial values
+	* sync, when a var is connected to a widget?
+* setting the size of pui (how many cols)
+* easier setting themes
+* themes need to be legible. (std theme is not!)
+* which std. font?
+	* NewMedia fett is not readable that well anymore.
