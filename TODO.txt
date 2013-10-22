@@ -376,11 +376,10 @@ x notes from pixdance project
 
 10/22
 -----
-* color picker
-* rework theme legibility (again)
+x color picker
+/ rework theme legibility (again)
 * theme revision
 * method naming
 * put out rev.3
 * check fonts w/beniamin
 
-* name change pUI -> PUI

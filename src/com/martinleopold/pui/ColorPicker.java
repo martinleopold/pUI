@@ -24,9 +24,10 @@ import processing.core.PApplet;
  * @author martinleopold
  */
 public class ColorPicker extends Widget<ColorPicker> {
-	int color;
+	float h, s, b; // need to save color components seperately
+	int color; // the resulting color
 	
-	// helpers
+// helpers
 //	int hHeight, sHeight, bHeight; // height of the individual sliders
 	
 	ColorPicker(PUI pui, int width, int height) {
@@ -39,11 +40,13 @@ public class ColorPicker extends Widget<ColorPicker> {
 		return this;
 	}
 	
-	public int color() {
+	// color() doesn't currently work with the PDE, since it's treated as a type
+	public int getColor() {
 		return color;
 	}
 	
-	public ColorPicker color(int color) {
+	// color() doesn't currently work with the PDE, since it's treated as a type
+	public ColorPicker setColor(int color) {
 		this.color = color;
 		return getThis();
 	}
@@ -65,29 +68,36 @@ public class ColorPicker extends Widget<ColorPicker> {
 		int innerHeight = height -2;
 		int innerWidth = width - 2;
 		int hHeight = innerHeight / 3;
-		float hue = p.hue(color);
-		float saturation = p.saturation(color);
-		float brightness = p.brightness(color);
-		drawCycle(p, x+1, y+1, innerWidth, hHeight, hue / 255);
+		drawCycle(p, x+1, y+1, innerWidth, hHeight, h / 255);
 		
 		// saturation selector
 		int sHeight = (innerHeight - hHeight) / 2;
 		p.pushStyle();
 		p.colorMode(PApplet.HSB);
+		int toColor = p.color(h, 255, 255);
+		p.popStyle();
 		drawGradient(p, x+1, y+1+hHeight, innerWidth, sHeight, 
-				p.color(hue, 0, brightness), p.color(hue, 255, brightness), saturation / 255 );
+				p.color(255), toColor, s / 255 );
 		
 		// brightness selector
 		int bHeight = innerHeight - hHeight - sHeight;
 		drawGradient(p, x+1, y+1+hHeight+sHeight, innerWidth, bHeight, 
-				p.color(hue, saturation, 0), p.color(hue, saturation, 255), brightness / 255 );
-		p.popStyle();
+				p.color(0), toColor, b / 255 );
 	}
 	
-	void drawMark(PApplet p, int x, int y, int w, int h, float mark) {
-		if (clicked) p.stroke(theme.outlineHighlight); else p.stroke(theme.outline);
+	void drawMark(PApplet p, int x, int y, int w, int h, float mark, int underlyingColor) {
 		int markX = PApplet.round(x + mark * (w-1));
-		p.line(markX, y, markX, y+h-1);
+		
+		// marker outside
+		if (clicked) p.stroke(theme.outlineHighlight);
+		else p.stroke(theme.outline);
+		p.noFill();
+		p.rect(markX-1, y, 2, h-1);
+		
+		// marker inside
+		p.stroke(theme.background);
+		p.line(markX, y+1, markX, y+h-2);
+				//p.line(markX, y, markX, y+h-1);
 	}
 	
 	// draw a gradient with a tickmark
@@ -99,7 +109,7 @@ public class ColorPicker extends Widget<ColorPicker> {
 			p.line(x+i, y, x+i, y+h-1);
 		}
 		// draw mark
-		drawMark(p, x, y, w, h, mark);
+		drawMark(p, x, y, w, h, mark, p.lerpColor(from, to, mark));
 	}
 	
 	void drawCycle(PApplet p, int x, int y, int w, int h, float mark) {
@@ -111,30 +121,31 @@ public class ColorPicker extends Widget<ColorPicker> {
 			p.stroke(a*255, 255, 255);
 			p.line(x+i, y, x+i, y+h-1);
 		}
+		int underlyingColor = p.color(mark*255, 255, 255);
 		p.popStyle();
 		
 		// draw mark
-		drawMark(p, x, y, w, h, mark);
+		drawMark(p, x, y, w, h, mark, underlyingColor);
 	}
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
 //		sliding = true;
-		setValue(mx, my);
+		setColor(mx, my);
 	}
 	
 	@Override
 	void mouseDragged(int button, float mx, float my, float dx, float dy) {
-		setValue(mx, my);
+		setColor(mx, my);
 	}
 	
-	@Override
-	void mouseReleased(int button, float mx, float my) {
-//		label.drawHighlight = false;
-//		sliding = false;
-	}
+//	@Override
+//	void mouseReleased(int button, float mx, float my) {
+////		label.drawHighlight = false;
+////		sliding = false;
+//	}
 	
-	void setValue(float mx, float my) {
+	void setColor(float mx, float my) {
 		int innerHeight = height - 2;
 		int hHeight = innerHeight / 3;
 		int sHeight = (innerHeight - hHeight) / 2;
@@ -147,21 +158,18 @@ public class ColorPicker extends Widget<ColorPicker> {
 		// b: [y+1+hHeight+sHeight, y+hHeight+sHeight+bHeight]
 		mx = PApplet.constrain(mx, x+1, x+width-2);
 		float value = PApplet.map(mx, x+1, x+width-2, 0, 255);
-		System.out.println("value: " + value);
 		
+
+		if ( my >= y+1 && my <= y+hHeight) {
+			h = value;
+		} else if (my >= y+1+hHeight && my <= y+hHeight+sHeight) {
+			s = value;
+		} else if (my >= y+1+hHeight+sHeight && my <= y+hHeight+sHeight+bHeight) {
+			b = value;
+		}
 		p.pushStyle();
 		p.colorMode(PApplet.HSB);
-		if ( my >= y+1 && my <= y+hHeight) {
-			color = p.color(value, p.saturation(color), p.brightness(color));
-			System.out.println("setting h");
-		} else if (my >= y+1+hHeight && my <= y+hHeight+sHeight) {
-			color = p.color(p.hue(color), value, p.brightness(color));
-			System.out.println("setting s");
-		} else if (my >= y+1+hHeight+sHeight && my <= y+hHeight+sHeight+bHeight) {
-			color = p.color(p.hue(color), p.saturation(color), value);
-			System.out.println("setting b");
-		}
-		System.out.println(p.hue(color) + " " + p.saturation(color) + " " + p.brightness(color));
+		color = p.color(h, s, b);
 		p.popStyle();
 	}
 }

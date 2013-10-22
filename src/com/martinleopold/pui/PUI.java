@@ -241,7 +241,7 @@ public final class PUI extends Rect {
 	}
 	
 	static float DEFAULT_COLORPICKER_W = 11;
-	static float DEFAULT_COLORPICKER_H = 6;
+	static float DEFAULT_COLORPICKER_H = 3;
 	public ColorPicker addColorPicker() {
 		return new ColorPicker(this, gridX2Px(DEFAULT_COLORPICKER_W), gridY2Px(DEFAULT_COLORPICKER_H));
 	}

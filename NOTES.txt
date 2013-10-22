@@ -725,3 +725,14 @@ Writing a Widget
 * override draw(PApplet) using
 * add events
 * create add method in PUI
+
+
+NOTES
+-----
+* maybe use "get" prefix for widget data getters, to indicate return of a value, and break of chaining.
+* color picker pushes CPU usage to 100%
+* color picker events, accessor names
+* color picker lock to one slider
+* color picker drag outside of bounds
+* name change pUI -> PUI 
+
