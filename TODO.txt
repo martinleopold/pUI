@@ -370,14 +370,17 @@ x new widget state / accessors
 x new connection options for all widgets
 / theme revision 
 
-
 10/21
 -----
-* notes from pixdance project
+x notes from pixdance project
+
+10/22
+-----
+* color picker
+* rework theme legibility (again)
 * theme revision
 * method naming
 * put out rev.3
-
 * check fonts w/beniamin
-* rework theme legibility (again)
-	* color picker
+
+* name change pUI -> PUI

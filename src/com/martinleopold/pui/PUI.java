@@ -240,6 +240,12 @@ public final class PUI extends Rect {
 		return l;
 	}
 	
+	static float DEFAULT_COLORPICKER_W = 11;
+	static float DEFAULT_COLORPICKER_H = 6;
+	public ColorPicker addColorPicker() {
+		return new ColorPicker(this, gridX2Px(DEFAULT_COLORPICKER_W), gridY2Px(DEFAULT_COLORPICKER_H));
+	}
+		
 	// TODO: use name as: label, retrieval handle, default callback (method or variable)
 //	public Button addButton(String name) {
 //		return null;

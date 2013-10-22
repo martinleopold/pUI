@@ -714,3 +714,14 @@ First use in real Project
 * themes need to be legible. (std theme is not!)
 * which std. font?
 	* NewMedia fett is not readable that well anymore.
+
+
+Writing a Widget
+----------------
+* Extend Widget or WidgetWithLabel
+* implement constructor (pui, width, height)
+* override getThis()
+* add data and public accessors
+* override draw(PApplet) using
+* add events
+* create add method in PUI
