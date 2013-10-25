@@ -383,7 +383,7 @@ x color picker
 x fix opengl rendering
 x fix P2D/P3D font rendering
 x theme class revision
-* method naming
+x method naming
 * put out rev.3
 * color schemes revision
 	* rework theme legibility (again)

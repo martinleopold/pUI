@@ -29,14 +29,14 @@ void keyPressed() {
       ui.toggle();
       break;
     case 'n':
-      if (++theme >= Theme.ALL.length) theme = 0;
-      ui.theme(Theme.ALL[theme]);
-      println(theme);
+      if (++theme >= ui.numThemes()) theme = 0;
+      ui.theme(theme);
+      println(theme, ui.themeNames()[theme]);
       break;
     case 'b':
-      if (--theme < 0) theme = Theme.ALL.length-1;
-      ui.theme(Theme.ALL[theme]);
-      println(theme);
+      if (--theme < 0) theme = ui.numThemes()-1;
+      ui.theme(theme);
+      println(theme, ui.themeNames()[theme]);
       break;
     case 'g':
       ui.toggleGrid();

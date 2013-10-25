@@ -10,10 +10,11 @@ Full Project Description: http://static.martinleopold.com/gsoc13/ <br/>
 Source: https://github.com/martinleopold/pUI
 
 CURRENT RELEASE: 
-v0.2 (Test Release)
+v0.3 (Test Release)
+Note: This is still alpha, so expect changes in the API.
 
 DOWNLOAD: 
-https://github.com/martinleopold/pUI/raw/v0.2/dist/pUI-508.zip
+https://github.com/martinleopold/pUI/raw/v0.3/dist/pUI-643.zip
 
 INSTALLATION:
 * Requires Processing 2.0 http://www.processing.org/download
@@ -30,8 +31,7 @@ FEATURES:
 * Create new widget by extending the Widget class
 * Automatic Column Based Layout
 * Color Themes
-* Callback Methods
-* Connect Widgets to Fields
+* Connect Widgets to Methods and Fields
 * Chainable Methods
 
 
@@ -60,39 +60,68 @@ PUI
 * toggleGrid() : PUI // toggle drawing grid
 * font(String font) : PUI // set font by name (uses createFont())
 * font(PFont font) : PUI // set font
-* theme(Theme t) : PUI // set color theme (e.g. Theme.DEFAULT, Theme.METALGEAR, Theme.MINBLACK, Theme.PEPTOBISMOL)
+* theme(int presetNo) : PUI // set color theme by number (numbers 0 to getNumThemes()-1)
+* theme(String themeName) : PUI // set color theme by name (array of names: getThemeNames())
+* numThemes() : int // get the number of preset color themes (for use with theme())
+* themeNames() : String[] // get the names of the preset color themes (for use with theme());
+
 
 All Widgets
 * position(float x, float y) : &lt;WidgetType&gt; // set widget position in grid units
 * size(float width, float height)) : &lt;WidgetType&gt; // set widget size in grid units
 * onMouse(String method) : &lt;WidgetType&gt; // method to be called when a mouse event happens. Parameters: MouseEvent
 * onDraw(String method) : &lt;WidgetType&gt; // method to be called when the widget is drawn. Parameters: &lt;WidgetType&gt;
+* isActive() : boolean // true if the widget receives mouse and keyboard events
+* isVisible() : boolean // true if the widget is drawn
+* isHovered() : boolean // true if the mouse is over the widget
+* isClicked() : boolean // true if the widget is being clicked
+* isDragged() : boolean // true if the mouse is clicked and moved over the widget
+* activate() : &lt;WidgetType&gt; // enable receiving mouse and keyboard events
+* deactivate() : &lt;WidgetType&gt; // disable receiving mouse and keyboard events
+* show() : &lt;WidgetType&gt; // show the widget
+* hide() : &lt;WidgetType&gt; // hide the widget
+* positionX() : int // x coordinate of upper left hand corner
+* positionY() : int // y coordinate of upper left hand corner
+* width() : int // width of the widget in px
+* height() : int // height of the widget in px
+* mouseX() : int // x coordinate of last mouse position relative to upper left hand corner of the widget
+* mouseY() : int // y coordinate of last mouse position relative to upper left hand corner of the widget
+
 
 Button
-* onClick(String method) : Button // method to be called when the button is clicked. Parameters: Button
-* connect(String field) : Button // name of boolean field to connect the button to
-* label(String text) : Button // set label text
+* connect(String) : Button // connect the Button to all applicable methods and fields with the given name
+* calls(String) : Button // name of a method to be called when the button is clicked. Parameters: () or Button
+* sets(String) : Button // name of a field to set when the button value changes. Type: boolean
+* label(String) : Button // set label text
 * noLabel() : Button // remove the label
-* clicked : boolean // true if the button is being clicked
+* isPressed(boolean) : Button
+* isPressed() : boolean // true if the button is being pressed down
+
 
 Toggle
-* onClick(String method) : Toggle // method to be called when the toggle is toggled. Parameters: Toggle
-* connect(String field) : Toggle // name of a boolean field to connect the toggle to
-* label(String text) : Toggle // set label text
+* connect(String) : Toggle // connect the Toggle to all applicable methods and fields with the given name
+* calls(String) : Toggle // method to be called when the toggle clicked. Parameters: boolean or Toggle
+* sets(String) : Toggle // name of a field to set when the toggle value changes. Type: boolean
+* label(String) : Toggle // set label text
 * noLabel() : Toggle // remove the label
-* on : boolean // true if the toggle is on
+* isPressed(boolean) : Toggle
+* isPressed() : boolean // true if the toggle is on
+
 
 Slider, VSlider
-* onValue(String method) : Slider // method to be called when the value is changed. Parameters: Slider
-* connect(String field) : Slider // name of a float field to connect the slider to
-* label(String text): Slider // set label text
+* connect(String) : Slider // connect the Slider to all applicable methods and fields with the given name
+* calls(String) : Slider // method to be called when the value is changed. Parameters: float or Slider
+* sets(String) : Slider // name of a field to set when the slider value changes. Type: float
+* label(String): Slider // set label text
 * noLabel() : Slider // remove the label
-* min(float min) : Slider // set minimum value
+* min(float ) : Slider // set minimum value
 * max(float max) : Slider // set maximum value
-* value : float // current value of the slider between 0 and 1
+* value() : float // current value of the slider between 0 and 1
+
 
 Label
-* text(String text) : Label // set label text
+* text(String) : Label // set label text
 * small() : Label // use small size
 * medium() : Label // use medium size
 * large() : Label // use large size
+* text() : String

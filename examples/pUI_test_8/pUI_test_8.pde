@@ -9,8 +9,11 @@ boolean b2Value;
 boolean t2Value;
 float s2Value;
 
+Slider s;
+
 void setup() {
   size(500, 500);
+  noSmooth();
   
   ui = PUI.init(this).size(300, height);
 //  ui.position(10,10);
@@ -20,27 +23,27 @@ void setup() {
   
   ui.addLabel("Buttons");
   ui.newRow();
-  ui.addButton().label("b1").onClick("buttonClick");
-  ui.addButton().label("b2").connect("b2Value");
+  ui.addButton().label("b1").calls("buttonClick");
+  ui.addButton().label("b2").sets("b2Value");
   ui.addButton().label("b3").onMouse("mouseEvent");
   ui.addButton().label("b4").onDraw("drawEvent");
   ui.addDivider();
   
   ui.addLabel("Toggles");
   ui.newRow();
-  ui.addToggle().label("t1").onToggle("toggleToggled");
-  ui.addToggle().label("t2").connect("t2Value");
+  ui.addToggle().label("t1").calls("toggleToggled");
+  ui.addToggle().label("t2").sets("t2Value");
   ui.addToggle().label("t3");
   ui.addToggle().label("t4");
   ui.addDivider();
   
   ui.addLabel("Sliders");
-  ui.addSlider().label("s1").onValue("sliderValue").max(100);
-  ui.addSlider().label("s2").connect("s2Value");
+  s = ui.addSlider().label("s1").calls("sliderValue").max(100);
+  ui.addSlider().label("s2").sets("s2Value");
   ui.addDivider();
   
   ui.addLabel("VSliders"); ui.newRow();
-  ui.addVSlider().label("v1").onValue("vSliderValue");
+  ui.addVSlider().label("v1").calls("vSliderValue");
   ui.addVSlider().label("v2");
   
   ui.newColumn();
@@ -81,21 +84,22 @@ void draw() {
 // callback for b1
 void buttonClick(Button b) {
   println("b1 clicked");
+  s.value(50);
 }
 
 // callback for t1
 void toggleToggled(Toggle t) {
-  println("t1 toggled. value=" + t.on);
+  println("t1 toggled. value=" + t.isPressed());
 }
 
 // callback for s1
 void sliderValue(Slider s) {
-  println("s1 value=" + s.value);
+  println("s1 value=" + s.value());
 }
 
 // callback for s1
-void vSliderValue(VSlider v) {
-  println("v1 value=" + v.value);
+void vSliderValue(float v) {
+  println("v1 value=" + v);
 }
 
 // callback for all mouseEvents in b3
@@ -105,9 +109,6 @@ void mouseEvent(MouseEvent e) {
 
 // override how b4 is drawn here
 void drawEvent(Button b) {
-  //println("drawEvent: " + b);
+  //println("drawEvent: " + b); 
 }
-
-
-
 

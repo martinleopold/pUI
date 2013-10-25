@@ -737,3 +737,6 @@ NOTES
 * name change pUI -> PUI 
 * performance: drawing operations (pushs/pops)
 * P3D rects render differently (1px right/down)
+* naming conventions? getters begin with "get" or "is", to indicate a break of chaining.
+* empty constructor for label
+* VSlider callback only works with Slider argument
