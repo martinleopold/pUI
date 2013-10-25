@@ -381,6 +381,7 @@ x color picker
 10/25
 -----
 x fix opengl rendering
+x fix P2D/P3D font rendering
 * theme class revision
 * method naming
 * put out rev.3

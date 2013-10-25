@@ -68,12 +68,12 @@ public final class PUI extends Rect {
 		p.registerMethod("draw", peh);
 		
 		theme(Theme.DEFAULT);
-		font("SourceSansPro-Semibold.ttf"); // this loads the TTF from the data/ bundled in the jar. simple as that
 		setLayout(new Layout(width, height, 0, 0, 0));
 		grid(DEFAULT_GRID_X, DEFAULT_GRID_Y);
 		padding(DEFAULT_PADDING_X, DEFAULT_PADDING_Y); // also sets layout padding
 		columnWidth(DEFAULT_COLUMNWIDTH);
 		columnGap(DEFAULT_COLUMNGAP);
+		font("SourceSansPro-Semibold.ttf"); // this loads the TTF from the data/ bundled in the jar. simple as that // needs to be done after grid
 		
 		visible = true;
 	}
@@ -382,7 +382,7 @@ public final class PUI extends Rect {
 	}
 	
 	public PUI font(String fontName) {
-		return font(p.createFont(fontName, DEFAULT_FONTSIZE_LARGE));
+		return font(p.createFont(fontName, 2*gridY2Px(DEFAULT_FONTSIZE_LARGE))); // double the size to gain some headroom
 	}
 	
 	
