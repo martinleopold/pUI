@@ -17,6 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.martinleopold.pui;
+
+import java.lang.reflect.Field;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author martinleopold
@@ -471,14 +476,7 @@ public class Theme {
 		color( 213, 213, 213, 237 )
 	);
 	
-	public final static Theme[] ALL = {DEFAULT, HACKER, HIPSTER, DIETER, BARBIE, WINDOWS, OSX, 
-		ZOOLANDER, VEGAN2, BERLIN, METALGEAR, TEALLIME, VEGAN, RUSTIC, MIDNIGHT, MINBLUE, LIMESTONE, 
-		SPEARMINT, MINPINK, PEPTOBISMOL, BILEBLUE, COOLCLAY, BLUEBLUE, PINKPANTHER, MAROON, 
-		PINKLATTE, MINGREEN, HELLOYELLOW, TEALTEAL, RUSTICORANGE, TEALSALMON, CITRUSBLUE,
-		LIMEPURPLE, LIMESTONE2, COOLPURPLE, GRAYRED, METALGEAR2, LIGHTPINK, MINPINK2, MAXPINK,
-		MINYELLOW, MINLIME, MINORANGE, GRAYDAY, MINBLACK};
-	
-	public static enum Preset {
+	static enum Preset {
 		DEFAULT, HACKER, HIPSTER, DIETER, BARBIE, WINDOWS, OSX, 
 		ZOOLANDER, VEGAN2, BERLIN, METALGEAR, TEALLIME, VEGAN, RUSTIC, MIDNIGHT, MINBLUE, LIMESTONE, 
 		SPEARMINT, MINPINK, PEPTOBISMOL, BILEBLUE, COOLCLAY, BLUEBLUE, PINKPANTHER, MAROON, 
@@ -488,12 +486,19 @@ public class Theme {
 	}
 	
 	// get preset by enum
-	public static Theme preset(Preset preset) {
-		switch (preset) {
-			case DEFAULT:
-				return DEFAULT;
-			case HACKER:
-				return HACKER;
+	static Theme preset(Preset preset) {
+		try {
+			// get preset by reflection
+			Field f = Theme.class.getField(preset.name()); // get field with same name as preset
+			return (Theme)f.get(null);
+		} catch (NoSuchFieldException ex) {
+			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SecurityException ex) {
+			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IllegalArgumentException ex) {
+			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return DEFAULT;
 	}

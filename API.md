@@ -22,7 +22,10 @@ PUI
 * toggleGrid() : PUI // toggle drawing grid
 * font(String font) : PUI // set font by name (uses createFont())
 * font(PFont font) : PUI // set font
-* theme(Theme t) : PUI // set color theme (e.g. Theme.DEFAULT, Theme.METALGEAR, Theme.MINBLACK, Theme.PEPTOBISMOL)
+* theme(int presetNo) : PUI // set color theme by number (numbers 0 to getNumThemes()-1)
+* theme(String themeName) : PUI // set color theme by name (array of names: getThemeNames())
+* getNumThemes() : int // get the number of preset color themes (for use with theme())
+* getThemeNames() : String[] // get the names of the preset color themes (for use with theme());
 
 
 All Widgets

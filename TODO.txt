@@ -382,7 +382,7 @@ x color picker
 -----
 x fix opengl rendering
 x fix P2D/P3D font rendering
-* theme class revision
+x theme class revision
 * method naming
 * put out rev.3
 * color schemes revision
