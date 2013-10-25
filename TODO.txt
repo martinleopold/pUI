@@ -386,7 +386,7 @@ x theme class revision
 x method naming
 x put out rev.3
 x add opacity to color picker
-* add label to color picker
+x add label to color picker
 * color schemes revision
 	* rework theme legibility (again)
 	* check fonts w/beniamin

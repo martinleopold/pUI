@@ -23,7 +23,7 @@ import processing.core.PApplet;
  *
  * @author martinleopold
  */
-public class ColorPicker extends Widget<ColorPicker> {
+public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 	float h, s, b, a; // need to save color components seperately
 	int color; // the resulting color
 	
@@ -31,7 +31,7 @@ public class ColorPicker extends Widget<ColorPicker> {
 //	int hHeight, sHeight, bHeight; // height of the individual sliders
 	
 	ColorPicker(PUI pui, int width, int height) {
-		super(pui, width, height, true);
+		super(pui, width, height);
 		a = 255;
 		color = pui.p.color(h,s,b, a);
 	}
@@ -42,12 +42,12 @@ public class ColorPicker extends Widget<ColorPicker> {
 	}
 	
 	// color() doesn't currently work with the PDE, since it's treated as a type
-	public int color() {
+	public int col() {
 		return color;
 	}
 	
 	// color() doesn't currently work with the PDE, since it's treated as a type
-	public ColorPicker color(int color) {
+	public ColorPicker col(int color) {
 		this.color = color;
 		return getThis();
 	}
