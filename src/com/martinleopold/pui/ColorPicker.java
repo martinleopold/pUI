@@ -29,6 +29,9 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 	float h, s, b, a; // need to save color components seperately
 	int color; // the resulting color
 	
+	enum Slider { NONE, H, S, B, A}
+	Slider sliding; // the slider currently in use
+	
 // helpers
 //	int hHeight, sHeight, bHeight; // height of the individual sliders
 	
@@ -36,6 +39,7 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 		super(pui, width, height);
 		a = 255;
 		color = pui.p.color(h,s,b, a);
+		sliding = Slider.NONE;
 	}
 	
 	@Override
@@ -146,45 +150,63 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 	
 	@Override
 	void mousePressed(int button, float mx, float my) {
-//		sliding = true;
-		setColor(mx, my);
-	}
-	
-	@Override
-	void mouseDragged(int button, float mx, float my, float dx, float dy) {
-		setColor(mx, my);
-	}
-	
-//	@Override
-//	void mouseReleased(int button, float mx, float my) {
-////		label.drawHighlight = false;
-////		sliding = false;
-//	}
-	
-	void setColor(float mx, float my) {
 		int innerHeight = height - 2;
 		int hHeight = innerHeight / 4;
 		int sHeight = (innerHeight - hHeight) / 3;
 		int bHeight = (innerHeight - hHeight - sHeight) / 2;
 		int aHeight = innerHeight - hHeight - sHeight - bHeight;
-		PApplet p = pui.p;
-		
 		// which slider was clicked
 		// h: [y+1, y+hHeight
 		// s: [y+1+hHeight, y+hHeight+sHeight]
 		// b: [y+1+hHeight+sHeight, y+hHeight+sHeight+bHeight]
-		mx = PApplet.constrain(mx, x+1, x+width-2);
-		float value = PApplet.map(mx, x+1, x+width-2, 0, 255);
 
 		if ( my >= y+1 && my <= y+hHeight) {
-			h = value;
+			sliding = Slider.H;
 		} else if (my >= y+1+hHeight && my <= y+hHeight+sHeight) {
-			s = value;
+			sliding = Slider.S;
 		} else if (my >= y+1+hHeight+sHeight && my <= y+hHeight+sHeight+bHeight) {
-			b = value;
+			sliding = Slider.B;
 		} else if (my >= y+1+hHeight+sHeight+bHeight && my <= y+hHeight+sHeight+bHeight+aHeight) {
-			a = value;
+			sliding = Slider.A;
 		}
+				
+		setColor(mx);
+		label.drawHighlight = true;
+	}
+	
+	@Override
+	void mouseDragged(int button, float mx, float my, float dx, float dy) {
+		setColor(mx);
+	}
+	
+	@Override
+	void mouseReleased(int button, float mx, float my) {
+//		label.drawHighlight = false;
+		sliding = Slider.NONE;
+	}
+	
+	void setColor(float mx) {
+		mx = PApplet.constrain(mx, x+1, x+width-2);
+		float value = PApplet.map(mx, x+1, x+width-2, 0, 255);
+		
+		switch (sliding) {
+			case H: 
+				h = value; 
+				break;
+			case S:
+				s = value;
+				break;
+			case B:
+				b = value;
+				break;
+			case A:
+				a = value;
+				break;
+			default:
+				return;
+		}
+		
+		PApplet p = pui.p;
 		p.pushStyle();
 		p.colorMode(PApplet.HSB);
 		color = p.color(h, s, b, a);
