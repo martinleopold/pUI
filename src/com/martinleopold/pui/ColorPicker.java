@@ -17,6 +17,8 @@
  */
 package com.martinleopold.pui;
 
+import com.martinleopold.pui.events.Event;
+import com.martinleopold.pui.events.Events;
 import processing.core.PApplet;
 
 /**
@@ -49,6 +51,11 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 	// color() doesn't currently work with the PDE, since it's treated as a type
 	public ColorPicker col(int color) {
 		this.color = color;
+		PApplet p = pui.p;
+		h = p.hue(color);
+		s = p.saturation(color);
+		b = p.brightness(color);
+		a = p.alpha(color);
 		return getThis();
 	}
 	
@@ -168,7 +175,6 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 		// b: [y+1+hHeight+sHeight, y+hHeight+sHeight+bHeight]
 		mx = PApplet.constrain(mx, x+1, x+width-2);
 		float value = PApplet.map(mx, x+1, x+width-2, 0, 255);
-		
 
 		if ( my >= y+1 && my <= y+hHeight) {
 			h = value;
@@ -183,5 +189,41 @@ public class ColorPicker extends WidgetWithLabel<ColorPicker> {
 		p.colorMode(PApplet.HSB);
 		color = p.color(h, s, b, a);
 		p.popStyle();
+		
+		onColorInt.fire(color);
+		onColor.fire(this);
+	}
+	
+	/*
+	 * Callbacks
+	 */
+	
+	Event<ColorPicker> onColor = Events.createEvent(ColorPicker.class);
+	Event<Integer> onColorInt = Events.createEvent(int.class);
+	public ColorPicker onColor(String methodName) {
+		if (Events.addListener(onColorInt, pui.p, methodName)) {
+			System.out.println("ColorPicker -> " + methodName + "(int)");
+		}
+		if (Events.addListener(onColor, pui.p, methodName)) {
+			System.out.println("ColorPicker -> " + methodName + "(ColorPicker)");
+		}
+		return getThis();
+	}
+	
+	public ColorPicker sets(String fieldName) {
+		if (Events.addListenerField(onColorInt, pui.p, fieldName)) {
+			System.out.println("ColorPicker -> " + fieldName);
+		}
+		return getThis();
+	}
+	
+	public ColorPicker calls(String methodName) {
+		return onColor(methodName);
+	}
+	
+	public ColorPicker connect(String name) {
+		sets(name);
+		calls(name);
+		return getThis();
 	}
 }
