@@ -74,12 +74,21 @@ public class Theme {
 		return (a << 24)  | (c & 0xffffff);
 	}
 	
+//	public final static Theme DEFAULT = new Theme(
+//		color( 0, 0, 0, 160),
+//		color( 255, 255, 255, 100),
+//		color( 255, 255, 255, 200),
+//		color( 255, 255, 255, 200),
+//		color( 255, 255, 255, 255),
+//		color( 0, 0, 0, 120 )
+//	);
+	
 	public final static Theme DEFAULT = new Theme(
-		color( 0, 0, 0, 160),
-		color( 255, 255, 255, 100),
-		color( 255, 255, 255, 200),
-		color( 255, 255, 255, 200),
-		color( 255, 255, 255, 255),
+		color( 0, 0, 0, 160 ),
+		color( 255, 255, 255, 100 ),
+		color( 255, 255, 255, 200 ),
+		color( 228, 228, 228, 185 ),
+		color( 255, 255, 255, 255 ),
 		color( 0, 0, 0, 120 )
 	);
 	
