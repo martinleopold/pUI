@@ -386,6 +386,10 @@ public final class PUI extends Rect {
 	public String[] themeNames() {
 		return Theme.presetNames();
 	}
+	
+	public Theme theme() {
+		return this.theme;
+	}
 
 	static float DEFAULT_FONTSIZE_SMALL = 1; 
 	static float DEFAULT_FONTSIZE_MEDIUM = 1.5f;

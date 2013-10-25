@@ -33,7 +33,7 @@ public class Theme {
 	public int outlineHighlight;
 	public int fill;
 	public int fillHighlight;
-	public int overlay;
+	public int overlay; // GUI Overlay Bacgkround Color
 	
 	Theme(int background, int outline, int outlineHighlight, int fill, int fillHighlight, int overlay) {
 		this.background = background;
@@ -52,6 +52,10 @@ public class Theme {
 //		fill = t.fill;
 //		fillHighlight = t.fillHighlight;
 //	}
+	
+	Theme copy() {
+		return new Theme(background, outline, outlineHighlight, fill, fillHighlight, overlay);
+	}
 	
 	static int color(int r, int g, int b, int a) {
       if (a > 255) a = 255; else if (a < 0) a = 0;
@@ -490,7 +494,7 @@ public class Theme {
 		try {
 			// get preset by reflection
 			Field f = Theme.class.getField(preset.name()); // get field with same name as preset
-			return (Theme)f.get(null);
+			return ((Theme)f.get(null)).copy(); // return a copy so presets aren't overwritten
 		} catch (NoSuchFieldException ex) {
 			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (SecurityException ex) {
@@ -500,7 +504,7 @@ public class Theme {
 		} catch (IllegalAccessException ex) {
 			Logger.getLogger(Theme.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return DEFAULT;
+		return DEFAULT.copy();
 	}
 	
 	// get preset by int
