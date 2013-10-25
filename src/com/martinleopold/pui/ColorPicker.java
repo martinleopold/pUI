@@ -24,7 +24,7 @@ import processing.core.PApplet;
  * @author martinleopold
  */
 public class ColorPicker extends Widget<ColorPicker> {
-	float h, s, b; // need to save color components seperately
+	float h, s, b, a; // need to save color components seperately
 	int color; // the resulting color
 	
 // helpers
@@ -32,7 +32,8 @@ public class ColorPicker extends Widget<ColorPicker> {
 	
 	ColorPicker(PUI pui, int width, int height) {
 		super(pui, width, height, true);
-		color = pui.p.color(0);
+		a = 255;
+		color = pui.p.color(h,s,b, a);
 	}
 	
 	@Override
@@ -41,12 +42,12 @@ public class ColorPicker extends Widget<ColorPicker> {
 	}
 	
 	// color() doesn't currently work with the PDE, since it's treated as a type
-	public int getColor() {
+	public int color() {
 		return color;
 	}
 	
 	// color() doesn't currently work with the PDE, since it's treated as a type
-	public ColorPicker setColor(int color) {
+	public ColorPicker color(int color) {
 		this.color = color;
 		return getThis();
 	}
@@ -67,22 +68,30 @@ public class ColorPicker extends Widget<ColorPicker> {
 		// hue selector
 		int innerHeight = height -2;
 		int innerWidth = width - 2;
-		int hHeight = innerHeight / 3;
+		int hHeight = innerHeight / 4;
 		drawCycle(p, x+1, y+1, innerWidth, hHeight, h / 255);
 		
 		// saturation selector
-		int sHeight = (innerHeight - hHeight) / 2;
+		int sHeight = (innerHeight - hHeight) / 3;
 		p.pushStyle();
 		p.colorMode(PApplet.HSB);
 		int toColor = p.color(h, 255, 255);
+		int fromAlpha = p.color(h,s,b,0);
+//		int toAlpha = p.color(h,s,b,255);
 		p.popStyle();
 		drawGradient(p, x+1, y+1+hHeight, innerWidth, sHeight, 
 				p.color(255), toColor, s / 255 );
 		
 		// brightness selector
-		int bHeight = innerHeight - hHeight - sHeight;
+		int bHeight = (innerHeight - hHeight - sHeight) / 2;
 		drawGradient(p, x+1, y+1+hHeight+sHeight, innerWidth, bHeight, 
 				p.color(0), toColor, b / 255 );
+		
+		// alpha/opacity selector [transparent, opaque]
+		int aHeight = innerHeight - hHeight - sHeight - bHeight;
+		
+		drawGradient(p, x+1, y+1+hHeight+sHeight+bHeight, innerWidth, aHeight, 
+				fromAlpha, toColor, a / 255 );
 	}
 	
 	void drawMark(PApplet p, int x, int y, int w, int h, float mark, int underlyingColor) {
@@ -147,9 +156,10 @@ public class ColorPicker extends Widget<ColorPicker> {
 	
 	void setColor(float mx, float my) {
 		int innerHeight = height - 2;
-		int hHeight = innerHeight / 3;
-		int sHeight = (innerHeight - hHeight) / 2;
-		int bHeight = innerHeight - hHeight - sHeight;
+		int hHeight = innerHeight / 4;
+		int sHeight = (innerHeight - hHeight) / 3;
+		int bHeight = (innerHeight - hHeight - sHeight) / 2;
+		int aHeight = innerHeight - hHeight - sHeight - bHeight;
 		PApplet p = pui.p;
 		
 		// which slider was clicked
@@ -166,10 +176,12 @@ public class ColorPicker extends Widget<ColorPicker> {
 			s = value;
 		} else if (my >= y+1+hHeight+sHeight && my <= y+hHeight+sHeight+bHeight) {
 			b = value;
+		} else if (my >= y+1+hHeight+sHeight+bHeight && my <= y+hHeight+sHeight+bHeight+aHeight) {
+			a = value;
 		}
 		p.pushStyle();
 		p.colorMode(PApplet.HSB);
-		color = p.color(h, s, b);
+		color = p.color(h, s, b, a);
 		p.popStyle();
 	}
 }
