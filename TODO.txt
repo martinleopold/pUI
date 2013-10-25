@@ -320,13 +320,13 @@ x auto connect (*)
 * revise method naming
 (*) ... has progress
 
-Revision 4
+Revision 4 (Friday 25.10.2013)
 ----------
 * extra widgets
-	* range slider
-	* text input
-	* multi select / drop down
+	* range slider (!)
+	* text input (!) 
 	* color picker
+	* multi select / drop down
 
 Revision 5
 ----------
@@ -377,9 +377,13 @@ x notes from pixdance project
 10/22
 -----
 x color picker
-/ rework theme legibility (again)
-* theme revision
+
+10/25
+-----
+x fix opengl rendering
+* theme class revision
 * method naming
 * put out rev.3
-* check fonts w/beniamin
-
+* color schemes revision
+	* rework theme legibility (again)
+	* check fonts w/beniamin

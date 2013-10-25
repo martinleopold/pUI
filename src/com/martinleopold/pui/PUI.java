@@ -146,7 +146,12 @@ public final class PUI extends Rect {
 			if (!visible) return;
 			
 			p.pushMatrix();
-			p.resetMatrix();
+			// reset the modelview matrix to it's inital state
+			if (p.g != null && p.g instanceof processing.opengl.PGraphics3D) {
+				p.camera(); // camera transformations
+			} else {
+				p.resetMatrix(); // identity matrix
+			}
 			
 			p.translate(x,y);
 			p.pushStyle();
@@ -158,7 +163,7 @@ public final class PUI extends Rect {
 			for (Widget<?> w : widgets) {
 				w.onDraw();
 			}
-
+			
 			p.popMatrix();
 		}
 	}

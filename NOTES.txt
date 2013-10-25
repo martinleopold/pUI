@@ -735,4 +735,5 @@ NOTES
 * color picker lock to one slider
 * color picker drag outside of bounds
 * name change pUI -> PUI 
+* performance: drawing operations (pushs/pops)
 
