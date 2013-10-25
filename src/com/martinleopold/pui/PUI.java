@@ -379,11 +379,11 @@ public final class PUI extends Rect {
 		return theme(Theme.preset(presetName));
 	}
 	
-	public int getNumThemes() {
+	public int numThemes() {
 		return Theme.numPresets();
 	}
 			
-	public String[] getThemeNames() {
+	public String[] themeNames() {
 		return Theme.presetNames();
 	}
 
