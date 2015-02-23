@@ -1,4 +1,4 @@
-<project name="pUI" default="clean" basedir=".">
+<project name="pUI" default="build" basedir=".">
 
     
 <!--	
@@ -275,7 +275,7 @@ ${line}
         </javadoc>
     </target>
     
-    <target name="generate.libprops" if="is.normal">
+    <target name="generate.libprops">
         <property name="libprops.destination" location="${project.tmp}/${project.name}/library.properties"/>
         <copy file="${libprops.source}" tofile="${libprops.destination}" />
         <antcall target="util.parseFile">
