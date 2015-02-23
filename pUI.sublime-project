@@ -1,0 +1,34 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+
+	"build_systems":
+	[
+		{
+			"name": "Ant",
+			"cmd": ["ant", "build-fast"],
+			"working_dir": "${project_path}",
+			"file_regex": "^ *\\[javac\\] (.+):([0-9]+):() (.*)$",
+			"selector": "source.java",
+			"variants": [
+				{
+					"name": "Clean",
+					"cmd": ["ant", "clean"]
+				},
+				{
+					"name": "Build Full",
+					"cmd": ["ant", "build"]
+				},
+				{
+					"name": "Run",
+					"cmd": ["ant", "run"]
+				}
+			]
+		}
+	]
+
+}

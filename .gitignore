@@ -17,3 +17,6 @@ Thumbs.db
 /dist/*
 !/dist/*.zip
 !/tmp/pUI/src/com/martinleopold/pui/Widget.java
+
+# sublime workspace
+.sublime-workspace
