@@ -1,4 +1,4 @@
-#Fri, 25 Oct 2013 16:26:15 +0200
+#Fri, 25 Oct 2013 18:06:32 +0200
 
 # Copyright (C) 2013 Martin Leopold <m@martinleopold.com>
 #
@@ -17,4 +17,4 @@
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 # build number of *next* version. (auto increments at the end of each *sucessful* build)
-build.number=654
+build.number=660

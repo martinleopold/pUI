@@ -2,7 +2,7 @@ PUI
 * PUI.init(PApplet) : PUI // init the library with the sketch (e.g PUI.init(this))
 * size(int width, int height) : PUI // set the size of the GUI overlay in px
 * position(int x, int y) : PUI // set the position of the GUI overlay in px
-<br>
+
 * addButton() : Button // add a Button
 * addToggle() : Toggle // add a Toggle
 * addSlider() : Slider // add a Slider (horizontal)
@@ -11,7 +11,7 @@ PUI
 * addLabel(String text) : Label // add a Label
 * newRow() : PUI // following widgets will be created in the next row
 * newColumn() : PUI // following widgets will be created in another column
-<br>
+
 * grid(int x, int y) : PUI // set grid unit in pixels
 * padding(float x, float y) : PUI // set padding (around all widgets) in grid units
 * columnWidth(float w) : PUI // set column width (in grid units). widgets including padding are fit in this width
@@ -26,8 +26,9 @@ PUI
 * theme(String themeName) : PUI // set color theme by name (array of names: getThemeNames())
 * numThemes() : int // get the number of preset color themes (for use with theme())
 * themeNames() : String[] // get the names of the preset color themes (for use with theme());
-<br>
-<br>
+
+
+
 All Widgets
 * position(float x, float y) : &lt;WidgetType&gt; // set widget position in grid units
 * size(float width, float height)) : &lt;WidgetType&gt; // set widget size in grid units
@@ -48,8 +49,9 @@ All Widgets
 * height() : int // height of the widget in px
 * mouseX() : int // x coordinate of last mouse position relative to upper left hand corner of the widget
 * mouseY() : int // y coordinate of last mouse position relative to upper left hand corner of the widget
-<br>
-<br>
+
+
+
 Button
 * connect(String) : Button // connect the Button to all applicable methods and fields with the given name
 * calls(String) : Button // name of a method to be called when the button is clicked. Parameters: () or Button
@@ -57,40 +59,46 @@ Button
 
 * label(String) : Button // set label text
 * noLabel() : Button // remove the label
-* isPressed(boolean) : Button
+* key(char k) : Button // set a key to associate with the button
+* isPressed(boolean) : Button // set the button to pressed (true) or not pressed (false)
 
 * isPressed() : boolean // true if the button is being pressed down
-<br>
-<br>
+
+
+
 Toggle
 * connect(String) : Toggle // connect the Toggle to all applicable methods and fields with the given name
 * calls(String) : Toggle // method to be called when the toggle clicked. Parameters: boolean or Toggle
 * sets(String) : Toggle // name of a field to set when the toggle value changes. Type: boolean
-<br>
+
 * label(String) : Toggle // set label text
 * noLabel() : Toggle // remove the label
-* isPressed(boolean) : Toggle
-<br>
+* key(char k) : Toggle // set a key to associate with the toggle
+* isPressed(boolean) : Toggle // set the toggle to be pressed (true) or not pressed (false)
+
 * isPressed() : boolean // true if the toggle is on
-<br>
-<br>
+
+
+
 Slider, VSlider
 * connect(String) : Slider // connect the Slider to all applicable methods and fields with the given name
 * calls(String) : Slider // method to be called when the value is changed. Parameters: float or Slider
 * sets(String) : Slider // name of a field to set when the slider value changes. Type: float
-<br>
+
 * label(String): Slider // set label text
 * noLabel() : Slider // remove the label
 * min(float ) : Slider // set minimum value
 * max(float max) : Slider // set maximum value
-<br>
+* value(float val) : Slider // set the value of the slider
+
 * value() : float // current value of the slider between 0 and 1
-<br>
-<br>
+
+
+
 Label
 * text(String) : Label // set label text
 * small() : Label // use small size
 * medium() : Label // use medium size
 * large() : Label // use large size
-<br>
-* text() : String
+
+* text() : String // get label text

@@ -167,6 +167,14 @@ import processing.event.MouseEvent;
 		if (!isActive()) {
 			return;
 		}
+		switch (e.getAction()) {
+			case KeyEvent.PRESS:
+				keyPressed(e.getKey(), e.getKeyCode());
+				break;
+			case KeyEvent.RELEASE:
+				keyReleased(e.getKey(), e.getKeyCode());
+				break;
+		}
 	}
 
 	void onDraw() {

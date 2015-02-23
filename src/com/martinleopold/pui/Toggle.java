@@ -29,6 +29,8 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	
 	// state
 	boolean pressed;
+	
+	char key; // associated key. default == 0
 			
 	public Toggle(PUI pui, int width, int height) {
 		super(pui, width, height);
@@ -60,6 +62,22 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 		pressed = !pressed;
 		onToggleBoolean.fire(pressed);
 		onToggle.fire(this);
+	}
+	
+	@Override
+	void keyPressed(int key, int keyCode) {
+		if (this.key == 0) return;
+		if (key != PApplet.CODED && key == this.key) {
+			mousePressed(0,0,0); // simulated click
+		}
+	}
+	
+	@Override
+	void keyReleased(int key, int keyCode) {
+		if (this.key == 0) return;
+		if (key != PApplet.CODED && key == this.key) {
+			mouseReleased(0,0,0); // simulated click
+		}
 	}
 	
 	/*
@@ -111,5 +129,10 @@ public class Toggle extends WidgetWithLabel<Toggle> {
 	@Override
 	protected Toggle getThis() {
 		return this;
+	}
+	
+	public Toggle key(char key) {
+		this.key = key;
+		return getThis();
 	}
 }

@@ -731,12 +731,17 @@ NOTES
 -----
 * maybe use "get" prefix for widget data getters, to indicate return of a value, and break of chaining.
 * color picker pushes CPU usage to 100%
-* color picker events, accessor names
-* color picker lock to one slider
-* color picker drag outside of bounds
+x color picker events, accessor names
+x color picker lock to one slider
+x color picker drag outside of bounds
 * name change pUI -> PUI 
 * performance: drawing operations (pushs/pops)
 * P3D rects render differently (1px right/down)
 * naming conventions? getters begin with "get" or "is", to indicate a break of chaining.
 * empty constructor for label
 * VSlider callback only works with Slider argument
+* rework theme legibility (again)
+x add key binding support to button and toggle
+* remove ui/elements ? 
+* multiple UIs, switch UIs (does show/hide deactivate events??);
+

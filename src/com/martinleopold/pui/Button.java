@@ -29,6 +29,8 @@ public class Button extends WidgetWithLabel<Button> {
 	// state
 	boolean pressed;
 	
+	char key; // associated key. default == 0
+	
 	public Button(PUI pui, int width, int height) {
 		super(pui, width, height);
 	}
@@ -68,6 +70,22 @@ public class Button extends WidgetWithLabel<Button> {
 		label.drawHighlight = false;
 		clicked = false;
 		onClickBoolean.fire(clicked);
+	}
+	
+	@Override
+	void keyPressed(int key, int keyCode) {
+		if (this.key == 0) return;
+		if (key != PApplet.CODED && key == this.key) {
+			mousePressed(0,0,0); // simulated click
+		}
+	}
+	
+	@Override
+	void keyReleased(int key, int keyCode) {
+		if (this.key == 0) return;
+		if (key != PApplet.CODED && key == this.key) {
+			mouseReleased(0,0,0); // simulated click
+		}
 	}
 	
 	/*
@@ -125,5 +143,10 @@ public class Button extends WidgetWithLabel<Button> {
 	@Override
 	protected Button getThis() {
 		return this;
+	}
+	
+	public Button key(char key) {
+		this.key = key;
+		return getThis();
 	}
 }
